@@ -22,7 +22,7 @@ const SizedBox kwidth10 = SizedBox(
 Color kgrey = Colors.grey;
 Color kblue = Color(0xFF3C73B1);
 Color kwhite = Colors.white;
-
+Color kblack=Colors.black;
 //image
 
 // final kimgadd = SvgPicture.asset('assets/images/add.svg');

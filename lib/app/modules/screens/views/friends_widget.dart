@@ -9,12 +9,14 @@ class HomeFriendsWidget extends StatefulWidget {
 }
 
 int _friendsindex=0;
+bool _accept=false;
+bool _remove=false;
 class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height*0.88,
-      width: MediaQuery.of(context).size.width*0.21,
+      width: MediaQuery.of(context).size.width*0.23,
       decoration: BoxDecoration(
         color: kwhite,
         boxShadow: <BoxShadow>[
@@ -73,7 +75,10 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
                 ),
                 InkWell(
                   onTap: (){
-                  
+                    setState(() {
+                        _friendsindex=1;
+                    });
+                
                   },
                   child: Container(
                     height: 30,
@@ -101,22 +106,463 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
           if(_friendsindex==0)
           Column(
             children: [
-            Row(
-              children: [
-                Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 20,),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Column(
-                    children: [
-                      Text('Kirshna'),
-                      Text('HR community',style: TextStyle(fontSize: 13),)
-                    ],
-                  ),
-                )
-              ],
-            )
+            Padding(
+              padding: const EdgeInsets.only(left: 10,top: 20),
+              child: Row(
+                children: [
+                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Kirshna',style: TextStyle(fontWeight: FontWeight.w900),),
+                        Text('HR community',style: TextStyle(fontSize: 11),)
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10,top: 20),
+              child: Row(
+                children: [
+                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Kirshna',style: TextStyle(fontWeight: FontWeight.w900),),
+                        Text('HR community',style: TextStyle(fontSize: 11),)
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),Padding(
+              padding: const EdgeInsets.only(left: 10,top: 20),
+              child: Row(
+                children: [
+                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Kirshna',style: TextStyle(fontWeight: FontWeight.w900),),
+                        Text('HR community',style: TextStyle(fontSize: 11),)
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10,top: 20),
+              child: Row(
+                children: [
+                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Kirshna',style: TextStyle(fontWeight: FontWeight.w900),),
+                        Text('HR community',style: TextStyle(fontSize: 11),)
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10,top: 20),
+              child: Row(
+                children: [
+                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Kirshna',style: TextStyle(fontWeight: FontWeight.w900),),
+                        Text('HR community',style: TextStyle(fontSize: 11),)
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10,top: 20),
+              child: Row(
+                children: [
+                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Kirshna',style: TextStyle(fontWeight: FontWeight.w900),),
+                        Text('HR community',style: TextStyle(fontSize: 11),)
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 10,top: 20),
+              child: Row(
+                children: [
+                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Kirshna',style: TextStyle(fontWeight: FontWeight.w900),),
+                        Text('HR community',style: TextStyle(fontSize: 11),)
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            ),
             ],
-          )
+          ),
+         if(_friendsindex==1)
+         Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 10,top: 20),
+              child: Row(
+                children: [
+                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Kirshna',style: TextStyle(fontWeight: FontWeight.w900),),
+                        Text('HR community',style: TextStyle(fontSize: 11),)
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 6),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        backgroundColor: _accept==true?kblue:kwhite
+                      ),
+                      onPressed: (){
+                      setState(() {
+                        _accept=!_accept;
+                      });
+                    }, 
+                    child: Text('Accept',style: TextStyle(color:_accept==true?kwhite:kblue ,
+                    fontSize: 12),)),
+                  ),
+                   Padding(
+                     padding: const EdgeInsets.only(left: 6),
+                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        
+                        backgroundColor: _remove==true?kblue:kwhite,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        )
+                      ),
+                      onPressed: (){
+                        setState(() {
+                          _remove=!_remove;
+                        });
+                
+                      }, 
+                     child: Text('Remove',style: TextStyle(color:_remove==true?kwhite:kblue,
+                    fontSize: 12 ))),
+                   )
+                ],
+              ),
+            ),
+             Padding(
+              padding: const EdgeInsets.only(left: 10,top: 30),
+              child: Row(
+                children: [
+                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Kirshna',style: TextStyle(fontWeight: FontWeight.w900),),
+                        Text('HR community',style: TextStyle(fontSize: 11),)
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 8),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        backgroundColor: _accept==true?kblue:kwhite
+                      ),
+                      onPressed: (){
+                      setState(() {
+                        _accept=!_accept;
+                      });
+                    }, 
+                    child: Text('Accept',style: TextStyle(color:_accept==true?kwhite:kblue ,
+                    fontSize: 12),)),
+                  ),
+                   Padding(
+                     padding: const EdgeInsets.only(left: 6),
+                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        
+                        backgroundColor: _remove==true?kblue:kwhite,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        )
+                      ),
+                      onPressed: (){
+                        setState(() {
+                          _remove=!_remove;
+                        });
+                
+                      }, 
+                     child: Text('Remove',style: TextStyle(color:_remove==true?kwhite:kblue,
+                    fontSize: 12 ))),
+                   )
+                ],
+              ),
+            ),
+             Padding(
+              padding: const EdgeInsets.only(left: 10,top: 30),
+              child: Row(
+                children: [
+                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Kirshna',style: TextStyle(fontWeight: FontWeight.w900),),
+                        Text('HR community',style: TextStyle(fontSize: 11),)
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 6),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        backgroundColor: _accept==true?kblue:kwhite
+                      ),
+                      onPressed: (){
+                      setState(() {
+                        _accept=!_accept;
+                      });
+                    }, 
+                    child: Text('Accept',style: TextStyle(color:_accept==true?kwhite:kblue ,
+                    fontSize: 12),)),
+                  ),
+                   Padding(
+                     padding: const EdgeInsets.only(left: 6),
+                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        
+                        backgroundColor: _remove==true?kblue:kwhite,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        )
+                      ),
+                      onPressed: (){
+                        setState(() {
+                          _remove=!_remove;
+                        });
+                
+                      }, 
+                     child: Text('Remove',style: TextStyle(color:_remove==true?kwhite:kblue,
+                    fontSize: 12 ))),
+                   )
+                ],
+              ),
+            ),
+             Padding(
+              padding: const EdgeInsets.only(left: 10,top: 30),
+              child: Row(
+                children: [
+                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Kirshna',style: TextStyle(fontWeight: FontWeight.w900),),
+                        Text('HR community',style: TextStyle(fontSize: 11),)
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 6),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        backgroundColor: _accept==true?kblue:kwhite
+                      ),
+                      onPressed: (){
+                      setState(() {
+                        _accept=!_accept;
+                      });
+                    }, 
+                    child: Text('Accept',style: TextStyle(color:_accept==true?kwhite:kblue ,
+                    fontSize: 12),)),
+                  ),
+                   Padding(
+                     padding: const EdgeInsets.only(left: 6),
+                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        
+                        backgroundColor: _remove==true?kblue:kwhite,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        )
+                      ),
+                      onPressed: (){
+                        setState(() {
+                          _remove=!_remove;
+                        });
+                
+                      }, 
+                     child: Text('Remove',style: TextStyle(color:_remove==true?kwhite:kblue,
+                    fontSize: 12 ))),
+                   )
+                ],
+              ),
+            ),
+             Padding(
+              padding: const EdgeInsets.only(left: 10,top: 30),
+              child: Row(
+                children: [
+                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Kirshna',style: TextStyle(fontWeight: FontWeight.w900),),
+                        Text('HR community',style: TextStyle(fontSize: 11),)
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 6),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        backgroundColor: _accept==true?kblue:kwhite
+                      ),
+                      onPressed: (){
+                      setState(() {
+                        _accept=!_accept;
+                      });
+                    }, 
+                    child: Text('Accept',style: TextStyle(color:_accept==true?kwhite:kblue ,
+                    fontSize: 12),)),
+                  ),
+                   Padding(
+                     padding: const EdgeInsets.only(left: 6),
+                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        
+                        backgroundColor: _remove==true?kblue:kwhite,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        )
+                      ),
+                      onPressed: (){
+                        setState(() {
+                          _remove=!_remove;
+                        });
+                
+                      }, 
+                     child: Text('Remove',style: TextStyle(color:_remove==true?kwhite:kblue,
+                    fontSize: 12 ))),
+                   )
+                ],
+              ),
+            ),
+             Padding(
+              padding: const EdgeInsets.only(left: 10,top: 30),
+              child: Row(
+                children: [
+                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Kirshna',style: TextStyle(fontWeight: FontWeight.w900),),
+                        Text('HR community',style: TextStyle(fontSize: 11),)
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 6),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        ),
+                        backgroundColor: _accept==true?kblue:kwhite
+                      ),
+                      onPressed: (){
+                      setState(() {
+                        _accept=!_accept;
+                      });
+                    }, 
+                    child: Text('Accept',style: TextStyle(color:_accept==true?kwhite:kblue ,
+                    fontSize: 12),)),
+                  ),
+                   Padding(
+                     padding: const EdgeInsets.only(left: 6),
+                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        
+                        backgroundColor: _remove==true?kblue:kwhite,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10)
+                        )
+                      ),
+                      onPressed: (){
+                        setState(() {
+                          _remove=!_remove;
+                        });
+                
+                      }, 
+                     child: Text('Remove',style: TextStyle(color:_remove==true?kwhite:kblue,
+                    fontSize: 12 ))),
+                   )
+                ],
+              ),
+            ),
+          ],
+         ),
+         
         ],
       ),
     );
