@@ -1,8 +1,8 @@
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-class Changepassword extends StatelessWidget {
-  const Changepassword({super.key});
+class demo extends StatelessWidget {
+  const demo({super.key});
 
   @override
   Widget build(BuildContext context) {

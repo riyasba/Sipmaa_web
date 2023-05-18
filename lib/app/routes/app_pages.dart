@@ -5,8 +5,9 @@
 import 'package:get/get.dart';
 import 'package:reg_login/app/modules/authentication/signin/views/signin.dart';
 
-import '../modules/screens/Settings/views/change_password.dart';
-import '../modules/screens/Settings/views/settings.dart';
+import '../modules/screens/Settings/views/settingss.dart';
+import '../modules/screens/Settings/views/widgets/change_password.dart';
+//import '../modules/screens/Settings/views/settings.dart';
 import '../modules/screens/profile/views/profile_page.dart';
 import '../modules/screens/views/home/home_screen.dart';
 import '../modules/authentication/OTP/views/otp.dart';
@@ -59,16 +60,17 @@ class AppPages {
     ),
    GetPage(
       name: _Paths.Profile_Screen,
-      page: () => const ProfileScreen (),
+      page: () => const ps (),
       // binding: SignInBinding(),
     ),
       GetPage(
       name: _Paths.Settings_page,
       page: () => const SettingsPage(), 
       // binding: SignInBinding(),
-    ),GetPage(
+    ),
+    GetPage(
       name: _Paths.Change_password,
-      page: () => const Changepassword (),
+      page: () => const demo (),
       // binding: SignInBinding(),
     ),];
 }

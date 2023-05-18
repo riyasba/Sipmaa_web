@@ -34,12 +34,12 @@ class _SignInViewState extends State<SignInView> {
               children: [
                 Expanded(
                   child: Container(
-                    // width: 500,
-                    //  height: 700,
-                    child: Stack(
+               //      width: 500,
+                //      height: 700,
+                    child: Column(
                       children: [
                         Padding(
-                            padding: const EdgeInsets.only(top: 50),
+                            padding: const EdgeInsets.only(top: 10),
                             child: Column(
                               children: [
                                 CarouselSlider(
@@ -48,7 +48,7 @@ class _SignInViewState extends State<SignInView> {
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
                                       child: Container(
-                                        height: 10,
+                                        height: 8,
                                         color: kblue,
                                         width: 600,
                                         child: Row(
@@ -68,7 +68,7 @@ class _SignInViewState extends State<SignInView> {
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
                                       child: Container(
-                                          height: 10,
+                                          height: 8,
                                           color: kblue,
                                           width: 600,
                                           child: Row(
@@ -87,9 +87,9 @@ class _SignInViewState extends State<SignInView> {
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(10),
                                       child: Container(
-                                          height: 10,
+                                          height: 8,
                                           color: kblue,
-                                          width: 600,
+                                          width: 500,
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.spaceEvenly,
@@ -168,7 +168,7 @@ class _SignInViewState extends State<SignInView> {
                                   "WELCOME",
                                   style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 35,
+                                      fontSize: 26,
                                       fontWeight: FontWeight.bold),
                                 ),
 
@@ -176,13 +176,13 @@ class _SignInViewState extends State<SignInView> {
                                 //   'Login',
                                 //   style: ktextstyle,
                                 // ),
-                                ksizedbox10,
+                                
                                 Text(
                                   'Login Back to Sipmaa HR Community',
                                   style: ktextstyle22,
                                 ),
-
-                                ksizedbox40,
+ksizedbox10,
+                                
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
