@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/modules/screens/views/home/create_widget.dart';
+import 'package:reg_login/app/modules/screens/views/home/notification_widget.dart';
 import 'package:reg_login/app/modules/screens/views/home/searchcontainer.dart';
 import 'package:reg_login/app/modules/screens/views/home/widgets.dart';
 import 'package:reg_login/constands.dart';
@@ -232,7 +234,10 @@ class _HomePageState extends State<HomePage> {
                               borderRadius: BorderRadius.circular(10)
                             )
                           ),
-                          onPressed: (){}, child: Row(
+                          onPressed: (){
+                            homeController.homeindex(5);
+                            homeController.update();
+                          }, child: Row(
                           
                             children: [
                               Icon(Icons.add_circle_outline,color: kblue,),
@@ -293,7 +298,7 @@ class _HomePageState extends State<HomePage> {
             ),
            Obx(()=> SizedBox(
              // width: 135
-             width:homeController.homeindex==2?0 :135,
+             width:homeController.homeindex==2?0 : homeController.homeindex==3?0:  135,
              ),
            ),
             Obx(()=>  Row(
@@ -301,19 +306,23 @@ class _HomePageState extends State<HomePage> {
                 if(homeController.homeindex.value == 0)  HomeContainer(),
                 if(homeController.homeindex.value == 1)  SearchContainer(),
               
-                if(homeController.homeindex.value==2)FillterWidget()
+                if(homeController.homeindex.value==2)FillterWidget(),
+                if(homeController.homeindex.value==3)NotificationWidget(),
+                if(homeController.homeindex.value==5)CreateWidget()
                 ],
               ),
             ),
             Obx(()=> SizedBox(
              // width: 135
-             width:homeController.homeindex==0?100:135,
+             width:homeController.homeindex==0? 100:homeController.homeindex!=3?100: 135,
              ),
            ),
-            Row(
-              children: [
-                HomeFriendsWidget()
-              ],
+            Obx(()=>
+               Row(
+                children: [
+                if(homeController.homeindex.value!=3)  HomeFriendsWidget()
+                ],
+              ),
             )
           ],
         ),

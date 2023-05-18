@@ -12,7 +12,7 @@ class SearchContainer extends StatefulWidget {
   State<SearchContainer> createState() => _SearchContainerState();
 }
 
-class _SearchContainerState extends State<SearchContainer> {
+class _SearchContainerState extends State<SearchContainer> { 
   bool _isfavorite=false; 
 bool _isfavorite2=false; 
 var searchController=TextEditingController();

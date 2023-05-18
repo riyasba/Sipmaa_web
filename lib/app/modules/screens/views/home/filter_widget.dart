@@ -12,6 +12,7 @@ class FillterWidget extends StatefulWidget {
 class _FillterWidgetState extends State<FillterWidget> {
  bool _isfavorite=false; 
 bool _isfavorite2=false; 
+int filterindex=0;
 var commentController=TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -31,13 +32,84 @@ var commentController=TextEditingController();
                   ],
                 ),
               ),
-              ksizedbox10,
-            TextButton(
-              style: ButtonStyle(
-                backgroundColor: MaterialStateProperty.all(kwhite)
-              ),
-              onPressed: (){}, 
-            child: Text('All'))
+            
+            Padding(
+              padding: const EdgeInsets.only(left: 15,right: 15,top: 20),
+              child: MaterialButton(
+                elevation: 0,
+                color:filterindex==0? kblue:kwhite,
+                minWidth: MediaQuery.of(context).size.width*0.2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)
+                ),
+                onPressed: (){
+                  setState(() {
+                    filterindex=0;
+                  });
+                },
+              child: Text('All',style: TextStyle(
+                fontSize: 13,
+                color: filterindex==0?kwhite:Colors.black
+              ),),),
+            ),
+            
+            Padding(
+              padding: const EdgeInsets.only(left: 15,right: 15,top: 20),
+              child: MaterialButton(
+                elevation: 0,
+                color:filterindex==1? kblue:kwhite,
+                minWidth: MediaQuery.of(context).size.width*0.2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)
+                ),
+                onPressed: (){
+                  setState(() {
+                    filterindex=1;
+                  });
+                },
+              child: Text('HR Management',style: TextStyle(
+                fontSize: 13,
+                color: filterindex==1?kwhite:Colors.black
+              ),),),
+            ),
+               Padding(
+              padding: const EdgeInsets.only(left: 15,right: 15,top: 20),
+              child: MaterialButton(
+                elevation: 0,
+                color:filterindex==2? kblue:kwhite,
+                minWidth: MediaQuery.of(context).size.width*0.2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)
+                ),
+                onPressed: (){
+                  setState(() {
+                    filterindex=2;
+                  });
+                },
+              child: Text('Sales',style: TextStyle(
+                fontSize: 13,
+                color: filterindex==2?kwhite:Colors.black
+              ),),),
+            ),
+               Padding(
+              padding: const EdgeInsets.only(left: 15,right: 15,top: 20),
+              child: MaterialButton(
+                elevation: 0,
+                color:filterindex==3? kblue:kwhite,
+                minWidth: MediaQuery.of(context).size.width*0.2,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)
+                ),
+                onPressed: (){
+                  setState(() {
+                    filterindex=3;
+                  });
+                },
+              child: Text('Marketing',style: TextStyle(
+                fontSize: 13,
+                color: filterindex==3?kwhite:Colors.black
+              ),),),
+            ),
             ],
           ),
         ),
