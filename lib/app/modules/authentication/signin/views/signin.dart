@@ -5,7 +5,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
-import '../../../../../constands.dart';
+import '../../../../data/components/constands/constands.dart';
 //import '../../../../data/components/constands/constands.dart';
 import '../../../../data/components/costom_button.dart';
 

@@ -26,7 +26,8 @@ class TextformfieldWidget extends StatelessWidget {
               textt!,
             ),
           ),
-          TextFormField(decoration: InputDecoration(labelText: text,border: OutlineInputBorder()),
+          TextFormField(decoration: InputDecoration( floatingLabelBehavior: FloatingLabelBehavior.never,
+            labelText: text,border: OutlineInputBorder()),
             // controller: controller,
             // // validator: validator,
             // decoration: InputDecoration(

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../../../constands.dart';
+import '../../../../data/components/constands/constands.dart';
 //import '../constands.dart';
 class FillterWidget extends StatefulWidget {
   const FillterWidget({super.key});
@@ -148,7 +148,7 @@ var commentController=TextEditingController();
                           ),
                          
                           Row(children:[
-                             Image.asset('assets/images/profile.png.png',
+                             Image.asset('assets/images/profile.png',
                              fit: BoxFit.fitHeight,height: 80,)]),
                              ksizedbox10,
                              SizedBox(
@@ -188,7 +188,7 @@ var commentController=TextEditingController();
                        Padding(
                          padding: const EdgeInsets.only(left: 35,top: 20),
                          child: Row(children:[
-                           Image.asset('assets/images/homeimage.png.png',
+                           Image.asset('assets/images/homeimage.png',
                            height: 220,fit: BoxFit.fitHeight,)]),
                        ),
                        Padding(
@@ -273,7 +273,7 @@ var commentController=TextEditingController();
                               ),
                               prefixIcon: Padding(
                                 padding: const EdgeInsets.only(left: 10,top: 1),
-                                child: Image.asset('assets/images/profile.png.png',
+                                child: Image.asset('assets/images/profile.png',
                                 height: 5,fit: BoxFit.fitHeight,),
                               ),
                               border: OutlineInputBorder(

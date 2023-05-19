@@ -3,8 +3,8 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/route_manager.dart';
 
-import '../../../../../constands.dart';
-import '../../../../../widget/search_field.dart';
+import '../../../../data/components/constands/constands.dart';
+import '../../../../data/components/search_field.dart';
 
 class ps extends StatefulWidget {
   const ps({super.key});

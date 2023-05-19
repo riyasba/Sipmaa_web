@@ -10,10 +10,10 @@ import 'package:reg_login/app/modules/screens/Settings/views/widgets/pofile_widg
 //import 'package:reg_login/app/modules/screens/Settings/views/widgets/profile_widget.dart';
 import 'package:reg_login/app/modules/screens/Settings/views/widgets/widgets.dart';
 
-import '../../../../../constands.dart';
+import '../../../../data/components/constands/constands.dart';
 //import '../../../../data/components/constands.dart';
 //import '../../../../data/components/constands/formfield.dart';
-import '../../../../../widget/search_field.dart';
+import '../../../../data/components/search_field.dart';
 import '../../../../data/components/costom_button.dart';
 import '../controllers/controllers.dart';
 

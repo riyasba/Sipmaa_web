@@ -5,7 +5,7 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
-import '../../../../../constands/constands.dart';
+import '../../../../data/components/constands/constands.dart';
 
 class OTPVIEWS extends StatelessWidget {
   const OTPVIEWS({super.key});

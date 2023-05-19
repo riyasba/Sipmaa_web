@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:reg_login/app/modules/screens/views/home/create_widget.dart';
-import 'package:reg_login/app/modules/screens/views/home/notification_widget.dart';
+import 'package:reg_login/app/modules/screens/home/views/create_widget.dart';
+import 'package:reg_login/app/modules/screens/home/views/notification_widget.dart';
 import 'package:reg_login/app/modules/screens/Settings/views/settingss.dart';
 import 'package:reg_login/app/modules/screens/Settings/views/widgets/change_password.dart';
 import 'package:reg_login/app/modules/screens/profile/views/profile_pagee.dart';
-import 'package:reg_login/app/modules/screens/views/home/searchcontainer.dart';
-import 'package:reg_login/app/modules/screens/views/home/widgets.dart';
-import 'package:reg_login/constands.dart';
+import 'package:reg_login/app/modules/screens/home/views/searchcontainer.dart';
+import 'package:reg_login/app/modules/screens/home/views/widgets.dart';
+import 'package:reg_login/app/data/components/constands/constands.dart';
 //import 'package:reg_login/controller/home_controller.dart';
 //import 'package:reg_login/widget/filtter_widget.dart';
 //import 'package:reg_login/widget/home_friends.dart';
 //import 'package:reg_login/widget/search_container.dart';
 
-import '../../../../../widget/search_field.dart';
+import '../../../../data/components/search_field.dart';
 import '../../profile/views/profile_page.dart';
-import '../friends_widget.dart';
+import 'widgets/friends_widget.dart';
 //import '../widget/home_container.dart';
 //import '../widget/search_field.dart';
-import 'controler/controler.dart';
+import '../controler/controler.dart';
 import 'filter_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: Image.asset(
-              'assets/images/profile.png.png',
+              'assets/images/profile.png',
               fit: BoxFit.fitHeight,
               height: 35,
             ),
@@ -310,8 +310,8 @@ class _HomePageState extends State<HomePage> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
                         onPressed: () {
-                            homeController.homeindex(5);
-                            homeController.update();
+                          homeController.homeindex(5);
+                          homeController.update();
                         },
                         child: Row(
                           children: [
@@ -340,7 +340,116 @@ class _HomePageState extends State<HomePage> {
                             backgroundColor: kwhite.withOpacity(0.7),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15))),
-                        onPressed: () {},
+                        onPressed: () {
+                          {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Dialog(
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.2,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.2,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(7),
+                                        color: kwhite,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(top: 10),
+                                        child: Column(
+                                          children: [
+                                            ksizedbox10,
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 15),
+                                              child: Text(
+                                                'Do you want to LogOut ?',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.w900),
+                                              ),
+                                            ),ksizedbox30,
+                                            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              children: [
+                                                SizedBox(
+                                                  height: 30,
+                                                  width: 80,
+                                                  child: ElevatedButton(
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        backgroundColor:
+                                                            Color(
+                                                          0xFF3C73B1,
+                                                        ),
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.0),
+                                                        ),
+                                                      ),
+                                                      onPressed: () {Get.toNamed( '/sign-in');},
+                                                      // Get.to(
+
+                                                      // BottomNavigationBarExample(),
+                                                      //);
+
+                                                      child: Text(
+                                                        'Yes',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                ), SizedBox(
+                                                  height: 30,
+                                                  width: 80,
+                                                  child: ElevatedButton(
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        backgroundColor:
+                                                            Color(
+                                                          0xFF3C73B1,
+                                                        ),
+                                                        shape:
+                                                            RoundedRectangleBorder(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.0),
+                                                        ),
+                                                      ),
+                                                      onPressed: () {Get.back();},
+                                                      // Get.to(
+
+                                                      // BottomNavigationBarExample(),
+                                                      //);
+
+                                                      child: Text(
+                                                        'No',
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.white,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      )),
+                                                ),
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                });
+                          }
+                        },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -394,7 +503,10 @@ class _HomePageState extends State<HomePage> {
           Obx(
             () => SizedBox(
               // width: 135
-              width: homeController.homeindex == 2 || homeController.homeindex.value == 4 ? 0 : 135,
+              width: homeController.homeindex == 2 ||
+                      homeController.homeindex.value == 4
+                  ? 0
+                  : 135,
             ),
           ),
           Obx(
@@ -403,9 +515,9 @@ class _HomePageState extends State<HomePage> {
                 if (homeController.homeindex.value == 0) HomeContainer(),
                 if (homeController.homeindex.value == 1) SearchContainer(),
                 if (homeController.homeindex.value == 2) FillterWidget(),
-                if (homeController.homeindex.value == 3) FillterWidget(),
-                if (homeController.homeindex.value == 4) ProfileScreen (),
-                if(homeController.homeindex.value==5)CreateWidget(),
+                if (homeController.homeindex.value == 3) NotificationWidget(),
+                if (homeController.homeindex.value == 4) ProfileScreen(),
+                if (homeController.homeindex.value == 5) CreateWidget(),
                 if (homeController.homeindex.value == 7) SettingsPage()
               ],
             ),
@@ -413,14 +525,19 @@ class _HomePageState extends State<HomePage> {
           Obx(
             () => SizedBox(
               // width: 135
-              width:  homeController.homeindex == 2 ? 100 :homeController.homeindex == 4 ?0:  135,
+              width: homeController.homeindex == 2
+                  ? 100
+                  : homeController.homeindex == 4
+                      ? 0
+                      : 135,
             ),
           ),
           Obx(
             () => Row(
               children: [
                 if (homeController.homeindex.value != 4 &&
-                    homeController.homeindex.value != 7)
+                    homeController.homeindex.value != 7 &&
+                    homeController.homeindex.value != 3)
                   HomeFriendsWidget()
               ],
             ),

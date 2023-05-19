@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:reg_login/constands.dart';
-import 'package:reg_login/widget/search_field.dart';
+import 'package:reg_login/app/data/components/constands/constands.dart';
+import 'package:reg_login/app/data/components/search_field.dart';
 
 class NotificationWidget extends StatefulWidget {
    NotificationWidget({super.key});
@@ -42,7 +42,7 @@ var dialogeController=TextEditingController();
                 padding: const EdgeInsets.only(left: 20),
                 child: Row(
                   children: [
-                   Image.asset('assets/images/profile.png.png',height: 50,fit: BoxFit.fitHeight,),
+                   Image.asset('assets/images/profile.png',height: 50,fit: BoxFit.fitHeight,),
                    Padding(
                      padding: const EdgeInsets.only(left: 15),
                      child: Column(
@@ -69,7 +69,7 @@ var dialogeController=TextEditingController();
                 padding: const EdgeInsets.only(left: 20),
                 child: Row(
                   children: [
-                   Image.asset('assets/images/profile.png.png',height: 50,fit: BoxFit.fitHeight,),
+                   Image.asset('assets/images/profile.png',height: 50,fit: BoxFit.fitHeight,),
                    Padding(
                      padding: const EdgeInsets.only(left: 15),
                      child: Column(
@@ -96,7 +96,7 @@ var dialogeController=TextEditingController();
                 padding: const EdgeInsets.only(left: 20),
                 child: Row(
                   children: [
-                   Image.asset('assets/images/profile.png.png',height: 50,fit: BoxFit.fitHeight,),
+                   Image.asset('assets/images/profile.png',height: 50,fit: BoxFit.fitHeight,),
                    Padding(
                      padding: const EdgeInsets.only(left: 15),
                      child: Column(
@@ -123,7 +123,7 @@ var dialogeController=TextEditingController();
                 padding: const EdgeInsets.only(left: 20),
                 child: Row(
                   children: [
-                   Image.asset('assets/images/profile.png.png',height: 50,fit: BoxFit.fitHeight,),
+                   Image.asset('assets/images/profile.png',height: 50,fit: BoxFit.fitHeight,),
                    Padding(
                      padding: const EdgeInsets.only(left: 15),
                      child: Column(
@@ -150,7 +150,7 @@ var dialogeController=TextEditingController();
                 padding: const EdgeInsets.only(left: 20),
                 child: Row(
                   children: [
-                   Image.asset('assets/images/profile.png.png',height: 50,fit: BoxFit.fitHeight,),
+                   Image.asset('assets/images/profile.png',height: 50,fit: BoxFit.fitHeight,),
                    Padding(
                      padding: const EdgeInsets.only(left: 15),
                      child: Column(
@@ -177,7 +177,7 @@ var dialogeController=TextEditingController();
                 padding: const EdgeInsets.only(left: 20),
                 child: Row(
                   children: [
-                   Image.asset('assets/images/profile.png.png',height: 50,fit: BoxFit.fitHeight,),
+                   Image.asset('assets/images/profile.png',height: 50,fit: BoxFit.fitHeight,),
                    Padding(
                      padding: const EdgeInsets.only(left: 15),
                      child: Column(
@@ -203,7 +203,7 @@ var dialogeController=TextEditingController();
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(left: 140),
+          padding: const EdgeInsets.only(left: 50),
           child: Container(
             height: MediaQuery.of(context).size.height*0.88,
             width: MediaQuery.of(context).size.width*0.38,
@@ -231,7 +231,7 @@ var dialogeController=TextEditingController();
                       width: 20,
                     ),
                     Row(children:[
-                       Image.asset('assets/images/profile.png.png',
+                       Image.asset('assets/images/profile.png',
                        fit: BoxFit.fitHeight,height: 80,)]),
                        ksizedbox10,
                        SizedBox(
@@ -271,7 +271,7 @@ var dialogeController=TextEditingController();
                  Padding(
                    padding: const EdgeInsets.only(left: 35,top: 20),
                    child: Row(children:[
-                     Image.asset('assets/images/homeimage.png.png',
+                     Image.asset('assets/images/homeimage.png',
                      height: 220,fit: BoxFit.fitHeight,)]),
                  ),
                  Padding(
@@ -320,7 +320,7 @@ var dialogeController=TextEditingController();
                                         children: [
                                         Padding(
                                           padding: const EdgeInsets.only(left: 10),
-                                          child: Image.asset('assets/images/profile.png.png',height: 50,
+                                          child: Image.asset('assets/images/profile.png',height: 50,
                                           fit: BoxFit.fitHeight,),
                                         ),
                                         Padding(
@@ -358,7 +358,7 @@ var dialogeController=TextEditingController();
                                         children: [
                                         Padding(
                                           padding: const EdgeInsets.only(left: 10),
-                                          child: Image.asset('assets/images/profile.png.png',height: 50,
+                                          child: Image.asset('assets/images/profile.png',height: 50,
                                           fit: BoxFit.fitHeight,),
                                         ),
                                         Padding(
@@ -396,7 +396,7 @@ var dialogeController=TextEditingController();
                                         children: [
                                         Padding(
                                           padding: const EdgeInsets.only(left: 10),
-                                          child: Image.asset('assets/images/profile.png.png',height: 50,
+                                          child: Image.asset('assets/images/profile.png',height: 50,
                                           fit: BoxFit.fitHeight,),
                                         ),
                                         Padding(
@@ -434,7 +434,7 @@ var dialogeController=TextEditingController();
                                         children: [
                                         Padding(
                                           padding: const EdgeInsets.only(left: 10),
-                                          child: Image.asset('assets/images/profile.png.png',height: 50,
+                                          child: Image.asset('assets/images/profile.png',height: 50,
                                           fit: BoxFit.fitHeight,),
                                         ),
                                         Padding(
@@ -472,7 +472,7 @@ var dialogeController=TextEditingController();
                                         children: [
                                         Padding(
                                           padding: const EdgeInsets.only(left: 10),
-                                          child: Image.asset('assets/images/profile.png.png',height: 50,
+                                          child: Image.asset('assets/images/profile.png',height: 50,
                                           fit: BoxFit.fitHeight,),
                                         ),
                                         Padding(
@@ -557,7 +557,7 @@ var dialogeController=TextEditingController();
                                                       Row(
                                                         crossAxisAlignment: CrossAxisAlignment.start,
                                                            children: [
-                                                              Image.asset('assets/images/profile.png.png',height: 50,
+                                                              Image.asset('assets/images/profile.png',height: 50,
                                                               fit: BoxFit.fitHeight,),
                                                               Padding(
                                                                 padding: const EdgeInsets.only(top: 7,left: 13),
@@ -590,7 +590,7 @@ var dialogeController=TextEditingController();
                                                   child: Row(
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                        children: [
-                                                          Image.asset('assets/images/profile.png.png',height: 50,
+                                                          Image.asset('assets/images/profile.png',height: 50,
                                                           fit: BoxFit.fitHeight,),
                                                           Padding(
                                                             padding: const EdgeInsets.only(top: 7,left: 13),
@@ -626,7 +626,7 @@ var dialogeController=TextEditingController();
                                                   child: Row(
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                        children: [
-                                                          Image.asset('assets/images/profile.png.png',height: 50,
+                                                          Image.asset('assets/images/profile.png',height: 50,
                                                           fit: BoxFit.fitHeight,),
                                                           Padding(
                                                             padding: const EdgeInsets.only(top: 7,left: 13),
@@ -661,7 +661,7 @@ var dialogeController=TextEditingController();
                                                   child: Row(
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                        children: [
-                                                          Image.asset('assets/images/profile.png.png',height: 50,
+                                                          Image.asset('assets/images/profile.png',height: 50,
                                                           fit: BoxFit.fitHeight,),
                                                           Padding(
                                                             padding: const EdgeInsets.only(top: 7,left: 13),
@@ -784,7 +784,7 @@ var dialogeController=TextEditingController();
                         ),
                         prefixIcon: Padding(
                           padding: const EdgeInsets.only(left: 10,top: 1),
-                          child: Image.asset('assets/images/profile.png.png',
+                          child: Image.asset('assets/images/profile.png',
                           height: 10,fit: BoxFit.fitHeight,),
                         ),
                         border: OutlineInputBorder(

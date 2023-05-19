@@ -9,7 +9,7 @@ import '../modules/screens/Settings/views/settingss.dart';
 import '../modules/screens/Settings/views/widgets/change_password.dart';
 //import '../modules/screens/Settings/views/settings.dart';
 import '../modules/screens/profile/views/profile_page.dart';
-import '../modules/screens/views/home/home_screen.dart';
+import '../modules/screens/home/views/home_screen.dart';
 import '../modules/authentication/OTP/views/otp.dart';
 import '../modules/authentication/forgotPassword/views/forgotpassword.dart';
 import '../modules/authentication/register/views/registerscreen.dart';
@@ -35,7 +35,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.REGISTER_VIEWS,
-      page: () => const REGISTERVIEWS(),
+      page: () => const RegisterViews(),
       // binding: SignInBinding(),
     ),
     GetPage(

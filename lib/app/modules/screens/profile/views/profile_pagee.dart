@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/widgets.dart';
 
-import '../../../../../constands.dart';
+import '../../../../data/components/constands/constands.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -41,7 +41,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     fit: BoxFit.fill,
                   )),
               Positioned(
-                  left: 50, child: Image.asset('assets/images/profile.png'))
+                  left: 50, child: Image.asset('assets/images/createprofile.png'))
             ],
           ),
           Padding(

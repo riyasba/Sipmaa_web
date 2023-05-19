@@ -4,8 +4,8 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
-import '../../../../../constands/constands.dart';
-import '../../../../../constands/formfield.dart';
+import '../../../../data/components/constands/constands.dart';
+import '../../../../data/components/constands/formfield.dart';
 
 class Resgister2 extends StatelessWidget {
   const Resgister2({super.key});

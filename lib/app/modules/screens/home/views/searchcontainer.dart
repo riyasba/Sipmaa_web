@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:reg_login/widget/search_field.dart';
+import 'package:reg_login/app/data/components/search_field.dart';
 //import 'package:staggered_grid_view_flutter/staggered_grid_view_flutter.dart';
 //import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
 //import 'package:staggered_grid_view_flutter/widgets/staggered_tile.dart';
-import '../../../../../constands.dart';
+import '../../../../data/components/constands/constands.dart';
 
 //import '../constands.dart';
 class SearchContainer extends StatefulWidget {

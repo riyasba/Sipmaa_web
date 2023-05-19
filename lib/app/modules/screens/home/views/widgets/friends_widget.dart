@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reg_login/constands.dart';
+import 'package:reg_login/app/data/components/constands/constands.dart';
 
 class HomeFriendsWidget extends StatefulWidget {
   const HomeFriendsWidget({super.key});
@@ -110,7 +110,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               padding: const EdgeInsets.only(left: 10,top: 20),
               child: Row(
                 children: [
-                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Image.asset('assets/images/profile.png',fit: BoxFit.fitHeight,height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Column(
@@ -128,7 +128,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               padding: const EdgeInsets.only(left: 10,top: 20),
               child: Row(
                 children: [
-                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Image.asset('assets/images/profile.png',fit: BoxFit.fitHeight,height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Column(
@@ -145,7 +145,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               padding: const EdgeInsets.only(left: 10,top: 20),
               child: Row(
                 children: [
-                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Image.asset('assets/images/profile.png',fit: BoxFit.fitHeight,height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Column(
@@ -163,7 +163,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               padding: const EdgeInsets.only(left: 10,top: 20),
               child: Row(
                 children: [
-                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Image.asset('assets/images/profile.png',fit: BoxFit.fitHeight,height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Column(
@@ -181,7 +181,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               padding: const EdgeInsets.only(left: 10,top: 20),
               child: Row(
                 children: [
-                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Image.asset('assets/images/profile.png',fit: BoxFit.fitHeight,height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Column(
@@ -199,7 +199,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               padding: const EdgeInsets.only(left: 10,top: 20),
               child: Row(
                 children: [
-                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Image.asset('assets/images/profile.png',fit: BoxFit.fitHeight,height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Column(
@@ -217,7 +217,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               padding: const EdgeInsets.only(left: 10,top: 20),
               child: Row(
                 children: [
-                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Image.asset('assets/images/profile.png',fit: BoxFit.fitHeight,height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Column(
@@ -240,7 +240,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               padding: const EdgeInsets.only(left: 10,top: 20),
               child: Row(
                 children: [
-                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Image.asset('assets/images/profile.png',fit: BoxFit.fitHeight,height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Column(
@@ -294,7 +294,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               padding: const EdgeInsets.only(left: 10,top: 30),
               child: Row(
                 children: [
-                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Image.asset('assets/images/profile.png',fit: BoxFit.fitHeight,height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Column(
@@ -348,7 +348,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               padding: const EdgeInsets.only(left: 10,top: 30),
               child: Row(
                 children: [
-                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Image.asset('assets/images/profile.png',fit: BoxFit.fitHeight,height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Column(
@@ -402,7 +402,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               padding: const EdgeInsets.only(left: 10,top: 30),
               child: Row(
                 children: [
-                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Image.asset('assets/images/profile.png',fit: BoxFit.fitHeight,height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Column(
@@ -456,7 +456,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               padding: const EdgeInsets.only(left: 10,top: 30),
               child: Row(
                 children: [
-                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Image.asset('assets/images/profile.png',fit: BoxFit.fitHeight,height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Column(
@@ -510,7 +510,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               padding: const EdgeInsets.only(left: 10,top: 30),
               child: Row(
                 children: [
-                  Image.asset('assets/images/profile.png.png',fit: BoxFit.fitHeight,height: 30,),
+                  Image.asset('assets/images/profile.png',fit: BoxFit.fitHeight,height: 30,),
                   Padding(
                     padding: const EdgeInsets.only(left: 15),
                     child: Column(

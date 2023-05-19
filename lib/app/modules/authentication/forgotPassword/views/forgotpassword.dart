@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
-import '../../../../../constands/constands.dart';
-import '../../../../../constands/formfield.dart';
+import '../../../../data/components/constands/constands.dart';
+import '../../../../data/components/constands/formfield.dart';
 
 class FORGOTPASSWORD extends StatelessWidget {
   const FORGOTPASSWORD({super.key});

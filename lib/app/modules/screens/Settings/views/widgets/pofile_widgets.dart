@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:reg_login/app/modules/screens/Settings/views/widgets/widgets.dart';
 
-import '../../../../../../constands.dart';
+import '../../../../../data/components/constands/constands.dart';
 //import '../../../../../data/components/constands.dart';
 import '../../../../../data/components/costom_button.dart';
 

@@ -38,6 +38,8 @@ dependencies:
   get: ^4.6.5
   carousel_slider: ^4.2.1
   flutter_otp_text_field: ^1.1.1
+  sharedpreference_utils: ^1.0.0
+  dio: ^5.1.2
   
 dev_dependencies:
   flutter_test:
