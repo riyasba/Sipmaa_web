@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/services/network_api_services/auth_api_services/register_api_services.dart';
+import 'package:reg_login/app/services/network_api_services/user_name_check_api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:simpa/models/department_model.dart';
 // import 'package:simpa/models/profile_update_model.dart';
@@ -19,8 +21,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 // import '../services/network_api_services/auth_api_services/otp_verify_api_services.dart';
 import 'package:dio/dio.dart' as dio;
 
-import '../../services/auth_api_service/register_api_service.dart';
-import '../../services/auth_api_service/username_checkapi_service.dart';
+
+import '../../../modules/screens/home/views/home_screen.dart';
+import '../../services/auth_api_service/login_api_services.dart';
 import '../register_model.dart';
 
 class AuthController extends GetxController {
@@ -35,7 +38,7 @@ class AuthController extends GetxController {
 
   //GetDepartmentServicesApi getDepartmentServicesApi =
   // GetDepartmentServicesApi();
-  //LoginServicesApi loginServicesApi = LoginServicesApi();
+  LoginServicesApi loginServicesApi = LoginServicesApi();
   /// OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
   RegisterServicesApi registerServicesApi = RegisterServicesApi();
   //ProfileUpdateServicesApi profileUpdateServicesApi =
@@ -72,8 +75,7 @@ class AuthController extends GetxController {
   // }
   registerUser(RegisterModel registerModel) async {
     isLoading(true);
-    dio.Response<dynamic> response =
-        await registerServicesApi.registerApi(registerModel);
+  var response = await registerServicesApi.registerApi(registerModel);
     isLoading(false);
 
     if (response.statusCode == 201) {
@@ -152,32 +154,32 @@ class AuthController extends GetxController {
   //   }
   // }
 
-  // loginUser({required String username, required String password}) async {
-  //   isLoading(true);
-  //   dio.Response<dynamic> response =
-  //       await loginServicesApi.loginApi(username: username, password: password);
-  //   isLoading(false);
-  //   if (response.statusCode == 200) {
-  //     final prefs = await SharedPreferences.getInstance();
-  //     await prefs.setString("auth_token", response.data["token"]);
-  //    // Get.offAll(() => BottomNavigationBarExample());
-  //     Get.rawSnackbar(
-  //       messageText: const Text(
-  //         "Login Successful",
-  //         style: TextStyle(color: Colors.white),
-  //       ),
-  //       backgroundColor: Colors.green,
-  //     );
-  //   } else {
-  //     Get.rawSnackbar(
-  //       messageText: const Text(
-  //         "Invalid User name / Password",
-  //         style: TextStyle(color: Colors.white),
-  //       ),
-  //       backgroundColor: Colors.red,
-  //     );
-  //   }
-  // }
+  loginUser({required String username, required String password}) async {
+    isLoading(true);
+    dio.Response<dynamic> response =
+        await loginServicesApi.loginApi(username: username, password: password);
+    isLoading(false);
+    if (response.statusCode == 200) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("auth_token", response.data["token"]);
+      Get.offAll(() => HomePage ());
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Login Successful",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      );
+    } else {
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Invalid User name / Password",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
 
   checkUserName({required String userName}) async {
     dio.Response<dynamic> response =

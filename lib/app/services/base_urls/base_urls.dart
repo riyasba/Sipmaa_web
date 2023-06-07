@@ -3,10 +3,7 @@ abstract class BaseApiService {
 
   //register url
   final String registerURl =
-      'https://demo.generation360tech.in/api/register_user';
-
-  //"https://demo.generation360tech.in/api/register_user";
-  //'https://admin.e-sankalp.com/public/api/planet';
+      "https://demo.generation360tech.in/api/register_user";
 
   //login url
   final String loginURL = "https://demo.generation360tech.in/api/login";
@@ -93,4 +90,13 @@ abstract class BaseApiService {
 
 //slider Api URL
   final String sliderURL = "https://demo.generation360tech.in/api/get_slider";
+
+  //fcm token store
+  String fcmTokenStoreApiUrl =
+      "https://demo.generation360tech.in/api/auth/fcm-token";
+
+  String getNotificationListURL =
+      "https://demo.generation360tech.in/api/auth/get_notifications";
+
+  String deletePostURL = "https://demo.generation360tech.in/api/auth/delete_post";
 }

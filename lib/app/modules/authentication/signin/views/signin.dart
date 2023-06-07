@@ -8,6 +8,7 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../../data/components/constands/constands.dart';
 //import '../../../../data/components/constands/constands.dart';
 import '../../../../data/components/costom_button.dart';
+import '../../../../data/models/controllers/auth_controllers.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
@@ -18,6 +19,10 @@ class SignInView extends StatefulWidget {
 
 CarouselController curouselController = CarouselController();
 int pageIndex = 0;
+var userNameController = TextEditingController();
+var passwordController = TextEditingController();
+final _formKey = GlobalKey<FormState>();
+final authController = Get.find<AuthController>();
 
 class _SignInViewState extends State<SignInView> {
   @override
@@ -34,8 +39,8 @@ class _SignInViewState extends State<SignInView> {
               children: [
                 Expanded(
                   child: Container(
-               //      width: 500,
-                //      height: 700,
+                    //      width: 500,
+                    //      height: 700,
                     child: Column(
                       children: [
                         Padding(
@@ -176,62 +181,67 @@ class _SignInViewState extends State<SignInView> {
                                 //   'Login',
                                 //   style: ktextstyle,
                                 // ),
-                                
+
                                 Text(
                                   'Login Back to Sipmaa HR Community',
                                   style: ktextstyle22,
                                 ),
-ksizedbox10,
-                                
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'Email Id',
-                                      ),
-                                    ),
-                                    TextFormField(
-                                      autofocus: true,
-                                      autovalidateMode:
-                                          AutovalidateMode.onUserInteraction,
-                                      validator: (value) {
-                                        if (value!.isEmpty) {
-                                          return "Email can't be empty";
-                                        } else if (!RegExp(
-                                                r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                                            .hasMatch(value)) {
-                                          return "Enter correct email";
-                                        }
-                                        return null;
-                                      },
-                                      // controller: controller,
-                                      // validator: validator,
-                                      decoration: InputDecoration(
-                                        floatingLabelBehavior:
-                                            FloatingLabelBehavior.never,
-                                        fillColor: Colors.grey[250],
-                                        labelText: 'Enter Email Id',
-                                        hintStyle: TextStyle(
-                                          color: Colors.grey[500],
+                                ksizedbox10,
+
+                                Form(
+                                  key: _formKey,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Text(
+                                          'User Name',
                                         ),
-                                        //  border: InputBorder.none,
-                                        filled: true,
-                                        border: OutlineInputBorder(
-                                          borderSide: BorderSide(
-                                              style: BorderStyle.none,
-                                              color: Color.fromARGB(
-                                                  241, 255, 255, 255),
-                                              width: 1.0),
-                                          borderRadius:
-                                              BorderRadius.circular(6.0),
-                                        ),
-                                        contentPadding: EdgeInsets.fromLTRB(
-                                            17.0, 8.0, 17.0, 7.0),
                                       ),
-                                    ),
-                                  ],
+                                      TextFormField(
+                                        controller: userNameController,
+                                        autofocus: true,
+                                        autovalidateMode:
+                                            AutovalidateMode.onUserInteraction,
+                                        // validator: (value) {
+                                        //   if (value!.isEmpty) {
+                                        //     return "Email can't be empty";
+                                        //   } else if (!RegExp(
+                                        //           r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                                        //       .hasMatch(value)) {
+                                        //     return "Enter correct email";
+                                        //   }
+                                        //   return null;
+                                        // },
+                                        // controller: controller,
+                                        // validator: validator,
+                                        decoration: InputDecoration(
+                                          floatingLabelBehavior:
+                                              FloatingLabelBehavior.never,
+                                          fillColor: Colors.grey[250],
+                                          labelText: 'Enter Email Id',
+                                          hintStyle: TextStyle(
+                                            color: Colors.grey[500],
+                                          ),
+                                          //  border: InputBorder.none,
+                                          filled: true,
+                                          border: OutlineInputBorder(
+                                            borderSide: BorderSide(
+                                                style: BorderStyle.none,
+                                                color: Color.fromARGB(
+                                                    241, 255, 255, 255),
+                                                width: 1.0),
+                                            borderRadius:
+                                                BorderRadius.circular(6.0),
+                                          ),
+                                          contentPadding: EdgeInsets.fromLTRB(
+                                              17.0, 8.0, 17.0, 7.0),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -241,6 +251,7 @@ ksizedbox10,
                                       child: Text('Password'),
                                     ),
                                     TextFormField(
+                                      controller: passwordController,
                                       autofocus: true,
                                       autovalidateMode:
                                           AutovalidateMode.onUserInteraction,
@@ -311,12 +322,69 @@ ksizedbox10,
                                 ),
                                 ksizedbox10,
                                 ksizedbox10,
-                                CUSTOMBUTTON(
-                                  onTap: () {
-                                    Get.toNamed('/home-screen');
-                                  },
-                                  text: 'Login',
+                                Obx(
+                                  () => SizedBox(
+                                    height: 45,
+                                    width: double.infinity,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(
+                                          left: 20, right: 20),
+                                      child: authController.isLoading.isTrue
+                                          ? ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: const Color(
+                                                  0xFF3C73B1,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                              ),
+                                              onPressed: () {},
+                                              child:
+                                                  const CircularProgressIndicator(
+                                                color: Colors.white,
+                                              ))
+                                          : ElevatedButton(
+                                              style: ElevatedButton.styleFrom(
+                                                backgroundColor: const Color(
+                                                  0xFF3C73B1,
+                                                ),
+                                                shape: RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.0),
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                if (_formKey.currentState!
+                                                    .validate()) {
+                                                  authController.loginUser(
+                                                      username:
+                                                          userNameController
+                                                              .text,
+                                                      password:
+                                                          passwordController
+                                                              .text);
+                                                }
+                                              },
+                                              child: const Text(
+                                                'Login ',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              )),
+                                    ),
+                                  ),
                                 ),
+                                // CUSTOMBUTTON(
+                                //   onTap: () {
+                                //     Get.toNamed('/home-screen');
+                                //   },
+                                //   text: 'Login',
+                                // ),
                                 ksizedbox10,
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.center,

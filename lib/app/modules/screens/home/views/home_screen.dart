@@ -370,8 +370,11 @@ class _HomePageState extends State<HomePage> {
                                                     fontWeight:
                                                         FontWeight.w900),
                                               ),
-                                            ),ksizedbox30,
-                                            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                            ),
+                                            ksizedbox30,
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
                                               children: [
                                                 SizedBox(
                                                   height: 30,
@@ -379,8 +382,7 @@ class _HomePageState extends State<HomePage> {
                                                   child: ElevatedButton(
                                                       style: ElevatedButton
                                                           .styleFrom(
-                                                        backgroundColor:
-                                                            Color(
+                                                        backgroundColor: Color(
                                                           0xFF3C73B1,
                                                         ),
                                                         shape:
@@ -391,7 +393,9 @@ class _HomePageState extends State<HomePage> {
                                                                       10.0),
                                                         ),
                                                       ),
-                                                      onPressed: () {Get.toNamed( '/sign-in');},
+                                                      onPressed: () {
+                                                        Get.toNamed('/sign-in');
+                                                      },
                                                       // Get.to(
 
                                                       // BottomNavigationBarExample(),
@@ -400,20 +404,19 @@ class _HomePageState extends State<HomePage> {
                                                       child: Text(
                                                         'Yes',
                                                         style: TextStyle(
-                                                            color:
-                                                                Colors.white,
+                                                            color: Colors.white,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .bold),
                                                       )),
-                                                ), SizedBox(
+                                                ),
+                                                SizedBox(
                                                   height: 30,
                                                   width: 80,
                                                   child: ElevatedButton(
                                                       style: ElevatedButton
                                                           .styleFrom(
-                                                        backgroundColor:
-                                                            Color(
+                                                        backgroundColor: Color(
                                                           0xFF3C73B1,
                                                         ),
                                                         shape:
@@ -424,7 +427,9 @@ class _HomePageState extends State<HomePage> {
                                                                       10.0),
                                                         ),
                                                       ),
-                                                      onPressed: () {Get.back();},
+                                                      onPressed: () {
+                                                        Get.back();
+                                                      },
                                                       // Get.to(
 
                                                       // BottomNavigationBarExample(),
@@ -433,8 +438,7 @@ class _HomePageState extends State<HomePage> {
                                                       child: Text(
                                                         'No',
                                                         style: TextStyle(
-                                                            color:
-                                                                Colors.white,
+                                                            color: Colors.white,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .bold),

@@ -117,7 +117,8 @@ class _RegisterViewsState extends State<RegisterViews> {
                                 children: [
                                   TextFormField(
                                     controller: userNameController,
-                                    textCapitalization: TextCapitalization.words,
+                                    textCapitalization:
+                                        TextCapitalization.words,
                                     autovalidateMode:
                                         AutovalidateMode.onUserInteraction,
                                     validator: (value) {
@@ -136,7 +137,6 @@ class _RegisterViewsState extends State<RegisterViews> {
                                       ),
                                       border: OutlineInputBorder(),
                                       filled: true,
-                                      
                                     ),
                                   ),
                                   if (userNameController.text.isNotEmpty)
@@ -178,7 +178,8 @@ class _RegisterViewsState extends State<RegisterViews> {
                                 crossAxisAlignment: CrossAxisAlignment.end,
                                 children: [
                                   TextFormField(
-                                    textCapitalization: TextCapitalization.words,
+                                    textCapitalization:
+                                        TextCapitalization.words,
                                     controller: emailIdController,
                                     autovalidateMode:
                                         AutovalidateMode.onUserInteraction,
@@ -198,7 +199,6 @@ class _RegisterViewsState extends State<RegisterViews> {
                                       ),
                                       border: OutlineInputBorder(),
                                       filled: true,
-                                    
                                     ),
                                   ),
                                   // Text(
@@ -237,88 +237,101 @@ class _RegisterViewsState extends State<RegisterViews> {
                         ksizedbox10,
                         ksizedbox10,
                         ksizedbox10,
-                        Obx(() => 
-                        SizedBox(
-                          height: 45,
-                          width: double.infinity,
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 20, right: 20),
-              
-                            child: authController.isLoading.isTrue?
-                            ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(
-                                    0xFF3C73B1,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                ),
-                                onPressed: () {
-                                  Get.toNamed('/otp-views');
-                                },
-                                // Get.off(otp_page());
-              
-                                child:CircularProgressIndicator() 
-                                // Text(
-                                //   'Register',
-                                //   style: TextStyle(
-                                //       color: Colors.white,
-                                //       fontWeight: FontWeight.bold),
-                                // )
-                                ):ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: const Color(
-                                        0xFF3C73B1,
+                        Obx(
+                          () => SizedBox(
+                            height: 45,
+                            width: double.infinity,
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
+                              child: authController.isLoading.isTrue
+                                  ? ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: Color(
+                                          0xFF3C73B1,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
                                       ),
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10.0),
+                                      onPressed: () {
+                                        Get.toNamed('/otp-views');
+                                      },
+                                      // Get.off(otp_page());
+
+                                      child: CircularProgressIndicator()
+                                      // Text(
+                                      //   'Register',
+                                      //   style: TextStyle(
+                                      //       color: Colors.white,
+                                      //       fontWeight: FontWeight.bold),
+                                      // )
+                                      )
+                                  : ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        backgroundColor: const Color(
+                                          0xFF3C73B1,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(10.0),
+                                        ),
                                       ),
-                                    ),
-                                    onPressed: () {
-                                      if (_formKey.currentState!.validate()) {
-                                       
-                                        if (createPassWordController.text ==
-                                            confirmPasswordController.text) {
-                                          RegisterModel registerModel =
-                                              RegisterModel(
-                                                  email: emailIdController.text,
-                                                  lastname:
-                                                      lastNameController.text,
-                                                  mobile:
-                                                      phoneNumberController.text,
-                                                  name: firstNameController.text,
-                                                  username:
-                                                      userNameController.text,
-                                                  passwordConfirmation:
-                                                      confirmPasswordController
-                                                          .text,
-                                                  password:
-                                                      createPassWordController
-                                                          .text);
-                                             print("-----------------------on here----------------------");
-                                          authController
-                                              .registerUser(registerModel);
-                                        } else {
-                                          Get.rawSnackbar(
-                                            messageText: const Text(
-                                              "Confirm password must match the new password.",
-                                              style:
-                                                  TextStyle(color: Colors.white),
-                                            ),
-                                            backgroundColor: Colors.red,
-                                          );
+                                      onPressed: () {
+                                        if (_formKey.currentState!.validate()) {
+                                          if (createPassWordController.text ==
+                                              confirmPasswordController.text) {
+
+                                        print("----------------------------changes------------------------");
+                                      print(firstNameController.text);
+                                      print(userNameController.text);
+                                      print(phoneNumberController.text);
+                                      print(emailIdController.text);
+                                            RegisterModel registerModel =
+                                                RegisterModel(
+                                                    email:
+                                                        emailIdController.text,
+                                                    lastname:
+                                                        lastNameController.text,
+                                                    mobile:
+                                                        phoneNumberController
+                                                            .text,
+                                                    name: firstNameController
+                                                        .text,
+                                                    username:
+                                                        userNameController.text,
+                                                    passwordConfirmation:
+                                                        confirmPasswordController
+                                                            .text,
+                                                    password:
+                                                        createPassWordController
+                                                            .text);
+                                            print(
+                                                "-----------------------on here----------------------");
+                                            authController
+                                                .registerUser(registerModel);
+                                          } else {
+                                            Get.rawSnackbar(
+                                              messageText: const Text(
+                                                "Confirm password must match the new password.",
+                                                style: TextStyle(
+                                                    color: Colors.white),
+                                              ),
+                                              backgroundColor: Colors.red,
+                                            );
+                                          }
                                         }
-                                      }
-                                    },
-                                    child: const Text(
-                                      'Register',
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    )),
+                                      },
+                                      child: const Text(
+                                        'Register',
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      )),
+                            ),
                           ),
-                        ),),
+                        ),
                         ksizedbox10,
                       ]),
                     ),
