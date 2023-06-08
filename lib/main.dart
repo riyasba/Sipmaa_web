@@ -4,6 +4,7 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:reg_login/app/data/components/controllers/auth_controllers.dart';
 import 'package:reg_login/app/modules/screens/home/controler/controler.dart';
 import 'package:reg_login/app/modules/screens/home/views/home_screen.dart';
+import 'package:reg_login/app/routes/route_generator.dart';
 
 import 'app/data/components/controllers/posts_controller.dart';
 import 'app/modules/screens/Settings/controllers/controllers.dart';
@@ -26,8 +27,11 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
      // home: HomePage(),
+    //  onGenerateRoute: AppPages.generateRoute,
+    //   initialRoute: TRoutes.HOME_PAGE,
          initialRoute: AppPages.INITIAL,
-          getPages: AppPages.routes,   );
+          getPages: AppPages.routes,  
+           );
       
   }
 }

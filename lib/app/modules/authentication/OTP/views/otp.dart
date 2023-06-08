@@ -2,13 +2,27 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:reg_login/app/data/components/controllers/auth_controllers.dart';
 
 import '../../../../data/components/constands/constands.dart';
 
-class OTPVIEWS extends StatelessWidget {
-  const OTPVIEWS({super.key});
+class OTPVIEWS extends StatefulWidget {
+  String phoneNumber;
+  String otp;
+  OTPVIEWS({super.key, required this.phoneNumber, required this.otp});
+
+  @override
+  State<OTPVIEWS> createState() => _OTPVIEWSState();
+}
+
+class _OTPVIEWSState extends State<OTPVIEWS> {
+
+  final authController = Get.find<AuthController>();
+
+  String otpValue = "";
 
   @override
   Widget build(BuildContext context) {
@@ -44,16 +58,23 @@ class OTPVIEWS extends StatelessWidget {
                               TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
                         ),
                         Text(
-                          'Riyasklb89@gmail.com',
+                          widget.phoneNumber,
                           style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.w400,
                               color: Colors.blue),
                         ),
+                        Text(
+                          widget.otp,
+                          style: TextStyle(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                              color: Colors.black),
+                        ),
                         ksizedbox10,
                         ksizedbox10,
                         OtpTextField(
-                          numberOfFields: 5,
+                          numberOfFields: 4,
                           borderColor: Color(0xFF512DA8),
                           //set to true to show as box or false to show as dash
                           showFieldAsBox: true,
@@ -63,15 +84,16 @@ class OTPVIEWS extends StatelessWidget {
                           },
                           //runs when every textfield is filled
                           onSubmit: (String verificationCode) {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text("Verification Code"),
-                                    content:
-                                        Text('Code entered is $verificationCode'),
-                                  );
-                                });
+                             otpValue = verificationCode;
+                            // showDialog(
+                            //     context: context,
+                            //     builder: (context) {
+                            //       return AlertDialog(
+                            //         title: Text("Verification Code"),
+                            //         content:
+                            //             Text('Code entered is $verificationCode'),
+                            //       );
+                            //     });
                           }, // end onSubmit
                         ),
                         SizedBox(
@@ -104,7 +126,10 @@ class OTPVIEWS extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10.0),
                                   ),
                                 ),
-                                onPressed: () => Get.toNamed('/register-2'),
+                                onPressed: () {
+                                  authController.otpVerify(otpValue);
+                                },
+                                //=> Get.toNamed('/register-2'),
                                 child: Text(
                                   'Submit',
                                   style: TextStyle(

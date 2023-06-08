@@ -30,7 +30,7 @@ class _SignInViewState extends State<SignInView> {
     return Scaffold(
       backgroundColor: kblue,
       body: Padding(
-        padding: const EdgeInsets.all(50),
+        padding: const EdgeInsets.all(45),
         child: Center(
           child: Container(
             decoration: BoxDecoration(
@@ -320,8 +320,8 @@ class _SignInViewState extends State<SignInView> {
                                     ),
                                   ],
                                 ),
-                                ksizedbox10,
-                                ksizedbox10,
+                              //  ksizedbox10,
+                               // ksizedbox10,
                                 Obx(
                                   () => SizedBox(
                                     height: 45,

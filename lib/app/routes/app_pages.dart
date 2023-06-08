@@ -4,6 +4,7 @@
 
 import 'package:get/get.dart';
 import 'package:reg_login/app/modules/authentication/signin/views/signin.dart';
+import 'package:reg_login/app/modules/screens/home/views/splash_view.dart';
 
 import '../modules/screens/Settings/views/settingss.dart';
 import '../modules/screens/Settings/views/widgets/change_password.dart';
@@ -20,9 +21,14 @@ part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
-  static String INITIAL = Routes.SIGN_IN;
+  static String INITIAL = Routes.SPLASH;
 
   static final routes = [
+     GetPage(
+      name: _Paths.SPLASH,
+      page: () => const Splash(),
+      // binding: SignInBinding(),
+    ),
     GetPage(
       name: _Paths.SIGN_IN,
       page: () => const SignInView(),
@@ -40,7 +46,10 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.OTP_VIEWS,
-      page: () => const OTPVIEWS(),
+      page: () =>  OTPVIEWS(
+        phoneNumber: "",
+        otp: "",
+      ),
       // binding: SignInBinding(),
     ),
     GetPage(
@@ -69,6 +78,7 @@ class AppPages {
       // binding: SignInBinding(),
     ),
     GetPage(
+      
       name: _Paths.Change_password,
       page: () => const demo (),
       // binding: SignInBinding(),

@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/data/models/department_model.dart';
+import 'package:reg_login/app/data/models/profile_update_model.dart';
+import 'package:reg_login/app/data/services/auth_api_service/get_department_api_services.dart';
+import 'package:reg_login/app/data/services/auth_api_service/otp_verify_api_services.dart';
+import 'package:reg_login/app/data/services/auth_api_service/update_profile_api_service.dart';
+import 'package:reg_login/app/modules/authentication/OTP/views/otp.dart';
+import 'package:reg_login/app/modules/authentication/register/views/register.dart';
+import 'package:reg_login/app/modules/authentication/register/views/registersplash.dart';
 import 'package:reg_login/app/services/network_api_services/auth_api_services/register_api_services.dart';
 import 'package:reg_login/app/services/network_api_services/user_name_check_api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,17 +40,18 @@ class AuthController extends GetxController {
 
   RxBool isUserNameAvailable = false.obs;
 
-  //List<Department> departments = [];
+  List<Department> departments = [];
   //List<SliderList> sliderList = [];
 
-  //GetDepartmentServicesApi getDepartmentServicesApi =
-  // GetDepartmentServicesApi();
+  GetDepartmentServicesApi getDepartmentServicesApi =
+   GetDepartmentServicesApi();
   LoginServicesApi loginServicesApi = LoginServicesApi();
 
   /// OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
+  OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
   RegisterServicesApi registerServicesApi = RegisterServicesApi();
-  //ProfileUpdateServicesApi profileUpdateServicesApi =
-  //  ProfileUpdateServicesApi();
+  ProfileUpdateServicesApi profileUpdateServicesApi =
+    ProfileUpdateServicesApi();
   UserNameApiServices userNameApiServices = UserNameApiServices();
   //GetSliderApiServices getSliderApiServices = GetSliderApiServices();
 
@@ -73,6 +82,8 @@ class AuthController extends GetxController {
   //     );
   //   }
   // }
+
+
   registerUser(RegisterModel registerModel) async {
     isLoading(true);
     var response = await registerServicesApi.registerApi(registerModel);
@@ -81,7 +92,16 @@ class AuthController extends GetxController {
     if (response.statusCode == 201) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", response.data["token"]);
-      Get.toNamed('/otp-views');
+      Get.to(OTPVIEWS(
+        phoneNumber: registerModel.mobile,
+        otp: response.data["user"]["otp"].toString(),
+      ));
+      // Get.toNamed('/otp-views',arguments: 
+      // {
+      //   "otp": response.data["user"]["otp"].toString(),
+      //   "phonenumber": registerModel.mobile
+      // }
+      // );
     } else if (response.statusCode == 422) {
       Get.rawSnackbar(
         messageText: Text(
@@ -92,67 +112,68 @@ class AuthController extends GetxController {
       );
     }
   }
-//   otpVerify(String otp) async {
-//     isLoading(true);
-//     dio.Response<dynamic> response =
-//         await otpVerifyServicesApi.otpVerifyApi(otp: otp);
-//     isLoading(false);
-//     if (response.statusCode == 200) {
-//  //     Get.offAll(const RegisterDetailsView());
-//       //success
-//       Get.rawSnackbar(
-//         messageText: const Text(
-//           "OTP Verified Successfully",
-//           style: TextStyle(color: Colors.white),
-//         ),
-//         backgroundColor: Colors.green,
-//       );
-//     } else if (response.statusCode == 400) {
-//       Get.rawSnackbar(
-//         messageText: const Text(
-//           "Invalid OTP",
-//           style: TextStyle(color: Colors.white),
-//         ),
-//         backgroundColor: Colors.red,
-//       );
-//     }
-//   }
+  
+  otpVerify(String otp) async {
+    isLoading(true);
+    dio.Response<dynamic> response =
+        await otpVerifyServicesApi.otpVerifyApi(otp: otp);
+    isLoading(false);
+    if (response.statusCode == 200) {
+     Get.offAll(const Resgister2());
+      //success
+      Get.rawSnackbar(
+        messageText: const Text(
+          "OTP Verified Successfully",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      );
+    } else if (response.statusCode == 400) {
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Invalid OTP",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
 
-  // getDepartmentList() async {
-  //   dio.Response<dynamic> response =
-  //       await getDepartmentServicesApi.getDepartmentApi();
+  getDepartmentList() async {
+    dio.Response<dynamic> response =
+        await getDepartmentServicesApi.getDepartmentApi();
 
-  //   if (response.statusCode == 200) {
-  //     DepartmentModel departmentModel = DepartmentModel.fromJson(response.data);
-  //     departments = departmentModel.departments;
-  //     update();
-  //   }
-  // }
+    if (response.statusCode == 200) {
+      DepartmentModel departmentModel = DepartmentModel.fromJson(response.data);
+      departments = departmentModel.departments;
+      update();
+    }
+  }
 
-  // updateProfile(ProfileUpdateModel profileUpdateModel) async {
-  //   isLoading(true);
-  //   dio.Response<dynamic> response =
-  //       await profileUpdateServicesApi.profileUpdate(profileUpdateModel);
-  //   isLoading(false);
-  //   if (response.statusCode == 200) {
-  //     Get.offAll(registersplash());
-  //     Get.rawSnackbar(
-  //       messageText: const Text(
-  //         "Registered Successfully",
-  //         style: TextStyle(color: Colors.white),
-  //       ),
-  //       backgroundColor: Colors.green,
-  //     );
-  //   } else {
-  //     Get.rawSnackbar(
-  //       messageText: const Text(
-  //         "Something went wrong",
-  //         style: TextStyle(color: Colors.white),
-  //       ),
-  //       backgroundColor: Colors.red,
-  //     );
-  //   }
-  // }
+  updateProfile(ProfileUpdateModel profileUpdateModel) async {
+    isLoading(true);
+    dio.Response<dynamic> response =
+        await profileUpdateServicesApi.profileUpdate(profileUpdateModel);
+    isLoading(false);
+    if (response.statusCode == 200) {
+      Get.offAll(Registersplash());
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Registered Successfully",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      );
+    } else {
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Something went wrong",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
 
   loginUser({required String username, required String password}) async {
     isLoading(true);

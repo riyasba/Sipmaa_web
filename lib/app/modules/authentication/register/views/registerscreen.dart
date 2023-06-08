@@ -256,7 +256,28 @@ class _RegisterViewsState extends State<RegisterViews> {
                                         ),
                                       ),
                                       onPressed: () {
-                                        Get.toNamed('/otp-views');
+
+                                        RegisterModel registerModel =
+                                            RegisterModel(
+                                                email: emailIdController.text,
+                                                lastname:
+                                                    lastNameController.text,
+                                                mobile:
+                                                    phoneNumberController.text,
+                                                name: firstNameController.text,
+                                                username:
+                                                    userNameController.text,
+                                                passwordConfirmation:
+                                                    confirmPasswordController
+                                                        .text,
+                                                password:
+                                                    createPassWordController
+                                                        .text);
+
+                                        authController
+                                            .registerUser(registerModel);
+
+                                        //Get.toNamed('/otp-views');
                                       },
                                       // Get.off(otp_page());
 

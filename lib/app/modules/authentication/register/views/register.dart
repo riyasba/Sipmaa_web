@@ -1,14 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:reg_login/app/data/components/controllers/auth_controllers.dart';
+import 'package:reg_login/app/data/models/department_model.dart';
+import 'package:reg_login/app/data/models/profile_update_model.dart';
 
 import '../../../../data/components/constands/constands.dart';
 import '../../../../data/components/constands/formfield.dart';
 
-class Resgister2 extends StatelessWidget {
+class Resgister2 extends StatefulWidget {
   const Resgister2({super.key});
+
+  @override
+  State<Resgister2> createState() => _Resgister2State();
+}
+
+class _Resgister2State extends State<Resgister2> {
+
+  final authController = Get.find<AuthController>();
+
+  var designation;
+
+  var currentCompanyController = TextEditingController();
+  var officialController = TextEditingController();
+  var locationController = TextEditingController();
+  var cityController = TextEditingController();
+  var stateController = TextEditingController();
+  var postalCodeController = TextEditingController();
+  var designationController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    authController.getDepartmentList();
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -63,14 +92,111 @@ class Resgister2 extends StatelessWidget {
                       // ),
                      
                       TextformfieldWidget(
+                         controller: currentCompanyController,
                           text: 'Current Company',
                           textt: 'Current Company'),
-                      TextformfieldWidget(text: 'Enter Designation', textt: 'Designation'),
-                      TextformfieldWidget(text: 'Enter Official Email ID', textt: 'Official Email ID'),
-                      TextformfieldWidget(text: 'Enter Location', textt: 'Location'),
-                      TextformfieldWidget(text: 'Type City', textt: 'City'),
-                      TextformfieldWidget(text: 'Type State', textt: 'State'),
-                      TextformfieldWidget(text: 'Postal Code', textt: 'Postal Code'),
+                          TextformfieldWidget(
+                        controller: designationController,
+                        text: 'Enter Designation',
+                        textt: 'Designation'),
+                     GetBuilder<AuthController>(builder: (_) {
+                      return Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Text(
+                                "Department",
+                              ),
+                            ),
+                            Container(
+                              height: 50,
+                              width: 430,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                      color: const Color.fromARGB(
+                                              255, 158, 158, 158)
+                                          .withOpacity(0.2))),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, top: 10),
+                                child: DropdownButton<Department>(
+                                  value: designation,
+                                  isExpanded: true,
+                                  icon: const Icon(
+                                      Icons.keyboard_arrow_down_outlined),
+                                  elevation: 0,
+                                  itemHeight: 55,
+                                  isDense: true,
+                                  dropdownColor: Colors.grey[250],
+                                  style: const TextStyle(color: Colors.black54),
+                                  hint: const Text(
+                                    "Department",
+                                    style: TextStyle(fontSize: 14),
+                                  ),
+                                  onChanged: (Department? value) {
+                                    // This is called when the user selects an item.
+                                    setState(() {
+                                      authController
+                                          .isDesignationSelected(false);
+                                      designation = value!;
+                                    });
+                                  },
+                                  items: authController.departments
+                                      .map<DropdownMenuItem<Department>>(
+                                          (Department value) {
+                                    return DropdownMenuItem<Department>(
+                                      value: value,
+                                      child: Text(value.title),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Obx(
+                              () => authController.isDesignationSelected.isTrue
+                                  ? const Padding(
+                                      padding: EdgeInsets.only(left: 15),
+                                      child: Text(
+                                        "Please select Department",
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 230, 46, 33),
+                                            fontSize: 12),
+                                      ),
+                                    )
+                                  : Container(),
+                            )
+                          ],
+                        ),
+                      );
+                    }),
+                      TextformfieldWidget(
+                        controller: officialController,
+                        text: 'Enter Official Email ID', 
+                        textt: 'Official Email ID'),
+                      TextformfieldWidget(
+                        controller: locationController,
+                        text: 'Enter Location', 
+                        textt: 'Location'),
+                      TextformfieldWidget(
+                        controller: cityController,
+                        text: 'Type City', 
+                        textt: 'City'),
+                      TextformfieldWidget(
+                        controller: stateController,
+                        text: 'Type State', 
+                        textt: 'State'),
+                      TextformfieldWidget(
+                        controller: postalCodeController,
+                        text: 'Postal Code', 
+                        textt: 'Postal Code'),
                       ksizedbox10,
                       ksizedbox10,
                       SizedBox(
@@ -87,7 +213,28 @@ class Resgister2 extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                               ),
-                              onPressed: () =>Get.toNamed('/resgister-splash'),
+                              onPressed: () {
+                                if (authController
+                                          .isDesignationSelected.isFalse) {
+                                        ProfileUpdateModel profileUpdateModel =
+                                            ProfileUpdateModel(
+                                          currentCompany:
+                                              currentCompanyController.text,
+                                          city: cityController.text,
+                                          designation: designation.id.toString(),
+                                          address: locationController.text,
+                                          department:
+                                              designationController.text,
+                                          officialEmail:
+                                              officialController.text,
+                                          pincode: postalCodeController.text,
+                                          state: stateController.text,
+                                        );
+                                        authController
+                                            .updateProfile(profileUpdateModel);
+                                      }
+                              },
+                              //=>Get.toNamed('/resgister-splash'),
                                
                               
                               child: Text(
