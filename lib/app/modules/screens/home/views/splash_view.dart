@@ -55,7 +55,7 @@ class _SplashState extends State<Splash> {
       backgroundColor: Colors.white,
       body: Center(
         child: Container(
-          child: Image.asset('assets/images/iPhone 14 Pro Max – 1.gif'),
+          child: Image.asset('assets/images/logo.png'),
         ),
       ),
     );

@@ -150,7 +150,7 @@ class PostsController extends GetxController {
   uplodPost({
     required String title,
     required String description,
-    required File media,
+    required var media,
   }) async {
     isLoading(true);
     update();
@@ -159,14 +159,14 @@ class PostsController extends GetxController {
     isLoading(false);
 
     if (response.statusCode == 201) {
-      Get.off(HomePage());
-      Get.rawSnackbar(
-        messageText: const Text(
-          "Uploaded successfull",
-          style: TextStyle(color: Colors.white),
-        ),
-        backgroundColor: Colors.green,
-      );
+      // Get.off(HomePage());
+      // Get.rawSnackbar(
+      //   messageText: const Text(
+      //     "Uploaded successfull",
+      //     style: TextStyle(color: Colors.white),
+      //   ),
+      //   backgroundColor: Colors.green,
+      // );
     } else {
       Get.rawSnackbar(
         messageText: const Text(
@@ -176,6 +176,8 @@ class PostsController extends GetxController {
         backgroundColor: Colors.red,
       );
     }
+
+    return response.statusCode;
   }
 
   postComments({

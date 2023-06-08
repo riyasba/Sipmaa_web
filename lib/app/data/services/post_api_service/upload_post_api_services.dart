@@ -7,7 +7,7 @@ class UploadPostApiServices extends BaseApiService {
   Future uploadPost({
     required String title,
     required String description,
-    required File media,
+    required var media,
   }) async {
     dynamic responseJson;
     try {
@@ -18,7 +18,7 @@ class UploadPostApiServices extends BaseApiService {
       FormData formData = FormData.fromMap({
         "title": title,
         "description": description,
-        "media": await MultipartFile.fromFile(media.path, filename: "image"),
+        "media":  MultipartFile.fromBytes(media, filename: "image"),
       });
 
       var response = await dio.post(uploadPostURL,
