@@ -1,4 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:reg_login/app/data/components/controllers/posts_controller.dart';
+import 'package:reg_login/app/modules/screens/home/views/home_screen.dart';
 
 import '../../../../data/components/constands/constands.dart';
 
@@ -10,6 +16,29 @@ class CreateWidget extends StatefulWidget {
 }
 
 class _CreateWidgetState extends State<CreateWidget> {
+
+  final postsController = Get.find<PostsController>();
+
+  var textController = TextEditingController();
+
+  File? image;
+
+  var imagePath;
+
+  chooseImage() async {
+    PickedFile? pickedFile = await ImagePicker().getImage(
+      source: ImageSource.gallery,
+    );
+    imagePath = await pickedFile!.readAsBytes();
+    setState(() {
+      // imageName = pickedFile.path.split(".").last;
+    });
+    // Uint8List? bytesFromPicker = await ImagePickerWeb.getImageAsBytes();
+    // setState(() {
+    //   imagePath = bytesFromPicker!;
+    // });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -64,9 +93,8 @@ class _CreateWidgetState extends State<CreateWidget> {
             padding: const EdgeInsets.only(left: 40, top: 10),
             child: Column(
               children: [
-                Text(
-                  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis  nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat',
-                  style: TextStyle(fontSize: 13),
+                TextField(
+                  controller: textController,
                 ),
               ],
             ),
@@ -94,7 +122,16 @@ class _CreateWidgetState extends State<CreateWidget> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset('assets/images/createupload.png'),
+                    InkWell(
+                      onTap: ()  {
+                       chooseImage();
+                      },
+                      child:imagePath == null ? Image.asset('assets/images/createupload.png') :
+                       ClipRRect(
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.memory(imagePath),
+                  ),
+                       ),
                   ],
                 ),
               ),
@@ -109,7 +146,12 @@ class _CreateWidgetState extends State<CreateWidget> {
                     minimumSize:
                         Size(MediaQuery.of(context).size.width * 0.27, 45)),
                 onPressed: () {
-                  showDialog(
+                   if (textController.text.isNotEmpty && imagePath != null) {
+                          postsController.uplodPost(
+                              title: textController.text,
+                              description: "",
+                              media: File(image!.path));
+                              showDialog(
                       context: context,
                       builder: (context) {
                         return Dialog(
@@ -154,7 +196,9 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                         .width *
                                                     0.2,
                                                 45)),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          Get.off(HomePage());
+                                        },
                                         child: Text(
                                           'Done',
                                           style: TextStyle(fontSize: 17),
@@ -166,6 +210,16 @@ class _CreateWidgetState extends State<CreateWidget> {
                           ),
                         );
                       });
+                        } else {
+                          Get.rawSnackbar(
+                            messageText: const Text(
+                              "Complete before posting",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            backgroundColor: Colors.red,
+                          );
+                        }
+                  
                 },
                 child: Text(
                   'Post',

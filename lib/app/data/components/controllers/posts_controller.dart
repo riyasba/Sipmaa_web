@@ -3,6 +3,8 @@ import 'dart:io';
 //import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/data/services/post_api_service/upload_post_api_services.dart';
+import 'package:reg_login/app/modules/screens/home/views/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:simpa/controllers/auth_controllers.dart';
 // import 'package:simpa/models/comment_list_model.dart';
@@ -40,7 +42,7 @@ class PostsController extends GetxController {
 
   GetAllPostApiServices getAllPostApiServices = GetAllPostApiServices();
   // SearchPostApiServices searchPostApiServices = SearchPostApiServices();
-//  UploadPostApiServices uploadPostApiServices = UploadPostApiServices();
+  UploadPostApiServices uploadPostApiServices = UploadPostApiServices();
   GetProfileApiServices getProfileApiServices = GetProfileApiServices();
   PostLikeApiServices postLikeApiServices = PostLikeApiServices();
   PostCommentsListApiServices postCommentsListApiServices =
@@ -145,36 +147,36 @@ class PostsController extends GetxController {
   //   update();
   // }
 
-  // uplodPost({
-  //   required String title,
-  //   required String description,
-  //   required File media,
-  // }) async {
-  //   isLoading(true);
-  //   update();
-  //   dio.Response<dynamic> response = await uploadPostApiServices.uploadPost(
-  //       title: title, description: description, media: media);
-  //   isLoading(false);
+  uplodPost({
+    required String title,
+    required String description,
+    required File media,
+  }) async {
+    isLoading(true);
+    update();
+    dio.Response<dynamic> response = await uploadPostApiServices.uploadPost(
+        title: title, description: description, media: media);
+    isLoading(false);
 
-  //   if (response.statusCode == 201) {
-  //     Get.off(postsplash());
-  //     Get.rawSnackbar(
-  //       messageText: const Text(
-  //         "Uploaded successfull",
-  //         style: TextStyle(color: Colors.white),
-  //       ),
-  //       backgroundColor: Colors.green,
-  //     );
-  //   } else {
-  //     Get.rawSnackbar(
-  //       messageText: const Text(
-  //         "Something went wrong",
-  //         style: TextStyle(color: Colors.white),
-  //       ),
-  //       backgroundColor: Colors.red,
-  //     );
-  //   }
-  // }
+    if (response.statusCode == 201) {
+      Get.off(HomePage());
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Uploaded successfull",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      );
+    } else {
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Something went wrong",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
 
   postComments({
     required String userID,
