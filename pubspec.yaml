@@ -41,7 +41,7 @@ dependencies:
   sharedpreference_utils: ^1.0.0
   dio: ^5.1.2
   http: ^1.0.0
-  
+  timeago: ^3.4.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

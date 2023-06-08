@@ -4,7 +4,7 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:reg_login/app/data/models/controllers/auth_controllers.dart';
+import 'package:reg_login/app/data/components/controllers/auth_controllers.dart';
 
 import '../../../../data/components/constands/constands.dart';
 import '../../../../data/components/constands/formfield.dart';

@@ -8,7 +8,7 @@ import 'package:get/get_core/src/get_main.dart';
 import '../../../../data/components/constands/constands.dart';
 //import '../../../../data/components/constands/constands.dart';
 import '../../../../data/components/costom_button.dart';
-import '../../../../data/models/controllers/auth_controllers.dart';
+import '../../../../data/components/controllers/auth_controllers.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});

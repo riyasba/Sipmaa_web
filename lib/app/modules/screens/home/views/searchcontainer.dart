@@ -20,15 +20,16 @@ class _SearchContainerState extends State<SearchContainer> {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: MediaQuery.of(context).size.height * 0.88,
-        width: MediaQuery.of(context).size.width * 0.4,
-        decoration: BoxDecoration(
-            color: kwhite,
-            boxShadow: <BoxShadow>[
-              BoxShadow(offset: Offset(0.0, 0.7), blurRadius: 0.5, color: kgrey)
-            ],
-            borderRadius: BorderRadius.circular(10)),
-        child: Column(children: [
+      height: MediaQuery.of(context).size.height * 0.88,
+      width: MediaQuery.of(context).size.width * 0.4,
+      decoration: BoxDecoration(
+          color: kwhite,
+          boxShadow: <BoxShadow>[
+            BoxShadow(offset: Offset(0.0, 0.7), blurRadius: 0.5, color: kgrey)
+          ],
+          borderRadius: BorderRadius.circular(10)),
+      child: Column(
+        children: [
           ksizedbox10,
           Padding(
             padding: const EdgeInsets.only(top: 20, left: 20),
@@ -91,6 +92,8 @@ class _SearchContainerState extends State<SearchContainer> {
               ),
             ),
           ),
-        ]));
+        ],
+      ),
+    );
   }
 }

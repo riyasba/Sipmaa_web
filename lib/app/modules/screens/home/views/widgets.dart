@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:reg_login/app/data/components/constands/constands.dart';
 import 'package:reg_login/app/data/components/search_field.dart';
+import 'package:reg_login/app/data/models/comment_list_model.dart';
+import 'package:reg_login/app/modules/screens/home/views/widgets/likepost.dart';
+
+import '../../../../data/components/controllers/auth_controllers.dart';
+import '../../../../data/components/controllers/posts_controller.dart';
+import '../../profile/views/profile_pagee.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class HomeContainer extends StatefulWidget {
   HomeContainer({super.key});
@@ -14,17 +22,35 @@ class HomeContainer extends StatefulWidget {
 class _HomeContainerState extends State<HomeContainer> {
   bool _isfavorite = false;
   bool _isfavorite2 = false;
+  final postsController = Get.find<PostsController>();
+  final authController = Get.find<AuthController>();
+  //final profileController = Get.find<ProfileController>();
   var commentController = TextEditingController();
   var dialogeController = TextEditingController();
+  var commentTextController = TextEditingController();
+  final postController = Get.find<PostsController>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Container(
       height: MediaQuery.of(context).size.height * 0.88,
       width: MediaQuery.of(context).size.width * 0.38,
-      child: ListView.separated(separatorBuilder: (BuildContext context, int index){return  Divider(height: 10,);},
-        
-          itemCount: 6,
-          itemBuilder: (context, i) {
+      child: GetBuilder<PostsController>(builder: (_) {
+        return ListView.separated(
+          separatorBuilder: (BuildContext context, int i) {
+            return Divider(
+              height: 10,
+            );
+          },
+          shrinkWrap: true,
+          itemCount: postsController.allPostList.length,
+          itemBuilder: (context, index) {
             return Container(
               height: MediaQuery.of(context).size.height * 0.88,
               width: MediaQuery.of(context).size.width * 0.38,
@@ -39,77 +65,122 @@ class _HomeContainerState extends State<HomeContainer> {
                 children: [
                   ksizedbox10,
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      ksizedbox10,
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Row(children: [
-                        Image.asset(
-                          'assets/images/profile.png',
-                          fit: BoxFit.fitHeight,
-                          height: 80,
-                        )
-                      ]),
-                      ksizedbox10,
-                      SizedBox(
-                        width: 20,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Sharmila',
-                              style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w900,
-                                  color: Colors.black),
-                            ),
-                            Text(
-                              'Loream ipounum',
-                              style: TextStyle(
-                                fontSize: 14,
+                      Row(
+                        children: [
+                          postsController
+                                      .allPostList[index].user.profilePicture ==
+                                  null
+                              ? const CircleAvatar(
+                                  backgroundImage: AssetImage(
+                                      'assets/icons/profile_icon.png'),
+                                  radius: 25,
+                                )
+                              : CircleAvatar(
+                                  backgroundImage: NetworkImage(postsController
+                                      .allPostList[index].user.profilePicture),
+                                ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                postsController.allPostList[index].user.name,
+                                style: ktextstyle22,
                               ),
-                              textAlign: TextAlign.start,
-                            )
-                          ],
-                        ),
+                              Text(postsController
+                                      .allPostList[index].user.designation ??
+                                  postsController
+                                      .allPostList[index].user.userName)
+                            ],
+                          ),
+                        ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 180),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text('2 days ago'),
-                          ],
-                        ),
-                      )
+                      Text(
+                        timeago.format(
+                            postsController.allPostList[index].createdAt),
+                        style: const TextStyle(fontSize: 17),
+                      ),
                     ],
                   ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.start,
+                  //   children: [
+                  //     ksizedbox10,
+                  //     SizedBox(
+                  //       width: 20,
+                  //     ),
+                  //     Row(children: [
+                  //       Image.asset(
+                  //         'assets/images/profile.png',
+                  //         fit: BoxFit.fitHeight,
+                  //         height: 80,
+                  //       )
+                  //     ]),
+                  //     ksizedbox10,
+                  //     SizedBox(
+                  //       width: 20,
+                  //     ),
+                  //     Padding(
+                  //       padding: const EdgeInsets.only(left: 0),
+                  //       child: Column(
+                  //         crossAxisAlignment: CrossAxisAlignment.start,
+                  //         children: [
+                  //           Text(
+                  //             'Sharmila',
+                  //             style: TextStyle(
+                  //                 fontSize: 17,
+                  //                 fontWeight: FontWeight.w900,
+                  //                 color: Colors.black),
+                  //           ),
+                  //           Text(
+                  //             'Loream ipounum',
+                  //             style: TextStyle(
+                  //               fontSize: 14,
+                  //             ),
+                  //             textAlign: TextAlign.start,
+                  //           )
+                  //         ],
+                  //       ),
+                  //     ),
+                  //     Padding(
+                  //       padding: const EdgeInsets.only(left: 180),
+                  //       child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.end,
+                  //         children: [
+                  //           Text('2 days ago'),
+                  //         ],
+                  //       ),
+                  //     )
+                  //   ],
+                  // ),
+                  ksizedbox30,
                   Padding(
                     padding: const EdgeInsets.only(left: 35, top: 5),
                     child: Row(
                       children: [
                         Text(
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod \ntempor incididunt ut labore et dolore magna aliqua. Ut enim ad \nminim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea \ncommodo consequat.',
-                          style: TextStyle(fontSize: 11.5),
+                          postsController.allPostList[index].title,
+                          style: TextStyle(fontSize: 18.5),
                         )
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 35, top: 20),
-                    child: Row(children: [
-                      Image.asset(
-                        'assets/images/homeimage.png',
-                        height: 220,
-                        fit: BoxFit.fitHeight,
-                      )
-                    ]),
-                  ),
+                  ksizedbox30,
+                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image.network(
+                        postsController.allPostList[index].body.toString(),
+                        fit: BoxFit.cover,
+                        width: size.width * 0.3,
+                        height: size.height * 0.4,
+                      ),
+                    ),
+                  ]),
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: Row(
@@ -502,7 +573,8 @@ class _HomeContainerState extends State<HomeContainer> {
                                   size: 15,
                                 )),
                             Text(
-                              '80K',
+                              postsController.allPostList[index].likeCount
+                                  .toString(),
                               style: TextStyle(
                                   fontSize: 13, fontWeight: FontWeight.w800),
                             ),
@@ -515,7 +587,11 @@ class _HomeContainerState extends State<HomeContainer> {
                           padding: const EdgeInsets.only(left: 20),
                           child: InkWell(
                               onTap: () {
-                                setState(() {
+                                postController.getComments(
+                                    postId: postsController
+                                        .allPostList[index].id
+                                        .toString());
+                           
                                   showDialog(
                                       context: context,
                                       builder: (context) {
@@ -529,7 +605,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width *
-                                                    0.56,
+                                                    0.7,
                                                 decoration: BoxDecoration(
                                                     color: kwhite),
                                                 child: Row(
@@ -558,299 +634,16 @@ class _HomeContainerState extends State<HomeContainer> {
                                                               top: 35,
                                                               left: 20),
                                                       child: Container(
-                                                        child: Column(
-                                                          children: [
-                                                            Row(
-                                                              crossAxisAlignment:
-                                                                  CrossAxisAlignment
-                                                                      .start,
-                                                              children: [
-                                                                Image.asset(
-                                                                  'assets/images/profile.png',
-                                                                  height: 50,
-                                                                  fit: BoxFit
-                                                                      .fitHeight,
-                                                                ),
-                                                                Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      top: 7,
-                                                                      left: 13),
-                                                                  child: Column(
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        'Akash',
-                                                                        style: TextStyle(
-                                                                            fontWeight:
-                                                                                FontWeight.bold),
-                                                                      ),
-                                                                      Padding(
-                                                                        padding:
-                                                                            const EdgeInsets.only(top: 2),
-                                                                        child:
-                                                                            Text(
-                                                                          'Day addmition opend sir!',
-                                                                          style: TextStyle(
-                                                                              fontSize: 11.3,
-                                                                              fontWeight: FontWeight.w600),
-                                                                        ),
-                                                                      )
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                Padding(
-                                                                  padding: const EdgeInsets
-                                                                          .only(
-                                                                      left: 120,
-                                                                      top: 10),
-                                                                  child: Text(
-                                                                    '2 Hours ago',
-                                                                    style: TextStyle(
-                                                                        fontSize:
-                                                                            11),
-                                                                  ),
-                                                                )
-                                                              ],
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      top: 10,
-                                                                      left: 0),
-                                                              child: Container(
-                                                                child: Row(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Image.asset(
-                                                                      'assets/images/profile.png',
-                                                                      height:
-                                                                          50,
-                                                                      fit: BoxFit
-                                                                          .fitHeight,
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          top:
-                                                                              7,
-                                                                          left:
-                                                                              13),
-                                                                      child:
-                                                                          Column(
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Text(
-                                                                            'Akash',
-                                                                            style:
-                                                                                TextStyle(fontWeight: FontWeight.bold),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.only(top: 2),
-                                                                            child:
-                                                                                Text(
-                                                                              'Day addmition opend sir!',
-                                                                              style: TextStyle(fontSize: 11.3, fontWeight: FontWeight.w600),
-                                                                            ),
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          left:
-                                                                              120,
-                                                                          top:
-                                                                              10),
-                                                                      child:
-                                                                          Text(
-                                                                        '2 Hours ago',
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                11),
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      top: 10,
-                                                                      left: 0),
-                                                              child: Container(
-                                                                child: Row(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Image.asset(
-                                                                      'assets/images/profile.png',
-                                                                      height:
-                                                                          50,
-                                                                      fit: BoxFit
-                                                                          .fitHeight,
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          top:
-                                                                              7,
-                                                                          left:
-                                                                              13),
-                                                                      child:
-                                                                          Column(
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Text(
-                                                                            'Akash',
-                                                                            style:
-                                                                                TextStyle(fontWeight: FontWeight.bold),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.only(top: 2),
-                                                                            child:
-                                                                                Text(
-                                                                              'Day addmition opend sir!',
-                                                                              style: TextStyle(fontSize: 11.3, fontWeight: FontWeight.w600),
-                                                                            ),
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          left:
-                                                                              120,
-                                                                          top:
-                                                                              10),
-                                                                      child:
-                                                                          Text(
-                                                                        '2 Hours ago',
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                11),
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      top: 10,
-                                                                      left: 0),
-                                                              child: Container(
-                                                                child: Row(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .start,
-                                                                  children: [
-                                                                    Image.asset(
-                                                                      'assets/images/profile.png',
-                                                                      height:
-                                                                          50,
-                                                                      fit: BoxFit
-                                                                          .fitHeight,
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          top:
-                                                                              7,
-                                                                          left:
-                                                                              13),
-                                                                      child:
-                                                                          Column(
-                                                                        crossAxisAlignment:
-                                                                            CrossAxisAlignment.start,
-                                                                        children: [
-                                                                          Text(
-                                                                            'Akash',
-                                                                            style:
-                                                                                TextStyle(fontWeight: FontWeight.bold),
-                                                                          ),
-                                                                          Padding(
-                                                                            padding:
-                                                                                const EdgeInsets.only(top: 2),
-                                                                            child:
-                                                                                Text(
-                                                                              'Day addmition opend sir!',
-                                                                              style: TextStyle(fontSize: 11.3, fontWeight: FontWeight.w600),
-                                                                            ),
-                                                                          )
-                                                                        ],
-                                                                      ),
-                                                                    ),
-                                                                    Padding(
-                                                                      padding: const EdgeInsets
-                                                                              .only(
-                                                                          left:
-                                                                              120,
-                                                                          top:
-                                                                              10),
-                                                                      child:
-                                                                          Text(
-                                                                        '2 Hours ago',
-                                                                        style: TextStyle(
-                                                                            fontSize:
-                                                                                11),
-                                                                      ),
-                                                                    )
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Padding(
-                                                              padding:
-                                                                  const EdgeInsets
-                                                                          .only(
-                                                                      left: 1,
-                                                                      right:
-                                                                          65),
-                                                              child: Row(
-                                                                children: [
-                                                                  Container(
-                                                                    height: 1,
-                                                                    width: 65,
-                                                                    color: Colors
-                                                                        .black
-                                                                        .withOpacity(
-                                                                            0.6),
-                                                                  ),
-                                                                  Padding(
-                                                                    padding: const EdgeInsets
-                                                                            .only(
-                                                                        left:
-                                                                            10),
-                                                                    child: Text(
-                                                                      'view 3 more replies',
-                                                                      style: TextStyle(
-                                                                          fontSize:
-                                                                              11.1,
-                                                                          fontWeight:
-                                                                              FontWeight.w600),
-                                                                    ),
-                                                                  )
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          ],
+                                                        height: 300,
+                                                        width: 500,
+                                                        child: GetBuilder<PostsController>(
+                                                          builder: (context) {
+                                                            return ListView.builder(
+                                                              shrinkWrap: true,
+                                                              itemBuilder:(context, index) => comentsContainer(commentsList: postsController.commentsList[index],),
+                                                            itemCount: postsController.commentsList.length,
+                                                               );
+                                                          }
                                                         ),
                                                       ),
                                                     ),
@@ -861,10 +654,14 @@ class _HomeContainerState extends State<HomeContainer> {
                                           ),
                                         );
                                       });
-                                });
+                               
                               },
                               child: Text(
-                                '80K comments',
+                                '${postsController.allPostList[index].comment} comments',
+                                //   postsController
+                                //                          .allPostList[index]
+                                //                           .likeCount
+                                //                          .toString(),
                                 style: TextStyle(fontSize: 13),
                               )),
                         )
@@ -881,27 +678,108 @@ class _HomeContainerState extends State<HomeContainer> {
                     padding: const EdgeInsets.only(left: 20),
                     child: Row(
                       children: [
-                        IconButton(
-                            onPressed: () {
-                              setState(() {
-                                _isfavorite = !_isfavorite;
-                              });
-                            },
-                            icon: _isfavorite == true
-                                ? Icon(
-                                    Icons.favorite,
-                                    color: Colors.pink,
-                                  )
-                                : Icon(Icons.favorite_border)),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 5),
-                          child: Icon(Icons.comment_rounded),
+                        LikeButton(
+                          isliked:
+                              postsController.allPostList[index].likedByUser,
+                          postId: postsController.allPostList[index].id,
+                          indexOfPost: index,
+                        ),
+                        // IconButton(
+                        //     onPressed: () {
+                        //       setState(() {
+                        //         _isfavorite = !_isfavorite;
+                        //       });
+                        //     },
+                        //     icon: _isfavorite == true
+                        //         ? Icon(
+                        //             Icons.favorite,
+                        //             color: Colors.pink,
+                        //           )
+                        //         : Icon(Icons.favorite_border)),
+                        InkWell(
+                          onTap: () {
+                            postController.getComments(
+                                postId: postsController.allPostList[index].id
+                                    .toString());
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.only(top: 5),
+                            child: Icon(Icons.comment_rounded),
+                          ),
                         )
                       ],
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(left: 30, right: 30),
+                    // child: Container(
+                    //   decoration: BoxDecoration(
+                    //     color: Colors.white,
+                    //     boxShadow: [
+                    //       BoxShadow(
+                    //           blurRadius: 5,
+                    //           color: Colors.grey.withOpacity(0.5)),
+                    //     ],
+                    //   ),
+                    //   height: 60,
+                    //   width: double.infinity,
+                    //   child: Padding(
+                    //     padding: const EdgeInsets.only(left: 10, right: 10),
+                    //     child: postController.profileData.isEmpty
+                    //         ? Container(
+                    //             width: 5,
+                    //           )
+                    //         : Row(children: [
+                    //             postController
+                    //                         .profileData.first.profilePicture ==
+                    //                     null
+                    //                 ? const CircleAvatar(
+                    //                     backgroundImage: AssetImage(
+                    //                         'assets/images/Group 89.png'),
+                    //                   )
+                    //                 : CircleAvatar(
+                    //                     backgroundImage: NetworkImage(
+                    //                         postController.profileData.first
+                    //                             .profilePicture),
+                    //                   ),
+                    //             const SizedBox(width: 10),
+                    //             Expanded(
+                    //               child: TextField(
+                    //                   controller: commentTextController,
+                    //                   decoration:
+                    //                       const InputDecoration.collapsed(
+                    //                           hintText: "Add a comments")),
+                    //             ),
+                    //             const SizedBox(width: 10),
+                    //             InkWell(
+                    //                 onTap: () {
+                    //                   if (commentTextController
+                    //                       .text.isNotEmpty) {
+                    //                     postController.postComments(
+                    //                         userID: postController
+                    //                             .profileData.first.id
+                    //                             .toString(),
+                    //                         postId: postsController
+                    //                             .allPostList[index].id
+                    //                             .toString(),
+                    //                         comment:
+                    //                             commentTextController.text);
+                    //                     commentTextController.clear();
+                    //                   } else {
+                    //                     Get.rawSnackbar(
+                    //                       messageText: const Text(
+                    //                         "type anything before commenting",
+                    //                         style:
+                    //                             TextStyle(color: Colors.white),
+                    //                       ),
+                    //                       backgroundColor: Colors.red,
+                    //                     );
+                    //                   }
+                    //                 },
+                    //                 child: Icon(Icons.send)),
+                    //           ]),
+                    //   ),
+                    // ),
                     child: Container(
                       decoration: BoxDecoration(
                           color: Colors.white.withOpacity(0.75),
@@ -936,7 +814,86 @@ class _HomeContainerState extends State<HomeContainer> {
                 ],
               ),
             );
-          }, ),
+          },
+        );
+      }),
+    );
+  }
+}
+
+class comentsContainer extends StatefulWidget {
+  CommentsList commentsList;
+   comentsContainer({
+    super.key,
+    required this.commentsList
+  });
+
+  @override
+  State<comentsContainer> createState() => _comentsContainerState();
+}
+
+class _comentsContainerState extends State<comentsContainer> {
+   var commentController = TextEditingController();
+  var dialogeController = TextEditingController();
+  var commentTextController = TextEditingController();
+  final postController = Get.find<PostsController>();
+  @override
+  Widget build(BuildContext context) {
+    var size=MediaQuery.of(context).size;
+    return Row(
+      crossAxisAlignment:
+          CrossAxisAlignment
+              .start,
+      children: [
+         Image.network(
+                        widget.commentsList.picture,
+                        fit: BoxFit.cover,
+                        width: size.width * 0.3,
+                        height: size.height * 0.4,
+                      ),
+        Padding(
+          padding: const EdgeInsets
+                  .only(
+              top: 7,
+              left: 13),
+          child: Column(
+            crossAxisAlignment:
+                CrossAxisAlignment
+                    .start,
+            children: [
+              Text(
+                'Akash',
+                style: TextStyle(
+                    fontWeight:
+                        FontWeight.bold),
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 2),
+                child:
+                    Text(
+                  'Day addmition opend sir!',
+                  style: TextStyle(
+                      fontSize: 11.3,
+                      fontWeight: FontWeight.w600),
+                ),
+              )
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets
+                  .only(
+              left: 120,
+              top: 10),
+          child: Text(
+            '2 Hours ago',
+            style: TextStyle(
+                fontSize:
+                    11),
+          ),
+        )
+      ],
     );
   }
 }

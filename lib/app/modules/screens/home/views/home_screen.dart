@@ -13,6 +13,7 @@ import 'package:reg_login/app/data/components/constands/constands.dart';
 //import 'package:reg_login/widget/home_friends.dart';
 //import 'package:reg_login/widget/search_container.dart';
 
+import '../../../../data/components/controllers/posts_controller.dart';
 import '../../../../data/components/search_field.dart';
 import '../../profile/views/profile_page.dart';
 import 'widgets/friends_widget.dart';
@@ -33,7 +34,12 @@ TextEditingController textController = TextEditingController();
 class _HomePageState extends State<HomePage> {
   int index = 0;
   final homeController = Get.find<HomeController>();
-
+  final postsController = Get.find<PostsController>();
+ @override
+  void initState() {
+    super.initState();
+    postsController.getAllPost();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(

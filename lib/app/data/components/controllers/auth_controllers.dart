@@ -21,10 +21,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 // import '../services/network_api_services/auth_api_services/otp_verify_api_services.dart';
 import 'package:dio/dio.dart' as dio;
 
-
 import '../../../modules/screens/home/views/home_screen.dart';
 import '../../services/auth_api_service/login_api_services.dart';
-import '../register_model.dart';
+import '../../models/register_model.dart';
 
 class AuthController extends GetxController {
   RxBool isDesignationSelected = false.obs;
@@ -39,6 +38,7 @@ class AuthController extends GetxController {
   //GetDepartmentServicesApi getDepartmentServicesApi =
   // GetDepartmentServicesApi();
   LoginServicesApi loginServicesApi = LoginServicesApi();
+
   /// OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
   RegisterServicesApi registerServicesApi = RegisterServicesApi();
   //ProfileUpdateServicesApi profileUpdateServicesApi =
@@ -75,7 +75,7 @@ class AuthController extends GetxController {
   // }
   registerUser(RegisterModel registerModel) async {
     isLoading(true);
-  var response = await registerServicesApi.registerApi(registerModel);
+    var response = await registerServicesApi.registerApi(registerModel);
     isLoading(false);
 
     if (response.statusCode == 201) {
@@ -162,7 +162,7 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", response.data["token"]);
-      Get.offAll(() => HomePage ());
+      Get.offAll(() => HomePage());
       Get.rawSnackbar(
         messageText: const Text(
           "Login Successful",
