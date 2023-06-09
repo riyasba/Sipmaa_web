@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/data/services/profile_api_service/friend_request_api_services.dart';
+import 'package:reg_login/app/data/services/profile_api_service/respond_request_api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:simpa/models/friend_list_model.dart';
 // import 'package:simpa/models/friend_request_model.dart';
@@ -24,24 +26,31 @@ import 'package:dio/dio.dart' as dio;
 // import 'package:simpa/view/profile_sccuessful_page.dart';
 
 import '../../models/friend_list_model.dart';
+import '../../models/friend_request_model.dart';
+import '../../models/notiofication_list_model.dart';
+import '../../models/post_like_list_model.dart';
 import '../../models/profile_model.dart';
+import '../../services/notification_list/notification_list.dart';
+import '../../services/post_api_service/post_liked_list_api_services.dart';
 import '../../services/profile_api_service/my_friend_list_api_services.dart';
+import '../../services/profile_api_service/send_friend_request.dart';
 
 class ProfileController extends GetxController {
   GetFriendListApiServices getFriendListApiServices =
       GetFriendListApiServices();
- // GetFriendRequestListApiServices getFriendRequestListApiServices =
-  //    GetFriendRequestListApiServices();
+ GetFriendRequestListApiServices getFriendRequestListApiServices =
+      GetFriendRequestListApiServices();
 
  // GetProfileApiServices getProfileApiServices = GetProfileApiServices();
  // SearchFriendsApiServices searchFriendsApiServices =
    //   SearchFriendsApiServices();
 
-//  SendFriendRequestAPIServices sendFriendRequestAPIServices =
- //     SendFriendRequestAPIServices();
-
-  //RespondFriendRequestAPIServices respondFriendRequestAPIServices =
-   //   RespondFriendRequestAPIServices();
+  SendFriendRequestAPIServices sendFriendRequestAPIServices =
+      SendFriendRequestAPIServices();
+PostLikesListApiServices postLikesListApiServices =
+      PostLikesListApiServices();
+  RespondFriendRequestAPIServices respondFriendRequestAPIServices =
+      RespondFriendRequestAPIServices();
 
  // ChangePasswordApiServices changePasswordApiServices =
    //   ChangePasswordApiServices();
@@ -53,11 +62,14 @@ class ProfileController extends GetxController {
 
 //  UpdateUserDetailsApi updateUserDetailsApi = UpdateUserDetailsApi();
 
- // GetNotificationListApi getNotificationLiistApi = GetNotificationListApi();
-
+ GetNotificationListApi getNotificationLiistApi = GetNotificationListApi();
+ 
+ // RespondFriendRequestAPIServices respondFriendRequestAPIServices =
+   //   RespondFriendRequestAPIServices();
+List<LikesList> likesList = [];
  List<FriendList> myFriendList = [];
   // List<FriendList> friendRequestList = [];
- // List<FriendRequestList> friendRequestList = [];
+ List<FriendRequestList> friendRequestList = [];
   List<ProfileModel> profileData = [];
   List<ProfileModel> otherUserProfileData = [];
  // List<SearchFriendsList> searchFriendsList = [];
@@ -93,7 +105,7 @@ class ProfileController extends GetxController {
   //   update();
   // }
 
-  getMyFriendList() async {
+   getMyFriendList() async {
     dio.Response<dynamic> response =
         await getFriendListApiServices.getFriendListApiServices();
 
@@ -104,16 +116,16 @@ class ProfileController extends GetxController {
     update();
   }
 
-  // getMyFriendRequestList() async {
-  //   dio.Response<dynamic> response =
-  //       await getFriendRequestListApiServices.getFriendRequestListApiServices();
-  //   if (response.statusCode == 200) {
-  //     FriendRequestListModel friendListModel =
-  //         FriendRequestListModel.fromJson(response.data);
-  //     friendRequestList = friendListModel.friendRequestList;
-  //   }
-  //   update();
-  // }
+  getMyFriendRequestList() async {
+    dio.Response<dynamic> response =
+        await getFriendRequestListApiServices.getFriendRequestListApiServices();
+    if (response.statusCode == 200) {
+      FriendRequestListModel friendListModel =
+          FriendRequestListModel.fromJson(response.data);
+      friendRequestList = friendListModel.friendRequestList;
+    }
+    update();
+  }
 
   // searchUser(String keyWord) async {
   //   searchFriendsList.clear();
@@ -153,47 +165,56 @@ class ProfileController extends GetxController {
   //     );
   //   }
   // }
+ getLikesList({required String postId}) async {
+    dio.Response<dynamic> response =
+        await postLikesListApiServices.postLikesLists(postId: postId);
 
-  // respondRequest({
-  //   required String userId,
-  //   required String status,
-  // }) async {
-  //   dio.Response<dynamic> response =
-  //       await respondFriendRequestAPIServices.respondFriendRequest(
-  //           userId: userId,
-  //           friendId: profileData.first.user.id.toString(),
-  //           status: status);
+    if (response.statusCode == 201) {
+      LikesListModel likesListModel = LikesListModel.fromJson(response.data);
+      likesList = likesListModel.likesList;
+    }
+    update();
+  }
+  respondRequest({
+    required String userId,
+    required String status,
+  }) async {
+    dio.Response<dynamic> response =
+        await respondFriendRequestAPIServices.respondFriendRequest(
+            userId: userId,
+            friendId: profileData.first.user.id.toString(),
+            status: status);
 
-  //   if (response.statusCode == 200) {
-  //     getMyFriendRequestList();
-  //     getMyFriendList();
-  //     if (status == "1") {
-  //       Get.rawSnackbar(
-  //         messageText: const Text(
-  //           "Request accepted",
-  //           style: TextStyle(color: Colors.white),
-  //         ),
-  //         backgroundColor: Colors.green,
-  //       );
-  //     } else if (status == "2") {
-  //       Get.rawSnackbar(
-  //         messageText: const Text(
-  //           "Removed from request",
-  //           style: TextStyle(color: Colors.white),
-  //         ),
-  //         backgroundColor: Colors.green,
-  //       );
-  //     }
-  //   } else {
-  //     Get.rawSnackbar(
-  //       messageText: const Text(
-  //         "Please try again",
-  //         style: TextStyle(color: Colors.white),
-  //       ),
-  //       backgroundColor: Colors.red,
-  //     );
-  //   }
-  // }
+    if (response.statusCode == 200) {
+      getMyFriendRequestList();
+     getMyFriendList();
+      if (status == "1") {
+        Get.rawSnackbar(
+          messageText: const Text(
+            "Request accepted",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.green,
+        );
+      } else if (status == "2") {
+        Get.rawSnackbar(
+          messageText: const Text(
+            "Removed from request",
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.green,
+        );
+      }
+    } else {
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Please try again",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
 
   // changePassword({
   //   required String oldPassword,
@@ -276,17 +297,17 @@ class ProfileController extends GetxController {
     //}
   //}
 
- // List<ListElement> notificationList = [];
+ List<ListElement> notificationList = [];
 
-  // getNotificationList() async {
-  //   dio.Response<dynamic> response =
-  //       await getNotificationLiistApi.getNotifionListApi();
+  getNotificationList() async {
+    dio.Response<dynamic> response =
+        await getNotificationLiistApi.getNotifionListApi();
 
-  //   if (response.statusCode == 201) {
-  //     NotificationListModel notificationListModel =
-  //         NotificationListModel.fromJson(response.data);
-  //     notificationList = notificationListModel.list;
-  //   }
-  //   update();
-  // }
+    if (response.statusCode == 201) {
+      NotificationListModel notificationListModel =
+          NotificationListModel.fromJson(response.data);
+      notificationList = notificationListModel.list;
+    }
+    update();
+  }
 }

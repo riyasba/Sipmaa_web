@@ -171,17 +171,20 @@ class _HomeContainerState extends State<HomeContainer> {
                     ),
                   ),
                   ksizedbox30,
-                  Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        postsController.allPostList[index].body.toString(),
-                        fit: BoxFit.cover,
-                        width: size.width * 0.3,
-                        height: size.height * 0.4,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Image.network(
+                          postsController.allPostList[index].body.toString(),
+                          fit: BoxFit.cover,
+                          width: size.width * 0.3,
+                          height: size.height * 0.4,
+                        ),
                       ),
-                    ),
-                  ]),
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(left: 20),
                     child: Row(
@@ -190,6 +193,10 @@ class _HomeContainerState extends State<HomeContainer> {
                           children: [
                             IconButton(
                                 onPressed: () {
+                                  postController.getLikesList(
+                                      postId: postsController
+                                          .allPostList[index].id
+                                          .toString());
                                   setState(() {
                                     showDialog(
                                         context: context,
@@ -228,337 +235,136 @@ class _HomeContainerState extends State<HomeContainer> {
                                                       ],
                                                     ),
                                                     ksizedbox10,
-                                                    Row(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10),
-                                                          child: Image.asset(
-                                                            'assets/images/profile.png',
-                                                            height: 50,
-                                                            fit: BoxFit
-                                                                .fitHeight,
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                'Krishna',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        top: 3),
-                                                                child: Text(
-                                                                  'Like in a post',
-                                                                  style: TextStyle(
+                                                    GetBuilder<PostsController>(
+                                                        builder: (_) {
+                                                      return ListView.separated(
+                                                        physics:
+                                                            BouncingScrollPhysics(),
+                                                        itemCount:
+                                                            postController
+                                                                .likesList
+                                                                .length,
+                                                        itemBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          return GestureDetector(
+                                                            onTap: () {},
+                                                            child: ListTile(
+                                                                leading: postController
+                                                                            .likesList[
+                                                                                index]
+                                                                            .picture ==
+                                                                        ""
+                                                                    ? const CircleAvatar(
+                                                                        radius:
+                                                                            40,
+                                                                        backgroundImage:
+                                                                            AssetImage('assets/icons/profile_icon.png'),
+                                                                      )
+                                                                    : CircleAvatar(
+                                                                        radius:
+                                                                            40,
+                                                                        backgroundImage: NetworkImage(postController
+                                                                            .likesList[index]
+                                                                            .picture),
+                                                                      ),
+                                                                title: Text(postController
+                                                                    .likesList[
+                                                                        index]
+                                                                    .userName),
+                                                                subtitle: Text(
+                                                                    postController
+                                                                        .likesList[
+                                                                            index]
+                                                                        .userName),
+                                                                trailing: Text(
+                                                                  timeago.format(postController
+                                                                      .likesList[
+                                                                          index]
+                                                                      .createdAt),
+                                                                  style: const TextStyle(
                                                                       fontSize:
-                                                                          11,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600),
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 90),
-                                                          child: Text(
-                                                            '2 Hours ago',
-                                                            style: TextStyle(
-                                                                fontSize: 10),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
+                                                                          10),
+                                                                )),
+                                                          );
+                                                        },
+                                                        separatorBuilder:
+                                                            (BuildContext
+                                                                    context,
+                                                                int index) {
+                                                          return const Divider(
+                                                            height: 1,
+                                                          );
+                                                        },
+                                                      );
+                                                    }),
+                                                    // Row(
+                                                    //   children: [
+                                                    //     Padding(
+                                                    //       padding:
+                                                    //           const EdgeInsets
+                                                    //                   .only(
+                                                    //               left: 10),
+                                                    //       child: Image.asset(
+                                                    //         'assets/images/profile.png',
+                                                    //         height: 50,
+                                                    //         fit: BoxFit
+                                                    //             .fitHeight,
+                                                    //       ),
+                                                    //     ),
+                                                    //     Padding(
+                                                    //       padding:
+                                                    //           const EdgeInsets
+                                                    //                   .only(
+                                                    //               left: 10),
+                                                    //       child: Column(
+                                                    //         crossAxisAlignment:
+                                                    //             CrossAxisAlignment
+                                                    //                 .start,
+                                                    //         children: [
+                                                    //           Text(
+                                                    //             'Krishna',
+                                                    //             style: TextStyle(
+                                                    //                 fontSize:
+                                                    //                     15,
+                                                    //                 fontWeight:
+                                                    //                     FontWeight
+                                                    //                         .bold),
+                                                    //           ),
+                                                    //           Padding(
+                                                    //             padding:
+                                                    //                 const EdgeInsets
+                                                    //                         .only(
+                                                    //                     top: 3),
+                                                    //             child: Text(
+                                                    //               'Like in a post',
+                                                    //               style: TextStyle(
+                                                    //                   fontSize:
+                                                    //                       11,
+                                                    //                   fontWeight:
+                                                    //                       FontWeight
+                                                    //                           .w600),
+                                                    //             ),
+                                                    //           )
+                                                    //         ],
+                                                    //       ),
+                                                    //     ),
+                                                    //     Padding(
+                                                    //       padding:
+                                                    //           const EdgeInsets
+                                                    //                   .only(
+                                                    //               left: 90),
+                                                    //       child: Text(
+                                                    //         '2 Hours ago',
+                                                    //         style: TextStyle(
+                                                    //             fontSize: 10),
+                                                    //       ),
+                                                    //     )
+                                                    //   ],
+                                                    // ),
                                                     SizedBox(
                                                       height: 15,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10),
-                                                          child: Image.asset(
-                                                            'assets/images/profile.png',
-                                                            height: 50,
-                                                            fit: BoxFit
-                                                                .fitHeight,
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                'Krishna',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        top: 3),
-                                                                child: Text(
-                                                                  'Like in a post',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          11,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600),
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 90),
-                                                          child: Text(
-                                                            '2 Hours ago',
-                                                            style: TextStyle(
-                                                                fontSize: 10),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10),
-                                                          child: Image.asset(
-                                                            'assets/images/profile.png',
-                                                            height: 50,
-                                                            fit: BoxFit
-                                                                .fitHeight,
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                'Krishna',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        top: 3),
-                                                                child: Text(
-                                                                  'Like in a post',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          11,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600),
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 90),
-                                                          child: Text(
-                                                            '2 Hours ago',
-                                                            style: TextStyle(
-                                                                fontSize: 10),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10),
-                                                          child: Image.asset(
-                                                            'assets/images/profile.png',
-                                                            height: 50,
-                                                            fit: BoxFit
-                                                                .fitHeight,
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                'Krishna',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        top: 3),
-                                                                child: Text(
-                                                                  'Like in a post',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          11,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600),
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 90),
-                                                          child: Text(
-                                                            '2 Hours ago',
-                                                            style: TextStyle(
-                                                                fontSize: 10),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                    Row(
-                                                      children: [
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10),
-                                                          child: Image.asset(
-                                                            'assets/images/profile.png.',
-                                                            height: 50,
-                                                            fit: BoxFit
-                                                                .fitHeight,
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 10),
-                                                          child: Column(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            children: [
-                                                              Text(
-                                                                'Krishna',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        15,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    const EdgeInsets
-                                                                            .only(
-                                                                        top: 3),
-                                                                child: Text(
-                                                                  'Like in a post',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          11,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w600),
-                                                                ),
-                                                              )
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 90),
-                                                          child: Text(
-                                                            '2 Hours ago',
-                                                            style: TextStyle(
-                                                                fontSize: 10),
-                                                          ),
-                                                        )
-                                                      ],
                                                     ),
                                                   ],
                                                 ),
@@ -831,4 +637,3 @@ class _HomeContainerState extends State<HomeContainer> {
     );
   }
 }
-

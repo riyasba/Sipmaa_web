@@ -30,7 +30,15 @@ bool _remove = false;
 @override
 void initState() {
   super.initState();
-  profileController.getMyFriendList();
+  profileController. getMyFriendRequestList();
+   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+   // profileController.getProfile();
+    profileController.getMyFriendList();
+    profileController.getMyFriendRequestList();
+  }
 }
 
 
@@ -96,6 +104,7 @@ void initState() {
                     setState(() {
                       _friendsindex = 1;
                     });
+                    profileController.getMyFriendRequestList();
                   },
                   child: Container(
                     height: 30,
@@ -144,18 +153,145 @@ void initState() {
                             ));
               }),
             ),
-          if (_friendsindex == 1)
-            Container(
-              width: size.width * 0.7,
-              height: size.height * 0.7,
-              child: ListView.separated(
-                itemBuilder: (context, index) => FriendRequesWiget(),
-                itemCount: 4,
-                separatorBuilder: (context, index) => Divider(
-                  height: 1,
-                ),
-              ),
-            ),
+          if (_friendsindex == 1) GetBuilder<ProfileController>(builder: (_) {
+            return profileController.friendRequestList.isEmpty
+                ? const Center(
+                    child: Text("No Requests"),
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: profileController.friendRequestList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return GestureDetector(
+                        onTap: () {},
+                        child: Card(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  profileController.friendRequestList[index]
+                                              .profile ==
+                                          null
+                                      ? Padding(
+                                          padding: const EdgeInsets.all(7.0),
+                                          child: CircleAvatar(
+                                            radius: 35,
+                                            backgroundImage: AssetImage(
+                                                'assets/images/img.jpg'),
+                                          ),
+                                        )
+                                      : Padding(
+                                          padding: const EdgeInsets.all(7.0),
+                                          child: CircleAvatar(
+                                            radius: 35,
+                                            backgroundImage: NetworkImage(
+                                                profileController
+                                                    .friendRequestList[index]
+                                                    .profile),
+                                          ),
+                                        ),
+                                  Container(
+                                    width: 110,
+                                    height: 50,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          profileController
+                                              .friendRequestList[index].name,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                              fontWeight: FontWeight.w600),
+                                        ),
+                                        Text(
+                                          profileController
+                                              .friendRequestList[index]
+                                              .designation,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  InkWell(
+                                    onTap: () {
+                                      profileController.respondRequest(
+                                          userId: profileController
+                                              .friendRequestList[index].friendId
+                                              .toString(),
+                                          status: "1");
+                                    },
+                                    child: Container(
+                                      child: Center(
+                                          child: Text(
+                                        "Accept",
+                                        style: TextStyle(
+                                            color: kwhite,
+                                            fontWeight: FontWeight.w600),
+                                      )),
+                                      height: 30,
+                                      width: 80,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(17),
+                                          color: kblue),
+                                    ),
+                                  ),
+                                  kwidth10,
+                                  ksizedbox10,
+                                  InkWell(
+                                    onTap: () {
+                                      profileController.respondRequest(
+                                          userId: profileController
+                                              .friendRequestList[index].friendId
+                                              .toString(),
+                                          status: "2");
+                                    },
+                                    child: Container(
+                                      child: Center(
+                                          child: Text(
+                                        "Remove",
+                                        style: TextStyle(
+                                            color: kblue,
+                                            fontWeight: FontWeight.w600),
+                                      )),
+                                      height: 30,
+                                      width: 80,
+                                      decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: kblue, width: 1),
+                                          borderRadius:
+                                              BorderRadius.circular(17),
+                                          color: kwhite),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  );
+          })
+            // Container(
+            //   width: size.width * 0.7,
+            //   height: size.height * 0.7,
+            //   child: ListView.separated(
+            //     itemBuilder: (context, index) => FriendRequesWiget(),
+            //     itemCount: 4,
+            //     separatorBuilder: (context, index) => Divider(
+            //       height: 1,
+            //     ),
+            //   ),
+            // ),
         ],
       ),
     );

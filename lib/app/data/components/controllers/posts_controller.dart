@@ -3,6 +3,7 @@ import 'dart:io';
 //import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/data/services/post_api_service/post_liked_list_api_services.dart';
 import 'package:reg_login/app/data/services/post_api_service/upload_post_api_services.dart';
 import 'package:reg_login/app/modules/screens/home/views/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -27,7 +28,9 @@ import 'package:dio/dio.dart' as dio;
 
 import '../../models/comment_list_model.dart';
 import '../../models/get_all_post_modals.dart';
+import '../../models/post_like_list_model.dart';
 import '../../models/profile_model.dart';
+import '../../services/post_api_service/filter_api_services.dart';
 import '../../services/post_api_service/get_all_post_api_services.dart';
 import '../../services/post_api_service/get_profile_api_services.dart';
 import '../../services/post_api_service/post_comment_api_services.dart';
@@ -48,17 +51,17 @@ class PostsController extends GetxController {
   PostCommentsListApiServices postCommentsListApiServices =
       PostCommentsListApiServices();
   PostCommentsApiServices postCommentsApiServices = PostCommentsApiServices();
-  // PostLikesListApiServices postLikesListApiServices =
-  //   PostLikesListApiServices();
-//PostFilterApiServices postFilterApiServices = PostFilterApiServices();
+  PostLikesListApiServices postLikesListApiServices =
+    PostLikesListApiServices();
+PostFilterApiServices postFilterApiServices = PostFilterApiServices();
 
   // PostDelteApiServices postDelteApiServices = PostDelteApiServices();
 
   List<Post> allPostList = [];
-  // List<Post> filterList = [];
+  List<Post> filterList = [];
 //  List<SearchPost> searchPosts = [];
   List<User> profileData = [];
-  // List<LikesList> likesList = [];
+  List<LikesList> likesList = [];
   List<CommentsList> commentsList = [];
 
   // getProfile() async {
@@ -94,27 +97,27 @@ class PostsController extends GetxController {
     update();
   }
 
-  // getAllInFilterPost() async {
-  //   dio.Response<dynamic> response =
-  //       await getAllPostApiServices.getAllPostApiServices();
+  getAllInFilterPost() async {
+    dio.Response<dynamic> response =
+        await getAllPostApiServices.getAllPostApiServices();
 
-  //   if (response.statusCode == 200) {
-  //     GetAllPostModel getAllPostModel = GetAllPostModel.fromJson(response.data);
-  //     filterList = getAllPostModel.posts;
-  //   }
-  //   update();
-  // }
+    if (response.statusCode == 200) {
+      GetAllPostModel getAllPostModel = GetAllPostModel.fromJson(response.data);
+      filterList = getAllPostModel.posts;
+    }
+    update();
+  }
 
-  // filterPosts({required int departmentId}) async {
-  //   dio.Response<dynamic> response = await postFilterApiServices.postFilter(
-  //       departmentId: departmentId.toString());
+  filterPosts({required int departmentId}) async {
+    dio.Response<dynamic> response = await postFilterApiServices.postFilter(
+        departmentId: departmentId.toString());
 
-  //   if (response.statusCode == 200) {
-  //     GetAllPostModel getAllPostModel = GetAllPostModel.fromJson(response.data);
-  //     filterList = getAllPostModel.posts;
-  //   }
-  //   update();
-  // }
+    if (response.statusCode == 200) {
+      GetAllPostModel getAllPostModel = GetAllPostModel.fromJson(response.data);
+      filterList = getAllPostModel.posts;
+    }
+    update();
+  }
 
   postLike(
       {required String postId,
@@ -220,17 +223,16 @@ class PostsController extends GetxController {
     update();
   }
 
-  // getLikesList({required String postId}) async {
-  //   dio.Response<dynamic> response =
-  //       await postLikesListApiServices.postLikesLists(postId: postId);
+ getLikesList({required String postId}) async {
+    dio.Response<dynamic> response =
+        await postLikesListApiServices.postLikesLists(postId: postId);
 
-  //   if (response.statusCode == 201) {
-  //     LikesListModel likesListModel = LikesListModel.fromJson(response.data);
-  //     likesList = likesListModel.likesList;
-  //   }
-  //   update();
-  // }
-
+    if (response.statusCode == 201) {
+      LikesListModel likesListModel = LikesListModel.fromJson(response.data);
+      likesList = likesListModel.likesList;
+    }
+    update();
+  }
   // deletePost({required String postId}) async {
   //   dio.Response<dynamic> response =
   //       await postDelteApiServices.postDelete(postID: postId);
