@@ -1,0 +1,292 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:simpa/models/friend_list_model.dart';
+// import 'package:simpa/models/friend_request_model.dart';
+// import 'package:simpa/models/notiofication_list_model.dart';
+// import 'package:simpa/models/profile_model.dart';
+// import 'package:simpa/models/search_friends_model.dart';
+// import 'package:simpa/services/network_api_services/notification_list/notification_list.dart';
+// import 'package:simpa/services/network_api_services/post_api_services/get_other_profile_api_services.dart';
+// import 'package:simpa/services/network_api_services/post_api_services/get_profile_api_services.dart';
+// import 'package:simpa/services/network_api_services/profile_api_services/change_password_api_services.dart';
+// import 'package:simpa/services/network_api_services/profile_api_services/friend_request_api_services.dart';
+// import 'package:simpa/services/network_api_services/profile_api_services/my_friend_list_api_services.dart';
+import 'package:dio/dio.dart' as dio;
+// import 'package:simpa/services/network_api_services/profile_api_services/respond_request_api_services.dart';
+// import 'package:simpa/services/network_api_services/profile_api_services/search_user_api_services.dart';
+// import 'package:simpa/services/network_api_services/profile_api_services/send_friend_request.dart';
+// import 'package:simpa/services/network_api_services/profile_api_services/update_profile_pic.dart';
+// import 'package:simpa/services/network_api_services/profile_api_services/update_userdetails_api_services.dart';
+// import 'package:simpa/view/login/login_view/loginpage.dart';
+// import 'package:simpa/view/profile_sccuessful_page.dart';
+
+import '../../models/friend_list_model.dart';
+import '../../models/profile_model.dart';
+import '../../services/profile_api_service/my_friend_list_api_services.dart';
+
+class ProfileController extends GetxController {
+  GetFriendListApiServices getFriendListApiServices =
+      GetFriendListApiServices();
+ // GetFriendRequestListApiServices getFriendRequestListApiServices =
+  //    GetFriendRequestListApiServices();
+
+ // GetProfileApiServices getProfileApiServices = GetProfileApiServices();
+ // SearchFriendsApiServices searchFriendsApiServices =
+   //   SearchFriendsApiServices();
+
+//  SendFriendRequestAPIServices sendFriendRequestAPIServices =
+ //     SendFriendRequestAPIServices();
+
+  //RespondFriendRequestAPIServices respondFriendRequestAPIServices =
+   //   RespondFriendRequestAPIServices();
+
+ // ChangePasswordApiServices changePasswordApiServices =
+   //   ChangePasswordApiServices();
+
+ // GetOtherProfileApiServices getOtherProfileApiServices =
+   //   GetOtherProfileApiServices();
+
+  //UpdateProfilePicApi updateProfilePicApi = UpdateProfilePicApi();
+
+//  UpdateUserDetailsApi updateUserDetailsApi = UpdateUserDetailsApi();
+
+ // GetNotificationListApi getNotificationLiistApi = GetNotificationListApi();
+
+ List<FriendList> myFriendList = [];
+  // List<FriendList> friendRequestList = [];
+ // List<FriendRequestList> friendRequestList = [];
+  List<ProfileModel> profileData = [];
+  List<ProfileModel> otherUserProfileData = [];
+ // List<SearchFriendsList> searchFriendsList = [];
+
+  RxBool isLoading = false.obs;
+
+  // getProfile() async {
+  //   dio.Response<dynamic> response = await getProfileApiServices.getProfile();
+  //   profileData.clear();
+  //   if (response.statusCode == 200) {
+  //     ProfileModel profileModel = ProfileModel.fromJson(response.data);
+  //     profileData.add(profileModel);
+  //   } else if (response.statusCode == 401) {
+  //     final prefs = await SharedPreferences.getInstance();
+  //     await prefs.setString("auth_token", "null");
+  //   //  Get.to(loginpage());
+  //   }
+  //   update();
+  // }
+
+  // getOtherProfile({required String userid}) async {
+  //   dio.Response<dynamic> response =
+  //       await getOtherProfileApiServices.getOtherProfile(userId: userid);
+  //   otherUserProfileData.clear();
+  //   if (response.statusCode == 200) {
+  //     ProfileModel profileModel = ProfileModel.fromJson(response.data);
+  //     otherUserProfileData.add(profileModel);
+  //   } else if (response.statusCode == 401) {
+  //     final prefs = await SharedPreferences.getInstance();
+  //     await prefs.setString("auth_token", "null");
+  //    // Get.to(loginpage());
+  //   }
+  //   update();
+  // }
+
+  getMyFriendList() async {
+    dio.Response<dynamic> response =
+        await getFriendListApiServices.getFriendListApiServices();
+
+    if (response.statusCode == 200) {
+      FriendListModel friendListModel = FriendListModel.fromJson(response.data);
+      myFriendList = friendListModel.friendList;
+    }
+    update();
+  }
+
+  // getMyFriendRequestList() async {
+  //   dio.Response<dynamic> response =
+  //       await getFriendRequestListApiServices.getFriendRequestListApiServices();
+  //   if (response.statusCode == 200) {
+  //     FriendRequestListModel friendListModel =
+  //         FriendRequestListModel.fromJson(response.data);
+  //     friendRequestList = friendListModel.friendRequestList;
+  //   }
+  //   update();
+  // }
+
+  // searchUser(String keyWord) async {
+  //   searchFriendsList.clear();
+  //   dio.Response<dynamic> response =
+  //       await searchFriendsApiServices.searchFriends(keyWord: keyWord);
+
+  //   if (response.statusCode == 200) {
+  //     SearchFriendsModel searchFriendsModel =
+  //         SearchFriendsModel.fromJson(response.data);
+  //     searchFriendsList = searchFriendsModel.friendList;
+  //   }
+  //   update();
+  // }
+
+  // sendRequest({required String userId, required int index}) async {
+  //   dio.Response<dynamic> response =
+  //       await sendFriendRequestAPIServices.sendFriendRequest(
+  //           userId: userId, friendId: profileData.first.user.id.toString());
+
+  //   if (response.statusCode == 200) {
+  //     searchFriendsList[index].isFriend = true;
+  //     update();
+  //     Get.rawSnackbar(
+  //       messageText: const Text(
+  //         "Friend request sended",
+  //         style: TextStyle(color: Colors.white),
+  //       ),
+  //       backgroundColor: Colors.green,
+  //     );
+  //   } else {
+  //     Get.rawSnackbar(
+  //       messageText: const Text(
+  //         "Please try again",
+  //         style: TextStyle(color: Colors.white),
+  //       ),
+  //       backgroundColor: Colors.red,
+  //     );
+  //   }
+  // }
+
+  // respondRequest({
+  //   required String userId,
+  //   required String status,
+  // }) async {
+  //   dio.Response<dynamic> response =
+  //       await respondFriendRequestAPIServices.respondFriendRequest(
+  //           userId: userId,
+  //           friendId: profileData.first.user.id.toString(),
+  //           status: status);
+
+  //   if (response.statusCode == 200) {
+  //     getMyFriendRequestList();
+  //     getMyFriendList();
+  //     if (status == "1") {
+  //       Get.rawSnackbar(
+  //         messageText: const Text(
+  //           "Request accepted",
+  //           style: TextStyle(color: Colors.white),
+  //         ),
+  //         backgroundColor: Colors.green,
+  //       );
+  //     } else if (status == "2") {
+  //       Get.rawSnackbar(
+  //         messageText: const Text(
+  //           "Removed from request",
+  //           style: TextStyle(color: Colors.white),
+  //         ),
+  //         backgroundColor: Colors.green,
+  //       );
+  //     }
+  //   } else {
+  //     Get.rawSnackbar(
+  //       messageText: const Text(
+  //         "Please try again",
+  //         style: TextStyle(color: Colors.white),
+  //       ),
+  //       backgroundColor: Colors.red,
+  //     );
+  //   }
+  // }
+
+  // changePassword({
+  //   required String oldPassword,
+  //   required String currentPassword,
+  //   required String condirmPassword,
+  // }) async {
+  //   dio.Response<dynamic> response =
+  //       await changePasswordApiServices.changePassword(
+  //           oldPassword: oldPassword,
+  //           currentPassword: currentPassword,
+  //           condirmPassword: condirmPassword);
+
+  //   if (response.statusCode == 200) {
+  //     Get.back();
+  //     Get.rawSnackbar(
+  //       messageText: const Text(
+  //         "password changed successfully",
+  //         style: TextStyle(color: Colors.white),
+  //       ),
+  //       backgroundColor: Colors.green,
+  //     );
+  //   } else if (response.statusCode == 400) {
+  //     Get.rawSnackbar(
+  //       messageText: Text(
+  //         response.data["message"],
+  //         style: const TextStyle(color: Colors.white),
+  //       ),
+  //       backgroundColor: Colors.red,
+  //     );
+  //   } else if (response.statusCode == 422) {
+  //     Get.rawSnackbar(
+  //       messageText: Text(
+  //         response.data["message"],
+  //         style: const TextStyle(color: Colors.white),
+  //       ),
+  //       backgroundColor: Colors.red,
+  //     );
+  //   }
+  // }
+
+  // updateProfilePic({required File media}) async {
+  //   isLoading(true);
+  //   update();
+  //   dio.Response<dynamic> response =
+  //       await updateProfilePicApi.updateProfilePic(media: media);
+  //   isLoading(false);
+  //   update();
+  //   if (response.statusCode == 200) {
+  //     getProfile();
+  //   }
+  // }
+
+  // updateUserDetails({
+  //   required String name,
+  //   required String bio,
+  //   required String designation,
+  //   required String email,
+  //   required String mobile,
+  // }) async {
+  //   isLoading(true);
+  //   update();
+  //   dio.Response<dynamic> response =
+  //       await updateUserDetailsApi.updateUserDetails(
+  //           name: name,
+  //           bio: bio,
+  //           designation: designation,
+  //           email: email,
+  //           mobile: mobile);
+  //   isLoading(false);
+  //   update();
+  //   if (response.statusCode == 200) {
+   //   Get.to(ProfileSuccessfullPage());
+      // Get.rawSnackbar(
+      //   messageText: const Text(
+      //     "Updated successfully",
+      //     style: TextStyle(color: Colors.white),
+      //   ),
+      //   backgroundColor: Colors.green,
+      // );
+    //}
+  //}
+
+ // List<ListElement> notificationList = [];
+
+  // getNotificationList() async {
+  //   dio.Response<dynamic> response =
+  //       await getNotificationLiistApi.getNotifionListApi();
+
+  //   if (response.statusCode == 201) {
+  //     NotificationListModel notificationListModel =
+  //         NotificationListModel.fromJson(response.data);
+  //     notificationList = notificationListModel.list;
+  //   }
+  //   update();
+  // }
+}

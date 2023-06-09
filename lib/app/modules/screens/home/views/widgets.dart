@@ -5,6 +5,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:reg_login/app/data/components/constands/constands.dart';
 import 'package:reg_login/app/data/components/search_field.dart';
 import 'package:reg_login/app/data/models/comment_list_model.dart';
+import 'package:reg_login/app/modules/screens/home/views/widgets/continers/comentcontiner.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets/likepost.dart';
 
 import '../../../../data/components/controllers/auth_controllers.dart';
@@ -591,70 +592,80 @@ class _HomeContainerState extends State<HomeContainer> {
                                     postId: postsController
                                         .allPostList[index].id
                                         .toString());
-                           
-                                  showDialog(
-                                      context: context,
-                                      builder: (context) {
-                                        return Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 110),
-                                          child: Row(
-                                            children: [
-                                              Container(
-                                                height: 350,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.7,
-                                                decoration: BoxDecoration(
-                                                    color: kwhite),
-                                                child: Row(
-                                                  children: [
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 15),
-                                                      child: Row(
-                                                        children: [
-                                                          Image.asset(
-                                                            'assets/images/searchimage1.png',
-                                                            height: MediaQuery.of(
-                                                                        context)
-                                                                    .size
-                                                                    .height *
-                                                                0.5,
-                                                            fit: BoxFit.cover,
-                                                          )
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 35,
-                                                              left: 20),
-                                                      child: Container(
-                                                        height: 300,
-                                                        width: 500,
-                                                        child: GetBuilder<PostsController>(
-                                                          builder: (context) {
-                                                            return ListView.builder(
-                                                              shrinkWrap: true,
-                                                              itemBuilder:(context, index) => comentsContainer(commentsList: postsController.commentsList[index],),
-                                                            itemCount: postsController.commentsList.length,
-                                                               );
-                                                          }
+
+                                showDialog(
+                                    context: context,
+                                    builder: (context) {
+                                      return Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 110),
+                                        child: Row(
+                                          children: [
+                                            Container(
+                                              height: 350,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.7,
+                                              decoration:
+                                                  BoxDecoration(color: kwhite),
+                                              child: Row(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 15),
+                                                    child: Row(
+                                                      children: [
+                                                        Image.network(
+                                                          postsController
+                                                              .allPostList[
+                                                                  index]
+                                                              .body,
+                                                          fit: BoxFit.cover,
+                                                          width:
+                                                              size.width * 0.3,
+                                                          height:
+                                                              size.height * 0.4,
                                                         ),
-                                                      ),
+                                                      ],
                                                     ),
-                                                  ],
-                                                ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 35, left: 20),
+                                                    child: Container(
+                                                      height: 300,
+                                                      width: 500,
+                                                      child: GetBuilder<
+                                                              PostsController>(
+                                                          builder: (context) {
+                                                        return ListView.builder(
+                                                          shrinkWrap: true,
+                                                          itemBuilder: (context,
+                                                                  index) =>
+                                                              comentsContainer(
+                                                            commentsList:
+                                                                postsController
+                                                                        .commentsList[
+                                                                    index],
+                                                          ),
+                                                          itemCount:
+                                                              postsController
+                                                                  .commentsList
+                                                                  .length,
+                                                        );
+                                                      }),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ],
-                                          ),
-                                        );
-                                      });
-                               
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    });
                               },
                               child: Text(
                                 '${postsController.allPostList[index].comment} comments',
@@ -821,79 +832,3 @@ class _HomeContainerState extends State<HomeContainer> {
   }
 }
 
-class comentsContainer extends StatefulWidget {
-  CommentsList commentsList;
-   comentsContainer({
-    super.key,
-    required this.commentsList
-  });
-
-  @override
-  State<comentsContainer> createState() => _comentsContainerState();
-}
-
-class _comentsContainerState extends State<comentsContainer> {
-   var commentController = TextEditingController();
-  var dialogeController = TextEditingController();
-  var commentTextController = TextEditingController();
-  final postController = Get.find<PostsController>();
-  @override
-  Widget build(BuildContext context) {
-    var size=MediaQuery.of(context).size;
-    return Row(
-      crossAxisAlignment:
-          CrossAxisAlignment
-              .start,
-      children: [
-         Image.network(
-                        widget.commentsList.picture,
-                        fit: BoxFit.cover,
-                        width: size.width * 0.3,
-                        height: size.height * 0.4,
-                      ),
-        Padding(
-          padding: const EdgeInsets
-                  .only(
-              top: 7,
-              left: 13),
-          child: Column(
-            crossAxisAlignment:
-                CrossAxisAlignment
-                    .start,
-            children: [
-              Text(
-                'Akash',
-                style: TextStyle(
-                    fontWeight:
-                        FontWeight.bold),
-              ),
-              Padding(
-                padding:
-                    const EdgeInsets.only(top: 2),
-                child:
-                    Text(
-                  'Day addmition opend sir!',
-                  style: TextStyle(
-                      fontSize: 11.3,
-                      fontWeight: FontWeight.w600),
-                ),
-              )
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets
-                  .only(
-              left: 120,
-              top: 10),
-          child: Text(
-            '2 Hours ago',
-            style: TextStyle(
-                fontSize:
-                    11),
-          ),
-        )
-      ],
-    );
-  }
-}
