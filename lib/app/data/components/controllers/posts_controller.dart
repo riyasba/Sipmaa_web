@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reg_login/app/data/services/post_api_service/post_liked_list_api_services.dart';
+import 'package:reg_login/app/data/models/search_post_model.dart';
+import 'package:reg_login/app/data/services/post_api_service/search_post_api_services.dart';
 import 'package:reg_login/app/data/services/post_api_service/upload_post_api_services.dart';
 import 'package:reg_login/app/modules/screens/home/views/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -44,7 +46,7 @@ class PostsController extends GetxController {
   RxBool isLoading = false.obs;
 
   GetAllPostApiServices getAllPostApiServices = GetAllPostApiServices();
-  // SearchPostApiServices searchPostApiServices = SearchPostApiServices();
+   SearchPostApiServices searchPostApiServices = SearchPostApiServices();
   UploadPostApiServices uploadPostApiServices = UploadPostApiServices();
   GetProfileApiServices getProfileApiServices = GetProfileApiServices();
   PostLikeApiServices postLikeApiServices = PostLikeApiServices();
@@ -60,6 +62,8 @@ PostFilterApiServices postFilterApiServices = PostFilterApiServices();
   List<Post> allPostList = [];
   List<Post> filterList = [];
 //  List<SearchPost> searchPosts = [];
+  // List<Post> filterList = [];
+  List<SearchPost> searchPosts = [];
   List<User> profileData = [];
   List<LikesList> likesList = [];
   List<CommentsList> commentsList = [];
@@ -138,17 +142,17 @@ PostFilterApiServices postFilterApiServices = PostFilterApiServices();
     update();
   }
 
-  // searchPost({required String keyWord}) async {
-  //   dio.Response<dynamic> response =
-  //       await searchPostApiServices.searchPost(keyWord: keyWord);
+  searchPost({required String keyWord}) async {
+    dio.Response<dynamic> response =
+        await searchPostApiServices.searchPost(keyWord: keyWord);
 
-  //   if (response.statusCode == 200) {
-  //     SearchPostModal searchPostsModel =
-  //         SearchPostModal.fromJson(response.data);
-  //     searchPosts = searchPostsModel.posts;
-  //   }
-  //   update();
-  // }
+    if (response.statusCode == 200) {
+      SearchPostModal searchPostsModel =
+          SearchPostModal.fromJson(response.data);
+      searchPosts = searchPostsModel.posts;
+    }
+    update();
+  }
 
   uplodPost({
     required String title,

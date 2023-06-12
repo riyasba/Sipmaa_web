@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reg_login/app/data/services/profile_api_service/friend_request_api_services.dart';
 import 'package:reg_login/app/data/services/profile_api_service/respond_request_api_services.dart';
+import 'package:reg_login/app/data/services/post_api_service/get_profile_api_services.dart';
+import 'package:reg_login/app/data/services/profile_api_service/change_password_api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:simpa/models/friend_list_model.dart';
 // import 'package:simpa/models/friend_request_model.dart';
@@ -41,7 +43,7 @@ class ProfileController extends GetxController {
  GetFriendRequestListApiServices getFriendRequestListApiServices =
       GetFriendRequestListApiServices();
 
- // GetProfileApiServices getProfileApiServices = GetProfileApiServices();
+  GetProfileApiServices getProfileApiServices = GetProfileApiServices();
  // SearchFriendsApiServices searchFriendsApiServices =
    //   SearchFriendsApiServices();
 
@@ -52,8 +54,7 @@ PostLikesListApiServices postLikesListApiServices =
   RespondFriendRequestAPIServices respondFriendRequestAPIServices =
       RespondFriendRequestAPIServices();
 
- // ChangePasswordApiServices changePasswordApiServices =
-   //   ChangePasswordApiServices();
+  ChangePasswordApiServices changePasswordApiServices = ChangePasswordApiServices();
 
  // GetOtherProfileApiServices getOtherProfileApiServices =
    //   GetOtherProfileApiServices();
@@ -76,19 +77,19 @@ List<LikesList> likesList = [];
 
   RxBool isLoading = false.obs;
 
-  // getProfile() async {
-  //   dio.Response<dynamic> response = await getProfileApiServices.getProfile();
-  //   profileData.clear();
-  //   if (response.statusCode == 200) {
-  //     ProfileModel profileModel = ProfileModel.fromJson(response.data);
-  //     profileData.add(profileModel);
-  //   } else if (response.statusCode == 401) {
-  //     final prefs = await SharedPreferences.getInstance();
-  //     await prefs.setString("auth_token", "null");
-  //   //  Get.to(loginpage());
-  //   }
-  //   update();
-  // }
+  getProfile() async {
+    dio.Response<dynamic> response = await getProfileApiServices.getProfile();
+    profileData.clear();
+    if (response.statusCode == 200) {
+      ProfileModel profileModel = ProfileModel.fromJson(response.data);
+      profileData.add(profileModel);
+    } else if (response.statusCode == 401) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("auth_token", "null");
+    //  Get.to(loginpage());
+    }
+    update();
+  }
 
   // getOtherProfile({required String userid}) async {
   //   dio.Response<dynamic> response =
@@ -216,44 +217,44 @@ List<LikesList> likesList = [];
     }
   }
 
-  // changePassword({
-  //   required String oldPassword,
-  //   required String currentPassword,
-  //   required String condirmPassword,
-  // }) async {
-  //   dio.Response<dynamic> response =
-  //       await changePasswordApiServices.changePassword(
-  //           oldPassword: oldPassword,
-  //           currentPassword: currentPassword,
-  //           condirmPassword: condirmPassword);
+  changePassword({
+    required String oldPassword,
+    required String currentPassword,
+    required String condirmPassword,
+  }) async {
+    dio.Response<dynamic> response =
+        await changePasswordApiServices.changePassword(
+            oldPassword: oldPassword,
+            currentPassword: currentPassword,
+            condirmPassword: condirmPassword);
 
-  //   if (response.statusCode == 200) {
-  //     Get.back();
-  //     Get.rawSnackbar(
-  //       messageText: const Text(
-  //         "password changed successfully",
-  //         style: TextStyle(color: Colors.white),
-  //       ),
-  //       backgroundColor: Colors.green,
-  //     );
-  //   } else if (response.statusCode == 400) {
-  //     Get.rawSnackbar(
-  //       messageText: Text(
-  //         response.data["message"],
-  //         style: const TextStyle(color: Colors.white),
-  //       ),
-  //       backgroundColor: Colors.red,
-  //     );
-  //   } else if (response.statusCode == 422) {
-  //     Get.rawSnackbar(
-  //       messageText: Text(
-  //         response.data["message"],
-  //         style: const TextStyle(color: Colors.white),
-  //       ),
-  //       backgroundColor: Colors.red,
-  //     );
-  //   }
-  // }
+    if (response.statusCode == 200) {
+      Get.back();
+      Get.rawSnackbar(
+        messageText: const Text(
+          "password changed successfully",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      );
+    } else if (response.statusCode == 400) {
+      Get.rawSnackbar(
+        messageText: Text(
+          response.data["message"],
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    } else if (response.statusCode == 422) {
+      Get.rawSnackbar(
+        messageText: Text(
+          response.data["message"],
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
 
   // updateProfilePic({required File media}) async {
   //   isLoading(true);

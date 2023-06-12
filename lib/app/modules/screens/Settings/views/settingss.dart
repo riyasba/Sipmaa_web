@@ -37,7 +37,7 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Obx(
           () => Container(
             child: Column(
-              children: [
+                children: [
                 ksizedbox30,
                 Container(
                   child: Row(
@@ -150,7 +150,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     ],
                   ),
                   height: 30,
-                  width: 900,
+                  width: 700,
                   decoration: BoxDecoration(
                       color: kblue, borderRadius: BorderRadius.circular(4)),
                 ),
@@ -164,7 +164,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ],
             ),
             //  height: 800,
-            width: 1000,
+            width: 750,
             // width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(4),
