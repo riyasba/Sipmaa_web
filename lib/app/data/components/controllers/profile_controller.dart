@@ -2,10 +2,13 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/data/models/search_friends_model.dart';
 import 'package:reg_login/app/data/services/profile_api_service/friend_request_api_services.dart';
 import 'package:reg_login/app/data/services/profile_api_service/respond_request_api_services.dart';
 import 'package:reg_login/app/data/services/post_api_service/get_profile_api_services.dart';
 import 'package:reg_login/app/data/services/profile_api_service/change_password_api_services.dart';
+import 'package:reg_login/app/data/services/profile_api_service/search_user_api_services.dart';
+import 'package:reg_login/app/data/services/profile_api_service/update_userdetails_api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:simpa/models/friend_list_model.dart';
 // import 'package:simpa/models/friend_request_model.dart';
@@ -44,8 +47,8 @@ class ProfileController extends GetxController {
       GetFriendRequestListApiServices();
 
   GetProfileApiServices getProfileApiServices = GetProfileApiServices();
- // SearchFriendsApiServices searchFriendsApiServices =
-   //   SearchFriendsApiServices();
+  SearchFriendsApiServices searchFriendsApiServices =
+      SearchFriendsApiServices();
 
   SendFriendRequestAPIServices sendFriendRequestAPIServices =
       SendFriendRequestAPIServices();
@@ -61,7 +64,7 @@ PostLikesListApiServices postLikesListApiServices =
 
   //UpdateProfilePicApi updateProfilePicApi = UpdateProfilePicApi();
 
-//  UpdateUserDetailsApi updateUserDetailsApi = UpdateUserDetailsApi();
+  UpdateUserDetailsApi updateUserDetailsApi = UpdateUserDetailsApi();
 
  GetNotificationListApi getNotificationLiistApi = GetNotificationListApi();
  
@@ -73,7 +76,7 @@ List<LikesList> likesList = [];
  List<FriendRequestList> friendRequestList = [];
   List<ProfileModel> profileData = [];
   List<ProfileModel> otherUserProfileData = [];
- // List<SearchFriendsList> searchFriendsList = [];
+  List<SearchFriendsList> searchFriendsList = [];
 
   RxBool isLoading = false.obs;
 
@@ -128,44 +131,49 @@ List<LikesList> likesList = [];
     update();
   }
 
-  // searchUser(String keyWord) async {
-  //   searchFriendsList.clear();
-  //   dio.Response<dynamic> response =
-  //       await searchFriendsApiServices.searchFriends(keyWord: keyWord);
+  searchUser(String keyWord) async {
+    searchFriendsList.clear();
+    dio.Response<dynamic> response =
+        await searchFriendsApiServices.searchFriends(keyWord: keyWord);
 
-  //   if (response.statusCode == 200) {
-  //     SearchFriendsModel searchFriendsModel =
-  //         SearchFriendsModel.fromJson(response.data);
-  //     searchFriendsList = searchFriendsModel.friendList;
-  //   }
-  //   update();
-  // }
+    if (response.statusCode == 200) {
+      SearchFriendsModel searchFriendsModel =
+          SearchFriendsModel.fromJson(response.data);
+      searchFriendsList = searchFriendsModel.friendList;
+    }
+    update();
+  }
 
-  // sendRequest({required String userId, required int index}) async {
-  //   dio.Response<dynamic> response =
-  //       await sendFriendRequestAPIServices.sendFriendRequest(
-  //           userId: userId, friendId: profileData.first.user.id.toString());
+  sendRequest({required String userId, required int index}) async {
+    dio.Response<dynamic> response =
+        await sendFriendRequestAPIServices.sendFriendRequest(
+            userId: userId);
 
-  //   if (response.statusCode == 200) {
-  //     searchFriendsList[index].isFriend = true;
-  //     update();
-  //     Get.rawSnackbar(
-  //       messageText: const Text(
-  //         "Friend request sended",
-  //         style: TextStyle(color: Colors.white),
-  //       ),
-  //       backgroundColor: Colors.green,
-  //     );
-  //   } else {
-  //     Get.rawSnackbar(
-  //       messageText: const Text(
-  //         "Please try again",
-  //         style: TextStyle(color: Colors.white),
-  //       ),
-  //       backgroundColor: Colors.red,
-  //     );
-  //   }
-  // }
+       print("--------------------------");
+        print(response.data);
+
+    if (response.statusCode == 200) {
+      searchFriendsList[index].isFriend = true;
+      update();
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Friend request sended",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      );
+    } else {
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Please try again",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
+
+  
  getLikesList({required String postId}) async {
     dio.Response<dynamic> response =
         await postLikesListApiServices.postLikesLists(postId: postId);
@@ -268,35 +276,35 @@ List<LikesList> likesList = [];
   //   }
   // }
 
-  // updateUserDetails({
-  //   required String name,
-  //   required String bio,
-  //   required String designation,
-  //   required String email,
-  //   required String mobile,
-  // }) async {
-  //   isLoading(true);
-  //   update();
-  //   dio.Response<dynamic> response =
-  //       await updateUserDetailsApi.updateUserDetails(
-  //           name: name,
-  //           bio: bio,
-  //           designation: designation,
-  //           email: email,
-  //           mobile: mobile);
-  //   isLoading(false);
-  //   update();
-  //   if (response.statusCode == 200) {
-   //   Get.to(ProfileSuccessfullPage());
-      // Get.rawSnackbar(
-      //   messageText: const Text(
-      //     "Updated successfully",
-      //     style: TextStyle(color: Colors.white),
-      //   ),
-      //   backgroundColor: Colors.green,
-      // );
-    //}
-  //}
+  updateUserDetails({
+    required String name,
+    required String bio,
+    required String designation,
+    required String email,
+    required String mobile,
+  }) async {
+    isLoading(true);
+    update();
+    dio.Response<dynamic> response =
+        await updateUserDetailsApi.updateUserDetails(
+            name: name,
+            bio: bio,
+            designation: designation,
+            email: email,
+            mobile: mobile);
+    isLoading(false);
+    update();
+    if (response.statusCode == 200) {
+    // Get.to(ProfileSuccessfullPage());
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Updated successfully",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      );
+    }
+  }
 
  List<ListElement> notificationList = [];
 

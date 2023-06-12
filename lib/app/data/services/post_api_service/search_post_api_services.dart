@@ -24,7 +24,7 @@ class SearchPostApiServices extends BaseApiService {
           data: {
             "title": keyWord,
           });
-      print("::::::::<Search Post>::::::::status code::::::::::");
+      print("::::::::<Search Post>::::::::status code::::::::::${response.statusCode}");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

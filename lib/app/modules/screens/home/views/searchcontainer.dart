@@ -44,8 +44,8 @@ class _SearchContainerState extends State<SearchContainer> {
     return GetBuilder<PostsController>(
       builder: (_) {
         return Container(
-          height: MediaQuery.of(context).size.height * 0.88,
-          width: MediaQuery.of(context).size.width * 0.4,
+          height: 600,  // MediaQuery.of(context).size.height * 0.88, 
+          width: 500, //MediaQuery.of(context).size.width * 0.4,
           decoration: BoxDecoration(
               color: kwhite,
               boxShadow: <BoxShadow>[
@@ -93,28 +93,32 @@ class _SearchContainerState extends State<SearchContainer> {
                         )),
                   )),
               ksizedbox30,
-              Padding(
-                padding: const EdgeInsets.only(left: 23, right: 20),
-                 child: postsController.searchPosts.isEmpty &&
-                         searchtextController.text.isNotEmpty
-                     ? Center(
-                         child: Text("No data"),
-                       )
-                     : GridView.builder(
-                         physics: const BouncingScrollPhysics(),
-                         itemCount: postsController.searchPosts.length,
-                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                           crossAxisCount: 2,
-                           crossAxisSpacing: 10,
-                           mainAxisSpacing: 10,
+              SizedBox(
+                height: 400,
+                width: 500,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 23, right: 20),
+                   child: postsController.searchPosts.isEmpty &&
+                           searchtextController.text.isNotEmpty
+                       ? Center(
+                           child: Text("No data"),
+                         )
+                       : GridView.builder(
+                           physics: const BouncingScrollPhysics(),
+                           itemCount: postsController.searchPosts.length,
+                           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                             crossAxisCount: 2,
+                             crossAxisSpacing: 10,
+                             mainAxisSpacing: 10,
+                           ),
+                           itemBuilder: (BuildContext context, int index) {
+                             return Card(
+                               child: Image.network(
+                                   postsController.searchPosts[index].mediaUrl),
+                             );
+                           },
                          ),
-                         itemBuilder: (BuildContext context, int index) {
-                           return Card(
-                             child: Image.network(
-                                 postsController.searchPosts[index].mediaUrl),
-                           );
-                         },
-                       ),
+                ),
               ),
             ],
           ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/modules/screens/Settings/views/widgets/widgets.dart';
 
@@ -18,7 +19,7 @@ class Profilewidget extends StatefulWidget {
 
 class _ProfilewidgetState extends State<Profilewidget> {
 
-   var nameController = TextEditingController();
+    var nameController = TextEditingController();
   var bioController = TextEditingController();
   var positionController = TextEditingController();
   var emailController = TextEditingController();
@@ -30,10 +31,45 @@ class _ProfilewidgetState extends State<Profilewidget> {
   final profileController = Get.find<ProfileController>();
 
   @override
+  void initState() {
+    super.initState();
+    setDefaullt();
+  }
+
+  setDefaullt() async {
+    if (profileController.profileData.isNotEmpty) {
+      nameController.text = profileController.profileData.first.user.name;
+      bioController.text = profileController.profileData.first.user.bio ?? "";
+      positionController.text =
+          profileController.profileData.first.user.designation ?? "";
+      numberController.text = profileController.profileData.first.user.mobile;
+      emailController.text =
+          profileController.profileData.first.user.officialEmail ?? "";
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Image.asset('assets/images/profile.png'),
+        // const SizedBox(
+        //       height: 10,
+        //     ),
+        //     InkWell(
+        //       onTap: () async {
+        //         final ImagePicker _picker = ImagePicker();
+        //         // Pick an image
+        //         final XFile? timage =
+        //             await _picker.pickImage(source: ImageSource.gallery);
+
+        //         profileController.updateProfilePic(media: File(timage!.path));
+        //       },
+        //       child: Text(
+        //         'Edit Profile Image',
+        //         style: TextStyle(fontSize: 17, color: kblue),
+        //       ),
+        //     ),
         ksizedbox10,
         Container(
             width: 700,
@@ -80,7 +116,28 @@ class _ProfilewidgetState extends State<Profilewidget> {
                 ),
                 ksizedbox40,
                 CUSTOMBUTTON(
-                  onTap: () {},
+                  onTap: () {
+                     if (nameController.text.isNotEmpty &&
+                                    bioController.text.isNotEmpty &&
+                                    positionController.text.isNotEmpty &&
+                                    emailController.text.isNotEmpty &&
+                                    numberController.text.isNotEmpty) {
+                                  profileController.updateUserDetails(
+                                      name: nameController.text,
+                                      bio: bioController.text,
+                                      designation: positionController.text,
+                                      email: emailController.text,
+                                      mobile: numberController.text);
+                                } else {
+                                  Get.rawSnackbar(
+                                    messageText: const Text(
+                                      "Fill All the fields",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                    backgroundColor: Colors.red,
+                                  );
+                                }
+                  },
                   text: 'Next',
                 ),
                 ksizedbox40

@@ -1,19 +1,17 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:reg_login/app/services/base_urls/base_urls.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-import '../base_url.dart';
-
-class SendFriendRequestAPIServices extends BaseApiService {
-  Future sendFriendRequest(
-      {required String userId}) async {
+class SearchFriendsApiServices extends BaseApiService {
+  Future searchFriends({required String keyWord}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
-      var response = await dio.post(sendFriendRequestURL,
+
+      var response = await dio.post(searchFriendsURL,
           options: Options(
               headers: {
                 'Accept': 'application/json',
@@ -23,8 +21,10 @@ class SendFriendRequestAPIServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: { "friend_id": userId});
-      print("::::::::<Send Friend request>::::::::status code::::::::::");
+          data: {
+            "name": keyWord,
+          });
+      print("::::::::<Search Friends>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

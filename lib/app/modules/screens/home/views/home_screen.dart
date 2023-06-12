@@ -4,6 +4,7 @@ import 'package:reg_login/app/modules/screens/home/views/create_widget.dart';
 import 'package:reg_login/app/modules/screens/home/views/notification_widget.dart';
 import 'package:reg_login/app/modules/screens/Settings/views/settingss.dart';
 import 'package:reg_login/app/modules/screens/Settings/views/widgets/change_password.dart';
+import 'package:reg_login/app/modules/screens/home/views/widgets/friends_search_screen.dart';
 import 'package:reg_login/app/modules/screens/profile/views/profile_pagee.dart';
 import 'package:reg_login/app/modules/screens/home/views/searchcontainer.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets.dart';
@@ -53,8 +54,15 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         actions: [
-          SearchWidget(
-            textController: textController,
+          InkWell(
+            onTap: (){
+              homeController.homeindex(1);
+                              homeController.update();
+             // Get.to(FriendsSearch());
+            },
+            child: SearchWidget(
+              textController: textController,
+            ),
           ),
           IconButton(
               onPressed: () {
@@ -89,7 +97,7 @@ class _HomePageState extends State<HomePage> {
               color: kblue,
               child: Column(
                 children: [
-                  ksizedbox30,
+                  ksizedbox20,
                   Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
                     child: Column(
@@ -134,7 +142,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  ksizedbox30,
+                  ksizedbox20,
                   Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
                     child: Column(
@@ -178,7 +186,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  ksizedbox30,
+                  ksizedbox20,
                   Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
                     child: Column(
@@ -221,7 +229,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  ksizedbox30,
+                  ksizedbox20,
                   Padding(
                     padding: const EdgeInsets.only(left: 14, right: 14),
                     child: Column(
@@ -264,7 +272,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
-                  ksizedbox30,
+                  ksizedbox20,
                   Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
                     child: Column(
@@ -336,6 +344,50 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         )),
+                  ),
+                   ksizedbox20,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: Column(
+                      children: [
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                elevation: 0,
+                                backgroundColor:
+                                    homeController.homeindex.value == 6
+                                        ? kwhite
+                                        : kblue,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                            onPressed: () {
+                              homeController.homeindex(6);
+                              homeController.update();
+                            },
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.search,
+                                  color: homeController.homeindex == 6
+                                      ? kblue
+                                      : kwhite,
+                                ),
+                                ksizedbox10,
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 5, left: 6),
+                                  child: Text(
+                                    'Friends',
+                                    style: TextStyle(
+                                        color: homeController.homeindex == 6
+                                            ? kblue
+                                            : kwhite,
+                                        fontWeight: FontWeight.w900),
+                                  ),
+                                ),
+                              ],
+                            ))
+                      ],
+                    ),
                   ),
                   Padding(
                     padding:
@@ -528,6 +580,7 @@ class _HomePageState extends State<HomePage> {
                 if (homeController.homeindex.value == 3) NotificationWidget(),
                 if (homeController.homeindex.value == 4) ProfileScreen(),
                 if (homeController.homeindex.value == 5) CreateWidget(),
+                if (homeController.homeindex.value == 6) FriendsSearch(),
                 if (homeController.homeindex.value == 7) SettingsPage()
               ],
             ),
