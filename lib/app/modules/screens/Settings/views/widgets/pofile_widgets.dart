@@ -18,8 +18,7 @@ class Profilewidget extends StatefulWidget {
 }
 
 class _ProfilewidgetState extends State<Profilewidget> {
-
-    var nameController = TextEditingController();
+  var nameController = TextEditingController();
   var bioController = TextEditingController();
   var positionController = TextEditingController();
   var emailController = TextEditingController();
@@ -52,7 +51,23 @@ class _ProfilewidgetState extends State<Profilewidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Image.asset('assets/images/profile.png'),
+        GetBuilder<ProfileController>(builder: (_) {
+          
+          return Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child:
+                profileController.profileData.first.user.profilePicture == null
+                    ? const CircleAvatar(
+                        backgroundImage:
+                            AssetImage('assets/images/createprofile.png'),
+                      )
+                    : CircleAvatar(
+                        backgroundImage: NetworkImage(profileController
+                            .profileData.first.user.profilePicture),
+                      ),
+          );
+        }),
+        //  Image.asset('assets/images/profile.png'),
         // const SizedBox(
         //       height: 10,
         //     ),
@@ -117,26 +132,26 @@ class _ProfilewidgetState extends State<Profilewidget> {
                 ksizedbox40,
                 CUSTOMBUTTON(
                   onTap: () {
-                     if (nameController.text.isNotEmpty &&
-                                    bioController.text.isNotEmpty &&
-                                    positionController.text.isNotEmpty &&
-                                    emailController.text.isNotEmpty &&
-                                    numberController.text.isNotEmpty) {
-                                  profileController.updateUserDetails(
-                                      name: nameController.text,
-                                      bio: bioController.text,
-                                      designation: positionController.text,
-                                      email: emailController.text,
-                                      mobile: numberController.text);
-                                } else {
-                                  Get.rawSnackbar(
-                                    messageText: const Text(
-                                      "Fill All the fields",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    backgroundColor: Colors.red,
-                                  );
-                                }
+                    if (nameController.text.isNotEmpty &&
+                        bioController.text.isNotEmpty &&
+                        positionController.text.isNotEmpty &&
+                        emailController.text.isNotEmpty &&
+                        numberController.text.isNotEmpty) {
+                      profileController.updateUserDetails(
+                          name: nameController.text,
+                          bio: bioController.text,
+                          designation: positionController.text,
+                          email: emailController.text,
+                          mobile: numberController.text);
+                    } else {
+                      Get.rawSnackbar(
+                        messageText: const Text(
+                          "Fill All the fields",
+                          style: TextStyle(color: Colors.white),
+                        ),
+                        backgroundColor: Colors.red,
+                      );
+                    }
                   },
                   text: 'Next',
                 ),

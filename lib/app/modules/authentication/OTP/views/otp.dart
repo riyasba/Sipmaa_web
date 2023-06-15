@@ -127,7 +127,7 @@ class _OTPVIEWSState extends State<OTPVIEWS> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  authController.otpVerify(otpValue);
+                                  authController.otpVerify(otpValue,true);
                                 },
                                 //=> Get.toNamed('/register-2'),
                                 child: Text(

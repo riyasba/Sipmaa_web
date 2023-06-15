@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:reg_login/app/services/base_urls/base_urls.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../base_url.dart';
+
 class GetFriendRequestListApiServices extends BaseApiService {
   Future getFriendRequestListApiServices() async {
     dynamic responseJson;

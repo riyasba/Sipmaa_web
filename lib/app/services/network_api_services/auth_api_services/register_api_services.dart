@@ -3,6 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:reg_login/app/data/models/register_model.dart';
 import 'package:reg_login/app/services/base_urls/base_urls.dart';
 
+import '../../../data/services/base_url.dart';
+
 class RegisterServicesApi extends BaseApiService {
   Future registerApi(RegisterModel registerModel) async {
     dynamic responseJson;

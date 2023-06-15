@@ -5,6 +5,7 @@ part of 'app_pages.dart';
 
 abstract class Routes {
   Routes._();
+  static const RESP = _Paths.RESP;
   static const SPLASH = _Paths.SPLASH;
   static const SIGN_IN = _Paths.SIGN_IN;
   static const HOME_PAGE = _Paths.HOME_PAGE;
@@ -20,6 +21,7 @@ abstract class Routes {
 
 abstract class _Paths {
   _Paths._();
+  static const RESP = '/RESPO';
   static const SPLASH = '/splash-page';
   static const SIGN_IN = '/sign-in';
   static const SIGN_UP = '/home-screen';

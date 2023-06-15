@@ -36,9 +36,11 @@ import '../../models/notiofication_list_model.dart';
 import '../../models/post_like_list_model.dart';
 import '../../models/profile_model.dart';
 import '../../services/notification_list/notification_list.dart';
+import '../../services/post_api_service/get_other_profile_api_services.dart';
 import '../../services/post_api_service/post_liked_list_api_services.dart';
 import '../../services/profile_api_service/my_friend_list_api_services.dart';
 import '../../services/profile_api_service/send_friend_request.dart';
+import '../../services/profile_api_service/update_profile_pic.dart';
 
 class ProfileController extends GetxController {
   GetFriendListApiServices getFriendListApiServices =
@@ -59,10 +61,10 @@ PostLikesListApiServices postLikesListApiServices =
 
   ChangePasswordApiServices changePasswordApiServices = ChangePasswordApiServices();
 
- // GetOtherProfileApiServices getOtherProfileApiServices =
-   //   GetOtherProfileApiServices();
+  GetOtherProfileApiServices getOtherProfileApiServices =
+      GetOtherProfileApiServices();
 
-  //UpdateProfilePicApi updateProfilePicApi = UpdateProfilePicApi();
+  UpdateProfilePicApi updateProfilePicApi = UpdateProfilePicApi();
 
   UpdateUserDetailsApi updateUserDetailsApi = UpdateUserDetailsApi();
 
@@ -94,20 +96,20 @@ List<LikesList> likesList = [];
     update();
   }
 
-  // getOtherProfile({required String userid}) async {
-  //   dio.Response<dynamic> response =
-  //       await getOtherProfileApiServices.getOtherProfile(userId: userid);
-  //   otherUserProfileData.clear();
-  //   if (response.statusCode == 200) {
-  //     ProfileModel profileModel = ProfileModel.fromJson(response.data);
-  //     otherUserProfileData.add(profileModel);
-  //   } else if (response.statusCode == 401) {
-  //     final prefs = await SharedPreferences.getInstance();
-  //     await prefs.setString("auth_token", "null");
-  //    // Get.to(loginpage());
-  //   }
-  //   update();
-  // }
+  getOtherProfile({required String userid}) async {
+    dio.Response<dynamic> response =
+        await getOtherProfileApiServices.getOtherProfile(userId: userid);
+    otherUserProfileData.clear();
+    if (response.statusCode == 200) {
+      ProfileModel profileModel = ProfileModel.fromJson(response.data);
+      otherUserProfileData.add(profileModel);
+    } else if (response.statusCode == 401) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("auth_token", "null");
+     // Get.to(loginpage());
+    }
+    update();
+  }
 
    getMyFriendList() async {
     dio.Response<dynamic> response =
@@ -318,5 +320,25 @@ List<LikesList> likesList = [];
       notificationList = notificationListModel.list;
     }
     update();
+  }
+
+  // void updateProfilePic({required dynamic media}) {
+
+
+
+    
+  // }
+
+
+   updateProfilePic({ dynamic media}) async {
+    isLoading(true);
+    update();
+    dio.Response<dynamic> response =
+        await updateProfilePicApi.updateProfilePic(media: media);
+    isLoading(false);
+    update();
+    if (response.statusCode == 200) {
+      getProfile();
+    }
   }
 }

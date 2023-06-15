@@ -10,6 +10,7 @@ import 'package:reg_login/app/modules/screens/home/views/widgets/likepost.dart';
 
 import '../../../../data/components/controllers/auth_controllers.dart';
 import '../../../../data/components/controllers/posts_controller.dart';
+import '../../../../data/components/controllers/profile_controller.dart';
 import '../../profile/views/profile_pagee.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -30,6 +31,7 @@ class _HomeContainerState extends State<HomeContainer> {
   var dialogeController = TextEditingController();
   var commentTextController = TextEditingController();
   final postController = Get.find<PostsController>();
+  final profileController = Get.find<ProfileController>();
 
   @override
   void initState() {
@@ -44,11 +46,7 @@ class _HomeContainerState extends State<HomeContainer> {
       width: MediaQuery.of(context).size.width * 0.38,
       child: GetBuilder<PostsController>(builder: (_) {
         return ListView.separated(
-          separatorBuilder: (BuildContext context, int i) {
-            return Divider(
-              height: 10,
-            );
-          },
+           separatorBuilder:(BuildContext context, int index) => SizedBox(height: 10),
           shrinkWrap: true,
           itemCount: postsController.allPostList.length,
           itemBuilder: (context, index) {
@@ -65,99 +63,51 @@ class _HomeContainerState extends State<HomeContainer> {
               child: Column(
                 children: [
                   ksizedbox10,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          postsController
-                                      .allPostList[index].user.profilePicture ==
-                                  null
-                              ? const CircleAvatar(
-                                  backgroundImage: AssetImage(
-                                      'assets/icons/profile_icon.png'),
-                                  radius: 25,
-                                )
-                              : CircleAvatar(
-                                  backgroundImage: NetworkImage(postsController
-                                      .allPostList[index].user.profilePicture),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            postsController
+                                        .allPostList[index].user.profilePicture ==
+                                    null
+                                ? const CircleAvatar(
+                                    backgroundImage: AssetImage(
+                                        'assets/icons/profile_icon.png'),
+                                    radius: 25,
+                                  )
+                                : CircleAvatar(
+                                    backgroundImage: NetworkImage(postsController
+                                        .allPostList[index].user.profilePicture),
+                                  ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  postsController.allPostList[index].user.name,
+                                  style: ktextstyle22,
                                 ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                postsController.allPostList[index].user.name,
-                                style: ktextstyle22,
-                              ),
-                              Text(postsController
-                                      .allPostList[index].user.designation ??
-                                  postsController
-                                      .allPostList[index].user.userName)
-                            ],
-                          ),
-                        ],
-                      ),
-                      Text(
-                        timeago.format(
-                            postsController.allPostList[index].createdAt),
-                        style: const TextStyle(fontSize: 17),
-                      ),
-                    ],
+                                Text(postsController
+                                        .allPostList[index].user.designation ??
+                                    postsController
+                                        .allPostList[index].user.userName)
+                              ],
+                            ),
+                          ],
+                        ),
+                        Text(
+                          timeago.format(
+                              postsController.allPostList[index].createdAt),
+                          style: const TextStyle(fontSize: 15,fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.start,
-                  //   children: [
-                  //     ksizedbox10,
-                  //     SizedBox(
-                  //       width: 20,
-                  //     ),
-                  //     Row(children: [
-                  //       Image.asset(
-                  //         'assets/images/profile.png',
-                  //         fit: BoxFit.fitHeight,
-                  //         height: 80,
-                  //       )
-                  //     ]),
-                  //     ksizedbox10,
-                  //     SizedBox(
-                  //       width: 20,
-                  //     ),
-                  //     Padding(
-                  //       padding: const EdgeInsets.only(left: 0),
-                  //       child: Column(
-                  //         crossAxisAlignment: CrossAxisAlignment.start,
-                  //         children: [
-                  //           Text(
-                  //             'Sharmila',
-                  //             style: TextStyle(
-                  //                 fontSize: 17,
-                  //                 fontWeight: FontWeight.w900,
-                  //                 color: Colors.black),
-                  //           ),
-                  //           Text(
-                  //             'Loream ipounum',
-                  //             style: TextStyle(
-                  //               fontSize: 14,
-                  //             ),
-                  //             textAlign: TextAlign.start,
-                  //           )
-                  //         ],
-                  //       ),
-                  //     ),
-                  //     Padding(
-                  //       padding: const EdgeInsets.only(left: 180),
-                  //       child: Row(
-                  //         mainAxisAlignment: MainAxisAlignment.end,
-                  //         children: [
-                  //           Text('2 days ago'),
-                  //         ],
-                  //       ),
-                  //     )
-                  //   ],
-                  // ),
                   ksizedbox30,
                   Padding(
                     padding: const EdgeInsets.only(left: 35, top: 5),
@@ -165,7 +115,7 @@ class _HomeContainerState extends State<HomeContainer> {
                       children: [
                         Text(
                           postsController.allPostList[index].title,
-                          style: TextStyle(fontSize: 18.5),
+                          style: TextStyle(fontSize: 18.5,fontWeight: FontWeight.w500),
                         )
                       ],
                     ),
@@ -201,43 +151,40 @@ class _HomeContainerState extends State<HomeContainer> {
                                     showDialog(
                                         context: context,
                                         builder: (context) {
-                                          return Padding(
-                                            padding: const EdgeInsets.only(
-                                                top: 70, bottom: 50),
-                                            child: Dialog(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15)),
-                                              child: Container(
-                                                decoration: BoxDecoration(),
-                                                height: 440,
+                                          return AlertDialog(
+                                            content: Container(
+                                             // decoration: BoxDecoration(),
+                                              height: 440,
+                                              width: 290,
+                                              child: Column(
+                                                children: [
+                                                  ksizedbox10,
+                                                  Row(
+                                                    children: [
+                                                      IconButton(
+                                                          onPressed: () {
+                                                            Get.back();
+                                                          },
+                                                          icon: Icon(Icons
+                                                              .arrow_back)),
+                                                      Text(
+                                                        'Reactions',
+                                                        style: TextStyle(
+                                                            fontSize: 16,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w900),
+                                                      )
+                                                    ],
+                                                  ),
+                                                  ksizedbox10,
+                                                  GetBuilder<PostsController>(
+                                                      builder: (_) {
+                                                    return Container(
+                                                      height: 350,
                                                 width: 290,
-                                                child: Column(
-                                                  children: [
-                                                    ksizedbox10,
-                                                    Row(
-                                                      children: [
-                                                        IconButton(
-                                                            onPressed: () {
-                                                              Get.back();
-                                                            },
-                                                            icon: Icon(Icons
-                                                                .arrow_back)),
-                                                        Text(
-                                                          'Reactions',
-                                                          style: TextStyle(
-                                                              fontSize: 16,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w900),
-                                                        )
-                                                      ],
-                                                    ),
-                                                    ksizedbox10,
-                                                    GetBuilder<PostsController>(
-                                                        builder: (_) {
-                                                      return ListView.separated(
+                                                      child:
+                                                          ListView.separated(
                                                         physics:
                                                             BouncingScrollPhysics(),
                                                         itemCount:
@@ -260,7 +207,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                                         radius:
                                                                             40,
                                                                         backgroundImage:
-                                                                            AssetImage('assets/icons/profile_icon.png'),
+                                                                            AssetImage('assets/images/createprofile.png'),
                                                                       )
                                                                     : CircleAvatar(
                                                                         radius:
@@ -273,12 +220,12 @@ class _HomeContainerState extends State<HomeContainer> {
                                                                     .likesList[
                                                                         index]
                                                                     .userName),
-                                                                subtitle: Text(
-                                                                    postController
-                                                                        .likesList[
-                                                                            index]
-                                                                        .userName),
-                                                                trailing: Text(
+                                                                subtitle: Text(postController
+                                                                    .likesList[
+                                                                        index]
+                                                                    .userName),
+                                                                trailing:
+                                                                    Text(
                                                                   timeago.format(postController
                                                                       .likesList[
                                                                           index]
@@ -297,77 +244,11 @@ class _HomeContainerState extends State<HomeContainer> {
                                                             height: 1,
                                                           );
                                                         },
-                                                      );
-                                                    }),
-                                                    // Row(
-                                                    //   children: [
-                                                    //     Padding(
-                                                    //       padding:
-                                                    //           const EdgeInsets
-                                                    //                   .only(
-                                                    //               left: 10),
-                                                    //       child: Image.asset(
-                                                    //         'assets/images/profile.png',
-                                                    //         height: 50,
-                                                    //         fit: BoxFit
-                                                    //             .fitHeight,
-                                                    //       ),
-                                                    //     ),
-                                                    //     Padding(
-                                                    //       padding:
-                                                    //           const EdgeInsets
-                                                    //                   .only(
-                                                    //               left: 10),
-                                                    //       child: Column(
-                                                    //         crossAxisAlignment:
-                                                    //             CrossAxisAlignment
-                                                    //                 .start,
-                                                    //         children: [
-                                                    //           Text(
-                                                    //             'Krishna',
-                                                    //             style: TextStyle(
-                                                    //                 fontSize:
-                                                    //                     15,
-                                                    //                 fontWeight:
-                                                    //                     FontWeight
-                                                    //                         .bold),
-                                                    //           ),
-                                                    //           Padding(
-                                                    //             padding:
-                                                    //                 const EdgeInsets
-                                                    //                         .only(
-                                                    //                     top: 3),
-                                                    //             child: Text(
-                                                    //               'Like in a post',
-                                                    //               style: TextStyle(
-                                                    //                   fontSize:
-                                                    //                       11,
-                                                    //                   fontWeight:
-                                                    //                       FontWeight
-                                                    //                           .w600),
-                                                    //             ),
-                                                    //           )
-                                                    //         ],
-                                                    //       ),
-                                                    //     ),
-                                                    //     Padding(
-                                                    //       padding:
-                                                    //           const EdgeInsets
-                                                    //                   .only(
-                                                    //               left: 90),
-                                                    //       child: Text(
-                                                    //         '2 Hours ago',
-                                                    //         style: TextStyle(
-                                                    //             fontSize: 10),
-                                                    //       ),
-                                                    //     )
-                                                    //   ],
-                                                    // ),
-                                                    SizedBox(
-                                                      height: 15,
-                                                    ),
-                                                  ],
-                                                ),
+                                                      ),
+                                                    );
+                                                  }),
+                                                 
+                                                ],
                                               ),
                                             ),
                                           );
@@ -378,7 +259,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                   Icons.favorite,
                                   color: Colors.pink,
                                   size: 15,
-                                )),
+                            )),
                             Text(
                               postsController.allPostList[index].likeCount
                                   .toString(),
@@ -412,7 +293,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  0.7,
+                                                  0.6,
                                               decoration:
                                                   BoxDecoration(color: kwhite),
                                               child: Row(
@@ -443,10 +324,10 @@ class _HomeContainerState extends State<HomeContainer> {
                                                             top: 35, left: 20),
                                                     child: Container(
                                                       height: 300,
-                                                      width: 500,
+                                                      width: 300,
                                                       child: GetBuilder<
                                                               PostsController>(
-                                                          builder: (context) {
+                                                          builder: (_) {
                                                         return ListView.builder(
                                                           shrinkWrap: true,
                                                           itemBuilder: (context,
@@ -473,13 +354,14 @@ class _HomeContainerState extends State<HomeContainer> {
                                       );
                                     });
                               },
-                              child: Text(
-                                '${postsController.allPostList[index].comment} comments',
+                              child: Text(  '${postsController.allPostList[index].comment} Coments'
+                                  .toString(),
+                             //   '${postsController.allPostList[index].comment} comments',
                                 //   postsController
                                 //                          .allPostList[index]
                                 //                           .likeCount
                                 //                          .toString(),
-                                style: TextStyle(fontSize: 13),
+                                style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),
                               )),
                         )
                       ],
@@ -501,18 +383,6 @@ class _HomeContainerState extends State<HomeContainer> {
                           postId: postsController.allPostList[index].id,
                           indexOfPost: index,
                         ),
-                        // IconButton(
-                        //     onPressed: () {
-                        //       setState(() {
-                        //         _isfavorite = !_isfavorite;
-                        //       });
-                        //     },
-                        //     icon: _isfavorite == true
-                        //         ? Icon(
-                        //             Icons.favorite,
-                        //             color: Colors.pink,
-                        //           )
-                        //         : Icon(Icons.favorite_border)),
                         InkWell(
                           onTap: () {
                             postController.getComments(
@@ -527,107 +397,175 @@ class _HomeContainerState extends State<HomeContainer> {
                       ],
                     ),
                   ),
+                  ksizedbox30,
                   Padding(
-                    padding: const EdgeInsets.only(left: 30, right: 30),
-                    // child: Container(
-                    //   decoration: BoxDecoration(
-                    //     color: Colors.white,
-                    //     boxShadow: [
-                    //       BoxShadow(
-                    //           blurRadius: 5,
-                    //           color: Colors.grey.withOpacity(0.5)),
-                    //     ],
-                    //   ),
-                    //   height: 60,
-                    //   width: double.infinity,
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.only(left: 10, right: 10),
-                    //     child: postController.profileData.isEmpty
-                    //         ? Container(
-                    //             width: 5,
-                    //           )
-                    //         : Row(children: [
-                    //             postController
-                    //                         .profileData.first.profilePicture ==
-                    //                     null
-                    //                 ? const CircleAvatar(
-                    //                     backgroundImage: AssetImage(
-                    //                         'assets/images/Group 89.png'),
-                    //                   )
-                    //                 : CircleAvatar(
-                    //                     backgroundImage: NetworkImage(
-                    //                         postController.profileData.first
-                    //                             .profilePicture),
-                    //                   ),
-                    //             const SizedBox(width: 10),
-                    //             Expanded(
-                    //               child: TextField(
-                    //                   controller: commentTextController,
-                    //                   decoration:
-                    //                       const InputDecoration.collapsed(
-                    //                           hintText: "Add a comments")),
-                    //             ),
-                    //             const SizedBox(width: 10),
-                    //             InkWell(
-                    //                 onTap: () {
-                    //                   if (commentTextController
-                    //                       .text.isNotEmpty) {
-                    //                     postController.postComments(
-                    //                         userID: postController
-                    //                             .profileData.first.id
-                    //                             .toString(),
-                    //                         postId: postsController
-                    //                             .allPostList[index].id
-                    //                             .toString(),
-                    //                         comment:
-                    //                             commentTextController.text);
-                    //                     commentTextController.clear();
-                    //                   } else {
-                    //                     Get.rawSnackbar(
-                    //                       messageText: const Text(
-                    //                         "type anything before commenting",
-                    //                         style:
-                    //                             TextStyle(color: Colors.white),
-                    //                       ),
-                    //                       backgroundColor: Colors.red,
-                    //                     );
-                    //                   }
-                    //                 },
-                    //                 child: Icon(Icons.send)),
-                    //           ]),
-                    //   ),
-                    // ),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.75),
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: <BoxShadow>[
-                            BoxShadow(
-                                offset: Offset(0.0, 0.80),
-                                color: kgrey.withOpacity(0.4),
-                                blurRadius: 0.2)
-                          ]),
-                      height: 42,
-                      width: MediaQuery.of(context).size.width,
-                      child: TextField(
-                        controller: commentController,
-                        decoration: InputDecoration(
-                            hintText: '  Write Comment',
-                            hintStyle:
-                                TextStyle(fontSize: 12, color: Colors.black),
-                            prefixIcon: Padding(
-                              padding: const EdgeInsets.only(left: 10, top: 1),
-                              child: Image.asset(
-                                'assets/images/profile.png',
-                                height: 10,
-                                fit: BoxFit.fitHeight,
+                      padding: const EdgeInsets.only(left: 30, right: 30),
+                      // child: Container(
+                      //   decoration: BoxDecoration(
+                      //     color: Colors.white,
+                      //     boxShadow: [
+                      //       BoxShadow(
+                      //           blurRadius: 5,
+                      //           color: Colors.grey.withOpacity(0.5)),
+                      //     ],
+                      //   ),
+                      //   height: 60,
+                      //   width: 333,
+                      //   child: Padding(
+                      //     padding: const EdgeInsets.only(left: 10, right: 10),
+                      //     child:
+                      //     postController.profileData.isEmpty
+                      //         ? Container(
+                      //             width: 5,
+                      //           )
+                      //        :
+                      //          Container(
+                      //           width: 222,
+                      //            child: Row(
+                      //             children: [
+                      //               postController
+                      //                           .profileData.first.profilePicture ==
+                      //                       null
+                      //                   ? const CircleAvatar(
+                      //                       backgroundImage: AssetImage(
+                      //                           'assets/images/Group 89.png'),
+                      //                     )
+                      //                   : CircleAvatar(
+                      //                       backgroundImage: NetworkImage(
+                      //                           postController.profileData.first
+                      //                               .profilePicture),
+                      //                     ),
+                      //               const SizedBox(width: 10),
+                      //               Expanded(
+                      //                 child: TextField(
+                      //                     controller: commentTextController,
+                      //                     decoration:
+                      //                         const InputDecoration.collapsed(
+                      //                             hintText: "Add a comments")),
+                      //               ),
+                      //               const SizedBox(width: 10),
+                      //               InkWell(
+                      // onTap: () {
+                      //   if (commentTextController
+                      //       .text.isNotEmpty) {
+                      //     postController.postComments(
+                      //         userID: postController
+                      //             .profileData.first.id
+                      //             .toString(),
+                      //         postId: postsController
+                      //             .allPostList[index].id
+                      //             .toString(),
+                      //         comment:
+                      //             commentTextController.text);
+                      //     commentTextController.clear();
+                      //   } else {
+                      //     Get.rawSnackbar(
+                      //       messageText: const Text(
+                      //         "type anything before commenting",
+                      //         style:
+                      //             TextStyle(color: Colors.white),
+                      //       ),
+                      //       backgroundColor: Colors.red,
+                      //     );
+                      //   }
+                      // },
+                      //                   child: Icon(Icons.send)),
+                      //             ]),
+                      //          ),
+                      //   ),
+                      // ),
+                      child: GetBuilder<ProfileController>(builder: (_) {
+                        return Container(
+                            decoration: BoxDecoration(
+                                color: Colors.white.withOpacity(0.75),
+                                borderRadius: BorderRadius.circular(15),
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                      offset: Offset(0.0, 0.80),
+                                      color: kgrey.withOpacity(0.4),
+                                      blurRadius: 0.2)
+                                ]),
+                            height: 42,
+                            width: MediaQuery.of(context).size.width,
+                            child: TextField(
+                              controller: postsController
+                                  .allPostList[index].textEditingController,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                    borderSide: BorderSide.none),
+                                suffixIcon: InkWell(
+                                    onTap: () {
+
+                                      print(postsController
+                                          .allPostList[index]
+                                          .textEditingController
+                                          .text);
+                                      if (postsController
+                                          .allPostList[index]
+                                          .textEditingController
+                                          .text
+                                          .isNotEmpty) {
+                                        postController.postComments(
+                                          index: index,
+                                            userID: profileController
+                                                .profileData.first.user.id
+                                                .toString(),
+                                            postId: postsController
+                                                .allPostList[index].id
+                                                .toString(),
+                                            comment: postsController
+                                                .allPostList[index]
+                                                .textEditingController
+                                                .text);
+                                        postsController.allPostList[index]
+                                            .textEditingController
+                                            .clear();
+                                        postController.update();
+                                      } else {
+                                        Get.rawSnackbar(
+                                          messageText: const Text(
+                                            "type anything before commenting",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                          backgroundColor: Colors.red,
+                                        );
+                                      }
+                                    },
+                                    child: Icon(Icons.send)),
+                                hintText: '  Write Comment',
+                                hintStyle: TextStyle(
+                                    fontSize: 12, color: Colors.black),
+                                prefixIcon: profileController
+                                        .profileData.isEmpty
+                                    ? Container(
+                                        width: 5,
+                                        height: 10,
+                                        color: Colors.red,
+                                      )
+                                    : Container(
+                                        width: 20,
+                                        child: Row(children: [
+                                          profileController.profileData.first
+                                                      .user.profilePicture ==
+                                                  null
+                                              ? const CircleAvatar(
+                                                  backgroundImage: AssetImage(
+                                                      'assets/images/createprofile.png'),
+                                                )
+                                              : CircleAvatar(
+                                                  backgroundImage: NetworkImage(
+                                                      profileController
+                                                          .profileData
+                                                          .first
+                                                          .user
+                                                          .profilePicture),
+                                                ),
+                                        ]),
+                                      ),
                               ),
-                            ),
-                            border: OutlineInputBorder(
-                                borderSide: BorderSide.none)),
-                      ),
-                    ),
-                  )
+                            ));
+                      }))
                 ],
               ),
             );

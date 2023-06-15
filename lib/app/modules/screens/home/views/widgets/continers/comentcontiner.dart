@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../../../data/components/controllers/posts_controller.dart';
+import '../../../../../../data/components/controllers/profile_controller.dart';
 import '../../../../../../data/models/comment_list_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
 class comentsContainer extends StatefulWidget {
@@ -22,17 +24,32 @@ class _comentsContainerState extends State<comentsContainer> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Row(
+      
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(70),
-          child: Image.network(
-            widget.commentsList.picture,
-            fit: BoxFit.cover,
-            width: 20,
-            height: 20,
-          ),
-        ),
+        // GetBuilder<ProfileController>(builder: (_) {
+        //     return Padding(
+        //       padding: const EdgeInsets.only(right: 10),
+        //       child: widget.commentsList.picture.isBlank ==
+        //               null
+        //           ? const CircleAvatar(
+        //               backgroundImage: AssetImage('assets/images/createprofile.png'),
+        //             )
+        //           : CircleAvatar(
+        //               backgroundImage: NetworkImage(widget.commentsList.picture
+        //                   .profileData.first.user.profilePicture),
+        //             ),
+        //     );
+        //   }),
+        // // ClipRRect(
+        //   borderRadius: BorderRadius.circular(70),
+        //   child: Image.network(
+        //     widget.commentsList.picture,
+        //     fit: BoxFit.cover,
+        //     width: 20,
+        //     height: 20,
+        //   ),
+        // ),
         Padding(
           padding: const EdgeInsets.only(top: 7, left: 13),
           child: Column(

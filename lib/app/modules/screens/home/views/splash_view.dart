@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:reg_login/app/modules/authentication/signin/views/signin.dart';
 import 'package:reg_login/app/modules/screens/home/views/home_screen.dart';
+import 'package:reg_login/app/responsive/responsive_homescreen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Splash extends StatefulWidget {
@@ -25,7 +26,7 @@ class _SplashState extends State<Splash> {
     await Future.delayed(const Duration(milliseconds: 3900));
 
     Get.offAll(
-      () => HomePage(),
+      () => HomeView(),
     );
   }
 

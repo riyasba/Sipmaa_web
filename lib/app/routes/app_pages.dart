@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:reg_login/app/modules/authentication/signin/views/signin.dart';
 import 'package:reg_login/app/modules/screens/home/views/splash_view.dart';
 
+import '../responsive/responsive_homescreen.dart';
 import '../modules/screens/Settings/views/settingss.dart';
 import '../modules/screens/Settings/views/widgets/change_password.dart';
 //import '../modules/screens/Settings/views/settings.dart';
@@ -16,14 +17,21 @@ import '../modules/authentication/forgotPassword/views/forgotpassword.dart';
 import '../modules/authentication/register/views/registerscreen.dart';
 import '../modules/authentication/register/views/register.dart';
 import '../modules/authentication/register/views/registersplash.dart';
+import '../responsive/view/home_respo.dart';
 
 part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
-  static String INITIAL = Routes.SPLASH;
+  //static String INITIAL = Routes.SPLASH;
+   static String INITIAL = Routes.SPLASH;
 
   static final routes = [
+      GetPage(
+      name: _Paths.RESP,
+      page: () => const HomeView(),
+      // binding: SignInBinding(),
+    ),
      GetPage(
       name: _Paths.SPLASH,
       page: () => const Splash(),
@@ -64,7 +72,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.HOME_PAGE,
-      page: () => const HomePage(),
+      page: () =>  HomepageRespo(),
       // binding: SignInBinding(),
     ),
    GetPage(

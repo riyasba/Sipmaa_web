@@ -27,6 +27,7 @@ final authController = Get.find<AuthController>();
 class _SignInViewState extends State<SignInView> {
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kblue,
       body: Padding(
@@ -320,8 +321,8 @@ class _SignInViewState extends State<SignInView> {
                                     ),
                                   ],
                                 ),
-                              //  ksizedbox10,
-                               // ksizedbox10,
+                                //  ksizedbox10,
+                                // ksizedbox10,
                                 Obx(
                                   () => SizedBox(
                                     height: 45,
@@ -361,6 +362,7 @@ class _SignInViewState extends State<SignInView> {
                                                 if (_formKey.currentState!
                                                     .validate()) {
                                                   authController.loginUser(
+                                                    size: size.width,
                                                       username:
                                                           userNameController
                                                               .text,

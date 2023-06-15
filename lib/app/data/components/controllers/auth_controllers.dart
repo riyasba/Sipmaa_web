@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:reg_login/app/data/models/department_model.dart';
 import 'package:reg_login/app/data/models/profile_update_model.dart';
 import 'package:reg_login/app/data/services/auth_api_service/get_department_api_services.dart';
@@ -29,7 +30,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 // import '../services/network_api_services/auth_api_services/otp_verify_api_services.dart';
 import 'package:dio/dio.dart' as dio;
 
+import '../../../get_slider_api_services.dart';
 import '../../../modules/screens/home/views/home_screen.dart';
+import '../../../responsive/view/home_respo.dart';
+import '../../../responsive/view/otp_page.dart';
+import '../../../responsive/view/register_details_page.dart';
+import '../../models/slider_model.dart';
 import '../../services/auth_api_service/login_api_services.dart';
 import '../../models/register_model.dart';
 
@@ -41,19 +47,19 @@ class AuthController extends GetxController {
   RxBool isUserNameAvailable = false.obs;
 
   List<Department> departments = [];
-  //List<SliderList> sliderList = [];
+  List<SliderList> sliderList = [];
 
   GetDepartmentServicesApi getDepartmentServicesApi =
-   GetDepartmentServicesApi();
+      GetDepartmentServicesApi();
   LoginServicesApi loginServicesApi = LoginServicesApi();
 
   /// OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
   OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
   RegisterServicesApi registerServicesApi = RegisterServicesApi();
   ProfileUpdateServicesApi profileUpdateServicesApi =
-    ProfileUpdateServicesApi();
+      ProfileUpdateServicesApi();
   UserNameApiServices userNameApiServices = UserNameApiServices();
-  //GetSliderApiServices getSliderApiServices = GetSliderApiServices();
+  GetSliderApiServices getSliderApiServices = GetSliderApiServices();
 
   // registerUser(RegisterModel registerModel) async {
   //   print("---------------------------------2-----------");
@@ -83,8 +89,7 @@ class AuthController extends GetxController {
   //   }
   // }
 
-
-  registerUser(RegisterModel registerModel) async {
+  registerUser(RegisterModel registerModel, bool isMobile) async {
     isLoading(true);
     var response = await registerServicesApi.registerApi(registerModel);
     isLoading(false);
@@ -92,11 +97,21 @@ class AuthController extends GetxController {
     if (response.statusCode == 201) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", response.data["token"]);
-      Get.to(OTPVIEWS(
-        phoneNumber: registerModel.mobile,
-        otp: response.data["user"]["otp"].toString(),
-      ));
-      // Get.toNamed('/otp-views',arguments: 
+      if (isMobile) {
+        Get.to(otp_page( phoneNumber: registerModel.mobile,
+        otp: response.data["user"]["otp"].toString(),));
+        //mobile
+      } else {
+        Get.to(OTPVIEWS( phoneNumber: registerModel.mobile,
+        otp: response.data["user"]["otp"].toString(),));
+        //desk
+      }
+
+      // Get.to(OTPVIEWS(
+      //   phoneNumber: registerModel.mobile,
+      //   otp: response.data["user"]["otp"].toString(),
+      // ));
+      // Get.toNamed('/otp-views',arguments:
       // {
       //   "otp": response.data["user"]["otp"].toString(),
       //   "phonenumber": registerModel.mobile
@@ -112,14 +127,22 @@ class AuthController extends GetxController {
       );
     }
   }
-  
-  otpVerify(String otp) async {
+
+  otpVerify(String otp,bool isMobile) async {
     isLoading(true);
     dio.Response<dynamic> response =
         await otpVerifyServicesApi.otpVerifyApi(otp: otp);
     isLoading(false);
     if (response.statusCode == 200) {
-     Get.offAll(const Resgister2());
+
+if(isMobile){
+  Get.to(Resgister2());
+}else{
+  Get.to(RegisterDetailsView());
+}
+
+
+      //Get.offAll(const Resgister2());
       //success
       Get.rawSnackbar(
         messageText: const Text(
@@ -175,7 +198,10 @@ class AuthController extends GetxController {
     }
   }
 
-  loginUser({required String username, required String password}) async {
+  loginUser(
+      {required String username,
+      required String password,
+      required double size}) async {
     isLoading(true);
     dio.Response<dynamic> response =
         await loginServicesApi.loginApi(username: username, password: password);
@@ -183,7 +209,12 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", response.data["token"]);
-      Get.offAll(() => HomePage());
+      if (size < 600) {
+        Get.toNamed('/home-screen');
+      } else {
+        Get.offAll(() => HomePage());
+      }
+
       Get.rawSnackbar(
         messageText: const Text(
           "Login Successful",
@@ -215,14 +246,14 @@ class AuthController extends GetxController {
     }
   }
 
-  // getSlider() async {
-  //   dio.Response<dynamic> response = await getSliderApiServices.getSliders();
+  getSlider() async {
+    dio.Response<dynamic> response = await getSliderApiServices.getSliders();
 
-  //   if (response.statusCode == 201) {
-  //     update();
-  //     SliderModel sliderModel = SliderModel.fromJson(response.data);
-  //     sliderList = sliderModel.sliderList;
-  //   }
-  //   update();
-  // }
+    if (response.statusCode == 201) {
+      update();
+      SliderModel sliderModel = SliderModel.fromJson(response.data);
+      sliderList = sliderModel.sliderList;
+    }
+    update();
+  }
 }

@@ -275,7 +275,7 @@ class _RegisterViewsState extends State<RegisterViews> {
                                                         .text);
 
                                         authController
-                                            .registerUser(registerModel);
+                                            .registerUser(registerModel,false);
 
                                         //Get.toNamed('/otp-views');
                                       },
@@ -331,7 +331,7 @@ class _RegisterViewsState extends State<RegisterViews> {
                                             print(
                                                 "-----------------------on here----------------------");
                                             authController
-                                                .registerUser(registerModel);
+                                                .registerUser(registerModel,false);
                                           } else {
                                             Get.rawSnackbar(
                                               messageText: const Text(

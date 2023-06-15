@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:reg_login/app/data/services/base_url.dart';
 //import 'package:simpa/models/register_model.dart';
 //import 'package:simpa/services/base_urls/base_urls.dart';
 

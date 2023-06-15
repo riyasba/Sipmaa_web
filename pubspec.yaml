@@ -43,6 +43,12 @@ dependencies:
   http: ^1.0.0
   timeago: ^3.4.0
   image_picker: ^0.8.6
+  velocity_x: ^4.1.0
+  firebase_core: ^2.6.1
+  firebase_messaging: ^14.2.4
+  cloud_firestore: ^4.4.2
+  awesome_notifications: ^0.6.19
+  flutter_slidable: ^3.0.0
   
 dev_dependencies:
   flutter_test:

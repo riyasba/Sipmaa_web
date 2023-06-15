@@ -58,7 +58,7 @@ abstract class BaseApiService {
 //like a post
   final String postLikeURL =
       "https://demo.generation360tech.in/api/auth/post_like";
- 
+
 //send friend request
   final String sendFriendRequestURL =
       "https://demo.generation360tech.in/api/auth/add_request";
@@ -93,4 +93,13 @@ abstract class BaseApiService {
 
 //slider Api URL
   final String sliderURL = "https://demo.generation360tech.in/api/get_slider";
+  final String getFcmToken = "https://sipmaa.batechnology.in.net/api/get_fcm";
+  String fcmTokenStoreApiUrl =
+      "https://sipmaa.batechnology.in.net/api/auth/fcm-token";
+
+  String getNotificationListURL =
+      "https://sipmaa.batechnology.in.net/api/auth/get_notifications";
+
+  String deletePostURL =
+      "https://sipmaa.batechnology.in.net/api/auth/delete_post";
 }

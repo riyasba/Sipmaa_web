@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reg_login/app/data/components/controllers/posts_controller.dart';
 import 'package:reg_login/app/modules/screens/home/controler/controler.dart';
-import 'package:reg_login/app/modules/screens/home/views/home_screen.dart';
 
 import '../../../../data/components/constands/constands.dart';
 

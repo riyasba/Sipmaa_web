@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/modules/screens/home/views/create_widget.dart';
 import 'package:reg_login/app/modules/screens/home/views/notification_widget.dart';
 import 'package:reg_login/app/modules/screens/Settings/views/settingss.dart';
-import 'package:reg_login/app/modules/screens/Settings/views/widgets/change_password.dart';
+//import 'package:reg_login/app/modules/screens/Settings/views/widgets/change_password.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets/friends_search_screen.dart';
 import 'package:reg_login/app/modules/screens/profile/views/profile_pagee.dart';
 import 'package:reg_login/app/modules/screens/home/views/searchcontainer.dart';
@@ -16,7 +17,7 @@ import 'package:reg_login/app/data/components/constands/constands.dart';
 
 import '../../../../data/components/controllers/posts_controller.dart';
 import '../../../../data/components/search_field.dart';
-import '../../profile/views/profile_page.dart';
+//import '../../profile/views/profile_page.dart';
 import 'widgets/friends_widget.dart';
 //import '../widget/home_container.dart';
 //import '../widget/search_field.dart';
@@ -36,11 +37,16 @@ class _HomePageState extends State<HomePage> {
   int index = 0;
   final homeController = Get.find<HomeController>();
   final postsController = Get.find<PostsController>();
- @override
+  final profileCn = Get.find<ProfileController>();
+  final profileController = Get.find<ProfileController>();
+
+  @override
   void initState() {
     super.initState();
     postsController.getAllPost();
+    profileCn.getProfile();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,19 +80,27 @@ class _HomePageState extends State<HomePage> {
                 color: Colors.black,
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+               // Get.to(NotificationWidget());
+                },
               icon: Icon(
                 Icons.notifications_outlined,
                 color: Colors.black,
               )),
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: Image.asset(
-              'assets/images/profile.png',
-              fit: BoxFit.fitHeight,
-              height: 35,
-            ),
-          ),
+          GetBuilder<ProfileController>(builder: (_) {
+            return Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: profileController.profileData.first.user.profilePicture ==
+                      null
+                  ? const CircleAvatar(
+                      backgroundImage: AssetImage('assets/images/createprofile.png'),
+                    )
+                  : CircleAvatar(
+                      backgroundImage: NetworkImage(profileController
+                          .profileData.first.user.profilePicture),
+                    ),
+            );
+          }),
         ],
       ),
       body: Row(

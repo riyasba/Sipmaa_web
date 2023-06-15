@@ -3,6 +3,7 @@ import 'dart:io';
 //import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/responsive/respologin.dart';
 import 'package:reg_login/app/data/services/post_api_service/post_liked_list_api_services.dart';
 import 'package:reg_login/app/data/models/search_post_model.dart';
 import 'package:reg_login/app/data/services/post_api_service/search_post_api_services.dart';
@@ -37,7 +38,9 @@ import '../../services/post_api_service/get_all_post_api_services.dart';
 import '../../services/post_api_service/get_profile_api_services.dart';
 import '../../services/post_api_service/post_comment_api_services.dart';
 import '../../services/post_api_service/post_comment_list_api_services.dart';
+import '../../services/post_api_service/post_delete_api_services.dart';
 import '../../services/post_api_service/post_like_api_services.dart';
+import 'auth_controllers.dart';
 // import 'package:simpa/view/login/login_view/loginpage.dart';
 // import 'package:simpa/view/post_splash.dart';
 // import 'package:simpa/widgets/bottumnavigationbar.dart';
@@ -57,7 +60,7 @@ class PostsController extends GetxController {
     PostLikesListApiServices();
 PostFilterApiServices postFilterApiServices = PostFilterApiServices();
 
-  // PostDelteApiServices postDelteApiServices = PostDelteApiServices();
+   PostDelteApiServices postDelteApiServices = PostDelteApiServices();
 
   List<Post> allPostList = [];
   List<Post> filterList = [];
@@ -68,24 +71,24 @@ PostFilterApiServices postFilterApiServices = PostFilterApiServices();
   List<LikesList> likesList = [];
   List<CommentsList> commentsList = [];
 
-  // getProfile() async {
-  //   dio.Response<dynamic> response = await getProfileApiServices.getProfile();
-  //   profileData.clear();
-  //   if (response.statusCode == 200) {
-  //     ProfileModel profileModel = ProfileModel.fromJson(response.data);
-  //     profileData.add(profileModel.user);
-  //     var token = await FirebaseMessaging.instance.getToken();
-  //     Get.find<AuthController>().fcmtoken(
-  //         token: token.toString(), id: profileModel.user.id.toString());
-  //     print("............firebase token.......=====================>>>");
-  //     print(token);
-  //   } else if (response.statusCode == 401) {
-  //     final prefs = await SharedPreferences.getInstance();
-  //     await prefs.setString("auth_token", "null");
-  //     Get.to(loginpage());
-  //   }
-  //   update();
-  // }
+  getProfile() async {
+    dio.Response<dynamic> response = await getProfileApiServices.getProfile();
+    profileData.clear();
+    if (response.statusCode == 200) {
+      ProfileModel profileModel = ProfileModel.fromJson(response.data);
+      profileData.add(profileModel.user);
+//  var token = await FirebaseMessaging.instance.getToken();
+//Get.find<AuthController>().fcmtoken(
+//    token: token.toString(), id: profileModel.user.id.toString());
+    //  print("............firebase token.......=====================>>>");
+      //print(token);
+    } else if (response.statusCode == 401) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("auth_token", "null");
+     // Get.to(loginpage());
+    }
+    update();
+  }
 
   getAllPost() async {
     isLoading(true);
@@ -191,12 +194,16 @@ PostFilterApiServices postFilterApiServices = PostFilterApiServices();
     required String userID,
     required String postId,
     required String comment,
+    required int index,
   }) async {
     dio.Response<dynamic> response = await postCommentsApiServices.postComments(
         userID: userID, postId: postId, comment: comment);
 
     if (response.statusCode == 200) {
       getComments(postId: postId);
+      int commentCount = Get.find<PostsController>().allPostList[index].comment;
+       Get.find<PostsController>().allPostList[index].comment = commentCount + 1;
+       Get.find<PostsController>().update();
       Get.rawSnackbar(
         messageText: const Text(
           "Comment posted",
@@ -237,23 +244,21 @@ PostFilterApiServices postFilterApiServices = PostFilterApiServices();
     }
     update();
   }
-  // deletePost({required String postId}) async {
-  //   dio.Response<dynamic> response =
-  //       await postDelteApiServices.postDelete(postID: postId);
+  deletePost({required String postId}) async {
+    dio.Response<dynamic> response =
+        await postDelteApiServices.postDelete(postID: postId);
 
-  //   if (response.statusCode == 200) {
-  //     getProfile();
-  //     getAllPost();
-  //     Get.offAll(() => BottomNavigationBarExample(
-  //           index: 3,
-  //         ));
-  //     Get.rawSnackbar(
-  //       messageText: const Text(
-  //         "Post deleted",
-  //         style: TextStyle(color: Colors.white),
-  //       ),
-  //       backgroundColor: const Color.fromARGB(255, 44, 44, 44),
-  //     );
-  //   }
-  // }
+    if (response.statusCode == 200) {
+    //  getProfile();
+      getAllPost();
+      Get.offAll(() => loginpagerespo());
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Post deleted",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: const Color.fromARGB(255, 44, 44, 44),
+      );
+    }
+  }
 }

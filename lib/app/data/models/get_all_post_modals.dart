@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+
 GetAllPostModel getAllPostModelFromJson(String str) =>
     GetAllPostModel.fromJson(json.decode(str));
 
@@ -40,6 +42,7 @@ class Post {
   int likeCount;
   bool likedByUser;
   int comment;
+  TextEditingController textEditingController;
 
   Post({
     required this.id,
@@ -50,6 +53,7 @@ class Post {
     required this.likeCount,
     required this.likedByUser,
     required this.comment,
+    required this.textEditingController,
   });
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
@@ -61,6 +65,7 @@ class Post {
         likeCount: json["like_count"],
         likedByUser: json["liked_by_user"],
         comment: json["comment"],
+        textEditingController: TextEditingController()
       );
 
   Map<String, dynamic> toJson() => {
