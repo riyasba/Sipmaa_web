@@ -9,33 +9,35 @@ import 'package:get/get.dart';
 
 import 'package:intl/intl.dart';
 import 'package:reg_login/app/data/components/constands/firestoreconsts.dart';
+import 'package:reg_login/app/modules/screens/home/views/chat.dart';
 import 'package:reg_login/app/responsive/widgets/chat_view/chat_widget/image_view_in_chat.dart';
 import 'package:reg_login/app/responsive/widgets/chat_view/chat_widget/other_chat_bubble.dart';
+import 'package:reg_login/app/responsive/widgets/chat_view/view_message_screen.dart';
 
-import '../../../data/components/constands/constands.dart';
-import '../../../data/components/constands/message_types.dart';
-import '../../../data/components/controllers/chat_controller.dart';
-import '../../../data/components/controllers/profile_controller.dart';
-import '../../../data/models/chat_messages_model.dart';
-import '../../../data/models/chat_models.dart';
-import 'chat_widget/my_chat_container.dart';
-import 'chat_widget/recived_image_view.dart';
-import 'chat_widget/send_image_container.dart';
+import '../../../../data/components/constands/constands.dart';
+import '../../../../data/components/constands/message_types.dart';
+import '../../../../data/components/controllers/chat_controller.dart';
+import '../../../../data/components/controllers/profile_controller.dart';
+import '../../../../data/models/chat_messages_model.dart';
+import '../../../../data/models/chat_models.dart';
+import '../chat_widget/my_chat_container.dart';
+import '../chat_widget/recived_image_view.dart';
+import '../chat_widget/send_image_container.dart';
 
-class ViewMessageScreen extends StatefulWidget {
+class ViewMessageScreenRespo extends StatefulWidget {
   int peerId;
   ChatListModel chatModel;
-  ViewMessageScreen({
+  ViewMessageScreenRespo({
     Key? key,
     required this.peerId,
     required this.chatModel,
   }) : super(key: key);
 
   @override
-  State<ViewMessageScreen> createState() => _ViewMessageScreenState();
+  _ViewMessageScreenRespoState createState() => _ViewMessageScreenRespoState();
 }
 
-class _ViewMessageScreenState extends State<ViewMessageScreen> {
+class _ViewMessageScreenRespoState extends State<ViewMessageScreenRespo> {
   final myProfileController = Get.find<ProfileController>();
   final chatController = Get.find<ChatController>();
 
@@ -222,131 +224,158 @@ class _ViewMessageScreenState extends State<ViewMessageScreen> {
               )
             ],
           ),
-          body: WillPopScope(
-            onWillPop: () {
-              return getBack();
-            },
-            child: GetBuilder<ChatController>(
-                builder: (_) => Container(
-                      height: size.height - 50,
-                      child: StreamBuilder<QuerySnapshot>(
-                          stream: chatController.getChatMessage(
-                              widget.chatModel.chatId, 25),
-                          builder: (BuildContext context,
-                              AsyncSnapshot<QuerySnapshot> snapshot) {
-                            chatController.updateReadStatus(
-                                widget.chatModel.chatId,
-                                myProfileController.profileData.first.user.id);
-                            chatController.makeActiveUser(
-                                chatId: widget.chatModel.chatId,
-                                userId: myProfileController
-                                    .profileData.first.user.id
-                                    .toString(),
-                                status: true);
-                            if (snapshot.hasData) {
-                              if (isRealtime) {
-                                chatController.listMessages =
-                                    snapshot.data!.docs;
-                              }
-                              if (chatController.listMessages.isNotEmpty) {
-                                return ListView.builder(
-                                    padding: const EdgeInsets.all(10),
-                                    itemCount:
-                                        chatController.listMessages.length,
-                                    reverse: true,
-                                    controller: scrollController,
-                                    itemBuilder: (context, index) => buildItem(
-                                        index,
-                                        chatController.listMessages[index]));
-                              } else {
-                                return Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        left: 30, right: 30),
-                                    child: Container(
-                                      height: 70,
-                                      width: size.width,
-                                      decoration: BoxDecoration(
-                                          color: Colors.blue[300],
-                                          borderRadius:
-                                              BorderRadius.circular(15)),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          const SizedBox(
-                                            height: 25,
+          body: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Chat(),
+              //ivide
+
+              Container(
+                width: 700,
+                child: WillPopScope(
+                  onWillPop: () {
+                    return getBack();
+                  },
+                  child: GetBuilder<ChatController>(
+                      builder: (_) => Container(
+                            height: size.height - 50,
+                            child: StreamBuilder<QuerySnapshot>(
+                                stream: chatController.getChatMessage(
+                                    widget.chatModel.chatId, 25),
+                                builder: (BuildContext context,
+                                    AsyncSnapshot<QuerySnapshot> snapshot) {
+                                  chatController.updateReadStatus(
+                                      widget.chatModel.chatId,
+                                      myProfileController
+                                          .profileData.first.user.id);
+                                  chatController.makeActiveUser(
+                                      chatId: widget.chatModel.chatId,
+                                      userId: myProfileController
+                                          .profileData.first.user.id
+                                          .toString(),
+                                      status: true);
+                                  if (snapshot.hasData) {
+                                    if (isRealtime) {
+                                      chatController.listMessages =
+                                          snapshot.data!.docs;
+                                    }
+                                    if (chatController
+                                        .listMessages.isNotEmpty) {
+                                      return ListView.builder(
+                                          padding: const EdgeInsets.all(10),
+                                          itemCount: chatController
+                                              .listMessages.length,
+                                          reverse: true,
+                                          controller: scrollController,
+                                          itemBuilder: (context, index) =>
+                                              buildItem(
+                                                  index,
+                                                  chatController
+                                                      .listMessages[index]));
+                                    } else {
+                                      return Center(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 30, right: 30),
+                                          child: Container(
+                                            height: 70,
+                                            width: size.width,
+                                            decoration: BoxDecoration(
+                                                color: Colors.blue[300],
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                const SizedBox(
+                                                  height: 25,
+                                                ),
+                                                Text(
+                                                  "Send a new message now",
+                                                  style: primaryfont.copyWith(
+                                                      color: kwhite),
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                          Text(
-                                            "Send a new message now",
-                                            style: primaryfont.copyWith(
-                                                color: kwhite),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                );
-                              }
-                            } else {
-                              return const Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            }
-                          }),
-                    )),
+                                        ),
+                                      );
+                                    }
+                                  } else {
+                                    return const Center(
+                                      child: CircularProgressIndicator(),
+                                    );
+                                  }
+                                }),
+                          )),
+                ),
+              ),
+            ],
           ),
           bottomNavigationBar: Container(
-            width: size.width,
-            padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom),
-            child: Padding(
-              padding: const EdgeInsets.only(bottom: 15),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Container(
-                    width: size.width * 0.83,
-                    decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(40)),
-                    padding: const EdgeInsets.only(left: 15),
-                    child: TextField(
-                      textAlignVertical: TextAlignVertical.center,
-                      maxLines: 5,
-                      minLines: 1,
-                      keyboardType: TextInputType.multiline,
-                      controller: textEditingController,
-                      textCapitalization: TextCapitalization.sentences,
-                      decoration: InputDecoration(
-                          floatingLabelAlignment: FloatingLabelAlignment.start,
-                          hintText: 'Type here',
-                          hintStyle: primaryfont,
-                          // prefixIcon: InkWell(
-                          //     onTap: () {
-                          //       // _modalBottomSheetMoreActions(size, context);
-                          //     },
-                          //     child:
-                          //         Image.asset("assets/icons/More Button.png")),
-                          // suffixIcon: Image.asset("assets/icons/GIF Icon.png"),
-                          contentPadding: const EdgeInsets.all(15),
-                          border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30))),
-                      onChanged: (value) {},
+            height: 70,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+              Container(
+                width: 100,
+              ),
+                Container(
+                  width: 700,
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 15),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Container(
+                          width: 600,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(40)),
+                          padding: const EdgeInsets.only(left: 15),
+                          child: TextField(
+                            textAlignVertical: TextAlignVertical.center,
+                            maxLines: 5,
+                            minLines: 1,
+                            keyboardType: TextInputType.multiline,
+                            controller: textEditingController,
+                            textCapitalization: TextCapitalization.sentences,
+                            decoration: InputDecoration(
+                                floatingLabelAlignment:
+                                    FloatingLabelAlignment.start,
+                                hintText: 'Type here',
+                                hintStyle: primaryfont,
+                                // prefixIcon: InkWell(
+                                //     onTap: () {
+                                //       // _modalBottomSheetMoreActions(size, context);
+                                //     },
+                                //     child:
+                                //         Image.asset("assets/icons/More Button.png")),
+                                // suffixIcon: Image.asset("assets/icons/GIF Icon.png"),
+                                contentPadding: const EdgeInsets.all(15),
+                                border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(30))),
+                            onChanged: (value) {},
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(
+                              right: 15, left: 15, top: 6, bottom: 10),
+                          child: InkWell(
+                              onTap: () async {
+                                onSendMessage(textEditingController.text,
+                                    MessageType().text);
+                              },
+                              child: Icon(Icons.send)),
+                        ),
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        right: 15, left: 15, top: 6, bottom: 10),
-                    child: InkWell(
-                        onTap: () async {
-                          onSendMessage(
-                              textEditingController.text, MessageType().text);
-                        },
-                        child: Icon(Icons.send)),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           )),
     );

@@ -17,14 +17,14 @@ class forgot extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: kwhite,
+        backgroundColor: kblue,
         title: Text(
           'Forgot Password ?',
           style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
         ),
       ),
       body: SingleChildScrollView(
-        child: Column(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ksizedbox10,
            // kforgotImage,

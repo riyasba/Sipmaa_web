@@ -41,7 +41,7 @@ class _SearchFriendsState extends State<SearchFriends> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: kwhite,
+        backgroundColor: kblue,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {

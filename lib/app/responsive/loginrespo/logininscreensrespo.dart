@@ -1,21 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:reg_login/app/modules/screens/home/views/home_screen.dart';
+import 'package:reg_login/app/responsive/mobile_homescreenn.dart';
+import 'package:reg_login/app/responsive/view/home_respo.dart';
+
+import '../../modules/authentication/signin/views/signin.dart';
+import '../respologin.dart';
 
 
-import '../modules/authentication/signin/views/signin.dart';
-import 'respologin.dart';
 
-import 'mobile_homescreenn.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+class LoginRespoView extends StatefulWidget {
+  const LoginRespoView({super.key});
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<LoginRespoView> createState() => _LoginViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class _LoginViewState extends State<LoginRespoView> {
   @override
   Widget build(BuildContext context) {
     //  final currentWidth = MediaQuery.of(context).size.width;

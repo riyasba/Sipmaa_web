@@ -51,7 +51,7 @@ class _HomeContainerState extends State<HomeContainer> {
           itemCount: postsController.allPostList.length,
           itemBuilder: (context, index) {
             return Container(
-              height: MediaQuery.of(context).size.height * 0.88,
+           //   height: MediaQuery.of(context).size.height * 0.88,
               width: MediaQuery.of(context).size.width * 0.38,
               decoration: BoxDecoration(
                   color: kwhite,
@@ -354,7 +354,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                       );
                                     });
                               },
-                              child: Text(  '${postsController.allPostList[index].comment} Coments'
+                              child: Text(  '${postsController.allPostList[index].comment} Comments'
                                   .toString(),
                              //   '${postsController.allPostList[index].comment} comments',
                                 //   postsController
@@ -565,8 +565,8 @@ class _HomeContainerState extends State<HomeContainer> {
                                       ),
                               ),
                             ));
-                      }))
-                ],
+                      })),
+              ksizedbox20,  ],
               ),
             );
           },

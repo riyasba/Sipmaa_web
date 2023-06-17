@@ -1,13 +1,13 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 import '../../../../data/components/constands/constands.dart';
 //import '../../../../data/components/constands/constands.dart';
-import '../../../../data/components/costom_button.dart';
+
 import '../../../../data/components/controllers/auth_controllers.dart';
 
 class SignInView extends StatefulWidget {
@@ -18,13 +18,32 @@ class SignInView extends StatefulWidget {
 }
 
 CarouselController curouselController = CarouselController();
-int pageIndex = 0;
+
+
+
+//  @override
+//   void initState() {
+//     super.initState();
+//     authController.getSlider();
+//   }
+
+
+
+class _SignInViewState extends State<SignInView> {
+
+  int pageIndex = 0;
 var userNameController = TextEditingController();
 var passwordController = TextEditingController();
 final _formKey = GlobalKey<FormState>();
 final authController = Get.find<AuthController>();
 
-class _SignInViewState extends State<SignInView> {
+@override
+void initState() {
+  super.initState();
+  authController.getSlider();
+  
+}
+  
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -48,83 +67,112 @@ class _SignInViewState extends State<SignInView> {
                             padding: const EdgeInsets.only(top: 10),
                             child: Column(
                               children: [
-                                CarouselSlider(
-                                  carouselController: curouselController,
-                                  items: [
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
+                                GetBuilder<AuthController>(
+                                  builder: (_) {
+                                    return CarouselSlider(
+                                      carouselController: curouselController,
+                                      
+                                      items: [for (int i = 0;
+                              i < authController.sliderList.length;
+                              i++)
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.circular(10),
+                                          child: Container(
+                                            height: 8,
+                                            color: kblue,
+                                            width: 600,
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.spaceEvenly,
+                                              children: [  Padding(
+                                      padding: const EdgeInsets.all(15.0),
                                       child: Container(
-                                        height: 8,
-                                        color: kblue,
-                                        width: 600,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            // Image.asset(
-                                            //   'assets/images/group-users 1.jpg'),
-                                            Text(
-                                              '  SIPMAA \n HR Community',
-                                              style: ktextstyle,
-                                            )
-                                          ],
-                                        ),
+                                        width: 80,
+                                        child: Image.network(
+                                            authController.sliderList[i].image),
                                       ),
                                     ),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Container(
-                                          height: 8,
-                                          color: kblue,
-                                          width: 600,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              //   Image.asset(
-                                              //     'assets/images/group-users 1.jpg'),
-                                              Text(
-                                                'SIPMAA \n HR Community',
-                                                style: ktextstyle,
-                                              )
-                                            ],
-                                          )),
-                                    ),
-                                    ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Container(
-                                          height: 8,
-                                          color: kblue,
-                                          width: 500,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              //  Image.asset(
-                                              //    'assets/images/group-users 1.jpg'),
-                                              Text(
-                                                'SIPMAA \n HR Community',
-                                                style: ktextstyle,
-                                              )
-                                            ],
-                                          )),
-                                    ),
-                                  ],
-                                  options: CarouselOptions(
-                                    height: 120.0,
-                                    enlargeCenterPage: true,
-                                    autoPlay: true,
-                                    aspectRatio: 16 / 9,
-                                    enableInfiniteScroll: true,
-                                    autoPlayAnimationDuration:
-                                        Duration(milliseconds: 3200),
-                                    viewportFraction: 0.8,
-                                    onPageChanged: (index, reason) {
-                                      setState(() {
-                                        pageIndex = index;
-                                      });
-                                    },
-                                  ),
+                                                // Image.asset(
+                                                //   'assets/images/group-users 1.jpg'),
+                                                 Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          authController.sliderList[i].title,
+                                          style: TextStyle(color: kwhite,fontSize: 25,fontWeight: FontWeight.w700)
+                                        ),
+                                        Text(
+                                          authController
+                                              .sliderList[i].description,
+                                          style: const TextStyle(
+                                              fontSize: 14,color: Colors.white,
+                                              fontWeight: FontWeight.w500),
+                                        ),
+                                      ],
+                                    )
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        // ClipRRect(
+                                        //   borderRadius: BorderRadius.circular(10),
+                                        //   child: Container(
+                                        //       height: 8,
+                                        //       color: kblue,
+                                        //       width: 600,
+                                        //       child: Row(
+                                        //         mainAxisAlignment:
+                                        //             MainAxisAlignment.spaceEvenly,
+                                        //         children: [
+                                        //           //   Image.asset(
+                                        //           //     'assets/images/group-users 1.jpg'),
+                                        //           Text(
+                                        //             'SIPMAA \n HR Community',
+                                        //             style: ktextstyle,
+                                        //           )
+                                        //         ],
+                                        //       )),
+                                        // ),
+                                        // ClipRRect(
+                                        //   borderRadius: BorderRadius.circular(10),
+                                        //   child: Container(
+                                        //       height: 8,
+                                        //       color: kblue,
+                                        //       width: 500,
+                                        //       child: Row(
+                                        //         mainAxisAlignment:
+                                        //             MainAxisAlignment.spaceEvenly,
+                                        //         children: [
+                                        //           //  Image.asset(
+                                        //           //    'assets/images/group-users 1.jpg'),
+                                        //           Text(
+                                        //             'SIPMAA \n HR Community',
+                                        //             style: ktextstyle,
+                                        //           )
+                                        //         ],
+                                        //       )),
+                                        // ),
+                                      ],
+                                      options: CarouselOptions(
+                                        height: 120.0,
+                                        enlargeCenterPage: true,
+                                        autoPlay: true,
+                                        aspectRatio: 16 / 9,
+                                        enableInfiniteScroll: true,
+                                        autoPlayAnimationDuration:
+                                            Duration(milliseconds: 3200),
+                                        viewportFraction: 0.8,
+                                        onPageChanged: (index, reason) {
+                                          setState(() {
+                                            pageIndex = index;
+                                          });
+                                        },
+                                      ),
+                                    );
+                                  }
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.all(10.0),
@@ -362,7 +410,7 @@ class _SignInViewState extends State<SignInView> {
                                                 if (_formKey.currentState!
                                                     .validate()) {
                                                   authController.loginUser(
-                                                    size: size.width,
+                                                      size: size.width,
                                                       username:
                                                           userNameController
                                                               .text,

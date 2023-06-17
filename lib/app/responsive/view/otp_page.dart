@@ -35,7 +35,7 @@ class _otp_pageState extends State<otp_page> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Center(
-          child: Column(
+          child: Column(mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
                 padding:
@@ -112,7 +112,7 @@ class _otp_pageState extends State<otp_page> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Dont't you receive the OTP?"),
+                          const Text("Don't you receive the OTP?"),
                           TextButton(
                               onPressed: () {},
                               child: const Text(

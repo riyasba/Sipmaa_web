@@ -136,7 +136,8 @@ class _FilterPageState extends State<FilterPage> {
             ),
           ],
         ),
-      ),drawer: MobileDrawer(),
+      ),
+      //drawer: MobileDrawer(),
       body: Padding(
         padding: const EdgeInsets.only(top: 10),
         child: GetBuilder<PostsController>(builder: (_) {

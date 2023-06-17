@@ -81,7 +81,9 @@ class ComenappBarmob extends StatelessWidget {
               child: Icon(Icons.add_a_photo),
               //   child: kimgadd
             ),
-          ],
+         const SizedBox(
+              width: 17,
+            ),  ],
         ),
       ],
     );

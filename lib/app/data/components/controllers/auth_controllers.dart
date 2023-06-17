@@ -98,12 +98,16 @@ class AuthController extends GetxController {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", response.data["token"]);
       if (isMobile) {
-        Get.to(otp_page( phoneNumber: registerModel.mobile,
-        otp: response.data["user"]["otp"].toString(),));
+        Get.to(otp_page(
+          phoneNumber: registerModel.mobile,
+          otp: response.data["user"]["otp"].toString(),
+        ));
         //mobile
       } else {
-        Get.to(OTPVIEWS( phoneNumber: registerModel.mobile,
-        otp: response.data["user"]["otp"].toString(),));
+        Get.to(OTPVIEWS(
+          phoneNumber: registerModel.mobile,
+          otp: response.data["user"]["otp"].toString(),
+        ));
         //desk
       }
 
@@ -128,19 +132,17 @@ class AuthController extends GetxController {
     }
   }
 
-  otpVerify(String otp,bool isMobile) async {
+  otpVerify(String otp, bool isMobile) async {
     isLoading(true);
     dio.Response<dynamic> response =
         await otpVerifyServicesApi.otpVerifyApi(otp: otp);
     isLoading(false);
     if (response.statusCode == 200) {
-
-if(isMobile){
-  Get.to(Resgister2());
-}else{
-  Get.to(RegisterDetailsView());
-}
-
+      if (isMobile) {
+        Get.to(Resgister2());
+      } else {
+        Get.to(RegisterDetailsView());
+      }
 
       //Get.offAll(const Resgister2());
       //success
@@ -179,6 +181,8 @@ if(isMobile){
         await profileUpdateServicesApi.profileUpdate(profileUpdateModel);
     isLoading(false);
     if (response.statusCode == 200) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("auth_token", "null");
       Get.offAll(Registersplash());
       Get.rawSnackbar(
         messageText: const Text(
@@ -222,10 +226,10 @@ if(isMobile){
         ),
         backgroundColor: Colors.green,
       );
-    } else {
+    } else if (response.statusCode == 401) {
       Get.rawSnackbar(
-        messageText: const Text(
-          "Invalid User name / Password",
+        messageText: Text(
+          response.data["error"],
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.red,

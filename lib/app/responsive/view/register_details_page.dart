@@ -13,6 +13,7 @@ import '../../data/models/department_model.dart';
 import '../../data/models/profile_update_model.dart';
 import '../../data/models/widgets/email_text_field.dart';
 import '../../data/models/widgets/postal_code_text.dart';
+import '../../data/models/widgets/textfield.dart';
 
 class RegisterDetailsView extends StatefulWidget {
   const RegisterDetailsView({super.key});

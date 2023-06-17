@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
+import 'package:reg_login/app/data/components/constands/constands.dart';
 
 class appbar_leading extends StatelessWidget {
   appbar_leading({super.key, required this.title, this.imageurl});
@@ -20,7 +21,7 @@ class appbar_leading extends StatelessWidget {
           Image.asset(imageurl!)
         ],
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: kblue,
     );
                 }
 }

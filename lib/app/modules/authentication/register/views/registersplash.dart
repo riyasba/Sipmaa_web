@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:reg_login/app/responsive/respologin.dart';
+import 'package:reg_login/app/responsive/view/home_responsive_view.dart';
+
+import '../../../../responsive/loginrespo/logininscreensrespo.dart';
 
 class Registersplash extends StatefulWidget {
   const Registersplash({super.key});
@@ -19,7 +23,7 @@ class _RegistersplashState extends State<Registersplash> {
   toHomePage() async {
     await Future.delayed(const Duration(seconds: 3));
 
-   Get.toNamed('/home-screen');
+   Get.offAll(()=> LoginRespoView());
   }
 
   @override
@@ -39,7 +43,7 @@ class _RegistersplashState extends State<Registersplash> {
               height: 30,
             ),
             Text(
-              'The Registratin Request has been Sent',
+              'The Registration Request has been Sent',
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
             ),
             Text(

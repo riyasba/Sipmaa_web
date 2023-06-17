@@ -9,6 +9,9 @@ import 'package:reg_login/app/data/components/controllers/auth_controllers.dart'
 import '../../../../data/components/constands/constands.dart';
 import '../../../../data/components/constands/formfield.dart';
 import '../../../../data/models/register_model.dart';
+import '../../../../data/models/widgets/password_text_field.dart';
+import '../../../../data/models/widgets/phone_number_text_field.dart';
+import '../../../../data/models/widgets/textfield.dart';
 
 class RegisterViews extends StatefulWidget {
   const RegisterViews({super.key});
@@ -91,149 +94,326 @@ class _RegisterViewsState extends State<RegisterViews> {
                           style: ktextstyle,
                         ),
                         ksizedbox10,
-                        TextformfieldWidget(
-                          text: 'First Name',
-                          textt: 'First Name',
-                          controller: firstNameController,
-                        ),
-                        TextformfieldWidget(
-                          text: 'Last Name',
-                          textt: 'Last Name',
-                          controller: lastNameController,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  "User Name",
-                                ),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  TextFormField(
-                                    controller: userNameController,
-                                    textCapitalization:
-                                        TextCapitalization.words,
-                                    autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return "User Name can't be empty";
-                                      }
-                                      return null;
-                                    },
-                                    decoration: InputDecoration(
-                                      floatingLabelBehavior:
-                                          FloatingLabelBehavior.never,
-                                      fillColor: Colors.white,
-                                      labelText: 'User Name',
-                                      hintStyle: TextStyle(
-                                        color: Colors.grey[500],
-                                      ),
-                                      border: OutlineInputBorder(),
-                                      filled: true,
-                                    ),
-                                  ),
-                                  if (userNameController.text.isNotEmpty)
-                                    Obx(
-                                      () => authController
-                                              .isUserNameAvailable.isFalse
-                                          ? Text(
-                                              'Not Availabe',
-                                              style: TextStyle(
-                                                  color: Colors.red,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w600),
-                                            )
-                                          : const Text(
-                                              'Availabe',
-                                              style: TextStyle(
-                                                  color: Colors.green,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                    )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  "Email ID",
-                                ),
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  TextFormField(
-                                    textCapitalization:
-                                        TextCapitalization.words,
-                                    controller: emailIdController,
-                                    autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return "Email ID can't be empty";
-                                      }
-                                      return null;
-                                    },
-                                    decoration: InputDecoration(
-                                      floatingLabelBehavior:
-                                          FloatingLabelBehavior.never,
-                                      fillColor: Colors.white,
-                                      labelText: 'Email Id',
-                                      hintStyle: TextStyle(
-                                        color: Colors.grey[500],
-                                      ),
-                                      border: OutlineInputBorder(),
-                                      filled: true,
-                                    ),
-                                  ),
-                                  // Text(
-                                  //   'Availabe',
-                                  //   style: TextStyle(
-                                  //       color: Colors.green,
-                                  //       fontSize: 12,
-                                  //       fontWeight: FontWeight.w600),
-                                  // )
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        // TextformfieldWidget(
-                        //   text: 'User Name',
-                        //   textt: "User Name",
+                        // TextformfieldWidgett(
+                        //   text: 'First Name',
+                        //   textt: 'First Name',
+                        //   controller: firstNameController,
                         // ),
-                        TextformfieldWidget(
-                          text: 'Phone Number',
-                          textt: 'Phone Number',
-                          controller: phoneNumberController,
+                        // TextformfieldWidgett(
+                        //   text: 'Last Name',
+                        //   textt: 'Last Name',
+                        //   controller: lastNameController,
+                        // ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(10.0),
+                        //   child: Column(
+                        //     crossAxisAlignment: CrossAxisAlignment.start,
+                        //     children: [
+                        //       Padding(
+                        //         padding: const EdgeInsets.all(8.0),
+                        //         child: Text(
+                        //           "User Name",
+                        //         ),
+                        //       ),
+                        //       Column(
+                        //         crossAxisAlignment: CrossAxisAlignment.end,
+                        //         children: [
+                        //           TextFormField(
+                        //             controller: userNameController,
+                        //             textCapitalization:
+                        //                 TextCapitalization.words,
+                        //             autovalidateMode:
+                        //                 AutovalidateMode.onUserInteraction,
+                        //             validator: (value) {
+                        //               if (value!.isEmpty) {
+                        //                 return "User Name can't be empty";
+                        //               }
+                        //               return null;
+                        //             },
+                        //             decoration: InputDecoration(
+                        //               floatingLabelBehavior:
+                        //                   FloatingLabelBehavior.never,
+                        //               fillColor: Colors.white,
+                        //               labelText: 'User Name',
+                        //               hintStyle: TextStyle(
+                        //                 color: Colors.grey[500],
+                        //               ),
+                        //               border: OutlineInputBorder(),
+                        //               filled: true,
+                        //             ),
+                        //           ),
+                        //           if (userNameController.text.isNotEmpty)
+                        //             Obx(
+                        //               () => authController
+                        //                       .isUserNameAvailable.isFalse
+                        //                   ? Text(
+                        //                       'Not Available',
+                        //                       style: TextStyle(
+                        //                           color: Colors.red,
+                        //                           fontSize: 12,
+                        //                           fontWeight: FontWeight.w600),
+                        //                     )
+                        //                   : const Text(
+                        //                       'Available',
+                        //                       style: TextStyle(
+                        //                           color: Colors.green,
+                        //                           fontSize: 12,
+                        //                           fontWeight: FontWeight.w600),
+                        //                     ),
+                        //             )
+                        //         ],
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        // Padding(
+                        //   padding: const EdgeInsets.all(10.0),
+                        //   child: Column(
+                        //     crossAxisAlignment: CrossAxisAlignment.start,
+                        //     children: [
+                        //       Padding(
+                        //         padding: const EdgeInsets.all(8.0),
+                        //         child: Text(
+                        //           "Email ID",
+                        //         ),
+                        //       ),
+                        //       Column(
+                        //         crossAxisAlignment: CrossAxisAlignment.end,
+                        //         children: [
+                        //           TextFormField(
+                        //             textCapitalization:
+                        //                 TextCapitalization.words,
+                        //             controller: emailIdController,
+                        //             autovalidateMode:
+                        //                 AutovalidateMode.onUserInteraction,
+                        //             validator: (value) {
+                        //               if (value!.isEmpty) {
+                        //                 return "Email ID can't be empty";
+                        //               }
+                        //               return null;
+                        //             },
+                        //             decoration: InputDecoration(
+                        //               floatingLabelBehavior:
+                        //                   FloatingLabelBehavior.never,
+                        //               fillColor: Colors.white,
+                        //               labelText: 'Email Id',
+                        //               hintStyle: TextStyle(
+                        //                 color: Colors.grey[500],
+                        //               ),
+                        //               border: OutlineInputBorder(),
+                        //               filled: true,
+                        //             ),
+                        //           ),
+                        //           // Text(
+                        //           //   'Availabe',
+                        //           //   style: TextStyle(
+                        //           //       color: Colors.green,
+                        //           //       fontSize: 12,
+                        //           //       fontWeight: FontWeight.w600),
+                        //           // )
+                        //         ],
+                        //       ),
+                        //     ],
+                        //   ),
+                        // ),
+                        // // TextformfieldWidget(
+                        // //   text: 'User Name',
+                        // //   textt: "User Name",
+                        // // ),
+                        // TextformfieldWidgett(
+                        //   text: 'Phone Number',
+                        //   textt: 'Phone Number',
+                        //   controller: phoneNumberController,
+                        // ),
+                        // TextformfieldWidgett(
+                        //   text: 'Create Password',
+                        //   textt: 'Create Password',
+                        //   controller: createPassWordController,
+                        // ),
+                        // // TextformfieldWidget(
+                        // //     text: 'Enter Email Id', textt: 'Email Id'),
+                        // TextformfieldWidgett(
+                        //   text: 'Confirm Password',
+                        //   textt: 'Confirm Password',
+                        //   controller: confirmPasswordController,
+                        // ),
+                         TextformfieldWidget(
+                      controller: firstNameController,
+                      validationText: "First name can't be empty",
+                      text: 'First Name',
+                      textt: 'First Name'),
+                  TextformfieldWidget(
+                      controller: lastNameController,
+                      validationText: "Last name can't be empty",
+                      text: 'Last Name',
+                      textt: 'Last Name'),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            "User Name",
+                          ),
                         ),
-                        TextformfieldWidget(
-                          text: 'Create Password',
-                          textt: 'Create Password',
-                          controller: createPassWordController,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            TextFormField(
+                              textCapitalization: TextCapitalization.words,
+                              controller: userNameController,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "User Name can't be empty";
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.never,
+                                fillColor: Colors.grey[250],
+                                labelText: 'User Name',
+                                hintStyle: TextStyle(
+                                  color: Colors.grey[500],
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Color.fromARGB(0, 158, 158, 158),
+                                      width: 2.0),
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
+                                filled: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Color.fromARGB(0, 158, 158, 158),
+                                      width: 2.0),
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Color.fromARGB(0, 158, 158, 158),
+                                      width: 2.0),
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
+                                contentPadding: const EdgeInsets.fromLTRB(
+                                    17.0, 8.0, 17.0, 7.0),
+                              ),
+                            ),
+                            if (userNameController.text.isNotEmpty)
+                              Obx(
+                                () =>
+                                    authController.isUserNameAvailable.isFalse
+                                        ? const Text(
+                                            'Not Available',
+                                            style: TextStyle(
+                                                color: Colors.red,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w600),
+                                          )
+                                        : const Text(
+                                            'Available',
+                                            style: TextStyle(
+                                                color: Colors.green,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w600),
+                                          ),
+                              )
+                          ],
                         ),
-                        // TextformfieldWidget(
-                        //     text: 'Enter Email Id', textt: 'Email Id'),
-                        TextformfieldWidget(
-                          text: 'Conform Password',
-                          textt: 'Conform Password',
-                          controller: confirmPasswordController,
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Text(
+                            "Email ID",
+                          ),
                         ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            TextFormField(
+                              controller: emailIdController,
+                              autovalidateMode:
+                                  AutovalidateMode.onUserInteraction,
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return "Email ID can't be empty";
+                                }
+                                return null;
+                              },
+                              decoration: InputDecoration(
+                                floatingLabelBehavior:
+                                    FloatingLabelBehavior.never,
+                                fillColor: Colors.grey[250],
+                                labelText: 'Enter Email ID',
+                                hintStyle: TextStyle(
+                                  color: Colors.grey[500],
+                                ),
+                                border: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Color.fromARGB(0, 158, 158, 158),
+                                      width: 2.0),
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
+                                filled: true,
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Color.fromARGB(0, 158, 158, 158),
+                                      width: 2.0),
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: const BorderSide(
+                                      color: Color.fromARGB(0, 158, 158, 158),
+                                      width: 2.0),
+                                  borderRadius: BorderRadius.circular(16.0),
+                                ),
+                                contentPadding: const EdgeInsets.fromLTRB(
+                                    17.0, 8.0, 17.0, 7.0),
+                              ),
+                            ),
+                            // const Text(
+                            //   'Verify',
+                            //   style: TextStyle(
+                            //       color: Colors.green,
+                            //       fontSize: 12,
+                            //       fontWeight: FontWeight.w600),
+                            // )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  // TextformfieldWidget(
+                  //   text: 'User Name',
+                  //   textt: "User Name",
+                  // ),
+                  TextPhoneformfieldWidget(
+                      controller: phoneNumberController,
+                      text: 'Phone Number',
+                      textt: 'Phone Number'),
+                  PassWordTextformfieldWidget(
+                      controller: createPassWordController,
+                      validationText: "Create Password can't be empty",
+                      text: 'Create Password',
+                      textt: 'Create Password'),
+                  // TextformfieldWidget(
+                  //     text: 'Enter Email Id', textt: 'Email Id'),
+                  PassWordTextformfieldWidget(
+                      controller: confirmPasswordController,
+                      validationText: "Conform Password can't be empty",
+                      text: 'Confirm Password',
+                      textt: 'Confirm Password'),
                         ksizedbox10,
                         ksizedbox10,
                         ksizedbox10,

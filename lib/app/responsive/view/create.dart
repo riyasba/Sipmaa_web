@@ -40,217 +40,214 @@ class _CreateWidgetrespoState extends State<CreateWidgetrespo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        height: MediaQuery.of(context).size.height * 0.88,
-        width: MediaQuery.of(context).size.width * 0.9,
-        decoration: BoxDecoration(
-            color: kwhite,
-            boxShadow: <BoxShadow>[
-              BoxShadow(offset: Offset(0.0, 0.7), blurRadius: 0.5, color: kgrey)
-            ],
-            borderRadius: BorderRadius.circular(10)),
-        child: Column(
-          children: [
-            if (postsController.profileData.isNotEmpty)
-              Padding(
-                padding: const EdgeInsets.only(left: 0, top: 15),
-                child: Row(
-                  children: [
-                    postsController.profileData.first.profilePicture == null
-                        ? Image.asset(
-                            'assets/images/createprofile.png',
-                            height: 60,
-                            //  width: 300,
-                            fit: BoxFit.fitHeight,
-                          )
-                        : Image.network(
-                            postsController.profileData.first.profilePicture,
-                            height: 60,
-                            fit: BoxFit.fitHeight,
-                          ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          if (postsController.profileData.isNotEmpty)
-                            Text(
-                              '${postsController.profileData.first.name} ${postsController.profileData.first.lastName}',
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
-                          if (postsController.profileData.isNotEmpty)
-                            Padding(
-                              padding: const EdgeInsets.only(top: 3),
-                              child: Text(
-                                postsController.profileData.first.department,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                ),
-                              ),
-                            )
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            Divider(
-              thickness: 1,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 40, top: 10),
-              child: Column(
-                children: [
-                  TextField(
-                    controller: textController,
-                    maxLines: 5,
-                    decoration:
-                        const InputDecoration.collapsed(hintText: "Type..."),
-                  ),
+    return Scaffold(appBar: AppBar(backgroundColor: kblue,
+      title: Text('Create Post',style: TextStyle(color: kwhite),),),
+      body: Column(mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            height: MediaQuery.of(context).size.height * 0.88,
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                color: kwhite,
+                boxShadow: <BoxShadow>[
+                  BoxShadow(offset: Offset(0.0, 0.7), blurRadius: 0.5, color: kgrey)
                 ],
-              ),
-            ),
-            // Padding(
-            //   padding: const EdgeInsets.only(left: 40, top: 10),
-            //   child: Row(
-            //     children: [
-            //       Text(
-            //         '#job  #newpost  #NewJob  #HR',
-            //         style: TextStyle(fontSize: 11, color: kblue),
-            //       )
-            //     ],
-            //   ),
-            // ),
-            Padding(
-              padding: const EdgeInsets.only(right: 55, top: 10),
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.42,
-                width: MediaQuery.of(context).size.width * 0.7,
-                decoration: BoxDecoration(
-                    color: kgrey.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(10)),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                borderRadius: BorderRadius.circular(10)),
+            child: Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                if (postsController.profileData.isNotEmpty)
+                  Row(
                     children: [
-                      InkWell(
-                        onTap: () {
-                          chooseImage();
-                        },
-                        child: imagePath == null
-                            ? Image.asset('assets/images/createupload.png')
-                            : Container(
-                                height: 200,
-                                width: 350,
-                                child: Image.memory(
-                                  imagePath,
-                                  fit: BoxFit.contain,
-                                )),
+                      postsController.profileData.first.profilePicture == null
+                          ? Image.asset(
+                              'assets/images/createprofile.png',
+                              height: 60,
+                              //  width: 300,
+                              fit: BoxFit.fitHeight,
+                            )
+                          : Image.network(
+                              postsController.profileData.first.profilePicture,
+                              height: 60,
+                              fit: BoxFit.fitHeight,
+                            ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            if (postsController.profileData.isNotEmpty)
+                              Text(
+                                '${postsController.profileData.first.name} ${postsController.profileData.first.lastName}',
+                                style: TextStyle(
+                                    fontSize: 15, fontWeight: FontWeight.bold),
+                              ),
+                            // if (postsController.profileData.isNotEmpty)
+                            //   Padding(
+                            //     padding: const EdgeInsets.only(top: 3),
+                            //     child: Text(
+                            //       postsController.profileData.first.department,
+                            //       style: TextStyle(
+                            //         fontSize: 14,
+                            //       ),
+                            //     ),
+                            //   )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                Divider(
+                  thickness: 1,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 40, top: 10),
+                  child: Column(
+                    children: [
+                      TextField(
+                        controller: textController,
+                        maxLines: 5,
+                        decoration:
+                            const InputDecoration.collapsed(hintText: "Type..."),
                       ),
                     ],
                   ),
                 ),
-              ),
-            ),
-            ksizedbox20,
-            Padding(
-              padding: const EdgeInsets.only(right: 50),
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: kblue,
-                      minimumSize:
-                          Size(MediaQuery.of(context).size.width * 0.27, 45)),
-                  onPressed: () async {
-                    if (textController.text.isNotEmpty && imagePath != null) {
-                      int response = await postsController.uplodPost(
-                          title: textController.text,
-                          description: "",
-                          media: imagePath);
-                      if (response == 201) {
-                        showDialog(
-                            context: context,
-                            builder: (context) {
-                              return Dialog(
-                                child: Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.5,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.2,
-                                  decoration: BoxDecoration(
-                                    color: kwhite,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(top: 10),
-                                    child: Column(
-                                      children: [
-                                        Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Image.asset(
-                                                'assets/images/Character.png',
-                                                fit: BoxFit.fitHeight,
-                                                height: 150,
-                                              ),
-                                            ]),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(top: 20),
-                                          child: Text(
-                                            'Your Post has Successfully Posted',
-                                            style: TextStyle(
-                                                fontWeight: FontWeight.w900),
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 40, top: 10),
+                //   child: Row(
+                //     children: [
+                //       Text(
+                //         '#job  #newpost  #NewJob  #HR',
+                //         style: TextStyle(fontSize: 11, color: kblue),
+                //       )
+                //     ],
+                //   ),
+                // ),
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.42,
+                  width: MediaQuery.of(context).size.width * 0.7,
+                  decoration: BoxDecoration(
+                      color: kgrey.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            chooseImage();
+                          },
+                          child: imagePath == null
+                              ? Image.asset('assets/images/createupload.png')
+                              : Container(
+                                  height: 200,
+                                  width: 350,
+                                  child: Image.memory(
+                                    imagePath,
+                                    fit: BoxFit.contain,
+                                  )),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                ksizedbox20,
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: kblue,
+                        minimumSize:
+                            Size(MediaQuery.of(context).size.width * 0.27, 45)),
+                    onPressed: () async {
+                      if (textController.text.isNotEmpty && imagePath != null) {
+                        int response = await postsController.uplodPost(
+                            title: textController.text,
+                            description: "",
+                            media: imagePath);
+                        if (response == 201) {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Dialog(
+                                  child: Container(
+                                    height:
+                                        MediaQuery.of(context).size.height * 0.5,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.2,
+                                    decoration: BoxDecoration(
+                                      color: kwhite,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Image.asset(
+                                                  'assets/images/Character.png',
+                                                  fit: BoxFit.fitHeight,
+                                                  height: 150,
+                                                ),
+                                              ]),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 20),
+                                            child: Text(
+                                              'Your Post has Successfully Posted',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w900),
+                                            ),
                                           ),
-                                        ),
-                                        ksizedbox30,
-                                        Padding(
-                                          padding: const EdgeInsets.only(
-                                              left: 40, right: 40),
-                                          child: ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  backgroundColor: kblue,
-                                                  minimumSize: Size(
-                                                      MediaQuery.of(context)
-                                                              .size
-                                                              .width *
-                                                          0.2,
-                                                      45)),
-                                              onPressed: () {
-                                                postsController.getAllPost();
-                                                Get.find<HomeController>()
-                                                    .homeindex(0);
-                                              },
-                                              child: Text(
-                                                'Done',
-                                                style: TextStyle(fontSize: 17),
-                                              )),
-                                        )
-                                      ],
+                                          ksizedbox30,
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 40, right: 40),
+                                            child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    backgroundColor: kblue,
+                                                    minimumSize: Size(
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.2,
+                                                        45)),
+                                                onPressed: () {
+                                                  postsController.getAllPost();
+                                                  Get.find<HomeController>()
+                                                      .homeindex(0);
+                                                },
+                                                child: Text(
+                                                  'Done',
+                                                  style: TextStyle(fontSize: 17),
+                                                )),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              );
-                            });
+                                );
+                              });
+                        }
+                      } else {
+                        Get.rawSnackbar(
+                          messageText: const Text(
+                            "Complete before posting",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Colors.red,
+                        );
                       }
-                    } else {
-                      Get.rawSnackbar(
-                        messageText: const Text(
-                          "Complete before posting",
-                          style: TextStyle(color: Colors.white),
-                        ),
-                        backgroundColor: Colors.red,
-                      );
-                    }
-                  },
-                  child: Text(
-                    'Post',
-                    style: TextStyle(fontSize: 18),
-                  )),
-            )
-          ],
-        ),
+                    },
+                    child: Text(
+                      'Post',
+                      style: TextStyle(fontSize: 18),
+                    ))
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

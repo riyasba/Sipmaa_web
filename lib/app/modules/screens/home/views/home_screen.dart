@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
+import 'package:reg_login/app/modules/screens/home/views/chat.dart';
 import 'package:reg_login/app/modules/screens/home/views/create_widget.dart';
 import 'package:reg_login/app/modules/screens/home/views/notification_widget.dart';
 import 'package:reg_login/app/modules/screens/Settings/views/settingss.dart';
@@ -60,16 +61,16 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         actions: [
-          InkWell(
-            onTap: (){
-              homeController.homeindex(1);
-                              homeController.update();
-             // Get.to(FriendsSearch());
-            },
-            child: SearchWidget(
-              textController: textController,
-            ),
-          ),
+          // InkWell(
+          //   onTap: (){
+          //     homeController.homeindex(1);
+          //                     homeController.update();
+          //    // Get.to(FriendsSearch());
+          //   },
+          //   child: SearchWidget(
+          //     textController: textController,
+          //   ),
+          // ),
           IconButton(
               onPressed: () {
                 homeController.homeindex(7);
@@ -328,13 +329,15 @@ class _HomePageState extends State<HomePage> {
                             ))
                       ],
                     ),
-                  ),
+                  ),ksizedbox20,
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 16, right: 16, top: 50),
+                        const EdgeInsets.only(left: 16, right: 16, top: 0),
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: kwhite,
+                        style: ElevatedButton.styleFrom(elevation: 0,
+                            backgroundColor:   homeController.homeindex.value == 5
+                                        ? kwhite
+                                        : kblue,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
                         onPressed: () {
@@ -345,7 +348,9 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Icon(
                               Icons.add_circle_outline,
-                              color: kblue,
+                              color:homeController.homeindex == 5
+                                      ? kblue
+                                      : kwhite,
                             ),
                             ksizedbox10,
                             Padding(
@@ -353,7 +358,9 @@ class _HomePageState extends State<HomePage> {
                               child: Text(
                                 'Create',
                                 style: TextStyle(
-                                    color: kblue, fontWeight: FontWeight.w900),
+                                    color:  homeController.homeindex == 5
+                                            ? kblue
+                                            : kwhite, fontWeight: FontWeight.w900),
                               ),
                             ),
                           ],
@@ -393,6 +400,48 @@ class _HomePageState extends State<HomePage> {
                                     'Friends',
                                     style: TextStyle(
                                         color: homeController.homeindex == 6
+                                            ? kblue
+                                            : kwhite,
+                                        fontWeight: FontWeight.w900),
+                                  ),
+                                ),
+                              ],
+                            ))
+                      ],
+                    ),
+                  ),ksizedbox20,  Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: Column(
+                      children: [
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                elevation: 0,
+                                backgroundColor:
+                                    homeController.homeindex.value == 8
+                                        ? kwhite
+                                        : kblue,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                            onPressed: () {
+                              homeController.homeindex(8);
+                              homeController.update();
+                            },
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.message,
+                                  color: homeController.homeindex == 8
+                                      ? kblue
+                                      : kwhite,
+                                ),
+                                ksizedbox10,
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(top: 5, left: 6),
+                                  child: Text(
+                                    'Chats',
+                                    style: TextStyle(
+                                        color: homeController.homeindex == 8
                                             ? kblue
                                             : kwhite,
                                         fontWeight: FontWeight.w900),
@@ -542,22 +591,22 @@ class _HomePageState extends State<HomePage> {
                               child: Column(
                                 children: [
                                   Text(
-                                    'Anas',
+                                    'Log out',
                                     style: TextStyle(
                                         color: Colors.black,
                                         fontWeight: FontWeight.w900,
                                         fontSize: 12),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 1),
-                                    child: Text(
-                                      'Developer',
-                                      style: TextStyle(
-                                          fontSize: 8,
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w800),
-                                    ),
-                                  )
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(top: 1),
+                                  //   child: Text(
+                                  //     'Developer',
+                                  //     style: TextStyle(
+                                  //         fontSize: 8,
+                                  //         color: Colors.black,
+                                  //         fontWeight: FontWeight.w800),
+                                  //   ),
+                                  // )
                                 ],
                               ),
                             ),
@@ -595,7 +644,8 @@ class _HomePageState extends State<HomePage> {
                 if (homeController.homeindex.value == 4) ProfileScreen(),
                 if (homeController.homeindex.value == 5) CreateWidget(),
                 if (homeController.homeindex.value == 6) FriendsSearch(),
-                if (homeController.homeindex.value == 7) SettingsPage()
+                if (homeController.homeindex.value == 7) SettingsPage(),
+                if (homeController.homeindex.value == 8)Chat(),
               ],
             ),
           ),
@@ -618,7 +668,7 @@ class _HomePageState extends State<HomePage> {
                   HomeFriendsWidget()
               ],
             ),
-          )
+          ),
         ],
       ),
     );

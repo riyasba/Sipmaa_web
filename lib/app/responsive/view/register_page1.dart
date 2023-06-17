@@ -161,14 +161,14 @@ class _register1State extends State<register1> {
                                 () =>
                                     authController.isUserNameAvailable.isFalse
                                         ? const Text(
-                                            'Not Availabe',
+                                            'Not Available',
                                             style: TextStyle(
                                                 color: Colors.red,
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w600),
                                           )
                                         : const Text(
-                                            'Availabe',
+                                            'Available',
                                             style: TextStyle(
                                                 color: Colors.green,
                                                 fontSize: 12,
@@ -265,8 +265,8 @@ class _register1State extends State<register1> {
                   PassWordTextformfieldWidget(
                       controller: confirmPasswordController,
                       validationText: "Conform Password can't be empty",
-                      text: 'Conform Password',
-                      textt: 'Conform Password'),
+                      text: 'Confirm Password',
+                      textt: 'Confirm Password'),
                   ksizedbox10,
                   ksizedbox10,
                   ksizedbox10,

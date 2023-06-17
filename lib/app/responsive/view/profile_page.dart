@@ -341,7 +341,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     left: 50,
                     child: Padding(
                       padding: const EdgeInsets.only(left: 155, top: 8),
-                      child: InkWell(
+                      child: GestureDetector(
                         onTap: () async {
                           var imagePath;
                           PickedFile? pickedFile = await ImagePicker().getImage(
@@ -357,7 +357,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               radius: 30,
                               backgroundImage:
                                   AssetImage('assets/images/profileicon.png'),
-                              backgroundColor: Colors.grey,
+                              backgroundColor: Colors.white,
                               child: Icon(Icons.add)),
                         ),
                       ),

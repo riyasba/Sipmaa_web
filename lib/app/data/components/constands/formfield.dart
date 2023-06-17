@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class TextformfieldWidget extends StatelessWidget {
-  TextformfieldWidget({
+class TextformfieldWidgett extends StatelessWidget {
+  TextformfieldWidgett({
     this.text,
     super.key,
     this.controller,

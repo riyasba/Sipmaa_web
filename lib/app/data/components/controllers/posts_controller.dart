@@ -145,6 +145,25 @@ PostFilterApiServices postFilterApiServices = PostFilterApiServices();
     update();
   }
 
+   postFilrertLike(
+      {required String postId,
+      required String isLiked,
+      required int index}) async {
+    dio.Response<dynamic> response =
+        await postLikeApiServices.postLike(postId: postId, isLiked: isLiked);
+
+    if (response.statusCode == 201) {
+      if (isLiked == "1") {
+        filterList[index].likeCount = filterList[index].likeCount + 1;
+        filterList[index].likedByUser = true;
+      } else {
+        filterList[index].likeCount = filterList[index].likeCount - 1;
+        filterList[index].likedByUser = false;
+      }
+    }
+    update();
+  }
+
   searchPost({required String keyWord}) async {
     dio.Response<dynamic> response =
         await searchPostApiServices.searchPost(keyWord: keyWord);

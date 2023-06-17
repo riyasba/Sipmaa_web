@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/data/components/constands/constands.dart';
 
 
 import '../../../data/components/controllers/profile_controller.dart';
@@ -23,11 +24,12 @@ class _ChatListViewState extends State<ChatListView> {
 
   @override
   Widget build(BuildContext context) {
+    var size=MediaQuery .of(context).size;
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.white,
+        backgroundColor: kblue,
         title: const Text("Chats"),
       ),
       body: GetBuilder<ProfileController>(builder: (_) {

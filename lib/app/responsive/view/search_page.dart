@@ -43,10 +43,10 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: kwhite,
+        backgroundColor: kblue,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () {
+          icon: Icon(Icons.arrow_back,color: kwhite,),
+          onPressed: () {Get.back();
 //Get.to(BottomNavigationBarExample());
           },
         ),
