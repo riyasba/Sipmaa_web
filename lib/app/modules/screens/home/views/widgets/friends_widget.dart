@@ -126,22 +126,15 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
                     ? const Center(
                         child: Text("No Friends"),
                       )
-                    : ListView.separated(
-                        shrinkWrap: true,
-                        itemBuilder: (BuildContext context, int index) {
-                          return profileController.myFriendList[index].status ==
-                                  "1"
-                              ? friendContiner(
+                    : Column(
+                      children: [
+                        for(int i = 0; i< profileController.myFriendList.length;i++ )
+                        friendContiner(
                                   friendList:
-                                      profileController.myFriendList[index],
+                                      profileController.myFriendList[i],
                                 )
-                              : Container();
-                        },
-                        itemCount: profileController.myFriendList.length,
-                        separatorBuilder: (BuildContext context, int index) =>
-                            Divider(
-                              height: 1,
-                            ));
+                      ],
+                    );
               }),
             ),
           if (_friendsindex == 1)

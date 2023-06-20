@@ -117,6 +117,7 @@ class ProfileController extends GetxController {
     if (response.statusCode == 200) {
       FriendListModel friendListModel = FriendListModel.fromJson(response.data);
       myFriendList = friendListModel.friendList;
+      print("---------<<<<<<<<<-------------------------------------------------------->>>>>>>>>>>>>>------------");
     }
     update();
   }

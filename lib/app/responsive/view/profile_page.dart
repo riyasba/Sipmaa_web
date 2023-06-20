@@ -307,7 +307,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 100),
+                      padding: const EdgeInsets.only(top: 100,right: 10,left: 20),
                       child: Container(
                         height: 100,
                         width: 100,
