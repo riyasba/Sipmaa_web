@@ -2,9 +2,9 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:reg_login/app/data/services/base_url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-//import 'package:simpa/services/base_urls/base_urls.dart';
 
-import '../../../services/base_urls/base_urls.dart';
+
+
 
 class GetNotificationListApi extends BaseApiService {
   Future getNotifionListApi() async {

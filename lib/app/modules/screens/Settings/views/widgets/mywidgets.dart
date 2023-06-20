@@ -41,7 +41,7 @@ class _ChangepasswordState extends State<Changepassword> {
             ksizedbox10,
             Textformfield(
               controller: confrmPasswordController,
-              text: 'Conform Password'),
+              text: 'Confirm Password'),
             ksizedbox30,
             CUSTOMBUTTON(
               text: 'Save',
@@ -151,7 +151,7 @@ class Termsandconditions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [Text(
-  'Tearms & Conditions',
+  'Terms & Conditions',
   style: TextStyle(fontSize: 19,fontWeight: FontWeight.w700,
     decoration: TextDecoration.underline,
   ),

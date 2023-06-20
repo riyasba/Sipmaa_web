@@ -34,7 +34,7 @@ class FriendList {
   String email;
   dynamic profile;
   String designation;
-  String status;
+  dynamic status;
 
   FriendList({
     required this.friendId,

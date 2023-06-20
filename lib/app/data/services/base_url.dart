@@ -1,105 +1,104 @@
 abstract class BaseApiService {
-  final String baseUrl = "https://demo.generation360tech.in/api/";
+  final String baseUrl = "https://sipmaaindia.com/api/";
 
   //register url
-  final String registerURl =
-      'https://demo.generation360tech.in/api/register_user';
+  final String registerURl = 'https://sipmaaindia.com/api/register_user';
 
-  //"https://demo.generation360tech.in/api/register_user";
+  //"https://sipmaaindia.com/api/register_user";
   //'https://admin.e-sankalp.com/public/api/planet';
 
   //login url
-  final String loginURL = "https://demo.generation360tech.in/api/login";
+  final String loginURL = "https://sipmaaindia.com/api/login";
 
   //otp Verify url
-  final String otpVerifyURL =
-      "https://demo.generation360tech.in/api/auth/otp_verrify";
+  final String otpVerifyURL = "https://sipmaaindia.com/api/auth/otp_verrify";
 
 //get departments url
-  final String departmentsURL =
-      "https://demo.generation360tech.in/api/department";
+  final String departmentsURL = "https://sipmaaindia.com/api/department";
 
 //update Profile URL
   final String updateProfileURL =
-      "https://demo.generation360tech.in/api/auth/profile_update";
+      "https://sipmaaindia.com/api/auth/profile_update";
 
 //get all posts
-  final String getAllPostsURL =
-      "https://demo.generation360tech.in/api/auth/get_post";
+  final String getAllPostsURL = "https://sipmaaindia.com/api/auth/get_post";
 
   //upload  a post
-  final String uploadPostURL =
-      "https://demo.generation360tech.in/api/auth/create_post";
+  final String uploadPostURL = "https://sipmaaindia.com/api/auth/create_post";
 
   //Search posts
-  final String searchPostURL =
-      "https://demo.generation360tech.in/api/auth/post_search";
+  final String searchPostURL = "https://sipmaaindia.com/api/auth/post_search";
 
   //Search friends
   final String searchFriendsURL =
-      "https://demo.generation360tech.in/api/auth/friends_search";
+      "https://sipmaaindia.com/api/auth/friends_search";
 
   //get profile details
   final String getProfileDetailsURL =
-      "https://demo.generation360tech.in/api/auth/profile";
+      "https://sipmaaindia.com/api/auth/profile";
 
   //add friends
-  final String addFriendsURL =
-      "https://demo.generation360tech.in/api/auth/add_request";
+  final String addFriendsURL = 
+  "https://sipmaaindia.com/api/auth/add_request";
 
 //add friends
-  final String friendListURL =
-      "https://demo.generation360tech.in/api/auth/friends_list";
+  final String friendListURL = 
+  "https://sipmaaindia.com/api/auth/friends_list";
 
 //friends request list
   final String frindRequestList =
-      "https://demo.generation360tech.in/api/auth/friends_list_recive";
+      "https://sipmaaindia.com/api/auth/friends_list_recive";
 
 //like a post
-  final String postLikeURL =
-      "https://demo.generation360tech.in/api/auth/post_like";
+  final String postLikeURL = 
+  "https://sipmaaindia.com/api/auth/post_like";
 
 //send friend request
   final String sendFriendRequestURL =
-      "https://demo.generation360tech.in/api/auth/add_request";
+      "https://sipmaaindia.com/api/auth/add_request";
 
 //update friend request
   final String updateFriendRequestURL =
-      "https://demo.generation360tech.in/api/auth/respond_request";
+      "https://sipmaaindia.com/api/auth/respond_request";
 
 //post_comments
   final String postCommemtsURL =
-      "https://demo.generation360tech.in/api/auth/post_comment";
+      "https://sipmaaindia.com/api/auth/post_comment";
 
   //post_comments_list
   final String postCommentsListURL =
-      "https://demo.generation360tech.in/api/auth/post_comments_list";
+      "https://sipmaaindia.com/api/auth/post_comments_list";
 
 //post filter api services
-  final String filerURL =
-      "https://demo.generation360tech.in/api/auth/filter_post";
+  final String filerURL 
+  = "https://sipmaaindia.com/api/auth/filter_post";
 
 //change password api services
   final String changePasswordURL =
-      "https://demo.generation360tech.in/api/auth/change_password_new";
+      "https://sipmaaindia.com/api/auth/change_password_new";
 
 //post_like_list
   final String postLikeListURL =
-      "https://demo.generation360tech.in/api/auth/post_like_list";
+      "https://sipmaaindia.com/api/auth/post_like_list";
 
 //user_name check
-  final String userNameCheckURL =
-      "https://demo.generation360tech.in/api/user_check";
+  final String userNameCheckURL = "https://sipmaaindia.com/api/user_check";
 
 //slider Api URL
-  final String sliderURL = "https://demo.generation360tech.in/api/get_slider";
-  final String getFcmToken = "https://sipmaa.batechnology.in.net/api/get_fcm";
+  final String sliderURL = 
+  "https://sipmaaindia.com/api/get_slider";
+
+  final String getFcmToken = 
+  "https://sipmaaindia.com/api/get_fcm";
+
   String fcmTokenStoreApiUrl =
-      "https://sipmaa.batechnology.in.net/api/auth/fcm-token";
+      "https://sipmaaindia.com/api/auth/fcm-token";
 
   String getNotificationListURL =
-      "https://sipmaa.batechnology.in.net/api/auth/get_notifications";
+      "https://sipmaaindia.com/api/auth/get_notifications";
 
   String deletePostURL =
-      "https://sipmaa.batechnology.in.net/api/auth/delete_post";
+      "https://sipmaaindia.com/api/auth/delete_post";
 }
+//  final String updateProfileURL =
+//       "https://sipmaaindia.com/api/auth/profile_update";

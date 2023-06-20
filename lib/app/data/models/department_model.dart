@@ -36,7 +36,7 @@ class Department {
   int id;
   String title;
   String description;
-  String status;
+  dynamic status;
   DateTime createdAt;
   DateTime updatedAt;
 

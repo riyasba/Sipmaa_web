@@ -4,17 +4,14 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 //import 'package:reg_login/app/modules/screens/Settings/controller/settings_controller.dart';
-import 'package:reg_login/app/modules/screens/Settings/views/widgets/change_password.dart';
+
 import 'package:reg_login/app/modules/screens/Settings/views/widgets/mywidgets.dart';
 import 'package:reg_login/app/modules/screens/Settings/views/widgets/pofile_widgets.dart';
 //import 'package:reg_login/app/modules/screens/Settings/views/widgets/profile_widget.dart';
-import 'package:reg_login/app/modules/screens/Settings/views/widgets/widgets.dart';
+
 
 import '../../../../data/components/constands/constands.dart';
-//import '../../../../data/components/constands.dart';
-//import '../../../../data/components/constands/formfield.dart';
-import '../../../../data/components/search_field.dart';
-import '../../../../data/components/costom_button.dart';
+
 import '../controllers/controllers.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -129,7 +126,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         child: Container(
                           child: Center(
                             child: Text(
-                              'Tearms & Conditions',
+                              'Terms & Conditions',
                               style: TextStyle(
                                   color:
                                       settingsController.settingIndex.value == 3

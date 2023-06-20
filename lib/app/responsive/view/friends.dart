@@ -117,48 +117,14 @@ class _Friends_screenState extends State<Friends_screen> {
             ],
           ),
         ),
-        body: TabBarView(children: [
+        body: TabBarView(
+          children: [
           GetBuilder<ProfileController>(builder: (_) {
             return profileController.myFriendList.isEmpty
                 ? const Center(
                     child: Text("No Friends"),
                   )
-                : ListView.builder(
-                    shrinkWrap: true,
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: profileController.myFriendList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return profileController.myFriendList[index].status == "1"
-                          ? GestureDetector(
-                              onTap: () {},
-                              child: Card(
-                                child: ListTile(
-                                  leading: profileController
-                                              .myFriendList[index].profile ==
-                                          null
-                                      ? const CircleAvatar(
-                                          radius: 40,
-                                          backgroundImage: AssetImage(
-                                              'assets/images/img.jpg'),
-                                        )
-                                      : CircleAvatar(
-                                          radius: 40,
-                                          backgroundImage: NetworkImage(
-                                              profileController
-                                                  .myFriendList[index].profile),
-                                        ),
-                                  title: Text(profileController
-                                          .myFriendList[index].name)
-                                  ,
-                                  subtitle: Text(profileController
-                                          .myFriendList[index].designation)
-                                      ,
-                                ),
-                              ),
-                            )
-                          : Container();
-                    },
-                  );
+                : Text(profileController.myFriendList.first.name,style: primaryfont.copyWith(color: Colors.blue),);
           }),
           // Center(
           //   child: friendrequest(

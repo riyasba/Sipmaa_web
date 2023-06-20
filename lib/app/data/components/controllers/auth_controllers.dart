@@ -230,7 +230,7 @@ class AuthController extends GetxController {
       Get.rawSnackbar(
         messageText: Text(
           response.data["error"],
-          style: TextStyle(color: Colors.white),
+          style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.red,
       );

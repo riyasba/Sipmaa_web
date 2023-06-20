@@ -68,30 +68,33 @@ class _SearchContainerState extends State<SearchContainer> {
               SizedBox(
                 width: 20,
               ),
-              Container(
-                  height: 40,
-                  width: MediaQuery.of(context).size.width * 0.36,
-                  decoration: BoxDecoration(
-                      color: kwhite.withOpacity(0.9),
-                      borderRadius: BorderRadius.circular(15),
-                      boxShadow: [
-                        BoxShadow(
-                            color: kgrey,
-                            blurRadius: 1.5,
-                            offset: const Offset(0.0, 0.75))
-                      ]),
-                  child: TextField(
-                    controller: searchtextController,
-                    decoration: InputDecoration(
-                        errorBorder: InputBorder.none,
-                        hintText: 'Search...',
-                        hintStyle: TextStyle(fontSize: 14),
-                        suffixIcon: Icon(Icons.search),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide.none,
-                          borderRadius: BorderRadius.circular(15),
-                        )),
-                  )),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                    height: 40,
+                    width: MediaQuery.of(context).size.width * 0.36,
+                    decoration: BoxDecoration(
+                        color: kwhite.withOpacity(0.9),
+                        borderRadius: BorderRadius.circular(15),
+                        boxShadow: [
+                          BoxShadow(
+                              color: kgrey,
+                              blurRadius: 1.5,
+                              offset: const Offset(0.0, 0.75))
+                        ]),
+                    child: TextField(
+                      controller: searchtextController,
+                      decoration: InputDecoration(
+                          errorBorder: InputBorder.none,
+                          hintText: 'Search...',
+                          hintStyle: TextStyle(fontSize: 14),
+                          suffixIcon: Icon(Icons.search),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(15),
+                          )),
+                    )),
+              ),
               ksizedbox30,
               SizedBox(
                 height: 400,

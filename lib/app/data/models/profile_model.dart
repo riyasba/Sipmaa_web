@@ -56,14 +56,14 @@ class ProfileModel {
 
 class User {
   int id;
-  String roleId;
+  dynamic roleId;
   String name;
   String email;
   String mobile;
-  String isVerrifiedMobile;
+  dynamic isVerrifiedMobile;
   String lastName;
   String userName;
-  String otp;
+  dynamic otp;
   dynamic currentCompany;
   dynamic department;
   dynamic designation;

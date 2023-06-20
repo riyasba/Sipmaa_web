@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
@@ -402,7 +402,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
         //                                   child: Image.asset('assets/images/profile.png',height: 50,
         //                                   fit: BoxFit.fitHeight,),
         //                                 ),
-        //                                 Padding(
+        //                                 Padding( 
         //                                   padding: const EdgeInsets.only(left: 10),
         //                                   child: Column(
         //                                     crossAxisAlignment: CrossAxisAlignment.start,

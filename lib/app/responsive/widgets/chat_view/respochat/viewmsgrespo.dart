@@ -318,9 +318,9 @@ class _ViewMessageScreenRespoState extends State<ViewMessageScreenRespo> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-              Container(
-                width: 100,
-              ),
+                Container(
+                  width: 100,
+                ),
                 Container(
                   width: 700,
                   padding: EdgeInsets.only(

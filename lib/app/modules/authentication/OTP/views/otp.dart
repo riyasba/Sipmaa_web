@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+
 import 'package:reg_login/app/data/components/controllers/auth_controllers.dart';
 
 import '../../../../data/components/constands/constands.dart';
@@ -102,7 +102,7 @@ class _OTPVIEWSState extends State<OTPVIEWS> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Dont't you receive the OTP?"),
+                            Text("Don't you receive the OTP?"),
                             TextButton(
                                 onPressed: () {},
                                 child: Text(

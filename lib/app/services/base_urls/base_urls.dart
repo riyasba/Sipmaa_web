@@ -17,8 +17,7 @@
 //       "https://demo.generation360tech.in/api/department";
 
 // //update Profile URL
-  final String updateProfileURL =
-      "https://demo.generation360tech.in/api/auth/profile_update";
+ 
 
 // //get all posts
 //   final String getAllPostsURL =

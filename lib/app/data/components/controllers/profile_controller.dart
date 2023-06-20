@@ -1,5 +1,3 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reg_login/app/data/models/search_friends_model.dart';
@@ -45,7 +43,7 @@ import '../../services/profile_api_service/update_profile_pic.dart';
 class ProfileController extends GetxController {
   GetFriendListApiServices getFriendListApiServices =
       GetFriendListApiServices();
- GetFriendRequestListApiServices getFriendRequestListApiServices =
+  GetFriendRequestListApiServices getFriendRequestListApiServices =
       GetFriendRequestListApiServices();
 
   GetProfileApiServices getProfileApiServices = GetProfileApiServices();
@@ -54,12 +52,13 @@ class ProfileController extends GetxController {
 
   SendFriendRequestAPIServices sendFriendRequestAPIServices =
       SendFriendRequestAPIServices();
-PostLikesListApiServices postLikesListApiServices =
+  PostLikesListApiServices postLikesListApiServices =
       PostLikesListApiServices();
   RespondFriendRequestAPIServices respondFriendRequestAPIServices =
       RespondFriendRequestAPIServices();
 
-  ChangePasswordApiServices changePasswordApiServices = ChangePasswordApiServices();
+  ChangePasswordApiServices changePasswordApiServices =
+      ChangePasswordApiServices();
 
   GetOtherProfileApiServices getOtherProfileApiServices =
       GetOtherProfileApiServices();
@@ -68,14 +67,14 @@ PostLikesListApiServices postLikesListApiServices =
 
   UpdateUserDetailsApi updateUserDetailsApi = UpdateUserDetailsApi();
 
- GetNotificationListApi getNotificationLiistApi = GetNotificationListApi();
- 
- // RespondFriendRequestAPIServices respondFriendRequestAPIServices =
-   //   RespondFriendRequestAPIServices();
-List<LikesList> likesList = [];
- List<FriendList> myFriendList = [];
+  GetNotificationListApi getNotificationLiistApi = GetNotificationListApi();
+
+  // RespondFriendRequestAPIServices respondFriendRequestAPIServices =
+  //   RespondFriendRequestAPIServices();
+  List<LikesList> likesList = [];
+  List<FriendList> myFriendList = [];
   // List<FriendList> friendRequestList = [];
- List<FriendRequestList> friendRequestList = [];
+  List<FriendRequestList> friendRequestList = [];
   List<ProfileModel> profileData = [];
   List<ProfileModel> otherUserProfileData = [];
   List<SearchFriendsList> searchFriendsList = [];
@@ -91,7 +90,7 @@ List<LikesList> likesList = [];
     } else if (response.statusCode == 401) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", "null");
-    //  Get.to(loginpage());
+      //  Get.to(loginpage());
     }
     update();
   }
@@ -106,12 +105,12 @@ List<LikesList> likesList = [];
     } else if (response.statusCode == 401) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", "null");
-     // Get.to(loginpage());
+      // Get.to(loginpage());
     }
     update();
   }
 
-   getMyFriendList() async {
+  getMyFriendList() async {
     dio.Response<dynamic> response =
         await getFriendListApiServices.getFriendListApiServices();
 
@@ -148,11 +147,10 @@ List<LikesList> likesList = [];
 
   sendRequest({required String userId, required int index}) async {
     dio.Response<dynamic> response =
-        await sendFriendRequestAPIServices.sendFriendRequest(
-            userId: userId);
+        await sendFriendRequestAPIServices.sendFriendRequest(userId: userId);
 
-       print("--------------------------");
-        print(response.data);
+    print("--------------------------");
+    print(response.data);
 
     if (response.statusCode == 200) {
       searchFriendsList[index].isFriend = true;
@@ -175,8 +173,7 @@ List<LikesList> likesList = [];
     }
   }
 
-  
- getLikesList({required String postId}) async {
+  getLikesList({required String postId}) async {
     dio.Response<dynamic> response =
         await postLikesListApiServices.postLikesLists(postId: postId);
 
@@ -186,6 +183,7 @@ List<LikesList> likesList = [];
     }
     update();
   }
+
   respondRequest({
     required String userId,
     required String status,
@@ -198,7 +196,7 @@ List<LikesList> likesList = [];
 
     if (response.statusCode == 200) {
       getMyFriendRequestList();
-     getMyFriendList();
+      getMyFriendList();
       if (status == "1") {
         Get.rawSnackbar(
           messageText: const Text(
@@ -297,7 +295,7 @@ List<LikesList> likesList = [];
     isLoading(false);
     update();
     if (response.statusCode == 200) {
-    // Get.to(ProfileSuccessfullPage());
+      // Get.to(ProfileSuccessfullPage());
       Get.rawSnackbar(
         messageText: const Text(
           "Updated successfully",
@@ -308,7 +306,7 @@ List<LikesList> likesList = [];
     }
   }
 
- List<ListElement> notificationList = [];
+  List<ListElement> notificationList = [];
 
   getNotificationList() async {
     dio.Response<dynamic> response =
@@ -324,13 +322,9 @@ List<LikesList> likesList = [];
 
   // void updateProfilePic({required dynamic media}) {
 
-
-
-    
   // }
 
-
-   updateProfilePic({ dynamic media}) async {
+  updateProfilePic({dynamic media}) async {
     isLoading(true);
     update();
     dio.Response<dynamic> response =
