@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart';
 import 'package:reg_login/app/data/models/department_model.dart';
 import 'package:reg_login/app/data/models/profile_update_model.dart';
 import 'package:reg_login/app/data/services/auth_api_service/get_department_api_services.dart';
@@ -29,10 +28,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 // import '../services/network_api_services/auth_api_services/otp_verify_api_services.dart';
 import 'package:dio/dio.dart' as dio;
-
 import '../../../get_slider_api_services.dart';
 import '../../../modules/screens/home/views/home_screen.dart';
-import '../../../responsive/view/home_respo.dart';
 import '../../../responsive/view/otp_page.dart';
 import '../../../responsive/view/register_details_page.dart';
 import '../../models/slider_model.dart';
@@ -43,16 +40,12 @@ class AuthController extends GetxController {
   RxBool isDesignationSelected = false.obs;
   RxBool isLoading = false.obs;
   RxInt selctedIndex = 100.obs;
-
   RxBool isUserNameAvailable = false.obs;
-
   List<Department> departments = [];
   List<SliderList> sliderList = [];
-
   GetDepartmentServicesApi getDepartmentServicesApi =
       GetDepartmentServicesApi();
   LoginServicesApi loginServicesApi = LoginServicesApi();
-
   /// OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
   OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
   RegisterServicesApi registerServicesApi = RegisterServicesApi();
@@ -60,7 +53,6 @@ class AuthController extends GetxController {
       ProfileUpdateServicesApi();
   UserNameApiServices userNameApiServices = UserNameApiServices();
   GetSliderApiServices getSliderApiServices = GetSliderApiServices();
-
   // registerUser(RegisterModel registerModel) async {
   //   print("---------------------------------2-----------");
   //   isLoading(true);
@@ -88,7 +80,6 @@ class AuthController extends GetxController {
   //     );
   //   }
   // }
-
   registerUser(RegisterModel registerModel, bool isMobile) async {
     isLoading(true);
     var response = await registerServicesApi.registerApi(registerModel);
