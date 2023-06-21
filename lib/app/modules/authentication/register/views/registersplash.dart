@@ -3,6 +3,7 @@ import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:reg_login/app/responsive/respologin.dart';
 import 'package:reg_login/app/responsive/view/home_responsive_view.dart';
+import 'package:reg_login/app/routes/app_pages.dart';
 
 import '../../../../responsive/loginrespo/logininscreensrespo.dart';
 
@@ -23,7 +24,7 @@ class _RegistersplashState extends State<Registersplash> {
   toHomePage() async {
     await Future.delayed(const Duration(seconds: 3));
 
-   Get.offAll(()=> LoginRespoView());
+    Get.offAllNamed(Routes.SIGN_IN);
   }
 
   @override
@@ -39,17 +40,17 @@ class _RegistersplashState extends State<Registersplash> {
               width: 250,
               fit: BoxFit.cover,
             ),
-            SizedBox(
+            const SizedBox(
               height: 30,
             ),
-            Text(
+            const Text(
               'The Registration Request has been Sent',
               style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
             ),
-            Text(
-              'Sent to modern Community',
-              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-            )
+            // Text(
+            //   'to modern Community',
+            //   style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+            // )
           ],
         ),
       ),

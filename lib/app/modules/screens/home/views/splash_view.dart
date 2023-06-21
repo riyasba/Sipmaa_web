@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:reg_login/app/modules/authentication/signin/views/signin.dart';
-import 'package:reg_login/app/modules/screens/home/views/home_screen.dart';
-import 'package:reg_login/app/responsive/responsive_homescreen.dart';
-import 'package:reg_login/app/responsive/view/home_responsive_view.dart';
+import 'package:reg_login/app/routes/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Splash extends StatefulWidget {
@@ -26,17 +21,13 @@ class _SplashState extends State<Splash> {
   toHomePage() async {
     await Future.delayed(const Duration(milliseconds: 3900));
 
-    Get.offAll(
-      () => HomeRespoView(),
-    );
+    Get.offAllNamed(Routes.HOME_PAGE);
   }
 
   toLoginPage() async {
     await Future.delayed(const Duration(milliseconds: 3900));
 
-    Get.offAll(
-      () => HomeView(),
-    );
+    Get.offAllNamed(Routes.SIGN_IN);
   }
 
   checkForAuth() async {

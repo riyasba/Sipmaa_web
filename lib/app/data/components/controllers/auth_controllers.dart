@@ -8,6 +8,7 @@ import 'package:reg_login/app/data/services/auth_api_service/update_profile_api_
 import 'package:reg_login/app/modules/authentication/OTP/views/otp.dart';
 import 'package:reg_login/app/modules/authentication/register/views/register.dart';
 import 'package:reg_login/app/modules/authentication/register/views/registersplash.dart';
+import 'package:reg_login/app/routes/app_pages.dart';
 import 'package:reg_login/app/services/network_api_services/auth_api_services/register_api_services.dart';
 import 'package:reg_login/app/services/network_api_services/user_name_check_api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -174,7 +175,7 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", "null");
-      Get.offAll(Registersplash());
+      Get.off(Registersplash());
       Get.rawSnackbar(
         messageText: const Text(
           "Registered Successfully",
@@ -205,9 +206,9 @@ class AuthController extends GetxController {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", response.data["token"]);
       if (size < 600) {
-        Get.toNamed('/home-screen');
+        Get.offAllNamed('/home-screen');
       } else {
-        Get.offAll(() => HomePage());
+        Get.offAllNamed(Routes.HOME_PAGE);
       }
 
       Get.rawSnackbar(

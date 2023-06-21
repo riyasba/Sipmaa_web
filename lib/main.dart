@@ -5,14 +5,18 @@ import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:reg_login/app/data/components/controllers/auth_controllers.dart';
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/modules/screens/home/controler/controler.dart';
+import 'package:reg_login/app/routes/route_generator.dart';
 import 'app/data/components/controllers/chat_controller.dart';
 import 'app/data/components/controllers/posts_controller.dart';
 import 'app/modules/screens/Settings/controllers/controllers.dart';
 import 'app/routes/app_pages.dart';
+import 'package:url_strategy/url_strategy.dart';
+
 
 void main() async
 {
   WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy();
   await Firebase.initializeApp(
     // Replace with actual values
     options: FirebaseOptions(
@@ -36,13 +40,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
 // home: HomePage(),
-//  onGenerateRoute: AppPages.generateRoute,
+       onGenerateRoute: RouteGenerator.generateRoute,
 //   initialRoute: TRoutes.HOME_PAGE,
-      initialRoute: AppPages.INITIAL,
-      getPages: AppPages.routes,
+      initialRoute: Routes.SPLASH,
+      // getPages: AppPages.routes,
     );
   }
 }

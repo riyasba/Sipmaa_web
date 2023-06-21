@@ -49,6 +49,7 @@ dependencies:
   cloud_firestore: ^4.4.2
   awesome_notifications: ^0.6.19
   flutter_slidable: ^3.0.0
+  url_strategy: ^0.2.0
   
 dev_dependencies:
   flutter_test:

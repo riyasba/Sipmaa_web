@@ -76,15 +76,15 @@ class _HomePageState extends State<HomePage> {
                 homeController.homeindex(7);
                 homeController.update();
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.settings_outlined,
                 color: Colors.black,
               )),
           IconButton(
               onPressed: () {
-               // Get.to(NotificationWidget());
-                },
-              icon: Icon(
+                homeController.homeindex(3);
+              },
+              icon: const Icon(
                 Icons.notifications_outlined,
                 color: Colors.black,
               )),
@@ -94,7 +94,8 @@ class _HomePageState extends State<HomePage> {
               child: profileController.profileData.first.user.profilePicture ==
                       null
                   ? const CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/createprofile.png'),
+                      backgroundImage:
+                          AssetImage('assets/images/profile_icon.png'),
                     )
                   : CircleAvatar(
                       backgroundImage: NetworkImage(profileController
@@ -329,15 +330,16 @@ class _HomePageState extends State<HomePage> {
                             ))
                       ],
                     ),
-                  ),ksizedbox20,
+                  ),
+                  ksizedbox20,
                   Padding(
-                    padding:
-                        const EdgeInsets.only(left: 16, right: 16, top: 0),
+                    padding: const EdgeInsets.only(left: 16, right: 16, top: 0),
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(elevation: 0,
-                            backgroundColor:   homeController.homeindex.value == 5
-                                        ? kwhite
-                                        : kblue,
+                        style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            backgroundColor: homeController.homeindex.value == 5
+                                ? kwhite
+                                : kblue,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
                         onPressed: () {
@@ -348,9 +350,9 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Icon(
                               Icons.add_circle_outline,
-                              color:homeController.homeindex == 5
-                                      ? kblue
-                                      : kwhite,
+                              color: homeController.homeindex == 5
+                                  ? kblue
+                                  : kwhite,
                             ),
                             ksizedbox10,
                             Padding(
@@ -358,15 +360,16 @@ class _HomePageState extends State<HomePage> {
                               child: Text(
                                 'Create',
                                 style: TextStyle(
-                                    color:  homeController.homeindex == 5
-                                            ? kblue
-                                            : kwhite, fontWeight: FontWeight.w900),
+                                    color: homeController.homeindex == 5
+                                        ? kblue
+                                        : kwhite,
+                                    fontWeight: FontWeight.w900),
                               ),
                             ),
                           ],
                         )),
                   ),
-                   ksizedbox20,
+                  ksizedbox20,
                   Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
                     child: Column(
@@ -409,7 +412,9 @@ class _HomePageState extends State<HomePage> {
                             ))
                       ],
                     ),
-                  ),ksizedbox20,  Padding(
+                  ),
+                  ksizedbox20,
+                  Padding(
                     padding: const EdgeInsets.only(left: 16, right: 16),
                     child: Column(
                       children: [
@@ -645,7 +650,7 @@ class _HomePageState extends State<HomePage> {
                 if (homeController.homeindex.value == 5) CreateWidget(),
                 if (homeController.homeindex.value == 6) FriendsSearch(),
                 if (homeController.homeindex.value == 7) SettingsPage(),
-                if (homeController.homeindex.value == 8)Chat(),
+                if (homeController.homeindex.value == 8) Chat(),
               ],
             ),
           ),

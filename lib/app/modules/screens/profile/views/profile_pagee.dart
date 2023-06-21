@@ -57,7 +57,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 100),
+                      padding: const EdgeInsets.only(top: 100,left: 100),
                       child: Stack(
                         children: [
                           Container(
@@ -67,7 +67,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               height: 160,
                               width: 160,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(50)),
+                                  borderRadius: BorderRadius.circular(100)),
                               child: profileController.isLoading.isTrue
                                   ? const Center(
                                       child: CircularProgressIndicator(),
@@ -84,7 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       .profilePicture ==
                                                   null
                                               ? Image.asset(
-                                                  "assets/images/profile.png",
+                                                  "assets/images/profile_icon.png",
                                                   fit: BoxFit.fill,
                                                 )
                                               : Image.network(
@@ -136,7 +136,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.all(13.0),
+              padding: const EdgeInsets.only(top: 15,left: 100),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
