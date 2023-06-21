@@ -217,6 +217,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                               postsController.getAllPost();
                                               Get.find<HomeController>()
                                                   .homeindex(0);
+                                              Get.back();
                                             },
                                             child: Text(
                                               'Done',

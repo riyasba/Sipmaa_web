@@ -120,7 +120,7 @@ class _RegisterDetailsViewState extends State<RegisterDetailsView> {
                           ),
                           Container(
                             height: 50,
-                            width: 330,
+                           // width: 330,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(

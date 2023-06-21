@@ -71,7 +71,7 @@ class _HomepageRespoState extends State<HomepageRespo> {
             itemCount: postsController.allPostList.length,
             itemBuilder: (context, index) {
               return Container(
-                height: MediaQuery.of(context).size.height * 0.8,
+               // height: MediaQuery.of(context).size.height * 0.8,
                 width: MediaQuery.of(context).size.width * 0.38,
                 decoration: BoxDecoration(
                     color: kwhite,
@@ -439,7 +439,7 @@ class _HomepageRespoState extends State<HomepageRespo> {
                       //             ),
                       //           ));
                       //     }))
-                    ],
+                  ksizedbox20  ],
                   ),
                 ),
               );

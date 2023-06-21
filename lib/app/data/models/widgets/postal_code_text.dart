@@ -32,7 +32,7 @@ class TextPostalCodeformfieldWidget extends StatelessWidget {
             validator: (value) {
               if (value!.isEmpty) {
                 return "$text can't be empty";
-              } else if (value.length == 6) {
+              } else if (value.length != 6) {
                 return "$text must be 6 digits";
               }
               return null;

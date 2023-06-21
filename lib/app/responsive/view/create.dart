@@ -40,9 +40,16 @@ class _CreateWidgetrespoState extends State<CreateWidgetrespo> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(backgroundColor: kblue,
-      title: Text('Create Post',style: TextStyle(color: kwhite),),),
-      body: Column(mainAxisAlignment: MainAxisAlignment.center,
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: kblue,
+        title: Text(
+          'Create Post',
+          style: TextStyle(color: kwhite),
+        ),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Container(
@@ -51,10 +58,13 @@ class _CreateWidgetrespoState extends State<CreateWidgetrespo> {
             decoration: BoxDecoration(
                 color: kwhite,
                 boxShadow: <BoxShadow>[
-                  BoxShadow(offset: Offset(0.0, 0.7), blurRadius: 0.5, color: kgrey)
+                  BoxShadow(
+                      offset: Offset(0.0, 0.7), blurRadius: 0.5, color: kgrey)
                 ],
                 borderRadius: BorderRadius.circular(10)),
-            child: Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 if (postsController.profileData.isNotEmpty)
                   Row(
@@ -107,8 +117,8 @@ class _CreateWidgetrespoState extends State<CreateWidgetrespo> {
                       TextField(
                         controller: textController,
                         maxLines: 5,
-                        decoration:
-                            const InputDecoration.collapsed(hintText: "Type..."),
+                        decoration: const InputDecoration.collapsed(
+                            hintText: "Type..."),
                       ),
                     ],
                   ),
@@ -170,8 +180,8 @@ class _CreateWidgetrespoState extends State<CreateWidgetrespo> {
                               builder: (context) {
                                 return Dialog(
                                   child: Container(
-                                    height:
-                                        MediaQuery.of(context).size.height * 0.5,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.5,
                                     width:
                                         MediaQuery.of(context).size.width * 0.2,
                                     decoration: BoxDecoration(
@@ -217,10 +227,13 @@ class _CreateWidgetrespoState extends State<CreateWidgetrespo> {
                                                   postsController.getAllPost();
                                                   Get.find<HomeController>()
                                                       .homeindex(0);
+
+                                                  Get.back();
                                                 },
                                                 child: Text(
                                                   'Done',
-                                                  style: TextStyle(fontSize: 17),
+                                                  style:
+                                                      TextStyle(fontSize: 17),
                                                 )),
                                           )
                                         ],
