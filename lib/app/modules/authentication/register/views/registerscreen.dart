@@ -237,183 +237,196 @@ class _RegisterViewsState extends State<RegisterViews> {
                         //   textt: 'Confirm Password',
                         //   controller: confirmPasswordController,
                         // ),
-                         TextformfieldWidget(
-                      controller: firstNameController,
-                      validationText: "First name can't be empty",
-                      text: 'First Name',
-                      textt: 'First Name'),
-                  TextformfieldWidget(
-                      controller: lastNameController,
-                      validationText: "Last name can't be empty",
-                      text: 'Last Name',
-                      textt: 'Last Name'),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            "User Name",
+                        TextformfieldWidget(
+                            controller: firstNameController,
+                            validationText: "First name can't be empty",
+                            text: 'First Name',
+                            textt: 'First Name'),
+                        TextformfieldWidget(
+                            controller: lastNameController,
+                            validationText: "Last name can't be empty",
+                            text: 'Last Name',
+                            textt: 'Last Name'),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  "User Name",
+                                ),
+                              ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  TextFormField(
+                                    textCapitalization:
+                                        TextCapitalization.words,
+                                    controller: userNameController,
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return "User Name can't be empty";
+                                      }
+                                      return null;
+                                    },
+                                    decoration: InputDecoration(
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.never,
+                                      fillColor: Colors.grey[250],
+                                      labelText: 'User Name',
+                                      hintStyle: TextStyle(
+                                        color: Colors.grey[500],
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Color.fromARGB(
+                                                0, 158, 158, 158),
+                                            width: 2.0),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+                                      filled: true,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Color.fromARGB(
+                                                0, 158, 158, 158),
+                                            width: 2.0),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Color.fromARGB(
+                                                0, 158, 158, 158),
+                                            width: 2.0),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+                                      contentPadding: const EdgeInsets.fromLTRB(
+                                          17.0, 8.0, 17.0, 7.0),
+                                    ),
+                                  ),
+                                  if (userNameController.text.isNotEmpty)
+                                    GetBuilder(
+                                      builder: (_) => authController
+                                              .isUserNameAvailable.isFalse
+                                          ? const Text(
+                                              'Not Available',
+                                              style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w600),
+                                            )
+                                          : const Text(
+                                              'Available',
+                                              style: TextStyle(
+                                                  color: Colors.green,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                    )
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            TextFormField(
-                              textCapitalization: TextCapitalization.words,
-                              controller: userNameController,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "User Name can't be empty";
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                fillColor: Colors.grey[250],
-                                labelText: 'User Name',
-                                hintStyle: TextStyle(
-                                  color: Colors.grey[500],
+                        Padding(
+                          padding: const EdgeInsets.only(left: 10, right: 10),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
+                                  "Email ID",
                                 ),
-                                border: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Color.fromARGB(0, 158, 158, 158),
-                                      width: 2.0),
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                filled: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Color.fromARGB(0, 158, 158, 158),
-                                      width: 2.0),
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Color.fromARGB(0, 158, 158, 158),
-                                      width: 2.0),
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                contentPadding: const EdgeInsets.fromLTRB(
-                                    17.0, 8.0, 17.0, 7.0),
                               ),
-                            ),
-                            if (userNameController.text.isNotEmpty)
-                              Obx(
-                                () =>
-                                    authController.isUserNameAvailable.isFalse
-                                        ? const Text(
-                                            'Not Available',
-                                            style: TextStyle(
-                                                color: Colors.red,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w600),
-                                          )
-                                        : const Text(
-                                            'Available',
-                                            style: TextStyle(
-                                                color: Colors.green,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                              )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10, right: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text(
-                            "Email ID",
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.end,
+                                children: [
+                                  TextFormField(
+                                    controller: emailIdController,
+                                    autovalidateMode:
+                                        AutovalidateMode.onUserInteraction,
+                                    validator: (value) {
+                                      if (value!.isEmpty) {
+                                        return "Email ID can't be empty";
+                                      }
+                                      return null;
+                                    },
+                                    decoration: InputDecoration(
+                                      floatingLabelBehavior:
+                                          FloatingLabelBehavior.never,
+                                      fillColor: Colors.grey[250],
+                                      labelText: 'Enter Email ID',
+                                      hintStyle: TextStyle(
+                                        color: Colors.grey[500],
+                                      ),
+                                      border: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Color.fromARGB(
+                                                0, 158, 158, 158),
+                                            width: 2.0),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+                                      filled: true,
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Color.fromARGB(
+                                                0, 158, 158, 158),
+                                            width: 2.0),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Color.fromARGB(
+                                                0, 158, 158, 158),
+                                            width: 2.0),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+                                      contentPadding: const EdgeInsets.fromLTRB(
+                                          17.0, 8.0, 17.0, 7.0),
+                                    ),
+                                  ),
+                                  // const Text(
+                                  //   'Verify',
+                                  //   style: TextStyle(
+                                  //       color: Colors.green,
+                                  //       fontSize: 12,
+                                  //       fontWeight: FontWeight.w600),
+                                  // )
+                                ],
+                              ),
+                            ],
                           ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            TextFormField(
-                              controller: emailIdController,
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              validator: (value) {
-                                if (value!.isEmpty) {
-                                  return "Email ID can't be empty";
-                                }
-                                return null;
-                              },
-                              decoration: InputDecoration(
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                fillColor: Colors.grey[250],
-                                labelText: 'Enter Email ID',
-                                hintStyle: TextStyle(
-                                  color: Colors.grey[500],
-                                ),
-                                border: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Color.fromARGB(0, 158, 158, 158),
-                                      width: 2.0),
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                filled: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Color.fromARGB(0, 158, 158, 158),
-                                      width: 2.0),
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: Color.fromARGB(0, 158, 158, 158),
-                                      width: 2.0),
-                                  borderRadius: BorderRadius.circular(16.0),
-                                ),
-                                contentPadding: const EdgeInsets.fromLTRB(
-                                    17.0, 8.0, 17.0, 7.0),
-                              ),
-                            ),
-                            // const Text(
-                            //   'Verify',
-                            //   style: TextStyle(
-                            //       color: Colors.green,
-                            //       fontSize: 12,
-                            //       fontWeight: FontWeight.w600),
-                            // )
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  // TextformfieldWidget(
-                  //   text: 'User Name',
-                  //   textt: "User Name",
-                  // ),
-                  TextPhoneformfieldWidget(
-                      controller: phoneNumberController,
-                      text: 'Phone Number',
-                      textt: 'Phone Number'),
-                  PassWordTextformfieldWidget(
-                      controller: createPassWordController,
-                      validationText: "Create Password can't be empty",
-                      text: 'Create Password',
-                      textt: 'Create Password'),
-                  // TextformfieldWidget(
-                  //     text: 'Enter Email Id', textt: 'Email Id'),
-                  PassWordTextformfieldWidget(
-                      controller: confirmPasswordController,
-                      validationText: "Conform Password can't be empty",
-                      text: 'Confirm Password',
-                      textt: 'Confirm Password'),
+                        // TextformfieldWidget(
+                        //   text: 'User Name',
+                        //   textt: "User Name",
+                        // ),
+                        TextPhoneformfieldWidget(
+                            controller: phoneNumberController,
+                            text: 'Phone Number',
+                            textt: 'Phone Number'),
+                        PassWordTextformfieldWidget(
+                            controller: createPassWordController,
+                            validationText: "Create Password can't be empty",
+                            text: 'Create Password',
+                            textt: 'Create Password'),
+                        // TextformfieldWidget(
+                        //     text: 'Enter Email Id', textt: 'Email Id'),
+                        PassWordTextformfieldWidget(
+                            controller: confirmPasswordController,
+                            validationText: "Conform Password can't be empty",
+                            text: 'Confirm Password',
+                            textt: 'Confirm Password'),
                         ksizedbox10,
                         ksizedbox10,
                         ksizedbox10,
@@ -436,7 +449,6 @@ class _RegisterViewsState extends State<RegisterViews> {
                                         ),
                                       ),
                                       onPressed: () {
-
                                         RegisterModel registerModel =
                                             RegisterModel(
                                                 email: emailIdController.text,
@@ -454,8 +466,8 @@ class _RegisterViewsState extends State<RegisterViews> {
                                                     createPassWordController
                                                         .text);
 
-                                        authController
-                                            .registerUser(registerModel,false);
+                                        authController.registerUser(
+                                            registerModel, false);
 
                                         //Get.toNamed('/otp-views');
                                       },
@@ -483,12 +495,12 @@ class _RegisterViewsState extends State<RegisterViews> {
                                         if (_formKey.currentState!.validate()) {
                                           if (createPassWordController.text ==
                                               confirmPasswordController.text) {
-
-                                        print("----------------------------changes------------------------");
-                                      print(firstNameController.text);
-                                      print(userNameController.text);
-                                      print(phoneNumberController.text);
-                                      print(emailIdController.text);
+                                            print(
+                                                "----------------------------changes------------------------");
+                                            print(firstNameController.text);
+                                            print(userNameController.text);
+                                            print(phoneNumberController.text);
+                                            print(emailIdController.text);
                                             RegisterModel registerModel =
                                                 RegisterModel(
                                                     email:
@@ -510,8 +522,8 @@ class _RegisterViewsState extends State<RegisterViews> {
                                                             .text);
                                             print(
                                                 "-----------------------on here----------------------");
-                                            authController
-                                                .registerUser(registerModel,false);
+                                            authController.registerUser(
+                                                registerModel, false);
                                           } else {
                                             Get.rawSnackbar(
                                               messageText: const Text(

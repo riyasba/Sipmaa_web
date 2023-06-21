@@ -5,7 +5,6 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 
-
 import '../../data/components/constands/constands.dart';
 import '../../data/components/constands/formfield.dart';
 import '../../data/components/controllers/auth_controllers.dart';
@@ -52,8 +51,8 @@ class _RegisterDetailsViewState extends State<RegisterDetailsView> {
       body: SingleChildScrollView(
         child: Column(children: [
           Padding(
-            padding: const EdgeInsets.only(
-                left: 37, right: 37, top: 40, bottom: 40),
+            padding:
+                const EdgeInsets.only(left: 37, right: 37, top: 40, bottom: 40),
             child: Container(
               width: double.infinity,
               decoration: BoxDecoration(
@@ -79,9 +78,9 @@ class _RegisterDetailsViewState extends State<RegisterDetailsView> {
                     'Enter the below Details',
                     style: ktextstyle22,
                   ),
-      
+
                   ksizedbox10,
-      
+
                   // Padding(
                   //   padding: const EdgeInsets.all(10.0),
                   //   child: Column(
@@ -97,7 +96,7 @@ class _RegisterDetailsViewState extends State<RegisterDetailsView> {
                   //     ],
                   //   ),
                   // ),
-      
+
                   TextformfieldWidget(
                       controller: currentCompanyController,
                       text: 'Current Company',
@@ -106,7 +105,7 @@ class _RegisterDetailsViewState extends State<RegisterDetailsView> {
                       controller: designationController,
                       text: 'Enter Designation',
                       textt: 'Designation'),
-      
+
                   GetBuilder<AuthController>(builder: (_) {
                     return Padding(
                       padding: const EdgeInsets.all(10.0),
@@ -125,9 +124,9 @@ class _RegisterDetailsViewState extends State<RegisterDetailsView> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
                                 border: Border.all(
-                                    color: const Color.fromARGB(
-                                            255, 158, 158, 158)
-                                        .withOpacity(0.2))),
+                                    color:
+                                        const Color.fromARGB(255, 158, 158, 158)
+                                            .withOpacity(0.2))),
                             child: Padding(
                               padding: const EdgeInsets.only(
                                   left: 10, right: 10, top: 10),
@@ -148,8 +147,7 @@ class _RegisterDetailsViewState extends State<RegisterDetailsView> {
                                 onChanged: (Department? value) {
                                   // This is called when the user selects an item.
                                   setState(() {
-                                    authController
-                                        .isDesignationSelected(false);
+                                    authController.isDesignationSelected(false);
                                     designation = value!;
                                   });
                                 },
@@ -174,8 +172,8 @@ class _RegisterDetailsViewState extends State<RegisterDetailsView> {
                                     child: Text(
                                       "Please select Department",
                                       style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 230, 46, 33),
+                                          color:
+                                              Color.fromARGB(255, 230, 46, 33),
                                           fontSize: 12),
                                     ),
                                   )
@@ -191,11 +189,11 @@ class _RegisterDetailsViewState extends State<RegisterDetailsView> {
                       textt: 'Official Email ID'),
                   TextformfieldWidget(
                       controller: cityController,
-                      text: 'Type City',
+                      text: 'Enter City',
                       textt: 'City'),
                   TextformfieldWidget(
                       controller: stateController,
-                      text: 'Type State',
+                      text: 'Enter State',
                       textt: 'State'),
                   TextPostalCodeformfieldWidget(
                       controller: postalCodeController,
@@ -234,8 +232,7 @@ class _RegisterDetailsViewState extends State<RegisterDetailsView> {
                                 ),
                                 onPressed: () {
                                   if (designation == null) {
-                                    authController
-                                        .isDesignationSelected(true);
+                                    authController.isDesignationSelected(true);
                                   }
                                   if (_formKey.currentState!.validate()) {
                                     //redirect
@@ -246,13 +243,10 @@ class _RegisterDetailsViewState extends State<RegisterDetailsView> {
                                         currentCompany:
                                             currentCompanyController.text,
                                         city: cityController.text,
-                                        designation:
-                                            designation.id.toString(),
+                                        designation: designation.id.toString(),
                                         address: locationController.text,
-                                        department:
-                                            designationController.text,
-                                        officialEmail:
-                                            officialController.text,
+                                        department: designationController.text,
+                                        officialEmail: officialController.text,
                                         pincode: postalCodeController.text,
                                         state: stateController.text,
                                       );

@@ -39,7 +39,7 @@ class TextPostalCodeformfieldWidget extends StatelessWidget {
             },
             keyboardType: TextInputType.phone,
             inputFormatters: [
-              LengthLimitingTextInputFormatter(8),
+              LengthLimitingTextInputFormatter(5),
               FilteringTextInputFormatter.digitsOnly,
               FilteringTextInputFormatter.deny(RegExp(r'\s')),
             ],

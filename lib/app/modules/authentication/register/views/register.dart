@@ -22,7 +22,6 @@ class Resgister2 extends StatefulWidget {
 }
 
 class _Resgister2State extends State<Resgister2> {
-
   final authController = Get.find<AuthController>();
 
   var designation;
@@ -41,30 +40,32 @@ class _Resgister2State extends State<Resgister2> {
     authController.getDepartmentList();
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: kblue,
+    return Scaffold(
+      backgroundColor: kblue,
       body: Center(
         child: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(8),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.center,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                 // height:1200,
+                  // height:1200,
                   width: 500,
                   decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(15),
-                      boxShadow:  [
+                      boxShadow: [
                         BoxShadow(
                           blurRadius: 5,
                           color: Colors.grey.withOpacity(0.5),
                         ),
                       ]),
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 37,right: 37,top: 40,bottom: 40),
+                    padding: const EdgeInsets.only(
+                        left: 37, right: 37, top: 40, bottom: 40),
                     child: Column(children: [
                       Image.asset(
                         'assets/images/logo (3).png',
@@ -74,10 +75,9 @@ class _Resgister2State extends State<Resgister2> {
                         'Enter the below Details',
                         style: ktextstyle22,
                       ),
-                      
+
                       ksizedbox10,
-                                   
-                     
+
                       // Padding(
                       //   padding: const EdgeInsets.all(10.0),
                       //   child: Column(
@@ -93,7 +93,7 @@ class _Resgister2State extends State<Resgister2> {
                       //     ],
                       //   ),
                       // ),
-                     
+
                       // TextformfieldWidgett(
                       //    controller: currentCompanyController,
                       //     text: 'Current Company',
@@ -102,206 +102,208 @@ class _Resgister2State extends State<Resgister2> {
                       //   controller: designationController,
                       //   text: 'Enter Designation',
                       //   textt: 'Designation'),
-                    //  GetBuilder<AuthController>(builder: (_) {
-                    //   return Padding(
-                    //     padding: const EdgeInsets.all(10.0),
-                    //     child: Column(
-                    //       crossAxisAlignment: CrossAxisAlignment.start,
-                    //       children: [
-                    //         const Padding(
-                    //           padding: EdgeInsets.all(8.0),
-                    //           child: Text(
-                    //             "Department",
-                    //           ),
-                    //         ),
-                    //         Container(
-                    //           height: 50,
-                    //           width: 430,
-                    //           decoration: BoxDecoration(
-                    //               borderRadius: BorderRadius.circular(10),
-                    //               border: Border.all(
-                    //                   color: const Color.fromARGB(
-                    //                           255, 158, 158, 158)
-                    //                       .withOpacity(0.2))),
-                    //           child: Padding(
-                    //             padding: const EdgeInsets.only(
-                    //                 left: 10, right: 10, top: 10),
-                    //             child: DropdownButton<Department>(
-                    //               value: designation,
-                    //               isExpanded: true,
-                    //               icon: const Icon(
-                    //                   Icons.keyboard_arrow_down_outlined),
-                    //               elevation: 0,
-                    //               itemHeight: 55,
-                    //               isDense: true,
-                    //               dropdownColor: Colors.grey[250],
-                    //               style: const TextStyle(color: Colors.black54),
-                    //               hint: const Text(
-                    //                 "Department",
-                    //                 style: TextStyle(fontSize: 14),
-                    //               ),
-                    //               onChanged: (Department? value) {
-                    //                 // This is called when the user selects an item.
-                    //                 setState(() {
-                    //                   authController
-                    //                       .isDesignationSelected(false);
-                    //                   designation = value!;
-                    //                 });
-                    //               },
-                    //               items: authController.departments
-                    //                   .map<DropdownMenuItem<Department>>(
-                    //                       (Department value) {
-                    //                 return DropdownMenuItem<Department>(
-                    //                   value: value,
-                    //                   child: Text(value.title),
-                    //                 );
-                    //               }).toList(),
-                    //             ),
-                    //           ),
-                    //         ),
-                    //         const SizedBox(
-                    //           height: 5,
-                    //         ),
-                    //         Obx(
-                    //           () => authController.isDesignationSelected.isTrue
-                    //               ? const Padding(
-                    //                   padding: EdgeInsets.only(left: 15),
-                    //                   child: Text(
-                    //                     "Please select Department",
-                    //                     style: TextStyle(
-                    //                         color: Color.fromARGB(
-                    //                             255, 230, 46, 33),
-                    //                         fontSize: 12),
-                    //                   ),
-                    //                 )
-                    //               : Container(),
-                    //         )
-                    //       ],
-                    //     ),
-                    //   );
-                    // }),
-                         TextformfieldWidget(
-                      controller: currentCompanyController,
-                      text: 'Current Company',
-                      textt: 'Current Company'),
-                  TextformfieldWidget(
-                      controller: designationController,
-                      text: 'Enter Designation',
-                      textt: 'Designation'),
-      
-                  GetBuilder<AuthController>(builder: (_) {
-                    return Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Text(
-                              "Department",
-                            ),
-                          ),
-                          Container(
-                            height: 50,
-                            width: 330,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border: Border.all(
-                                    color: const Color.fromARGB(
-                                            255, 158, 158, 158)
-                                        .withOpacity(0.2))),
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  left: 10, right: 10, top: 10),
-                              child: DropdownButton<Department>(
-                                value: designation,
-                                isExpanded: true,
-                                icon: const Icon(
-                                    Icons.keyboard_arrow_down_outlined),
-                                elevation: 0,
-                                itemHeight: 55,
-                                isDense: true,
-                                dropdownColor: Colors.grey[250],
-                                style: const TextStyle(color: Colors.black54),
-                                hint: const Text(
+                      //  GetBuilder<AuthController>(builder: (_) {
+                      //   return Padding(
+                      //     padding: const EdgeInsets.all(10.0),
+                      //     child: Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      //         const Padding(
+                      //           padding: EdgeInsets.all(8.0),
+                      //           child: Text(
+                      //             "Department",
+                      //           ),
+                      //         ),
+                      //         Container(
+                      //           height: 50,
+                      //           width: 430,
+                      //           decoration: BoxDecoration(
+                      //               borderRadius: BorderRadius.circular(10),
+                      //               border: Border.all(
+                      //                   color: const Color.fromARGB(
+                      //                           255, 158, 158, 158)
+                      //                       .withOpacity(0.2))),
+                      //           child: Padding(
+                      //             padding: const EdgeInsets.only(
+                      //                 left: 10, right: 10, top: 10),
+                      //             child: DropdownButton<Department>(
+                      //               value: designation,
+                      //               isExpanded: true,
+                      //               icon: const Icon(
+                      //                   Icons.keyboard_arrow_down_outlined),
+                      //               elevation: 0,
+                      //               itemHeight: 55,
+                      //               isDense: true,
+                      //               dropdownColor: Colors.grey[250],
+                      //               style: const TextStyle(color: Colors.black54),
+                      //               hint: const Text(
+                      //                 "Department",
+                      //                 style: TextStyle(fontSize: 14),
+                      //               ),
+                      //               onChanged: (Department? value) {
+                      //                 // This is called when the user selects an item.
+                      //                 setState(() {
+                      //                   authController
+                      //                       .isDesignationSelected(false);
+                      //                   designation = value!;
+                      //                 });
+                      //               },
+                      //               items: authController.departments
+                      //                   .map<DropdownMenuItem<Department>>(
+                      //                       (Department value) {
+                      //                 return DropdownMenuItem<Department>(
+                      //                   value: value,
+                      //                   child: Text(value.title),
+                      //                 );
+                      //               }).toList(),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //         const SizedBox(
+                      //           height: 5,
+                      //         ),
+                      //         Obx(
+                      //           () => authController.isDesignationSelected.isTrue
+                      //               ? const Padding(
+                      //                   padding: EdgeInsets.only(left: 15),
+                      //                   child: Text(
+                      //                     "Please select Department",
+                      //                     style: TextStyle(
+                      //                         color: Color.fromARGB(
+                      //                             255, 230, 46, 33),
+                      //                         fontSize: 12),
+                      //                   ),
+                      //                 )
+                      //               : Container(),
+                      //         )
+                      //       ],
+                      //     ),
+                      //   );
+                      // }),
+                      TextformfieldWidget(
+                          controller: currentCompanyController,
+                          text: 'Current Company',
+                          textt: 'Current Company'),
+                      TextformfieldWidget(
+                          controller: designationController,
+                          text: 'Enter Designation',
+                          textt: 'Designation'),
+
+                      GetBuilder<AuthController>(builder: (_) {
+                        return Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Text(
                                   "Department",
-                                  style: TextStyle(fontSize: 14),
                                 ),
-                                onChanged: (Department? value) {
-                                  // This is called when the user selects an item.
-                                  setState(() {
-                                    authController
-                                        .isDesignationSelected(false);
-                                    designation = value!;
-                                  });
-                                },
-                                items: authController.departments
-                                    .map<DropdownMenuItem<Department>>(
-                                        (Department value) {
-                                  return DropdownMenuItem<Department>(
-                                    value: value,
-                                    child: Text(value.title),
-                                  );
-                                }).toList(),
                               ),
-                            ),
-                          ),
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Obx(
-                            () => authController.isDesignationSelected.isTrue
-                                ? const Padding(
-                                    padding: EdgeInsets.only(left: 15),
-                                    child: Text(
-                                      "Please select Department",
-                                      style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 230, 46, 33),
-                                          fontSize: 12),
+                              Container(
+                                height: 50,
+                                // width: 330,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    border: Border.all(
+                                        color: const Color.fromARGB(
+                                                255, 158, 158, 158)
+                                            .withOpacity(0.2))),
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10, top: 10),
+                                  child: DropdownButton<Department>(
+                                    value: designation,
+                                    isExpanded: true,
+                                    icon: const Icon(
+                                        Icons.keyboard_arrow_down_outlined),
+                                    elevation: 0,
+                                    itemHeight: 55,
+                                    isDense: true,
+                                    dropdownColor: Colors.grey[250],
+                                    style:
+                                        const TextStyle(color: Colors.black54),
+                                    hint: const Text(
+                                      "Department",
+                                      style: TextStyle(fontSize: 14),
                                     ),
-                                  )
-                                : Container(),
-                          )
-                        ],
-                      ),
-                    );
-                  }),
-                  TextformEmailfieldWidget(
-                      controller: officialController,
-                      text: 'Enter Official Email ID',
-                      textt: 'Official Email ID'),
-                  TextformfieldWidget(
-                      controller: cityController,
-                      text: 'Type City',
-                      textt: 'City'),
-                  TextformfieldWidget(
-                      controller: stateController,
-                      text: 'Type State',
-                      textt: 'State'),
-                  TextPostalCodeformfieldWidget(
-                      controller: postalCodeController,
-                      text: 'Postal Code',
-                      textt: 'Postal Code'),
+                                    onChanged: (Department? value) {
+                                      // This is called when the user selects an item.
+                                      setState(() {
+                                        authController
+                                            .isDesignationSelected(false);
+                                        designation = value!;
+                                      });
+                                    },
+                                    items: authController.departments
+                                        .map<DropdownMenuItem<Department>>(
+                                            (Department value) {
+                                      return DropdownMenuItem<Department>(
+                                        value: value,
+                                        child: Text(value.title),
+                                      );
+                                    }).toList(),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 5,
+                              ),
+                              Obx(
+                                () =>
+                                    authController.isDesignationSelected.isTrue
+                                        ? const Padding(
+                                            padding: EdgeInsets.only(left: 15),
+                                            child: Text(
+                                              "Please select Department",
+                                              style: TextStyle(
+                                                  color: Color.fromARGB(
+                                                      255, 230, 46, 33),
+                                                  fontSize: 12),
+                                            ),
+                                          )
+                                        : Container(),
+                              )
+                            ],
+                          ),
+                        );
+                      }),
+                      TextformEmailfieldWidget(
+                          controller: officialController,
+                          text: 'Enter Official Email ID',
+                          textt: 'Official Email ID'),
+                      TextformfieldWidget(
+                          controller: cityController,
+                          text: 'Enter City',
+                          textt: 'City'),
+                      TextformfieldWidget(
+                          controller: stateController,
+                          text: 'Enter State',
+                          textt: 'State'),
+                      TextPostalCodeformfieldWidget(
+                          controller: postalCodeController,
+                          text: 'Postal Code',
+                          textt: 'Postal Code'),
                       // TextformfieldWidgett(
                       //   controller: officialController,
-                      //   text: 'Enter Official Email ID', 
+                      //   text: 'Enter Official Email ID',
                       //   textt: 'Official Email ID'),
                       // TextformfieldWidgett(
                       //   controller: locationController,
-                      //   text: 'Enter Location', 
+                      //   text: 'Enter Location',
                       //   textt: 'Location'),
                       // TextformfieldWidgett(
                       //   controller: cityController,
-                      //   text: 'Type City', 
+                      //   text: 'Type City',
                       //   textt: 'City'),
                       // TextformfieldWidgett(
                       //   controller: stateController,
-                      //   text: 'Type State', 
+                      //   text: 'Type State',
                       //   textt: 'State'),
                       // TextformfieldWidgett(
                       //   controller: postalCodeController,
-                      //   text: 'Postal Code', 
+                      //   text: 'Postal Code',
                       //   textt: 'Postal Code'),
                       ksizedbox10,
                       ksizedbox10,
@@ -321,28 +323,25 @@ class _Resgister2State extends State<Resgister2> {
                               ),
                               onPressed: () {
                                 if (authController
-                                          .isDesignationSelected.isFalse) {
-                                        ProfileUpdateModel profileUpdateModel =
-                                            ProfileUpdateModel(
-                                          currentCompany:
-                                              currentCompanyController.text,
-                                          city: cityController.text,
-                                          designation: designation.id.toString(),
-                                          address: locationController.text,
-                                          department:
-                                              designationController.text,
-                                          officialEmail:
-                                              officialController.text,
-                                          pincode: postalCodeController.text,
-                                          state: stateController.text,
-                                        );
-                                        authController
-                                            .updateProfile(profileUpdateModel);
-                                      }
+                                    .isDesignationSelected.isFalse) {
+                                  ProfileUpdateModel profileUpdateModel =
+                                      ProfileUpdateModel(
+                                    currentCompany:
+                                        currentCompanyController.text,
+                                    city: cityController.text,
+                                    designation: designation.id.toString(),
+                                    address: locationController.text,
+                                    department: designationController.text,
+                                    officialEmail: officialController.text,
+                                    pincode: postalCodeController.text,
+                                    state: stateController.text,
+                                  );
+                                  authController
+                                      .updateProfile(profileUpdateModel);
+                                }
                               },
                               //=>Get.toNamed('/resgister-splash'),
-                               
-                              
+
                               child: Text(
                                 'Register',
                                 style: TextStyle(

@@ -3,13 +3,11 @@ import 'package:carousel_slider/carousel_options.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:reg_login/app/responsive/view/forgot_page.dart';
 import 'package:reg_login/app/responsive/view/register_page1.dart';
-
 import '../data/components/constands/constands.dart';
 import '../data/components/controllers/auth_controllers.dart';
 
@@ -415,7 +413,8 @@ class _loginpagerespoState extends State<loginpagerespo> {
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: TextButton(
-                                onPressed: () { Get.to(forgot());
+                                onPressed: () {
+                                  Get.to(forgot());
                                   //  Get.to(forgot());
                                 },
                                 child: const Text(
@@ -464,8 +463,8 @@ class _loginpagerespoState extends State<loginpagerespo> {
                                         if (_formKey.currentState!.validate()) {
                                           authController.loginUser(
                                               username: userNameController.text,
-                                              password:
-                                                  passwordController.text, size: size.width);
+                                              password: passwordController.text,
+                                              size: size.width);
                                         }
                                       },
                                       child: const Text(
@@ -486,7 +485,8 @@ class _loginpagerespoState extends State<loginpagerespo> {
                               style: ktextstyle15gry,
                             ),
                             TextButton(
-                              onPressed: () {Get.to(register1());
+                              onPressed: () {
+                                Get.to(register1());
                                 // Get.to(
                                 // register1(),
                                 // );
