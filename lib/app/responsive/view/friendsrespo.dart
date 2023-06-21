@@ -37,7 +37,7 @@ class _Friends_screenState extends State<Friends_screen> {
 
   @override
   Widget build(BuildContext context) {
-     var size = MediaQuery.of(context).size;
+    var size = MediaQuery.of(context).size;
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -117,34 +117,84 @@ class _Friends_screenState extends State<Friends_screen> {
             ],
           ),
         ),
-        body: TabBarView(children: [      Container(
-              width: size.width * 0.7,
-              height: size.height * 0.7,
-              child: GetBuilder<ProfileController>(builder: (_) {
-                return profileController.myFriendList.isEmpty
-                    ? const Center(
-                        child: Text("No Friends"),
-                      )
-                    : SingleChildScrollView(
+        body: TabBarView(children: [
+          Container(
+            width: size.width * 0.7,
+            height: size.height * 0.7,
+            child: GetBuilder<ProfileController>(builder: (_) {
+              return profileController.myFriendList.isEmpty
+                  ? const Center(
+                      child: Text("No Friends"),
+                    )
+                  : SingleChildScrollView(
                       child: Column(
                         children: [
-                          for(int i = 0; i< profileController.myFriendList.length;i++ )
-                          friendContiner(
-                                    friendList:
-                                        profileController.myFriendList[i],
-                                  )
+                          for (int i = 0;
+                              i < profileController.myFriendList.length;
+                              i++)
+                            if (profileController.myFriendList[i].status
+                                    .toString() ==
+                                "1")
+                              InkWell(
+                                onTap: () {
+                                  final myprofileController =
+                                      Get.find<ProfileController>();
+                                  String tchatId = "";
+
+                                  if (profileController
+                                          .myFriendList[i].friendId >
+                                      myprofileController
+                                          .profileData.first.user.id) {
+                                    tchatId =
+                                        "chatId${profileController.myFriendList[i].friendId}0${myprofileController.profileData.first.user.id}";
+                                  } else {
+                                    tchatId =
+                                        "chatId${myprofileController.profileData.first.user.id}0${profileController.myFriendList[i].friendId}";
+                                  }
+                                  ChatListModel chatListModel = ChatListModel(
+                                      userId: profileController
+                                          .myFriendList[i].friendId,
+                                      firstName: profileController
+                                          .myFriendList[i].name,
+                                      lastName: "",
+                                      photo: profileController
+                                          .myFriendList[i].profile,
+                                      pin: 0,
+                                      isArchived: false,
+                                      isBlocked: false,
+                                      isMuted: false,
+                                      userName: "",
+                                      chatId: tchatId,
+                                      message: "",
+                                      messageType: MessageType().text,
+                                      unreadCount: 1,
+                                      readStatus: false,
+                                      createdAt: DateTime.now()
+                                          .millisecondsSinceEpoch
+                                          .toString(),
+                                      updatedAt: DateTime.now()
+                                          .millisecondsSinceEpoch
+                                          .toString(),
+                                      users: [
+                                        myprofileController
+                                            .profileData.first.user.id
+                                      ]);
+
+                                  Get.to(() => ViewMessageScreen(
+                                        chatModel: chatListModel,
+                                        peerId: profileController
+                                            .myFriendList[i].friendId,
+                                      ));
+                                },
+                                child: friendContiner(
+                                  friendList: profileController.myFriendList[i],
+                                ),
+                              )
                         ],
                       ),
                     );
-              }),
-            ),
-
-
-
-
-
-
-
+            }),
+          ),
 
           // GetBuilder<ProfileController>(builder: (_) {
           //   return profileController.myFriendList.isEmpty

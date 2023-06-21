@@ -52,16 +52,17 @@ class _ProfilewidgetState extends State<Profilewidget> {
     return Column(
       children: [
         GetBuilder<ProfileController>(builder: (_) {
-          
           return Padding(
             padding: const EdgeInsets.only(right: 10),
             child:
                 profileController.profileData.first.user.profilePicture == null
                     ? const CircleAvatar(
+                      radius: 100,
                         backgroundImage:
-                            AssetImage('assets/images/createprofile.png'),
+                            AssetImage('assets/images/profile_icon.png'),
                       )
                     : CircleAvatar(
+                      radius: 100,
                         backgroundImage: NetworkImage(profileController
                             .profileData.first.user.profilePicture),
                       ),

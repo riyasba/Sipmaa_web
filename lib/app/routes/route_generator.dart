@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/modules/authentication/register/views/registerscreen.dart';
 import 'package:reg_login/app/modules/screens/home/views/splash_view.dart';
 import 'package:reg_login/app/responsive/responsive_homescreen.dart';
 import 'package:reg_login/app/responsive/view/home_respo.dart';
@@ -18,6 +19,10 @@ class RouteGenerator {
 
       case Routes.SIGN_IN:
         return _GeneratePageRoute(widget: HomeView(), routeName: settings.name);
+
+      case Routes.REGISTER_VIEWS:
+        return _GeneratePageRoute(
+            widget: const RegisterViews(), routeName: settings.name);
 
       default:
         return _GeneratePageRoute(widget: Splash(), routeName: settings.name);

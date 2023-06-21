@@ -19,31 +19,27 @@ class SignInView extends StatefulWidget {
 
 CarouselController curouselController = CarouselController();
 
-
-
 //  @override
 //   void initState() {
 //     super.initState();
 //     authController.getSlider();
 //   }
 
-
-
 class _SignInViewState extends State<SignInView> {
-
   int pageIndex = 0;
-var userNameController = TextEditingController();
-var passwordController = TextEditingController();
-final _formKey = GlobalKey<FormState>();
-final authController = Get.find<AuthController>();
+  var userNameController = TextEditingController();
+  var passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  final authController = Get.find<AuthController>();
 
-@override
-void initState() {
-  super.initState();
-  authController.getSlider();
-  
-}
-  
+  bool isPasswordVisible = true;
+
+  @override
+  void initState() {
+    super.initState();
+    authController.getSlider();
+  }
+
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -67,16 +63,16 @@ void initState() {
                             padding: const EdgeInsets.only(top: 10),
                             child: Column(
                               children: [
-                                GetBuilder<AuthController>(
-                                  builder: (_) {
-                                    return CarouselSlider(
-                                      carouselController: curouselController,
-                                      
-                                      items: [for (int i = 0;
-                              i < authController.sliderList.length;
-                              i++)
+                                GetBuilder<AuthController>(builder: (_) {
+                                  return CarouselSlider(
+                                    carouselController: curouselController,
+                                    items: [
+                                      for (int i = 0;
+                                          i < authController.sliderList.length;
+                                          i++)
                                         ClipRRect(
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                           child: Container(
                                             height: 8,
                                             color: kblue,
@@ -84,96 +80,108 @@ void initState() {
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.spaceEvenly,
-                                              children: [  Padding(
-                                      padding: const EdgeInsets.all(15.0),
-                                      child: Container(
-                                        width: 80,
-                                        child: Image.network(
-                                            authController.sliderList[i].image),
-                                      ),
-                                    ),
+                                              children: [
+                                                Padding(
+                                                  padding: const EdgeInsets.all(
+                                                      15.0),
+                                                  child: Container(
+                                                    width: 80,
+                                                    child: Image.network(
+                                                        authController
+                                                            .sliderList[i]
+                                                            .image),
+                                                  ),
+                                                ),
                                                 // Image.asset(
                                                 //   'assets/images/group-users 1.jpg'),
-                                                 Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          authController.sliderList[i].title,
-                                          style: TextStyle(color: kwhite,fontSize: 25,fontWeight: FontWeight.w700)
-                                        ),
-                                        Text(
-                                          authController
-                                              .sliderList[i].description,
-                                          style: const TextStyle(
-                                              fontSize: 14,color: Colors.white,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ],
-                                    )
+                                                Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                        authController
+                                                            .sliderList[i]
+                                                            .title,
+                                                        style: TextStyle(
+                                                            color: kwhite,
+                                                            fontSize: 25,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .w700)),
+                                                    Text(
+                                                      authController
+                                                          .sliderList[i]
+                                                          .description,
+                                                      style: const TextStyle(
+                                                          fontSize: 14,
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                  ],
+                                                )
                                               ],
                                             ),
                                           ),
                                         ),
-                                        // ClipRRect(
-                                        //   borderRadius: BorderRadius.circular(10),
-                                        //   child: Container(
-                                        //       height: 8,
-                                        //       color: kblue,
-                                        //       width: 600,
-                                        //       child: Row(
-                                        //         mainAxisAlignment:
-                                        //             MainAxisAlignment.spaceEvenly,
-                                        //         children: [
-                                        //           //   Image.asset(
-                                        //           //     'assets/images/group-users 1.jpg'),
-                                        //           Text(
-                                        //             'SIPMAA \n HR Community',
-                                        //             style: ktextstyle,
-                                        //           )
-                                        //         ],
-                                        //       )),
-                                        // ),
-                                        // ClipRRect(
-                                        //   borderRadius: BorderRadius.circular(10),
-                                        //   child: Container(
-                                        //       height: 8,
-                                        //       color: kblue,
-                                        //       width: 500,
-                                        //       child: Row(
-                                        //         mainAxisAlignment:
-                                        //             MainAxisAlignment.spaceEvenly,
-                                        //         children: [
-                                        //           //  Image.asset(
-                                        //           //    'assets/images/group-users 1.jpg'),
-                                        //           Text(
-                                        //             'SIPMAA \n HR Community',
-                                        //             style: ktextstyle,
-                                        //           )
-                                        //         ],
-                                        //       )),
-                                        // ),
-                                      ],
-                                      options: CarouselOptions(
-                                        height: 120.0,
-                                        enlargeCenterPage: true,
-                                        autoPlay: true,
-                                        aspectRatio: 16 / 9,
-                                        enableInfiniteScroll: true,
-                                        autoPlayAnimationDuration:
-                                            Duration(milliseconds: 3200),
-                                        viewportFraction: 0.8,
-                                        onPageChanged: (index, reason) {
-                                          setState(() {
-                                            pageIndex = index;
-                                          });
-                                        },
-                                      ),
-                                    );
-                                  }
-                                ),
+                                      // ClipRRect(
+                                      //   borderRadius: BorderRadius.circular(10),
+                                      //   child: Container(
+                                      //       height: 8,
+                                      //       color: kblue,
+                                      //       width: 600,
+                                      //       child: Row(
+                                      //         mainAxisAlignment:
+                                      //             MainAxisAlignment.spaceEvenly,
+                                      //         children: [
+                                      //           //   Image.asset(
+                                      //           //     'assets/images/group-users 1.jpg'),
+                                      //           Text(
+                                      //             'SIPMAA \n HR Community',
+                                      //             style: ktextstyle,
+                                      //           )
+                                      //         ],
+                                      //       )),
+                                      // ),
+                                      // ClipRRect(
+                                      //   borderRadius: BorderRadius.circular(10),
+                                      //   child: Container(
+                                      //       height: 8,
+                                      //       color: kblue,
+                                      //       width: 500,
+                                      //       child: Row(
+                                      //         mainAxisAlignment:
+                                      //             MainAxisAlignment.spaceEvenly,
+                                      //         children: [
+                                      //           //  Image.asset(
+                                      //           //    'assets/images/group-users 1.jpg'),
+                                      //           Text(
+                                      //             'SIPMAA \n HR Community',
+                                      //             style: ktextstyle,
+                                      //           )
+                                      //         ],
+                                      //       )),
+                                      // ),
+                                    ],
+                                    options: CarouselOptions(
+                                      height: 120.0,
+                                      enlargeCenterPage: true,
+                                      autoPlay: true,
+                                      aspectRatio: 16 / 9,
+                                      enableInfiniteScroll: true,
+                                      autoPlayAnimationDuration:
+                                          const Duration(milliseconds: 3200),
+                                      viewportFraction: 0.8,
+                                      onPageChanged: (index, reason) {
+                                        setState(() {
+                                          pageIndex = index;
+                                        });
+                                      },
+                                    ),
+                                  );
+                                }),
                                 Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Container(
@@ -205,7 +213,8 @@ void initState() {
                                       ],
                                     ),
                                     decoration: BoxDecoration(
-                                        color: Color.fromARGB(203, 35, 69, 107),
+                                        color: const Color.fromARGB(
+                                            203, 35, 69, 107),
                                         borderRadius: BorderRadius.circular(4)),
                                   ),
                                 )
@@ -218,7 +227,7 @@ void initState() {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 ksizedbox10,
-                                Text(
+                                const Text(
                                   "WELCOME",
                                   style: TextStyle(
                                       color: Colors.black,
@@ -243,8 +252,8 @@ void initState() {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(8.0),
+                                      const Padding(
+                                        padding: EdgeInsets.all(8.0),
                                         child: Text(
                                           'User Name',
                                         ),
@@ -277,7 +286,7 @@ void initState() {
                                           //  border: InputBorder.none,
                                           filled: true,
                                           border: OutlineInputBorder(
-                                            borderSide: BorderSide(
+                                            borderSide: const BorderSide(
                                                 style: BorderStyle.none,
                                                 color: Color.fromARGB(
                                                     241, 255, 255, 255),
@@ -285,8 +294,9 @@ void initState() {
                                             borderRadius:
                                                 BorderRadius.circular(6.0),
                                           ),
-                                          contentPadding: EdgeInsets.fromLTRB(
-                                              17.0, 8.0, 17.0, 7.0),
+                                          contentPadding:
+                                              const EdgeInsets.fromLTRB(
+                                                  17.0, 8.0, 17.0, 7.0),
                                         ),
                                       ),
                                     ],
@@ -295,8 +305,8 @@ void initState() {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                    const Padding(
+                                      padding: EdgeInsets.all(8.0),
                                       child: Text('Password'),
                                     ),
                                     TextFormField(
@@ -306,7 +316,7 @@ void initState() {
                                           AutovalidateMode.onUserInteraction,
                                       keyboardType:
                                           TextInputType.visiblePassword,
-                                      //   obscureText: _obscured,
+                                      obscureText: isPasswordVisible,
                                       // focusNode: textFieldFocusNode,
                                       decoration: InputDecoration(
                                         floatingLabelBehavior: FloatingLabelBehavior
@@ -317,7 +327,7 @@ void initState() {
                                         fillColor: Colors.grey[250],
                                         isDense: true, // Reduces height a bit
                                         border: OutlineInputBorder(
-                                          borderSide: BorderSide(
+                                          borderSide: const BorderSide(
                                             color: Color.fromARGB(
                                                 0, 158, 158, 158),
                                             width: 2.0,
@@ -330,15 +340,21 @@ void initState() {
                                           padding: const EdgeInsets.fromLTRB(
                                               0, 0, 4, 0),
                                           child: GestureDetector(
-                                            //      onTap: _toggleObscured,
+                                            onTap: () {
+                                              setState(() {
+                                                isPasswordVisible =
+                                                    !isPasswordVisible;
+                                              });
+                                            },
                                             child: Icon(
-                                                Icons.visibility_off_rounded
-                                                //         _obscured
-                                                //             ? Icons.visibility_rounded
-                                                //             : Icons.visibility_off_rounded,
-                                                //        color: Colors.grey,
-                                                //        size: 23,
-                                                ),
+                                              // Icons.visibility_off_rounded
+                                              isPasswordVisible
+                                                  ? Icons.visibility_rounded
+                                                  : Icons
+                                                      .visibility_off_rounded,
+                                              color: Colors.grey,
+                                              // size: 23,
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -361,7 +377,7 @@ void initState() {
                                       child: TextButton(
                                         onPressed: () =>
                                             Get.toNamed('/forgot-password'),
-                                        child: Text(
+                                        child: const Text(
                                           'Forgot Password?',
                                           style: TextStyle(color: Colors.grey),
                                         ),
