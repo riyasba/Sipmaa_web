@@ -273,6 +273,9 @@ class _RegisterViewsState extends State<RegisterViews> {
                                       }
                                       return null;
                                     },
+                                    onChanged: (val) {
+                                      setState(() {});
+                                    },
                                     decoration: InputDecoration(
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.never,
@@ -311,7 +314,7 @@ class _RegisterViewsState extends State<RegisterViews> {
                                     ),
                                   ),
                                   if (userNameController.text.isNotEmpty)
-                                    GetBuilder(
+                                    GetBuilder<AuthController>(
                                       builder: (_) => authController
                                               .isUserNameAvailable.isFalse
                                           ? const Text(

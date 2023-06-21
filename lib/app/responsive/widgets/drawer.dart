@@ -8,7 +8,8 @@ import 'package:reg_login/app/responsive/view/search_friends/search_friends_view
 import 'package:reg_login/app/responsive/widgets/chat_view/chat_list_view.dart';
 
 import '../../modules/screens/home/views/widgets/friends_widget.dart';
-import '../view/friends.dart';
+
+import '../view/friendsrespo.dart';
 import '../view/home_respo.dart';
 import '../view/notification_screen.dart';
 import '../view/profile_page.dart';

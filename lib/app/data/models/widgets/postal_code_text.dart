@@ -32,14 +32,14 @@ class TextPostalCodeformfieldWidget extends StatelessWidget {
             validator: (value) {
               if (value!.isEmpty) {
                 return "$text can't be empty";
-              } else if (value.length < 5) {
-                return "$text must be 5 digits";
+              } else if (value.length == 6) {
+                return "$text must be 6 digits";
               }
               return null;
             },
             keyboardType: TextInputType.phone,
             inputFormatters: [
-              LengthLimitingTextInputFormatter(5),
+              LengthLimitingTextInputFormatter(6),
               FilteringTextInputFormatter.digitsOnly,
               FilteringTextInputFormatter.deny(RegExp(r'\s')),
             ],

@@ -124,7 +124,9 @@ class _register1State extends State<register1> {
                                   return "User Name can't be empty";
                                 }
                                 return null;
-                              },
+                              },     onChanged: (val) {
+                                      setState(() {});
+                                    },
                               decoration: InputDecoration(
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.never,
@@ -156,25 +158,25 @@ class _register1State extends State<register1> {
                                     17.0, 8.0, 17.0, 7.0),
                               ),
                             ),
-                            if (userNameController.text.isNotEmpty)
-                              Obx(
-                                () =>
-                                    authController.isUserNameAvailable.isFalse
-                                        ? const Text(
-                                            'Not Available',
-                                            style: TextStyle(
-                                                color: Colors.red,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w600),
-                                          )
-                                        : const Text(
-                                            'Available',
-                                            style: TextStyle(
-                                                color: Colors.green,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w600),
-                                          ),
-                              )
+                           if (userNameController.text.isNotEmpty)
+                                    GetBuilder<AuthController>(
+                                      builder: (_) => authController
+                                              .isUserNameAvailable.isFalse
+                                          ? const Text(
+                                              'Not Available',
+                                              style: TextStyle(
+                                                  color: Colors.red,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w600),
+                                            )
+                                          : const Text(
+                                              'Available',
+                                              style: TextStyle(
+                                                  color: Colors.green,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                    )
                           ],
                         ),
                       ],

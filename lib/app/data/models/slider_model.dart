@@ -35,7 +35,7 @@ class SliderList {
   String title;
   String description;
   String image;
-  String status;
+  dynamic status;
   DateTime createdAt;
   DateTime updatedAt;
 

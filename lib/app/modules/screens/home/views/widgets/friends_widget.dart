@@ -126,14 +126,16 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
                     ? const Center(
                         child: Text("No Friends"),
                       )
-                    : Column(
-                      children: [
-                        for(int i = 0; i< profileController.myFriendList.length;i++ )
-                        friendContiner(
-                                  friendList:
-                                      profileController.myFriendList[i],
-                                )
-                      ],
+                    : SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          for(int i = 0; i< profileController.myFriendList.length;i++ )
+                          friendContiner(
+                                    friendList:
+                                        profileController.myFriendList[i],
+                                  )
+                        ],
+                      ),
                     );
               }),
             ),

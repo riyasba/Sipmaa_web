@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-
 import 'package:get/get.dart';
-
 
 //import '../widgets/appbar_friends.dart';
 import '../../data/components/constands/constands.dart';
 
+import '../../data/components/constands/message_types.dart';
 import '../../data/components/controllers/profile_controller.dart';
+import '../../data/models/chat_models.dart';
+import '../../modules/screens/home/views/widgets/friends_widget.dart';
+import '../widgets/chat_view/view_message_screen.dart';
 import '../widgets/comonmobappbar.dart';
 import '../widgets/drawer.dart';
-
-
 
 class Friends_screen extends StatefulWidget {
   Friends_screen({super.key});
@@ -37,7 +37,7 @@ class _Friends_screenState extends State<Friends_screen> {
 
   @override
   Widget build(BuildContext context) {
-    // var size = MediaQuery.of(context).size;
+     var size = MediaQuery.of(context).size;
     return DefaultTabController(
       length: 2,
       child: Scaffold(
@@ -46,8 +46,8 @@ class _Friends_screenState extends State<Friends_screen> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(240),
           child: Column(
-            children: [ComenappBarmob(),
-           
+            children: [
+              ComenappBarmob(),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
@@ -117,15 +117,136 @@ class _Friends_screenState extends State<Friends_screen> {
             ],
           ),
         ),
-        body: TabBarView(
-          children: [
-          GetBuilder<ProfileController>(builder: (_) {
-            return profileController.myFriendList.isEmpty
-                ? const Center(
-                    child: Text("No Friends"),
-                  )
-                : Text(profileController.myFriendList.first.name,style: primaryfont.copyWith(color: Colors.blue),);
-          }),
+        body: TabBarView(children: [      Container(
+              width: size.width * 0.7,
+              height: size.height * 0.7,
+              child: GetBuilder<ProfileController>(builder: (_) {
+                return profileController.myFriendList.isEmpty
+                    ? const Center(
+                        child: Text("No Friends"),
+                      )
+                    : SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          for(int i = 0; i< profileController.myFriendList.length;i++ )
+                          friendContiner(
+                                    friendList:
+                                        profileController.myFriendList[i],
+                                  )
+                        ],
+                      ),
+                    );
+              }),
+            ),
+
+
+
+
+
+
+
+
+          // GetBuilder<ProfileController>(builder: (_) {
+          //   return profileController.myFriendList.isEmpty
+          //       ? const Center(
+          //           child: Text("No Friends"),
+          //         )
+          //       : Container(width: 100,height: 300,
+          //         child: ListView.builder(
+          //             shrinkWrap: true,
+          //             physics: const BouncingScrollPhysics(),
+          //             itemCount: profileController.myFriendList.length,
+          //             itemBuilder: (BuildContext context, int index) {
+          //               return profileController.myFriendList[index].status == "1"
+          //                   ? GestureDetector(
+          //                       onTap: () {
+          //                         final myprofileController =
+          //                             Get.find<ProfileController>();
+          //                         String tchatId = "";
+
+          //                         if (profileController
+          //                                 .myFriendList[index].friendId >
+          //                             myprofileController
+          //                                 .profileData.first.user.id) {
+          //                           tchatId =
+          //                               "chatId${profileController.myFriendList[index].friendId}0${myprofileController.profileData.first.user.id}";
+          //                         } else {
+          //                           tchatId =
+          //                               "chatId${myprofileController.profileData.first.user.id}0${profileController.myFriendList[index].friendId}";
+          //                         }
+          //                         ChatListModel chatListModel = ChatListModel(
+          //                             userId: profileController
+          //                                 .myFriendList[index].friendId,
+          //                             firstName: profileController
+          //                                 .myFriendList[index].name,
+          //                             lastName: "",
+          //                             photo: profileController
+          //                                 .myFriendList[index].profile,
+          //                             pin: 0,
+          //                             isArchived: false,
+          //                             isBlocked: false,
+          //                             isMuted: false,
+          //                             userName: "",
+          //                             chatId: tchatId,
+          //                             message: "",
+          //                             messageType: MessageType().text,
+          //                             unreadCount: 1,
+          //                             readStatus: false,
+          //                             createdAt: DateTime.now()
+          //                                 .millisecondsSinceEpoch
+          //                                 .toString(),
+          //                             updatedAt: DateTime.now()
+          //                                 .millisecondsSinceEpoch
+          //                                 .toString(),
+          //                             users: [
+          //                               myprofileController
+          //                                   .profileData.first.user.id
+          //                             ]);
+
+          //                         Get.to(() => ViewMessageScreen(
+          //                               chatModel: chatListModel,
+          //                               peerId: profileController
+          //                                   .myFriendList[index].friendId,
+          //                             ));
+          //                       },
+          //                       child: Card(
+          //                         child: ListTile(
+          //                           leading: profileController
+          //                                       .myFriendList[index].profile ==
+          //                                   null
+          //                               ? const CircleAvatar(
+          //                                   radius: 40,
+          //                                   backgroundImage: AssetImage(
+          //                                       'assets/images/img.jpg'),
+          //                                 )
+          //                               : CircleAvatar(
+          //                                   radius: 40,
+          //                                   backgroundImage: NetworkImage(
+          //                                       profileController
+          //                                           .myFriendList[index].profile),
+          //                                 ),
+          //                           title: Text(profileController
+          //                               .myFriendList[index].name),
+          //                           subtitle: Text(profileController
+          //                               .myFriendList[index].designation),
+          //                         ),
+          //                       ),
+          //                     )
+          //                   : Container();
+          //             },
+          //           ),
+          //       );
+          // }),
+
+////////////////////
+
+          // GetBuilder<ProfileController>(builder: (_) {
+          //   return profileController.myFriendList.isEmpty
+          //       ? const Center(
+          //           child: Text("No Friends"),
+          //         )
+          //       : Text(profileController.myFriendList.first.name,style: primaryfont.copyWith(color: Colors.blue),);
+          // }),
           // Center(
           //   child: friendrequest(
           //     text1: 'Add Friend',

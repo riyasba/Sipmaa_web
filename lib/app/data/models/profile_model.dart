@@ -73,14 +73,14 @@ class User {
   dynamic clientSecret;
   dynamic clientId;
   dynamic keyName;
-  String keyStatus;
+  dynamic keyStatus;
   dynamic emailVerifiedAt;
   dynamic address;
   dynamic bio;
   dynamic pincode;
   dynamic city;
   dynamic state;
-  String status;
+  dynamic status;
   DateTime createdAt;
   DateTime updatedAt;
 
