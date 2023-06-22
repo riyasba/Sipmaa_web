@@ -4,7 +4,9 @@ import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:reg_login/app/data/components/controllers/posts_controller.dart';
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
+import 'package:reg_login/app/modules/screens/home/views/widgets/continers/comentcontiner.dart';
 
 import '../../../../data/components/constands/constands.dart';
 
@@ -57,7 +59,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 100,left: 100),
+                      padding:
+                          EdgeInsets.only(top: 100, left: size.width * 0.35),
                       child: Stack(
                         children: [
                           Container(
@@ -136,7 +139,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 15,left: 100),
+              padding: EdgeInsets.only(top: 15, left: size.width * 0.37),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -264,9 +267,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
-                children: [
+                children: const [
                   Text(
-                    'ALL Post',
+                    'All Post',
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
@@ -311,9 +314,138 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         itemBuilder: (context, index) {
                           return InkWell(
                             onTap: () {
-                              // Get.to(() => PostView(
-                              //     postData: profileController
-                              //         .profileData.first.posts[index]));
+                              Get.find<PostsController>().getComments(
+                                  postId: profileController
+                                      .profileData.first.posts[index].id
+                                      .toString());
+
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      content: Row(
+                                        children: [
+                                          Stack(
+                                            children: [
+                                              Container(
+                                                height: 350,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.53,
+                                                decoration: BoxDecoration(
+                                                    color: kwhite),
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 15),
+                                                      child: Row(
+                                                        children: [
+                                                          Image.network(
+                                                            profileController
+                                                                .profileData
+                                                                .first
+                                                                .posts[index]
+                                                                .body,
+                                                            fit: BoxFit.contain,
+                                                            width: size.width *
+                                                                0.3,
+                                                            height:
+                                                                size.height *
+                                                                    0.4,
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 35,
+                                                              left: 20),
+                                                      child: Container(
+                                                        height: 300,
+                                                        width: 250,
+                                                        child: GetBuilder<
+                                                                PostsController>(
+                                                            builder: (_) {
+                                                          return Get.find<
+                                                                      PostsController>()
+                                                                  .commentsList
+                                                                  .isEmpty
+                                                              ? Padding(
+                                                                  padding: const EdgeInsets
+                                                                          .only(
+                                                                      bottom:
+                                                                          20),
+                                                                  child: Center(
+                                                                    child: const Text(
+                                                                        "No Comments yet!"),
+                                                                  ),
+                                                                )
+                                                              : ListView
+                                                                  .builder(
+                                                                  shrinkWrap:
+                                                                      true,
+                                                                  itemBuilder: (context,
+                                                                          index) =>
+                                                                      comentsContainer(
+                                                                    commentsList:
+                                                                        Get.find<PostsController>()
+                                                                            .commentsList[index],
+                                                                  ),
+                                                                  itemCount: Get
+                                                                          .find<
+                                                                              PostsController>()
+                                                                      .commentsList
+                                                                      .length,
+                                                                );
+                                                        }),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              Positioned(
+                                                top: 10,
+                                                left: 10,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    Get.back();
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.arrow_back,
+                                                    color: Colors.black,
+                                                  ),
+                                                ),
+                                              ),
+                                              Positioned(
+                                                top: 10,
+                                                right: 10,
+                                                child: InkWell(
+                                                  onTap: () {
+                                                    _deletePromt(
+                                                        context,
+                                                        profileController
+                                                            .profileData
+                                                            .first
+                                                            .posts[index]
+                                                            .id
+                                                            .toString());
+                                                  },
+                                                  child: const Icon(
+                                                    Icons.delete,
+                                                    color: Colors.red,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  });
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -332,5 +464,67 @@ class _ProfileScreenState extends State<ProfileScreen> {
         );
       }),
     );
+  }
+
+  _deletePromt(BuildContext context, String postId) {
+    return showModalBottomSheet(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        context: context,
+        builder: (builder) {
+          return Container(
+            height: 162,
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 28,
+                ),
+                Center(
+                    child: Text(
+                  "Do you want to Delete this post?",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                )),
+                SizedBox(
+                  height: 32,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(100, 40),
+                            backgroundColor: kblue,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18))),
+                        onPressed: () async {
+                          Get.find<PostsController>()
+                              .deletePost(postId: postId);
+                        },
+                        child: Text(
+                          'Delete',
+                          style: TextStyle(fontSize: 15, color: kwhite),
+                        )),
+                    const SizedBox(
+                      width: 40,
+                    ),
+                    OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                            side: BorderSide(color: kblue, width: 1),
+                            minimumSize: const Size(110, 40),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18),
+                            )),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                        child: Text(
+                          'Cancel',
+                          style: TextStyle(fontSize: 15, color: kblue),
+                        ))
+                  ],
+                )
+              ],
+            ),
+          );
+        });
   }
 }

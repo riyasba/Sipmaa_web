@@ -94,6 +94,7 @@ class _PostViewState extends State<PostView> {
                 const EdgeInsets.only(top: 50, right: 10, left: 10, bottom: 30),
             child: Container(
               width: double.infinity,
+              height: 550,
               decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(15),
@@ -214,9 +215,12 @@ class _PostViewState extends State<PostView> {
                     ksizedbox10,
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        widget.postData.body.toString(),
-                        fit: BoxFit.cover,
+                      child: Container(
+                        height: 300,
+                        child: Image.network(
+                          widget.postData.body.toString(),
+                          fit: BoxFit.contain,
+                        ),
                       ),
                     ),
                     ksizedbox10,

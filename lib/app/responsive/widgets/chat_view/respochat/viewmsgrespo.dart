@@ -13,6 +13,7 @@ import 'package:reg_login/app/modules/screens/home/views/chat.dart';
 import 'package:reg_login/app/responsive/widgets/chat_view/chat_widget/image_view_in_chat.dart';
 import 'package:reg_login/app/responsive/widgets/chat_view/chat_widget/other_chat_bubble.dart';
 import 'package:reg_login/app/responsive/widgets/chat_view/view_message_screen.dart';
+import 'package:reg_login/app/routes/app_pages.dart';
 
 import '../../../../data/components/constands/constands.dart';
 import '../../../../data/components/constands/message_types.dart';
@@ -151,7 +152,8 @@ class _ViewMessageScreenRespoState extends State<ViewMessageScreenRespo> {
             elevation: 0,
             leading: InkWell(
                 onTap: () {
-                  Get.back();
+                Get.offAllNamed(Routes.HOME_PAGE);
+                  // Get.back();
                 },
                 child: Row(
                   children: [
@@ -229,7 +231,6 @@ class _ViewMessageScreenRespoState extends State<ViewMessageScreenRespo> {
             children: [
               Chat(),
               //ivide
-
               Container(
                 width: 700,
                 child: WillPopScope(

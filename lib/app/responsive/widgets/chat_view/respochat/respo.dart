@@ -205,9 +205,10 @@ class _ViewChatsUserListRespoState extends State<ViewChatsUserListRespo> {
                           return Container(
                             child: InkWell(
                                 onTap: () {
+                                  print("---------------------------------------");
                                   chatController.makeAsRead(
                                       chatList.userId, chatList.users.first);
-                                  Get.to(() => ViewMessageScreenRespo(
+                                  Get.offAll(() => ViewMessageScreenRespo(
                                         chatModel: chatList,
                                         peerId: chatList.userId,
                                       ));

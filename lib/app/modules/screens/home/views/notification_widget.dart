@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -5,6 +7,8 @@ import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:reg_login/app/data/components/constands/constands.dart';
 import 'package:reg_login/app/data/components/search_field.dart';
+import 'package:reg_login/app/data/models/notification_model.dart';
+import 'package:reg_login/app/modules/screens/home/controler/controler.dart';
 
 import '../../../../data/components/controllers/posts_controller.dart';
 import '../../../../data/components/controllers/profile_controller.dart';
@@ -23,11 +27,29 @@ class _NotificationWidgetState extends State<NotificationWidget> {
   var dialogeController = TextEditingController();
   final postController = Get.find<PostsController>();
   final profileController = Get.find<ProfileController>();
+  final homeController = Get.find<HomeController>();
 
   @override
   void initState() {
     super.initState();
     profileController.getNotificationList();
+  }
+
+  redirectToPages({dynamic response}) async {
+    NotificationDataModel notificationModel =
+        NotificationDataModel.fromJson(response);
+
+    if (notificationModel.type == "like_Post") {
+      homeController.homeindex(4);
+    } else if (notificationModel.type == "comment_Post") {
+      homeController.homeindex(4);
+    } else if (notificationModel.type == "Friend_Request") {
+      homeController.homeindex(0);
+    } else if (notificationModel.type == "Friend_Request_accepted") {
+      homeController.homeindex(0);
+    } else {
+      homeController.homeindex(0);
+    }
   }
 
   @override
@@ -49,10 +71,10 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
                         onTap: () {
-//var data = jsonDecode(
-                          //                        profileController.notificationList[index].data);
+                          var data = jsonDecode(
+                              profileController.notificationList[index].data);
 
-//redirectToPages(response: data);
+                          redirectToPages(response: data);
                         },
                         child: ListTile(
                           leading: const CircleAvatar(
@@ -402,7 +424,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
         //                                   child: Image.asset('assets/images/profile.png',height: 50,
         //                                   fit: BoxFit.fitHeight,),
         //                                 ),
-        //                                 Padding( 
+        //                                 Padding(
         //                                   padding: const EdgeInsets.only(left: 10),
         //                                   child: Column(
         //                                     crossAxisAlignment: CrossAxisAlignment.start,

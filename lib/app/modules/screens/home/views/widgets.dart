@@ -46,12 +46,13 @@ class _HomeContainerState extends State<HomeContainer> {
       width: MediaQuery.of(context).size.width * 0.38,
       child: GetBuilder<PostsController>(builder: (_) {
         return ListView.separated(
-           separatorBuilder:(BuildContext context, int index) => SizedBox(height: 10),
+          separatorBuilder: (BuildContext context, int index) =>
+              const SizedBox(height: 10),
           shrinkWrap: true,
           itemCount: postsController.allPostList.length,
           itemBuilder: (context, index) {
             return Container(
-           //   height: MediaQuery.of(context).size.height * 0.88,
+              //   height: MediaQuery.of(context).size.height * 0.88,
               width: MediaQuery.of(context).size.width * 0.38,
               decoration: BoxDecoration(
                   color: kwhite,
@@ -70,8 +71,8 @@ class _HomeContainerState extends State<HomeContainer> {
                       children: [
                         Row(
                           children: [
-                            postsController
-                                        .allPostList[index].user.profilePicture ==
+                            postsController.allPostList[index].user
+                                        .profilePicture ==
                                     null
                                 ? const CircleAvatar(
                                     backgroundImage: AssetImage(
@@ -79,8 +80,9 @@ class _HomeContainerState extends State<HomeContainer> {
                                     radius: 25,
                                   )
                                 : CircleAvatar(
-                                    backgroundImage: NetworkImage(postsController
-                                        .allPostList[index].user.profilePicture),
+                                    backgroundImage: NetworkImage(
+                                        postsController.allPostList[index].user
+                                            .profilePicture),
                                   ),
                             const SizedBox(
                               width: 10,
@@ -103,7 +105,8 @@ class _HomeContainerState extends State<HomeContainer> {
                         Text(
                           timeago.format(
                               postsController.allPostList[index].createdAt),
-                          style: const TextStyle(fontSize: 15,fontWeight: FontWeight.w500),
+                          style: const TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
@@ -115,7 +118,8 @@ class _HomeContainerState extends State<HomeContainer> {
                       children: [
                         Text(
                           postsController.allPostList[index].title,
-                          style: TextStyle(fontSize: 18.5,fontWeight: FontWeight.w500),
+                          style: const TextStyle(
+                              fontSize: 18.5, fontWeight: FontWeight.w500),
                         )
                       ],
                     ),
@@ -130,7 +134,6 @@ class _HomeContainerState extends State<HomeContainer> {
                           postsController.allPostList[index].body.toString(),
                           fit: BoxFit.cover,
                           width: size.width * 0.3,
-                          height: size.height * 0.4,
                         ),
                       ),
                     ],
@@ -153,7 +156,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                         builder: (context) {
                                           return AlertDialog(
                                             content: Container(
-                                             // decoration: BoxDecoration(),
+                                              // decoration: BoxDecoration(),
                                               height: 440,
                                               width: 290,
                                               child: Column(
@@ -165,7 +168,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                           onPressed: () {
                                                             Get.back();
                                                           },
-                                                          icon: Icon(Icons
+                                                          icon: const Icon(Icons
                                                               .arrow_back)),
                                                       Text(
                                                         'Reactions',
@@ -182,72 +185,59 @@ class _HomeContainerState extends State<HomeContainer> {
                                                       builder: (_) {
                                                     return Container(
                                                       height: 350,
-                                                width: 290,
-                                                      child:
-                                                          ListView.separated(
-                                                        physics:
-                                                            BouncingScrollPhysics(),
-                                                        itemCount:
-                                                            postController
-                                                                .likesList
-                                                                .length,
-                                                        itemBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return GestureDetector(
-                                                            onTap: () {},
-                                                            child: ListTile(
-                                                                leading: postController
-                                                                            .likesList[
-                                                                                index]
-                                                                            .picture ==
-                                                                        ""
-                                                                    ? const CircleAvatar(
-                                                                        radius:
-                                                                            40,
-                                                                        backgroundImage:
-                                                                            AssetImage('assets/images/createprofile.png'),
-                                                                      )
-                                                                    : CircleAvatar(
-                                                                        radius:
-                                                                            40,
-                                                                        backgroundImage: NetworkImage(postController
+                                                      width: 290,
+                                                      child: postController
+                                                              .likesList.isEmpty
+                                                          ? const Center(
+                                                              child: Text(
+                                                                  "No Likes Yet!"),
+                                                            )
+                                                          : ListView.separated(
+                                                              physics:
+                                                                  BouncingScrollPhysics(),
+                                                              itemCount:
+                                                                  postController
+                                                                      .likesList
+                                                                      .length,
+                                                              itemBuilder:
+                                                                  (BuildContext
+                                                                          context,
+                                                                      int index) {
+                                                                return GestureDetector(
+                                                                  onTap: () {},
+                                                                  child: ListTile(
+                                                                      leading: postController.likesList[index].picture == ""
+                                                                          ? const CircleAvatar(
+                                                                              radius: 40,
+                                                                              backgroundImage: AssetImage('assets/images/createprofile.png'),
+                                                                            )
+                                                                          : CircleAvatar(
+                                                                              radius: 40,
+                                                                              backgroundImage: NetworkImage(postController.likesList[index].picture),
+                                                                            ),
+                                                                      title: Text(postController.likesList[index].userName),
+                                                                      subtitle: Text(postController.likesList[index].userName),
+                                                                      trailing: Text(
+                                                                        timeago.format(postController
                                                                             .likesList[index]
-                                                                            .picture),
-                                                                      ),
-                                                                title: Text(postController
-                                                                    .likesList[
-                                                                        index]
-                                                                    .userName),
-                                                                subtitle: Text(postController
-                                                                    .likesList[
-                                                                        index]
-                                                                    .userName),
-                                                                trailing:
-                                                                    Text(
-                                                                  timeago.format(postController
-                                                                      .likesList[
-                                                                          index]
-                                                                      .createdAt),
-                                                                  style: const TextStyle(
-                                                                      fontSize:
-                                                                          10),
-                                                                )),
-                                                          );
-                                                        },
-                                                        separatorBuilder:
-                                                            (BuildContext
-                                                                    context,
-                                                                int index) {
-                                                          return const Divider(
-                                                            height: 1,
-                                                          );
-                                                        },
-                                                      ),
+                                                                            .createdAt),
+                                                                        style: const TextStyle(
+                                                                            fontSize:
+                                                                                10),
+                                                                      )),
+                                                                );
+                                                              },
+                                                              separatorBuilder:
+                                                                  (BuildContext
+                                                                          context,
+                                                                      int index) {
+                                                                return const Divider(
+                                                                  height: 1,
+                                                                );
+                                                              },
+                                                            ),
                                                     );
                                                   }),
-                                                 
                                                 ],
                                               ),
                                             ),
@@ -259,7 +249,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                   Icons.favorite,
                                   color: Colors.pink,
                                   size: 15,
-                            )),
+                                )),
                             Text(
                               postsController.allPostList[index].likeCount
                                   .toString(),
@@ -293,7 +283,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  0.6,
+                                                  0.53,
                                               decoration:
                                                   BoxDecoration(color: kwhite),
                                               child: Row(
@@ -309,7 +299,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                               .allPostList[
                                                                   index]
                                                               .body,
-                                                          fit: BoxFit.cover,
+                                                          fit: BoxFit.contain,
                                                           width:
                                                               size.width * 0.3,
                                                           height:
@@ -324,25 +314,33 @@ class _HomeContainerState extends State<HomeContainer> {
                                                             top: 35, left: 20),
                                                     child: Container(
                                                       height: 300,
-                                                      width: 300,
+                                                      width: 250,
                                                       child: GetBuilder<
                                                               PostsController>(
                                                           builder: (_) {
-                                                        return ListView.builder(
-                                                          shrinkWrap: true,
-                                                          itemBuilder: (context,
-                                                                  index) =>
-                                                              comentsContainer(
-                                                            commentsList:
-                                                                postsController
-                                                                        .commentsList[
-                                                                    index],
-                                                          ),
-                                                          itemCount:
-                                                              postsController
-                                                                  .commentsList
-                                                                  .length,
-                                                        );
+                                                        return postsController
+                                                                .commentsList
+                                                                .isEmpty
+                                                            ? const Center(
+                                                                child: Text(
+                                                                    "No Comments Yet!"),
+                                                              )
+                                                            : ListView.builder(
+                                                                shrinkWrap:
+                                                                    true,
+                                                                itemBuilder: (context,
+                                                                        index) =>
+                                                                    comentsContainer(
+                                                                  commentsList:
+                                                                      postsController
+                                                                              .commentsList[
+                                                                          index],
+                                                                ),
+                                                                itemCount:
+                                                                    postsController
+                                                                        .commentsList
+                                                                        .length,
+                                                              );
                                                       }),
                                                     ),
                                                   ),
@@ -354,14 +352,16 @@ class _HomeContainerState extends State<HomeContainer> {
                                       );
                                     });
                               },
-                              child: Text(  '${postsController.allPostList[index].comment} Comments'
-                                  .toString(),
-                             //   '${postsController.allPostList[index].comment} comments',
+                              child: Text(
+                                '${postsController.allPostList[index].comment} Comments'
+                                    .toString(),
+                                //   '${postsController.allPostList[index].comment} comments',
                                 //   postsController
                                 //                          .allPostList[index]
                                 //                           .likeCount
                                 //                          .toString(),
-                                style: TextStyle(fontSize: 13,fontWeight: FontWeight.w500),
+                                style: TextStyle(
+                                    fontSize: 13, fontWeight: FontWeight.w500),
                               )),
                         )
                       ],
@@ -495,18 +495,15 @@ class _HomeContainerState extends State<HomeContainer> {
                                     borderSide: BorderSide.none),
                                 suffixIcon: InkWell(
                                     onTap: () {
-
-                                      print(postsController
-                                          .allPostList[index]
-                                          .textEditingController
-                                          .text);
+                                      print(postsController.allPostList[index]
+                                          .textEditingController.text);
                                       if (postsController
                                           .allPostList[index]
                                           .textEditingController
                                           .text
                                           .isNotEmpty) {
                                         postController.postComments(
-                                          index: index,
+                                            index: index,
                                             userID: profileController
                                                 .profileData.first.user.id
                                                 .toString(),
@@ -566,7 +563,8 @@ class _HomeContainerState extends State<HomeContainer> {
                               ),
                             ));
                       })),
-              ksizedbox20,  ],
+                  ksizedbox20,
+                ],
               ),
             );
           },

@@ -32,8 +32,8 @@ class LikesListModel {
 
 class LikesList {
   int id;
-  String userId;
-  String postsId;
+  dynamic userId;
+  dynamic postsId;
   String type;
   DateTime createdAt;
   DateTime updatedAt;
@@ -59,8 +59,8 @@ class LikesList {
 
   factory LikesList.fromJson(Map<String, dynamic> json) => LikesList(
         id: json["id"],
-        userId: json["user_id"],
-        postsId: json["posts_id"],
+        userId: json["user_id"].toString(),
+        postsId: json["posts_id"].toString(),
         type: json["type"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),

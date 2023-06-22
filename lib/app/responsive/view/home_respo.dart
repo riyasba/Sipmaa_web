@@ -4,8 +4,6 @@ import 'package:get/get.dart';
 
 import 'package:reg_login/app/responsive/view/reactions_page.dart';
 
-
-
 import '../../modules/screens/home/views/widgets/likepost.dart';
 import '../../data/components/constands/constands.dart';
 import '../../data/components/controllers/auth_controllers.dart';
@@ -18,7 +16,6 @@ import '../widgets/drawer.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 import 'coments.dart';
-
 
 class HomepageRespo extends StatefulWidget {
   HomepageRespo({super.key});
@@ -66,12 +63,12 @@ class _HomepageRespoState extends State<HomepageRespo> {
           padding: const EdgeInsets.all(8.0),
           child: ListView.separated(
             separatorBuilder: (BuildContext context, int index) =>
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
             shrinkWrap: true,
             itemCount: postsController.allPostList.length,
             itemBuilder: (context, index) {
               return Container(
-               // height: MediaQuery.of(context).size.height * 0.8,
+                // height: MediaQuery.of(context).size.height * 0.8,
                 width: MediaQuery.of(context).size.width * 0.38,
                 decoration: BoxDecoration(
                     color: kwhite,
@@ -439,7 +436,8 @@ class _HomepageRespoState extends State<HomepageRespo> {
                       //             ),
                       //           ));
                       //     }))
-                  ksizedbox20  ],
+                      ksizedbox20
+                    ],
                   ),
                 ),
               );

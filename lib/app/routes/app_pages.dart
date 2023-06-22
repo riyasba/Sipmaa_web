@@ -80,15 +80,15 @@ class AppPages {
       page: () => const ps (),
       // binding: SignInBinding(),
     ),
-      GetPage(
+    GetPage(
       name: _Paths.Settings_page,
       page: () => const SettingsPage(), 
       // binding: SignInBinding(),
     ),
     GetPage(
-      
       name: _Paths.Change_password,
       page: () => const demo (),
       // binding: SignInBinding(),
-    ),];
+    ),
+    ];
 }

@@ -3,9 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-
 import 'package:get/get.dart';
-
+import 'package:reg_login/app/data/models/notification_model.dart';
+import 'package:reg_login/app/modules/screens/home/controler/controler.dart';
+import 'package:reg_login/app/responsive/view/friendsrespo.dart';
+import 'package:reg_login/app/responsive/view/from_notification_view/notification_comment_view.dart';
+import 'package:reg_login/app/responsive/view/from_notification_view/notification_reaction_screen_view.dart';
 
 import '../../data/components/controllers/posts_controller.dart';
 import '../../data/components/controllers/profile_controller.dart';
@@ -24,46 +27,43 @@ class _Notificaton_screenState extends State<Notificaton_screen> {
   final profileController = Get.find<ProfileController>();
 
   final postController = Get.find<PostsController>();
+  final homeController = Get.find<HomeController>();
   @override
   void initState() {
     super.initState();
     profileController.getNotificationList();
   }
 
-  // redirectToPages({dynamic response}) async {
-  //   NotificationDataModel notificationModel =
-  //       NotificationDataModel.fromJson(response);
+  redirectToPages({dynamic response}) async {
+    NotificationDataModel notificationModel =
+        NotificationDataModel.fromJson(response);
 
-  //   if (notificationModel.type == "like_Post") {
-  //     Get.offAll(NotficationReactionView(
-  //       likeCount: 100,
-  //       postId: int.parse(notificationModel.id.toString()),
-  //     ));
-  //   } else if (notificationModel.type == "comment_Post") {
-  //     Get.offAll(() => NotoficationCommentView(
-  //           postId: int.parse(notificationModel.id.toString()),
-  //         ));
-  //   } else if (notificationModel.type == "Friend_Request") {
-  //     Get.offAll(() => BottomNavigationBarExample(
-  //           index: 1,
-  //         ));
-  //   } else if (notificationModel.type == "Friend_Request_accepted") {
-  //     Get.offAll(() => BottomNavigationBarExample(
-  //           index: 1,
-  //         ));
-  //   } else {
-  //     Get.offAll(() => BottomNavigationBarExample());
-  //   }
-  // }
+    if (notificationModel.type == "like_Post") {
+      Get.offAll(NotficationReactionView(
+        likeCount: 100,
+        postId: int.parse(notificationModel.id.toString()),
+      ));
+    } else if (notificationModel.type == "comment_Post") {
+      Get.offAll(() => NotoficationCommentView(
+            postId: int.parse(notificationModel.id.toString()),
+          ));
+    } else if (notificationModel.type == "Friend_Request") {
+      Get.to(Friends_screen());
+    } else if (notificationModel.type == "Friend_Request_accepted") {
+      Get.to(Friends_screen());
+    } else {
+      Get.offAll(() => HomepageRespo());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
+        preferredSize: const Size.fromHeight(60),
         child: ComenappBarmob(),
       ),
-      drawer: MobileDrawer(),
+      drawer: const MobileDrawer(),
       body: GetBuilder<ProfileController>(builder: (_) {
         return profileController.notificationList.isEmpty
             ? const Center(
@@ -78,11 +78,12 @@ class _Notificaton_screenState extends State<Notificaton_screen> {
                       var data = jsonDecode(
                           profileController.notificationList[index].data);
 
-                      //     redirectToPages(response: data);
+                      redirectToPages(response: data);
                     },
                     child: ListTile(
                       leading: const CircleAvatar(
                         radius: 40,
+                        backgroundColor: Colors.white,
                         backgroundImage:
                             AssetImage('assets/icons/profile_icon.png'),
                       ),

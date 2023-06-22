@@ -7,6 +7,7 @@ import '../../../../../../data/components/controllers/posts_controller.dart';
 import '../../../../../../data/components/controllers/profile_controller.dart';
 import '../../../../../../data/models/comment_list_model.dart';
 import 'package:timeago/timeago.dart' as timeago;
+
 class comentsContainer extends StatefulWidget {
   CommentsList commentsList;
   comentsContainer({super.key, required this.commentsList});
@@ -24,7 +25,6 @@ class _comentsContainerState extends State<comentsContainer> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Row(
-      
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // GetBuilder<ProfileController>(builder: (_) {
@@ -55,29 +55,32 @@ class _comentsContainerState extends State<comentsContainer> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                widget.commentsList.userName,
-                style: TextStyle(fontWeight: FontWeight.bold),
+              Row(
+                children: [
+                  Container(
+                    width: 150,
+                    child: Text(
+                      widget.commentsList.userName,
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Text(
+                    timeago.format(widget.commentsList.createdAt),
+                    //    widget.commentsList.createdAt,
+                    style: const TextStyle(fontSize: 11),
+                  ),
+                ],
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 2),
                 child: Text(
                   widget.commentsList.comment,
-                  style: TextStyle(fontSize: 11.3, fontWeight: FontWeight.w600),
+                  style: const TextStyle(fontSize: 11.3, fontWeight: FontWeight.w600),
                 ),
               )
             ],
           ),
         ),
-        Row(mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Text(
-              timeago.format(widget.commentsList.createdAt),
-              //    widget.commentsList.createdAt,
-              style: TextStyle(fontSize: 11),
-            ),
-          ],
-        )
       ],
     );
   }

@@ -35,8 +35,8 @@ class CommentsListModel {
 
 class CommentsList {
   int id;
-  String userId;
-  String postsId;
+  dynamic userId;
+  dynamic postsId;
   String comment;
   String type;
   DateTime createdAt;
@@ -64,8 +64,8 @@ class CommentsList {
 
   factory CommentsList.fromJson(Map<String, dynamic> json) => CommentsList(
         id: json["id"],
-        userId: json["user_id"],
-        postsId: json["posts_id"],
+        userId: json["user_id"].toString(),
+        postsId: json["posts_id"].toString(),
         comment: json["comment"],
         type: json["type"],
         createdAt: DateTime.parse(json["created_at"]),

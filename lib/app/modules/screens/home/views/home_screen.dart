@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xffCAE1FF),
+        backgroundColor: const Color(0xffCAE1FF),
         leadingWidth: 100,
         leading: Padding(
           padding: const EdgeInsets.only(left: 20),
@@ -180,7 +180,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Icon(
                                   Icons.search,
-                                  color: homeController.homeindex == 1
+                                  color:  homeController.homeindex == 1
                                       ? kblue
                                       : kwhite,
                                 ),
@@ -350,7 +350,7 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Icon(
                               Icons.add_circle_outline,
-                              color: homeController.homeindex == 5
+                              color:  homeController.homeindex == 5
                                   ? kblue
                                   : kwhite,
                             ),

@@ -149,7 +149,7 @@ class _MobileDrawerState extends State<MobileDrawer> {
               children: [
                 TextButton(
                     onPressed: () {
-                      Get.to(Notificaton_screen());
+                      Get.to(const Notificaton_screen());
                       //    Get.to(RespoServices());
                     },
                     child: Text(

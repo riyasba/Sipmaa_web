@@ -242,7 +242,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             },
                           ),
                           ListTile(
-                            leading: Icon(Icons.privacy_tip),
+                            leading: const Icon(Icons.privacy_tip),
                             title: const Text(
                               'Privacy',
                               style: TextStyle(fontWeight: FontWeight.bold),
@@ -252,7 +252,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             },
                           ),
                           ListTile(
-                            leading: Icon(Icons.document_scanner),
+                            leading: const Icon(Icons.document_scanner),
                             title: const Text(
                               'Terms & Conditions',
                               style: TextStyle(fontWeight: FontWeight.bold),
@@ -262,7 +262,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             },
                           ),
                           ListTile(
-                            leading: Icon(Icons.logout),
+                            leading: const Icon(Icons.logout),
                             title: const Text(
                               'Logout',
                               style: TextStyle(fontWeight: FontWeight.bold),
@@ -276,7 +276,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       );
                     });
               },
-              child: Icon(Icons.settings),
+              child: const Icon(Icons.settings),
               //  child: ksettingsicon
             ),
           ),
@@ -307,7 +307,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 100,right: 10,left: 20),
+                      padding:
+                          const EdgeInsets.only(top: 100, right: 10, left: 20),
                       child: Container(
                         height: 100,
                         width: 100,

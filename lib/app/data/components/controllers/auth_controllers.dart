@@ -47,6 +47,7 @@ class AuthController extends GetxController {
   GetDepartmentServicesApi getDepartmentServicesApi =
       GetDepartmentServicesApi();
   LoginServicesApi loginServicesApi = LoginServicesApi();
+
   /// OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
   OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
   RegisterServicesApi registerServicesApi = RegisterServicesApi();

@@ -3,6 +3,7 @@ import 'dart:io';
 //import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/responsive/respologin.dart';
 import 'package:reg_login/app/data/services/post_api_service/post_liked_list_api_services.dart';
 import 'package:reg_login/app/data/models/search_post_model.dart';
@@ -49,7 +50,7 @@ class PostsController extends GetxController {
   RxBool isLoading = false.obs;
 
   GetAllPostApiServices getAllPostApiServices = GetAllPostApiServices();
-   SearchPostApiServices searchPostApiServices = SearchPostApiServices();
+  SearchPostApiServices searchPostApiServices = SearchPostApiServices();
   UploadPostApiServices uploadPostApiServices = UploadPostApiServices();
   GetProfileApiServices getProfileApiServices = GetProfileApiServices();
   PostLikeApiServices postLikeApiServices = PostLikeApiServices();
@@ -57,10 +58,10 @@ class PostsController extends GetxController {
       PostCommentsListApiServices();
   PostCommentsApiServices postCommentsApiServices = PostCommentsApiServices();
   PostLikesListApiServices postLikesListApiServices =
-    PostLikesListApiServices();
-PostFilterApiServices postFilterApiServices = PostFilterApiServices();
+      PostLikesListApiServices();
+  PostFilterApiServices postFilterApiServices = PostFilterApiServices();
 
-   PostDelteApiServices postDelteApiServices = PostDelteApiServices();
+  PostDelteApiServices postDelteApiServices = PostDelteApiServices();
 
   List<Post> allPostList = [];
   List<Post> filterList = [];
@@ -80,12 +81,12 @@ PostFilterApiServices postFilterApiServices = PostFilterApiServices();
 //  var token = await FirebaseMessaging.instance.getToken();
 //Get.find<AuthController>().fcmtoken(
 //    token: token.toString(), id: profileModel.user.id.toString());
-    //  print("............firebase token.......=====================>>>");
+      //  print("............firebase token.......=====================>>>");
       //print(token);
     } else if (response.statusCode == 401) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", "null");
-     // Get.to(loginpage());
+      // Get.to(loginpage());
     }
     update();
   }
@@ -145,7 +146,7 @@ PostFilterApiServices postFilterApiServices = PostFilterApiServices();
     update();
   }
 
-   postFilrertLike(
+  postFilrertLike(
       {required String postId,
       required String isLiked,
       required int index}) async {
@@ -221,8 +222,8 @@ PostFilterApiServices postFilterApiServices = PostFilterApiServices();
     if (response.statusCode == 200) {
       getComments(postId: postId);
       int commentCount = Get.find<PostsController>().allPostList[index].comment;
-       Get.find<PostsController>().allPostList[index].comment = commentCount + 1;
-       Get.find<PostsController>().update();
+      Get.find<PostsController>().allPostList[index].comment = commentCount + 1;
+      Get.find<PostsController>().update();
       Get.rawSnackbar(
         messageText: const Text(
           "Comment posted",
@@ -253,7 +254,7 @@ PostFilterApiServices postFilterApiServices = PostFilterApiServices();
     update();
   }
 
- getLikesList({required String postId}) async {
+  getLikesList({required String postId}) async {
     dio.Response<dynamic> response =
         await postLikesListApiServices.postLikesLists(postId: postId);
 
@@ -263,14 +264,16 @@ PostFilterApiServices postFilterApiServices = PostFilterApiServices();
     }
     update();
   }
+
   deletePost({required String postId}) async {
     dio.Response<dynamic> response =
         await postDelteApiServices.postDelete(postID: postId);
-
     if (response.statusCode == 200) {
-    //  getProfile();
+      //  getProfile();
       getAllPost();
-      Get.offAll(() => loginpagerespo());
+      Get.find<ProfileController>().getProfile();
+      Get.back();
+      Get.back();
       Get.rawSnackbar(
         messageText: const Text(
           "Post deleted",

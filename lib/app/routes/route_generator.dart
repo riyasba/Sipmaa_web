@@ -41,7 +41,7 @@ class RouteGenerator {
 
   case Routes.Profile_Screen:
         return _GeneratePageRoute(
-            widget: ps (), routeName: settings.name);
+            widget: ps(), routeName: settings.name);
 
 
 
@@ -52,7 +52,7 @@ case Routes.Settings_page:
 
 case Routes.Change_password:
         return _GeneratePageRoute(
-            widget:  demo (), routeName: settings.name);
+            widget:  demo(), routeName: settings.name);
 
 
       case Routes.OTP_VIEWS:
