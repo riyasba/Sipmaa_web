@@ -46,7 +46,8 @@ class _SignInViewState extends State<SignInView> {
     return Scaffold(
       backgroundColor: kblue,
       body: Padding(
-        padding: const EdgeInsets.only(left: 45,right: 45,bottom: 20,top: 30),
+        padding:
+            const EdgeInsets.only(left: 45, right: 45, bottom: 20, top: 30),
         child: Center(
           child: Container(
             decoration: BoxDecoration(
@@ -279,7 +280,7 @@ class _SignInViewState extends State<SignInView> {
                                           floatingLabelBehavior:
                                               FloatingLabelBehavior.never,
                                           fillColor: Colors.grey[250],
-                                          labelText: 'Enter Email Id',
+                                          labelText: 'Enter User name',
                                           hintStyle: TextStyle(
                                             color: Colors.grey[500],
                                           ),

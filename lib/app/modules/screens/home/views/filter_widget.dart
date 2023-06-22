@@ -248,7 +248,6 @@ class _FillterWidgetState extends State<FillterWidget> {
                                         .toString(),
                                     fit: BoxFit.cover,
                                     width: size.width * 0.3,
-                                    height: size.height * 0.4,
                                   ),
                                 ),
                               ],
@@ -477,7 +476,7 @@ class _FillterWidgetState extends State<FillterWidget> {
                                           //                          .filterList[index]
                                           //                           .likeCount
                                           //                          .toString(),
-                                          style: TextStyle(
+                                          style: const TextStyle(
                                               fontSize: 13,
                                               fontWeight: FontWeight.w500),
                                         )),
@@ -604,18 +603,20 @@ class _FillterWidgetState extends State<FillterWidget> {
                                         borderRadius: BorderRadius.circular(15),
                                         boxShadow: <BoxShadow>[
                                           BoxShadow(
-                                              offset: Offset(0.0, 0.80),
+                                              offset: const Offset(0.0, 0.80),
                                               color: kgrey.withOpacity(0.4),
                                               blurRadius: 0.2)
                                         ]),
                                     height: 42,
                                     width: MediaQuery.of(context).size.width,
-                                    child: TextField(
+                                    child: TextFormField(
                                       controller: postsController
                                           .filterList[index]
                                           .textEditingController,
                                       decoration: InputDecoration(
-                                        border: OutlineInputBorder(
+                                        isDense: true,
+                                        
+                                        border: const OutlineInputBorder(
                                             borderSide: BorderSide.none),
                                         suffixIcon: InkWell(
                                             onTap: () {
@@ -660,8 +661,9 @@ class _FillterWidgetState extends State<FillterWidget> {
                                               }
                                             },
                                             child: Icon(Icons.send)),
-                                        hintText: '  Write Comment',
-                                        hintStyle: TextStyle(
+                                            contentPadding: EdgeInsets.symmetric(horizontal: 20),
+                                        hintText: 'Write Comment',
+                                        hintStyle: const TextStyle(
                                             fontSize: 12, color: Colors.black),
                                         prefixIcon: profileController
                                                 .profileData.isEmpty
@@ -670,32 +672,35 @@ class _FillterWidgetState extends State<FillterWidget> {
                                                 height: 10,
                                                 color: Colors.red,
                                               )
-                                            : Container(
-                                                width: 20,
-                                                child: Row(
-                                                  children: [
-                                                    profileController
-                                                                .profileData
-                                                                .first
-                                                                .user
-                                                                .profilePicture ==
-                                                            null
-                                                        ? const CircleAvatar(
-                                                            backgroundImage:
-                                                                AssetImage(
-                                                                    'assets/images/createprofile.png'),
-                                                          )
-                                                        : CircleAvatar(
-                                                            backgroundImage: NetworkImage(
-                                                                profileController
-                                                                    .profileData
-                                                                    .first
-                                                                    .user
-                                                                    .profilePicture),
-                                                          ),
-                                                  ],
+                                            : Padding(
+                                              padding: const EdgeInsets.only(right: 40),
+                                              child: Container(
+                                                  width: 10,
+                                                  child: Row(
+                                                    children: [
+                                                      profileController
+                                                                  .profileData
+                                                                  .first
+                                                                  .user
+                                                                  .profilePicture ==
+                                                              null
+                                                          ? const CircleAvatar(
+                                                              backgroundImage:
+                                                                  AssetImage(
+                                                                      'assets/images/createprofile.png'),
+                                                            )
+                                                          : CircleAvatar(
+                                                              backgroundImage: NetworkImage(
+                                                                  profileController
+                                                                      .profileData
+                                                                      .first
+                                                                      .user
+                                                                      .profilePicture),
+                                                            ),
+                                                    ],
+                                                  ),
                                                 ),
-                                              ),
+                                            ),
                                       ),
                                     ),
                                   );

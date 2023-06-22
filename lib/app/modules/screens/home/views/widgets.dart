@@ -170,7 +170,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                           },
                                                           icon: const Icon(Icons
                                                               .arrow_back)),
-                                                      Text(
+                                                     const Text(
                                                         'Reactions',
                                                         style: TextStyle(
                                                             fontSize: 16,
@@ -530,8 +530,8 @@ class _HomeContainerState extends State<HomeContainer> {
                                       }
                                     },
                                     child: Icon(Icons.send)),
-                                hintText: '  Write Comment',
-                                hintStyle: TextStyle(
+                                hintText: 'Write Comment',
+                                hintStyle: const TextStyle(
                                     fontSize: 12, color: Colors.black),
                                 prefixIcon: profileController
                                         .profileData.isEmpty
@@ -540,25 +540,30 @@ class _HomeContainerState extends State<HomeContainer> {
                                         height: 10,
                                         color: Colors.red,
                                       )
-                                    : Container(
-                                        width: 20,
-                                        child: Row(children: [
-                                          profileController.profileData.first
-                                                      .user.profilePicture ==
-                                                  null
-                                              ? const CircleAvatar(
-                                                  backgroundImage: AssetImage(
-                                                      'assets/images/createprofile.png'),
-                                                )
-                                              : CircleAvatar(
-                                                  backgroundImage: NetworkImage(
-                                                      profileController
-                                                          .profileData
-                                                          .first
-                                                          .user
-                                                          .profilePicture),
-                                                ),
-                                        ]),
+                                    : Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 30),
+                                        child: Container(
+                                          width: 20,
+                                          child: Row(children: [
+                                            profileController.profileData.first
+                                                        .user.profilePicture ==
+                                                    null
+                                                ? const CircleAvatar(
+                                                    backgroundImage: AssetImage(
+                                                        'assets/images/createprofile.png'),
+                                                  )
+                                                : CircleAvatar(
+                                                    backgroundImage:
+                                                        NetworkImage(
+                                                            profileController
+                                                                .profileData
+                                                                .first
+                                                                .user
+                                                                .profilePicture),
+                                                  ),
+                                          ]),
+                                        ),
                                       ),
                               ),
                             ));

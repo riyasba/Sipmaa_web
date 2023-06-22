@@ -374,11 +374,21 @@ class _friendContinerState extends State<friendContiner> {
         padding: const EdgeInsets.only(left: 10, top: 20),
         child: Row(
           children: [
-            Image.asset(
-              'assets/images/profile.png',
-              fit: BoxFit.fitHeight,
-              height: 30,
-            ),
+            widget.friendList.profile == ""
+                ? const CircleAvatar(
+                  foregroundColor: Colors.white,
+                    backgroundImage:
+                        AssetImage('assets/images/profile_icon.png'),
+                    
+                  )
+                : CircleAvatar(
+                    backgroundImage: NetworkImage(widget.friendList.profile),
+                  ),
+            // Image.asset(
+            //   'assets/images/profile.png',
+            //   fit: BoxFit.fitHeight,
+            //   height: 30,
+            // ),
             Padding(
               padding: const EdgeInsets.only(left: 15),
               child: Column(
@@ -386,11 +396,11 @@ class _friendContinerState extends State<friendContiner> {
                 children: [
                   Text(
                     widget.friendList.name,
-                    style: TextStyle(fontWeight: FontWeight.w900),
+                    style: const TextStyle(fontWeight: FontWeight.w900),
                   ),
                   Text(
-                    'HR community',
-                    style: TextStyle(fontSize: 11),
+                    widget.friendList.designation,
+                    style: const TextStyle(fontSize: 11),
                   )
                 ],
               ),

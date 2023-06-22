@@ -81,7 +81,9 @@ class _RegisterViewsState extends State<RegisterViews> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Image.asset(
-                            'assets/images/logo (3).png',
+                            'assets/icons/sipmaa.jpg',
+                            height: 150,
+                            fit: BoxFit.contain,
                           ),
                         ),
                         ksizedbox10,

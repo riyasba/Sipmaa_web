@@ -19,7 +19,8 @@ class SearchPostModal {
 
   factory SearchPostModal.fromJson(Map<String, dynamic> json) =>
       SearchPostModal(
-        posts: List<SearchPost>.from(json["posts"].map((x) => SearchPost.fromJson(x))),
+        posts: List<SearchPost>.from(
+            json["posts"].map((x) => SearchPost.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -29,12 +30,12 @@ class SearchPostModal {
 
 class SearchPost {
   int id;
-  String userId;
+  dynamic userId;
   String title;
   String description;
-  String status;
+  dynamic status;
   String mediaUrl;
-  String departmentId;
+  dynamic departmentId;
   String type;
   DateTime createdAt;
   DateTime updatedAt;
@@ -54,12 +55,12 @@ class SearchPost {
 
   factory SearchPost.fromJson(Map<String, dynamic> json) => SearchPost(
         id: json["id"],
-        userId: json["user_id"],
+        userId: json["user_id"].toString(),
         title: json["title"] ?? "",
         description: json["description"] ?? "",
-        status: json["status"],
+        status: json["status"].toString(),
         mediaUrl: json["media_url"] ?? "",
-        departmentId: json["department_id"] ?? "",
+        departmentId: json["department_id"].toString(),
         type: json["type"] ?? "",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),

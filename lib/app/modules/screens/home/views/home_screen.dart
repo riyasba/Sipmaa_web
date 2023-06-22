@@ -583,14 +583,7 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(top: 5),
-                              child: Image.asset(
-                                'assets/images/logoutimage.png',
-                                fit: BoxFit.fitHeight,
-                                height: 21,
-                              ),
-                            ),
+                            
                             Padding(
                               padding: const EdgeInsets.only(top: 5, left: 6),
                               child: Column(
@@ -668,8 +661,7 @@ class _HomePageState extends State<HomePage> {
             () => Row(
               children: [
                 if (homeController.homeindex.value != 4 &&
-                    homeController.homeindex.value != 7 &&
-                    homeController.homeindex.value != 3)
+                    homeController.homeindex.value != 7)
                   HomeFriendsWidget()
               ],
             ),
