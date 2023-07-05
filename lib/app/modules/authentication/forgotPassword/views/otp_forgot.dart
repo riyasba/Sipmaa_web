@@ -1,32 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
-
 import 'package:reg_login/app/data/components/controllers/auth_controllers.dart';
-
+import 'package:reg_login/app/modules/authentication/forgotPassword/views/conformpassword.dart';
 import '../../../../data/components/constands/constands.dart';
 
-class OTPVIEWS extends StatefulWidget {
+class OtpForgot extends StatefulWidget {
   String phoneNumber;
   String otp;
-  OTPVIEWS({super.key, required this.phoneNumber, required this.otp});
+  OtpForgot({super.key, required this.phoneNumber, required this.otp});
 
   @override
-  State<OTPVIEWS> createState() => _OTPVIEWSState();
+  State<OtpForgot> createState() => _OtpForgotState();
 }
 
-class _OTPVIEWSState extends State<OTPVIEWS> {
-
+class _OtpForgotState extends State<OtpForgot> {
   final authController = Get.find<AuthController>();
 
   String otpValue = "";
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(backgroundColor: kblue,
+    return Scaffold(
+      backgroundColor: kblue,
       body: Padding(
         padding: const EdgeInsets.all(50),
         child: Center(
@@ -39,23 +37,32 @@ class _OTPVIEWSState extends State<OTPVIEWS> {
                   child: Container(
                     //    height: 400,
                     //  width: 500,
-        
-                    child: Column(mainAxisAlignment: MainAxisAlignment.center,
+
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
-                          height: 30,
+                        // SizedBox(
+                        //   height: 30,
+
+                        // ),
+
+                        ksizedbox10,
+                        Image.asset(
+                          'assets/images/logo (3).png',
+                          height: 150,
                         ),
-                        Text(
-                          'OTP Verification',
-                          style: ktextstyle22,
-                        ),
+                        ksizedbox10,
+                        //     kforgotI
+                        Text('OTP VERIFICATION',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold, fontSize: 35)),
                         SizedBox(
                           height: 30,
                         ),
                         Text(
                           'Enter the OTP sent to',
-                          style:
-                              TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
+                          style: TextStyle(
+                              fontSize: 17, fontWeight: FontWeight.w400),
                         ),
                         Text(
                           widget.phoneNumber,
@@ -84,7 +91,7 @@ class _OTPVIEWSState extends State<OTPVIEWS> {
                           },
                           //runs when every textfield is filled
                           onSubmit: (String verificationCode) {
-                             otpValue = verificationCode;
+                            otpValue = verificationCode;
                             // showDialog(
                             //     context: context,
                             //     builder: (context) {
@@ -111,12 +118,15 @@ class _OTPVIEWSState extends State<OTPVIEWS> {
                                 ))
                           ],
                         ),
-                        Container(width: 500,
+                        ksizedbox10,
+                        Container(
+                          width: 500,
                           child: SizedBox(
                             height: 45,
                             width: double.infinity,
                             child: Padding(
-                              padding: const EdgeInsets.only(left: 20, right: 20),
+                              padding:
+                                  const EdgeInsets.only(left: 20, right: 20),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: Color(
@@ -127,7 +137,8 @@ class _OTPVIEWSState extends State<OTPVIEWS> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  authController.otpVerify(otpValue,true);
+                                  Get.to(ConformPASSWORD());
+                                  // authController.otpVerify(otpValue,true);
                                 },
                                 //=> Get.toNamed('/register-2'),
                                 child: Text(
@@ -145,7 +156,9 @@ class _OTPVIEWSState extends State<OTPVIEWS> {
                     ),
                   ),
                 ),
-                Expanded(child: Container(child: Image.asset('assets/images/Group 85.png')))
+                Expanded(
+                    child: Container(
+                        child: Image.asset('assets/images/Group 85.png')))
               ],
             ),
           ),

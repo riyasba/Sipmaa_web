@@ -2,27 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
-import 'package:reg_login/app/modules/authentication/forgotPassword/views/otp_forgot.dart';
+import 'package:reg_login/app/modules/authentication/forgotPassword/views/verified_screen.dart';
 
 import '../../../../data/components/constands/constands.dart';
-import '../../../../data/components/constands/formfield.dart';
 import '../../../../data/components/controllers/profile_controller.dart';
-import '../../../../responsive/widgets/phone_number_text_field.dart';
-import '../../../../responsive/widgets/textfield.dart';
-import 'conformpassword.dart';
+import '../../../../data/models/widgets/password_text_field.dart';
+import '../../../../data/models/widgets/textfield.dart';
 
-class FORGOTPASSWORD extends StatefulWidget {
-  const FORGOTPASSWORD({super.key});
+class ConformPASSWORD extends StatefulWidget {
+  const ConformPASSWORD({super.key});
 
   @override
-  State<FORGOTPASSWORD> createState() => _FORGOTPASSWORDState();
+  State<ConformPASSWORD> createState() => _ConformPASSWORDState();
 }
 
-class _FORGOTPASSWORDState extends State<FORGOTPASSWORD> {
-  final profileController = Get.find<ProfileController>();
+class _ConformPASSWORDState extends State<ConformPASSWORD> {
 
-  var mobileOrEmailController = TextEditingController();
-
+ final profileController = Get.find<ProfileController>();
+  String otpValue = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +40,6 @@ class _FORGOTPASSWORDState extends State<FORGOTPASSWORD> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        ksizedbox10,
                         Image.asset(
                           'assets/images/logo (3).png',
                           height: 150,
@@ -51,34 +47,44 @@ class _FORGOTPASSWORDState extends State<FORGOTPASSWORD> {
                         ksizedbox10,
                         //     kforgotImage,
                         Text(
-                          'FORGET PASSWORD',
+                          'Create New Password',
                           style: TextStyle(
                               fontSize: 35, fontWeight: FontWeight.bold),
                         ),
                         ksizedbox30,
-                        Text(
-                          'Please Enter Your Email Addreass or',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: kgrey,
-                              fontSize: 18),
-                        ),
-                        Text(
-                          'Mobile Number to Receive a Verification',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              color: kgrey,
-                              fontSize: 18),
-                        ),
-                        ksizedbox30,
 
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: TextPhoneformfieldWidget(
-                              controller: mobileOrEmailController,
-                              text: 'Enter Email Addreass or Mobile Number',
-                              textt: 'Enter Email Addreass or Mobile Number'),
-                        ),
+                        // Text(
+                        //   'Mobile Number to Receive a Verification',
+                        //   style: TextStyle(
+                        //       fontWeight: FontWeight.w600, fontSize: 18),
+                        // ),
+
+                        PassWordTextformfieldWidget(
+                            //   controller: createPassWordController,
+                            validationText: "Create Password can't be empty",
+                            text: 'Enter New Password',
+                            textt: 'Enter New Password'),
+                        // TextformfieldWidget(
+                        //     text: 'Enter Email Id', textt: 'Email Id'),
+                        PassWordTextformfieldWidget(
+                            //  controller: confirmPasswordController,
+                            validationText: "Conform Password can't be empty",
+                            text: 'Enter Confirm Password',
+                            textt: 'Enter Confirm Password'),
+
+                        // Padding(
+                        //   padding: const EdgeInsets.all(12.0),
+                        //   child: TextformfieldWidget(
+                        //     text: 'New Password',
+                        //     textt: "Enter New Password",
+                        //   ),
+                        // ),ksizedbox10,    Padding(
+                        //   padding: const EdgeInsets.all(12.0),
+                        //   child: TextformfieldWidget(
+                        //     text: 'Enter Conform Password',
+                        //     textt: "Conform Password",
+                        //   ),
+                        // ),
                         ksizedbox30,
                         SizedBox(
                           height: 45,
@@ -95,14 +101,11 @@ class _FORGOTPASSWORDState extends State<FORGOTPASSWORD> {
                                 ),
                               ),
                               onPressed: () {
-                                Get.to(profileController.forgetPassword(
-                                    mobileoremail:
-                                        mobileOrEmailController.text,isFromMobile: false));
-
+                                Get.to(Verified());
                                 //     Get.off(registerpage());
                               },
                               child: Text(
-                                'Sent It',
+                                'Done',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
@@ -116,7 +119,7 @@ class _FORGOTPASSWORDState extends State<FORGOTPASSWORD> {
                 ),
                 Expanded(
                     child: Container(
-                        child: Image.asset('assets/images/Asset 11 4.png')))
+                        child: Image.asset('assets/images/Group 92.png')))
               ],
             ),
           ),

@@ -99,6 +99,17 @@ abstract class BaseApiService {
 
   String deletePostURL =
       "https://sipmaaindia.com/api/auth/delete_post";
+
+ //forget password
+  String forgotPassword = "https://sipmaaindia.com/api/forgotPassword";
+
+  //verify-otp
+  String verifyOtp = "https://sipmaaindia.com/api/verifyOTP";
+
+  //reset password
+  String resetPassword = "https://sipmaaindia.com/api/resetpassword";
+
+
 }
 //  final String updateProfileURL =
 //       "https://sipmaaindia.com/api/auth/profile_update";

@@ -28,6 +28,12 @@ import 'package:dio/dio.dart' as dio;
 // import 'package:simpa/view/login/login_view/loginpage.dart';
 // import 'package:simpa/view/profile_sccuessful_page.dart';
 
+import '../../../modules/authentication/forgotPassword/views/conformpassword.dart';
+import '../../../modules/authentication/forgotPassword/views/forgotpassword.dart';
+import '../../../modules/authentication/forgotPassword/views/otp_forgot.dart';
+import '../../../responsive/forgotrespo/create_new_password.dart';
+import '../../../responsive/forgotrespo/forgot_password_verifypage.dart';
+import '../../../responsive/forgotrespo/sucessfull.dart';
 import '../../models/friend_list_model.dart';
 import '../../models/friend_request_model.dart';
 import '../../models/notiofication_list_model.dart';
@@ -36,7 +42,10 @@ import '../../models/profile_model.dart';
 import '../../services/notification_list/notification_list.dart';
 import '../../services/post_api_service/get_other_profile_api_services.dart';
 import '../../services/post_api_service/post_liked_list_api_services.dart';
+import '../../services/profile_api_service/forgetPwd_verify_otp_api_services.dart';
+import '../../services/profile_api_service/forget_password_api_service.dart';
 import '../../services/profile_api_service/my_friend_list_api_services.dart';
+import '../../services/profile_api_service/reset_password_api_service.dart';
 import '../../services/profile_api_service/send_friend_request.dart';
 import '../../services/profile_api_service/update_profile_pic.dart';
 
@@ -336,4 +345,123 @@ class ProfileController extends GetxController {
       getProfile();
     }
   }
+
+    //verfify otp
+  ForgetPwdVerifyOtpApiServices forgetPwdVerifyOtpApiServices = ForgetPwdVerifyOtpApiServices();
+
+  verifyOtpfpwd({required String otp}) async {
+
+    dio.Response<dynamic> response = await forgetPwdVerifyOtpApiServices.
+    forgetPwdVerifyOtpApiServices(otp: otp);
+
+    if(response.statusCode == 200){
+
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("mobile", response.data["data"].toString());
+      
+      Get.to(const CreateNewPassword());
+
+    } else if(response.statusCode == 404){
+      Get.rawSnackbar(
+        messageText: Text(
+          response.data["message"],
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    } else if(response.statusCode == 400){
+      Get.rawSnackbar(
+        messageText: Text(
+          response.data["message"],
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    } else if(response.statusCode == 422){
+      Get.rawSnackbar(
+        messageText: const Text("The otp field is required.",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    } else {
+      Get.rawSnackbar(
+        messageText: const Text("Something went wrong",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
+
+
+  ForgetPasswordApiServices forgetPasswordApiServices = ForgetPasswordApiServices();
+
+  forgetPassword({required String mobileoremail,required bool isFromMobile}) async {
+
+    dio.Response<dynamic> response = await forgetPasswordApiServices.
+    forgetPasswordApiServices(mobileoremail: mobileoremail);
+
+    if(response.statusCode == 200){
+      final prefs = await SharedPreferences.getInstance();
+      print("OTP---------------------------------->>>>>>>${response.data["data"].toString()}");
+      await prefs.setString("data", response.data["data"].toString());
+
+      if(isFromMobile){
+Get.to(const Forgotpasswordverifiypage());
+      }else{
+        Get.to(OtpForgot(otp: '', phoneNumber: '',));
+      }
+        
+    }else{
+      Get.rawSnackbar(
+        messageText: Text(
+          response.data["message"],
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+
+
+  }
+
+    //reset password
+  ResetPwdApiServices resetPwdApiServices = ResetPwdApiServices();
+
+  resetPassword({ required String password,required String confirmPassword}) async {
+     
+     dio.Response<dynamic> response = await resetPwdApiServices.
+     resetPwdApiServices(password: password, confirmPassword: confirmPassword);
+
+     if(response.statusCode == 200){
+      
+      Get.to(const Sucessfullscreen());
+
+     } else if(response.statusCode == 422){
+        Get.rawSnackbar(
+        messageText: const Text("The password field confirmation does not match.",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+     } else if(response.statusCode == 404){
+      Get.rawSnackbar(
+        messageText: Text(
+          response.data["message"],
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    } else {
+      Get.rawSnackbar(
+        messageText: const Text("Something went wrong",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+
+  }
+
 }
