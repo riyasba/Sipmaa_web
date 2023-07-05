@@ -246,7 +246,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
                   onPressed: () {
                     profileController.resetPassword(
                       password: passwordController.text,
-                      confirmPassword: confirmpasswordController.text);
+                      confirmPassword: confirmpasswordController.text, isFromMobile: true);
                     // Get.to(const Sucessfullscreen());
                   },
                   child:const Text(

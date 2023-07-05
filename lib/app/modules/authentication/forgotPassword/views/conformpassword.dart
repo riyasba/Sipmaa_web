@@ -20,6 +20,32 @@ class _ConformPASSWORDState extends State<ConformPASSWORD> {
 
  final profileController = Get.find<ProfileController>();
   String otpValue = "";
+   var passwordController = TextEditingController();
+   var confirmpasswordController = TextEditingController();
+   final textFieldFocusNode = FocusNode();
+   final textFieldFocusNode1 = FocusNode();
+
+  bool _obscured = false;
+   bool _obscured1 = false;
+
+  void _toggleObscured() {
+    setState(() {
+      _obscured = !_obscured;
+      if (textFieldFocusNode.hasPrimaryFocus) return;
+      textFieldFocusNode.canRequestFocus = false;
+    });
+  }
+
+  void _toggleObscured2() {
+    setState(() {
+      _obscured1 = !_obscured1;
+      if (textFieldFocusNode1.hasPrimaryFocus) return;
+      textFieldFocusNode1.canRequestFocus = false;
+    });
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,14 +86,14 @@ class _ConformPASSWORDState extends State<ConformPASSWORD> {
                         // ),
 
                         PassWordTextformfieldWidget(
-                            //   controller: createPassWordController,
+                               controller:  passwordController,
                             validationText: "Create Password can't be empty",
                             text: 'Enter New Password',
                             textt: 'Enter New Password'),
                         // TextformfieldWidget(
                         //     text: 'Enter Email Id', textt: 'Email Id'),
                         PassWordTextformfieldWidget(
-                            //  controller: confirmPasswordController,
+                              controller: confirmpasswordController,
                             validationText: "Conform Password can't be empty",
                             text: 'Enter Confirm Password',
                             textt: 'Enter Confirm Password'),
@@ -100,8 +126,10 @@ class _ConformPASSWORDState extends State<ConformPASSWORD> {
                                   borderRadius: BorderRadius.circular(10.0),
                                 ),
                               ),
-                              onPressed: () {
-                                Get.to(Verified());
+                              onPressed: () {    profileController.resetPassword(
+                      password: passwordController.text,
+                      confirmPassword: confirmpasswordController.text, isFromMobile: false);
+                            //    Get.to(Verified());
                                 //     Get.off(registerpage());
                               },
                               child: Text(

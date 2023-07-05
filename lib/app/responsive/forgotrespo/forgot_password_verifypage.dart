@@ -7,7 +7,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 
 import '../../data/components/constands/constands.dart';
-import '../widgets/bottumnavigationbar.dart';
+
 
 class Forgotpasswordverifiypage extends StatefulWidget {
   const Forgotpasswordverifiypage({super.key});
@@ -130,7 +130,7 @@ class _ForgotpasswordverifiypageState extends State<Forgotpasswordverifiypage> {
                   ),
                   onPressed: () {
                     print("---------------------Entered in ${otpValue}");
-                    profileController.verifyOtpfpwd(otp: otpValue);
+                    profileController.verifyOtpfpwd(otp: otpValue, isFromMobile: true);
                   //  Get.to(const CreateNewPassword());
                   },
                   child:const Text(

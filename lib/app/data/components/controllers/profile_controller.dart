@@ -31,6 +31,7 @@ import 'package:dio/dio.dart' as dio;
 import '../../../modules/authentication/forgotPassword/views/conformpassword.dart';
 import '../../../modules/authentication/forgotPassword/views/forgotpassword.dart';
 import '../../../modules/authentication/forgotPassword/views/otp_forgot.dart';
+import '../../../modules/authentication/forgotPassword/views/verified_screen.dart';
 import '../../../responsive/forgotrespo/create_new_password.dart';
 import '../../../responsive/forgotrespo/forgot_password_verifypage.dart';
 import '../../../responsive/forgotrespo/sucessfull.dart';
@@ -126,7 +127,8 @@ class ProfileController extends GetxController {
     if (response.statusCode == 200) {
       FriendListModel friendListModel = FriendListModel.fromJson(response.data);
       myFriendList = friendListModel.friendList;
-      print("---------<<<<<<<<<-------------------------------------------------------->>>>>>>>>>>>>>------------");
+      print(
+          "---------<<<<<<<<<-------------------------------------------------------->>>>>>>>>>>>>>------------");
     }
     update();
   }
@@ -346,22 +348,23 @@ class ProfileController extends GetxController {
     }
   }
 
-    //verfify otp
-  ForgetPwdVerifyOtpApiServices forgetPwdVerifyOtpApiServices = ForgetPwdVerifyOtpApiServices();
+  //verfify otp
+  ForgetPwdVerifyOtpApiServices forgetPwdVerifyOtpApiServices =
+      ForgetPwdVerifyOtpApiServices();
 
-  verifyOtpfpwd({required String otp}) async {
+  verifyOtpfpwd({required String otp, required bool isFromMobile}) async {
+    dio.Response<dynamic> response = await forgetPwdVerifyOtpApiServices
+        .forgetPwdVerifyOtpApiServices(otp: otp);
 
-    dio.Response<dynamic> response = await forgetPwdVerifyOtpApiServices.
-    forgetPwdVerifyOtpApiServices(otp: otp);
-
-    if(response.statusCode == 200){
-
+    if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("mobile", response.data["data"].toString());
-      
-      Get.to(const CreateNewPassword());
-
-    } else if(response.statusCode == 404){
+      if (isFromMobile) {
+        Get.to(const CreateNewPassword());
+      } else {
+        Get.to(ConformPASSWORD ());
+      }
+    } else if (response.statusCode == 404) {
       Get.rawSnackbar(
         messageText: Text(
           response.data["message"],
@@ -369,7 +372,7 @@ class ProfileController extends GetxController {
         ),
         backgroundColor: Colors.red,
       );
-    } else if(response.statusCode == 400){
+    } else if (response.statusCode == 400) {
       Get.rawSnackbar(
         messageText: Text(
           response.data["message"],
@@ -377,16 +380,18 @@ class ProfileController extends GetxController {
         ),
         backgroundColor: Colors.red,
       );
-    } else if(response.statusCode == 422){
+    } else if (response.statusCode == 422) {
       Get.rawSnackbar(
-        messageText: const Text("The otp field is required.",
+        messageText: const Text(
+          "The otp field is required.",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.red,
       );
     } else {
       Get.rawSnackbar(
-        messageText: const Text("Something went wrong",
+        messageText: const Text(
+          "Something went wrong",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.red,
@@ -394,26 +399,26 @@ class ProfileController extends GetxController {
     }
   }
 
+  ForgetPasswordApiServices forgetPasswordApiServices =
+      ForgetPasswordApiServices();
 
-  ForgetPasswordApiServices forgetPasswordApiServices = ForgetPasswordApiServices();
+  forgetPassword(
+      {required String mobileoremail, required bool isFromMobile}) async {
+    dio.Response<dynamic> response = await forgetPasswordApiServices
+        .forgetPasswordApiServices(mobileoremail: mobileoremail);
 
-  forgetPassword({required String mobileoremail,required bool isFromMobile}) async {
-
-    dio.Response<dynamic> response = await forgetPasswordApiServices.
-    forgetPasswordApiServices(mobileoremail: mobileoremail);
-
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
-      print("OTP---------------------------------->>>>>>>${response.data["data"].toString()}");
+      print(
+          "OTP---------------------------------->>>>>>>${response.data["data"].toString()}");
       await prefs.setString("data", response.data["data"].toString());
 
-      if(isFromMobile){
-Get.to(const Forgotpasswordverifiypage());
-      }else{
-        Get.to(OtpForgot(otp: '', phoneNumber: '',));
+      if (isFromMobile) {
+        Get.to(const Forgotpasswordverifiypage());
+      } else {
+        Get.to(OtpForgot());
       }
-        
-    }else{
+    } else {
       Get.rawSnackbar(
         messageText: Text(
           response.data["message"],
@@ -422,30 +427,30 @@ Get.to(const Forgotpasswordverifiypage());
         backgroundColor: Colors.red,
       );
     }
-
-
   }
 
-    //reset password
+  //reset password
   ResetPwdApiServices resetPwdApiServices = ResetPwdApiServices();
 
-  resetPassword({ required String password,required String confirmPassword}) async {
-     
-     dio.Response<dynamic> response = await resetPwdApiServices.
-     resetPwdApiServices(password: password, confirmPassword: confirmPassword);
+  resetPassword(
+      {required String password, required String confirmPassword,required bool isFromMobile}) async {
+    dio.Response<dynamic> response =
+        await resetPwdApiServices.resetPwdApiServices(
+            password: password, confirmPassword: confirmPassword);
 
-     if(response.statusCode == 200){
-      
+    if (response.statusCode == 200) {
+      if(isFromMobile){
       Get.to(const Sucessfullscreen());
-
-     } else if(response.statusCode == 422){
-        Get.rawSnackbar(
-        messageText: const Text("The password field confirmation does not match.",
+      }else{Get.to(Verified());}
+    } else if (response.statusCode == 422) {
+      Get.rawSnackbar(
+        messageText: const Text(
+          "The password field confirmation does not match.",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.red,
       );
-     } else if(response.statusCode == 404){
+    } else if (response.statusCode == 404) {
       Get.rawSnackbar(
         messageText: Text(
           response.data["message"],
@@ -455,13 +460,12 @@ Get.to(const Forgotpasswordverifiypage());
       );
     } else {
       Get.rawSnackbar(
-        messageText: const Text("Something went wrong",
+        messageText: const Text(
+          "Something went wrong",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.red,
       );
     }
-
   }
-
 }

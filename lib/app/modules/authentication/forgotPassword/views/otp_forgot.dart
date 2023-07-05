@@ -4,13 +4,14 @@ import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:reg_login/app/data/components/controllers/auth_controllers.dart';
+import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/modules/authentication/forgotPassword/views/conformpassword.dart';
 import '../../../../data/components/constands/constands.dart';
 
 class OtpForgot extends StatefulWidget {
-  String phoneNumber;
-  String otp;
-  OtpForgot({super.key, required this.phoneNumber, required this.otp});
+  //String phoneNumber;
+  //String otp;
+  OtpForgot({super.key, });
 
   @override
   State<OtpForgot> createState() => _OtpForgotState();
@@ -18,6 +19,7 @@ class OtpForgot extends StatefulWidget {
 
 class _OtpForgotState extends State<OtpForgot> {
   final authController = Get.find<AuthController>();
+final profileController = Get.find<ProfileController>();
 
   String otpValue = "";
 
@@ -64,13 +66,13 @@ class _OtpForgotState extends State<OtpForgot> {
                           style: TextStyle(
                               fontSize: 17, fontWeight: FontWeight.w400),
                         ),
-                        Text(
-                          widget.phoneNumber,
-                          style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.blue),
-                        ),
+                        // Text(
+                        //   widget.phoneNumber,
+                        //   style: TextStyle(
+                        //       fontSize: 17,
+                        //       fontWeight: FontWeight.w400,
+                        //       color: Colors.blue),
+                        // ),
                         // Text(
                         //   widget.otp,
                         //   style: TextStyle(
@@ -137,7 +139,7 @@ class _OtpForgotState extends State<OtpForgot> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  Get.to(ConformPASSWORD());
+                                  Get.to(profileController.verifyOtpfpwd(otp: otpValue, isFromMobile: false));
                                   // authController.otpVerify(otpValue,true);
                                 },
                                 //=> Get.toNamed('/register-2'),
