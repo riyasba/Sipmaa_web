@@ -41,15 +41,19 @@ class _comentsContainerState extends State<comentsContainer> {
         //             ),
         //     );
         //   }),
-        // // ClipRRect(
-        //   borderRadius: BorderRadius.circular(70),
-        //   child: Image.network(
-        //     widget.commentsList.picture,
-        //     fit: BoxFit.cover,
-        //     width: 20,
-        //     height: 20,
-        //   ),
-        // ),
+        Container(
+          width: 40,
+          height: 40,
+          child: ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+            child: Image.network(
+              widget.commentsList.picture,
+              fit: BoxFit.cover,
+              width: 20,
+              height: 20,
+            ),
+          ),
+        ),
         Padding(
           padding: const EdgeInsets.only(top: 7, left: 13),
           child: Column(

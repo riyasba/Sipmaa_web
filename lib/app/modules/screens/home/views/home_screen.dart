@@ -120,7 +120,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    padding: const EdgeInsets.only(left: 15, right: 15),
                     child: Column(
                       children: [
                         ElevatedButton(
@@ -147,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                                 ksizedbox10,
                                 Padding(
                                   padding:
-                                      const EdgeInsets.only(top: 5, left: 6),
+                                      const EdgeInsets.only( left: 6),
                                   child: Text(
                                     'Home',
                                     style: TextStyle(
@@ -165,7 +165,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    padding: const EdgeInsets.only(left: 15, right: 5),
                     child: Column(
                       children: [
                         ElevatedButton(
@@ -192,7 +192,7 @@ class _HomePageState extends State<HomePage> {
                                 ksizedbox10,
                                 Padding(
                                   padding:
-                                      const EdgeInsets.only(top: 5, left: 6),
+                                      const EdgeInsets.only(top: 0, left: 6),
                                   child: Text(
                                     'Search',
                                     style: TextStyle(
@@ -209,7 +209,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    padding: const EdgeInsets.only(left: 15,right: 5),
                     child: Column(
                       children: [
                         ElevatedButton(
@@ -235,7 +235,7 @@ class _HomePageState extends State<HomePage> {
                                 ksizedbox10,
                                 Padding(
                                   padding:
-                                      const EdgeInsets.only(top: 5, left: 6),
+                                      const EdgeInsets.only(top: 0, left: 6),
                                   child: Text(
                                     'Filter',
                                     style: TextStyle(
@@ -252,7 +252,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 14, right: 14),
+                    padding: const EdgeInsets.only(left: 15, right: 5),
                     child: Column(
                       children: [
                         ElevatedButton(
@@ -278,7 +278,7 @@ class _HomePageState extends State<HomePage> {
                                 ksizedbox10,
                                 Padding(
                                   padding:
-                                      const EdgeInsets.only(top: 0, left: 0),
+                                      const EdgeInsets.only(top: 0, left: 6),
                                   child: Text(
                                     'Notification',
                                     style: TextStyle(
@@ -295,7 +295,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    padding: const EdgeInsets.only(left: 15, right: 5),
                     child: Column(
                       children: [
                         ElevatedButton(
@@ -321,7 +321,7 @@ class _HomePageState extends State<HomePage> {
                                 ksizedbox10,
                                 Padding(
                                   padding:
-                                      const EdgeInsets.only(top: 5, left: 6),
+                                      const EdgeInsets.only(top: 0, left: 6),
                                   child: Text(
                                     'Profile',
                                     style: TextStyle(
@@ -338,7 +338,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16, top: 0),
+                    padding: const EdgeInsets.only(left: 15, right: 5, top: 0),
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             elevation: 0,
@@ -361,7 +361,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                             ksizedbox10,
                             Padding(
-                              padding: const EdgeInsets.only(top: 5, left: 6),
+                              padding: const EdgeInsets.only(top: 0, left: 6),
                               child: Text(
                                 'Create',
                                 style: TextStyle(
@@ -376,7 +376,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    padding: const EdgeInsets.only(left: 15, right: 5),
                     child: Column(
                       children: [
                         ElevatedButton(
@@ -403,7 +403,7 @@ class _HomePageState extends State<HomePage> {
                                 ksizedbox10,
                                 Padding(
                                   padding:
-                                      const EdgeInsets.only(top: 5, left: 6),
+                                      const EdgeInsets.only(top: 0, left: 6),
                                   child: Text(
                                     'Friends',
                                     style: TextStyle(
@@ -420,7 +420,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    padding: const EdgeInsets.only(left: 15, right: 5),
                     child: Column(
                       children: [
                         ElevatedButton(
@@ -446,7 +446,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                               ksizedbox10,
                               Padding(
-                                padding: const EdgeInsets.only(top: 5, left: 6),
+                                padding: const EdgeInsets.only(top: 0, left: 6),
                                 child: Text(
                                   'Chats',
                                   style: TextStyle(
@@ -464,7 +464,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 16, right: 16, top: 30),
+                        const EdgeInsets.only(left: 15, right: 15, top: 30),
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             minimumSize:const Size(52, 52),
@@ -569,10 +569,17 @@ class _HomePageState extends State<HomePage> {
                           }
                         },
                         child:const Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(top: 5, left: 6),
+                              padding: EdgeInsets.only(left: 5, top: 0),
+                              child: Icon(
+                                Icons.power_settings_new,
+                                size: 17,
+                                color: Colors.black,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(top: 0, left: 10),
                               child: Column(
                                 children: [
                                   Text(
@@ -595,14 +602,7 @@ class _HomePageState extends State<HomePage> {
                                 ],
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(left: 4, top: 5),
-                              child: Icon(
-                                Icons.power_settings_new,
-                                size: 17,
-                                color: Colors.black,
-                              ),
-                            )
+                            
                           ],
                         )),
                   )
