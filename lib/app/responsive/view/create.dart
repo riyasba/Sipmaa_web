@@ -71,7 +71,7 @@ class _CreateWidgetrespoState extends State<CreateWidgetrespo> {
                     children: [
                       postsController.profileData.first.profilePicture == null
                           ? Image.asset(
-                              'assets/images/createprofile.png',
+                              'assets/images/profile_icon.png',
                               height: 60,
                               //  width: 300,
                               fit: BoxFit.fitHeight,
@@ -328,7 +328,7 @@ class _CreateWidgetrespoState extends State<CreateWidgetrespo> {
 //                 children: [
 //                   postsController.profileData.first.profilePicture == null
 //                       ? Image.asset(
-//                           'assets/images/createprofile.png',
+//                           'assets/images/profile_icon.png',
 //                           height: 60,
 //                           fit: BoxFit.fitHeight,
 //                         )

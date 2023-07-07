@@ -88,21 +88,25 @@ class _HomePageState extends State<HomePage> {
                 Icons.notifications_outlined,
                 color: Colors.black,
               )),
-          GetBuilder<ProfileController>(builder: (_) {
-            return Padding(
-              padding: const EdgeInsets.only(right: 10),
-              child: profileController.profileData.first.user.profilePicture ==
-                      null
-                  ? const CircleAvatar(
-                      backgroundImage:
-                          AssetImage('assets/images/profile_icon.png'),
-                    )
-                  : CircleAvatar(
-                      backgroundImage: NetworkImage(profileController
-                          .profileData.first.user.profilePicture),
-                    ),
-            );
-          }),
+          InkWell( onTap:  () {
+                homeController.homeindex(4);
+              },
+            child: GetBuilder<ProfileController>(builder: (_) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 10),
+                child: profileController.profileData.first.user.profilePicture ==
+                        null
+                    ? const CircleAvatar(
+                        backgroundImage:
+                            AssetImage('assets/images/profile_icon.png'),
+                      )
+                    : CircleAvatar(
+                        backgroundImage: NetworkImage(profileController
+                            .profileData.first.user.profilePicture),
+                      ),
+              );
+            }),
+          ),
         ],
       ),
       body: Row(
@@ -150,7 +154,7 @@ class _HomePageState extends State<HomePage> {
                                             homeController.homeindex.value == 0
                                                 ? kblue
                                                 : kwhite,
-                                        fontWeight: FontWeight.w900),
+                                        fontWeight: FontWeight.w700),
                                   ),
                                 ),
                               ],
@@ -180,7 +184,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 Icon(
                                   Icons.search,
-                                  color:  homeController.homeindex == 1
+                                  color: homeController.homeindex == 1
                                       ? kblue
                                       : kwhite,
                                 ),
@@ -194,7 +198,7 @@ class _HomePageState extends State<HomePage> {
                                         color: homeController.homeindex == 1
                                             ? kblue
                                             : kwhite,
-                                        fontWeight: FontWeight.w900),
+                                        fontWeight: FontWeight.w700),
                                   ),
                                 ),
                               ],
@@ -237,7 +241,7 @@ class _HomePageState extends State<HomePage> {
                                         color: homeController.homeindex == 2
                                             ? kblue
                                             : kwhite,
-                                        fontWeight: FontWeight.w900),
+                                        fontWeight: FontWeight.w700),
                                   ),
                                 ),
                               ],
@@ -280,7 +284,7 @@ class _HomePageState extends State<HomePage> {
                                         color: homeController.homeindex == 3
                                             ? kblue
                                             : kwhite,
-                                        fontWeight: FontWeight.w900),
+                                        fontWeight: FontWeight.w700),
                                   ),
                                 ),
                               ],
@@ -323,7 +327,7 @@ class _HomePageState extends State<HomePage> {
                                         color: homeController.homeindex == 4
                                             ? kblue
                                             : kwhite,
-                                        fontWeight: FontWeight.w900),
+                                        fontWeight: FontWeight.w700),
                                   ),
                                 ),
                               ],
@@ -350,7 +354,7 @@ class _HomePageState extends State<HomePage> {
                           children: [
                             Icon(
                               Icons.add_circle_outline,
-                              color:  homeController.homeindex == 5
+                              color: homeController.homeindex == 5
                                   ? kblue
                                   : kwhite,
                             ),
@@ -363,7 +367,7 @@ class _HomePageState extends State<HomePage> {
                                     color: homeController.homeindex == 5
                                         ? kblue
                                         : kwhite,
-                                    fontWeight: FontWeight.w900),
+                                    fontWeight: FontWeight.w700),
                               ),
                             ),
                           ],
@@ -390,7 +394,7 @@ class _HomePageState extends State<HomePage> {
                             child: Row(
                               children: [
                                 Icon(
-                                  Icons.search,
+                                  Icons.person_search,
                                   color: homeController.homeindex == 6
                                       ? kblue
                                       : kwhite,
@@ -405,7 +409,7 @@ class _HomePageState extends State<HomePage> {
                                         color: homeController.homeindex == 6
                                             ? kblue
                                             : kwhite,
-                                        fontWeight: FontWeight.w900),
+                                        fontWeight: FontWeight.w700),
                                   ),
                                 ),
                               ],
@@ -419,41 +423,41 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                backgroundColor:
-                                    homeController.homeindex.value == 8
-                                        ? kwhite
-                                        : kblue,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10))),
-                            onPressed: () {
-                              homeController.homeindex(8);
-                              homeController.update();
-                            },
-                            child: Row(
-                              children: [
-                                Icon(
-                                  Icons.message,
-                                  color: homeController.homeindex == 8
-                                      ? kblue
-                                      : kwhite,
+                          style: ElevatedButton.styleFrom(
+                              elevation: 0,
+                              backgroundColor:
+                                  homeController.homeindex.value == 8
+                                      ? kwhite
+                                      : kblue,
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10))),
+                          onPressed: () {
+                            homeController.homeindex(8);
+                            homeController.update();
+                          },
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.message,
+                                color: homeController.homeindex == 8
+                                    ? kblue
+                                    : kwhite,
+                              ),
+                              ksizedbox10,
+                              Padding(
+                                padding: const EdgeInsets.only(top: 5, left: 6),
+                                child: Text(
+                                  'Chats',
+                                  style: TextStyle(
+                                      color: homeController.homeindex == 8
+                                          ? kblue
+                                          : kwhite,
+                                      fontWeight: FontWeight.w700),
                                 ),
-                                ksizedbox10,
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(top: 5, left: 6),
-                                  child: Text(
-                                    'Chats',
-                                    style: TextStyle(
-                                        color: homeController.homeindex == 8
-                                            ? kblue
-                                            : kwhite,
-                                        fontWeight: FontWeight.w900),
-                                  ),
-                                ),
-                              ],
-                            ))
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -469,121 +473,115 @@ class _HomePageState extends State<HomePage> {
                         onPressed: () {
                           {
                             showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return Dialog(
-                                    child: Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.2,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(7),
-                                        color: kwhite,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(top: 10),
-                                        child: Column(
-                                          children: [
-                                            ksizedbox10,
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 15),
-                                              child: Text(
-                                                'Do you want to LogOut ?',
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.w900),
-                                              ),
+                              context: context,
+                              builder: (context) {
+                                return Dialog(
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.2,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.2,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(7),
+                                      color: kwhite,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Column(
+                                        children: [
+                                          ksizedbox10,
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(top: 15),
+                                            child: Text(
+                                              'Do you want to LogOut ?',
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.w900),
                                             ),
-                                            ksizedbox30,
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.spaceEvenly,
-                                              children: [
-                                                SizedBox(
-                                                  height: 30,
-                                                  width: 80,
-                                                  child: ElevatedButton(
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        backgroundColor: Color(
-                                                          0xFF3C73B1,
-                                                        ),
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10.0),
-                                                        ),
+                                          ),
+                                          ksizedbox30,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              SizedBox(
+                                                height: 30,
+                                                width: 80,
+                                                child: ElevatedButton(
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      backgroundColor: Color(
+                                                        0xFF3C73B1,
                                                       ),
-                                                      onPressed: () {
-                                                        Get.toNamed('/sign-in');
-                                                      },
-                                                      // Get.to(
-
-                                                      // BottomNavigationBarExample(),
-                                                      //);
-
-                                                      child: Text(
-                                                        'Yes',
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      )),
-                                                ),
-                                                SizedBox(
-                                                  height: 30,
-                                                  width: 80,
-                                                  child: ElevatedButton(
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        backgroundColor: Color(
-                                                          0xFF3C73B1,
-                                                        ),
-                                                        shape:
-                                                            RoundedRectangleBorder(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      10.0),
-                                                        ),
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10.0),
                                                       ),
-                                                      onPressed: () {
-                                                        Get.back();
-                                                      },
-                                                      // Get.to(
+                                                    ),
+                                                    onPressed: () {
+                                                      Get.toNamed('/sign-in');
+                                                    },
+                                                    // Get.to(
 
-                                                      // BottomNavigationBarExample(),
-                                                      //);
+                                                    // BottomNavigationBarExample(),
+                                                    //);
 
-                                                      child: Text(
-                                                        'No',
-                                                        style: TextStyle(
-                                                            color: Colors.white,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      )),
-                                                ),
-                                              ],
-                                            )
-                                          ],
-                                        ),
+                                                    child: Text(
+                                                      'Yes',
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                              ),
+                                              SizedBox(
+                                                height: 30,
+                                                width: 80,
+                                                child: ElevatedButton(
+                                                    style: ElevatedButton
+                                                        .styleFrom(
+                                                      backgroundColor: Color(
+                                                        0xFF3C73B1,
+                                                      ),
+                                                      shape:
+                                                          RoundedRectangleBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10.0),
+                                                      ),
+                                                    ),
+                                                    onPressed: () {
+                                                      Get.back();
+                                                    },
+                                                    // Get.to(
+
+                                                    // BottomNavigationBarExample(),
+                                                    //);
+
+                                                    child: Text(
+                                                      'No',
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    )),
+                                              ),
+                                            ],
+                                          )
+                                        ],
                                       ),
                                     ),
-                                  );
-                                });
+                                  ),
+                                );
+                              },
+                            );
                           }
                         },
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            
                             Padding(
                               padding: const EdgeInsets.only(top: 5, left: 6),
                               child: Column(

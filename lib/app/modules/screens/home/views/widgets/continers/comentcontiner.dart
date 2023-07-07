@@ -33,7 +33,7 @@ class _comentsContainerState extends State<comentsContainer> {
         //       child: widget.commentsList.picture.isBlank ==
         //               null
         //           ? const CircleAvatar(
-        //               backgroundImage: AssetImage('assets/images/createprofile.png'),
+        //               backgroundImage: AssetImage('assets/images/profile_icon.png'),
         //             )
         //           : CircleAvatar(
         //               backgroundImage: NetworkImage(widget.commentsList.picture

@@ -53,7 +53,7 @@ class _PassWordTextformfieldWidgetState
             validator: (value) {
               if (value!.isEmpty) {
                 return widget.validationText;
-              } else if (value.length < 6) {
+              } else if (value.length < 8) {
                 return "The password field must be at least 6 characters.";
               }
               return null;

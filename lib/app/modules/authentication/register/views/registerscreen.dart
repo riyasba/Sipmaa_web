@@ -56,7 +56,8 @@ class _RegisterViewsState extends State<RegisterViews> {
     return Scaffold(
       backgroundColor: kblue,
       body: Center(
-        child: SingleChildScrollView(
+        child: SingleChildScrollView(primary: true,
+          scrollDirection: Axis.vertical,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(

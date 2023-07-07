@@ -37,7 +37,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
           //  kforgotImage,ic
             ksizedbox30,
             const Text(
-              'Please Enter Your Email Addreass or',
+              'Please Enter Your Email Address or',
               style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18),
             ),
             const Text(

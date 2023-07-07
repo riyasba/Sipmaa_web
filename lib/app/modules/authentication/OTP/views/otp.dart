@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
@@ -8,22 +10,46 @@ import 'package:get/get_core/get_core.dart';
 import 'package:reg_login/app/data/components/controllers/auth_controllers.dart';
 
 import '../../../../data/components/constands/constands.dart';
+import '../../../../data/components/controllers/profile_controller.dart';
 
 class OTPVIEWS extends StatefulWidget {
-  String phoneNumber;
   String otp;
-  OTPVIEWS({super.key, required this.phoneNumber, required this.otp});
+  String phoneNumber;
+  OTPVIEWS({super.key,required this.phoneNumber,required this.otp});
 
   @override
   State<OTPVIEWS> createState() => _OTPVIEWSState();
 }
 
 class _OTPVIEWSState extends State<OTPVIEWS> {
-
+final profileController = Get.find<ProfileController>();
   final authController = Get.find<AuthController>();
 
   String otpValue = "";
+   int _start = 60; // Timer duration in seconds
+  bool _isActive = false;
+  late Timer _timer;
 
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(oneSec, (timer) {
+      setState(() {
+        if (_start == 1) {
+          _isActive = false;
+          timer.cancel();
+          _start = 60;
+        } else {
+          _start--;
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel(); // Cancel the timer to avoid memory leaks
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(backgroundColor: kblue,
@@ -102,13 +128,27 @@ class _OTPVIEWSState extends State<OTPVIEWS> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text("Don't you receive the OTP?"),
-                            TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  'Resend OTP',
-                                  style: TextStyle(color: Colors.blue),
-                                ))
+                         const Text("Don't receive it ?",style: TextStyle(color: Colors.grey),),
+                          _isActive
+                        ? Text(
+                            "Resend in $_start",
+                            style:const TextStyle(color: Colors.blue),
+                          )
+                        : InkWell(
+                            onTap: () async {
+                              profileController.resendOtp(mobile: widget.phoneNumber);
+                              setState(() {
+                                _isActive = true;
+                               // widget.otp = tempOtp;
+                              });
+                              startTimer();
+                            },
+                            child:const Text(
+                              "Resend",
+                              style: TextStyle(
+                                  color: Colors.blue),
+                            ),
+                          ),
                           ],
                         ),
                         Container(width: 500,

@@ -297,7 +297,7 @@ class _MobileDrawerState extends State<MobileDrawer> {
           //   ),
           // ),
           Padding(
-            padding: const EdgeInsets.only(left: 30, right: 30, top: 100),
+            padding: const EdgeInsets.only(left: 50, right: 50, top: 100),
             child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     minimumSize: Size(52, 52),
@@ -409,14 +409,7 @@ class _MobileDrawerState extends State<MobileDrawer> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5),
-                      child: Image.asset(
-                        'assets/images/logoutimage.png',
-                        fit: BoxFit.fitHeight,
-                        height: 21,
-                      ),
-                    ),
+                   
                     Padding(
                       padding: const EdgeInsets.only(top: 5, left: 6),
                       child: Column(

@@ -55,7 +55,8 @@ class _register1State extends State<register1> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SingleChildScrollView(
+      body: SingleChildScrollView(primary: true,
+          scrollDirection: Axis.vertical,
         child: Column( children: [
           Padding(
             padding: const EdgeInsets.only(

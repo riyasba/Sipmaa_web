@@ -143,12 +143,23 @@ class _FillterWidgetState extends State<FillterWidget> {
         ),
         Row(
           children: [
-            Container(
+            Container( 
               height: MediaQuery.of(context).size.height * 0.88,
               width: MediaQuery.of(context).size.width * 0.38,
               child: GetBuilder<PostsController>(
                 builder: (_) {
-                  return ListView.separated(
+                  return postsController.isLoading.isTrue
+            ? Center(
+                child: CircularProgressIndicator(
+                  color: kblue,
+                ),
+              )
+            : postsController.filterList.isEmpty
+                ? Center(
+                    child: Image.asset("assets/icons/no_post.png"),
+                  )
+                :  ListView.separated(primary: true,
+          scrollDirection: Axis.vertical,
                     separatorBuilder: (BuildContext context, int index) =>
                         SizedBox(height: 10),
                     shrinkWrap: true,
@@ -322,7 +333,7 @@ class _FillterWidgetState extends State<FillterWidget> {
                                                                           leading: postController.likesList[index].picture == ""
                                                                               ? const CircleAvatar(
                                                                                   radius: 40,
-                                                                                  backgroundImage: AssetImage('assets/images/createprofile.png'),
+                                                                                  backgroundImage: AssetImage('assets/images/profile_icon.png'),
                                                                                 )
                                                                               : CircleAvatar(
                                                                                   radius: 40,
@@ -687,7 +698,7 @@ class _FillterWidgetState extends State<FillterWidget> {
                                                           ? const CircleAvatar(
                                                               backgroundImage:
                                                                   AssetImage(
-                                                                      'assets/images/createprofile.png'),
+                                                                      'assets/images/profile_icon.png'),
                                                             )
                                                           : CircleAvatar(
                                                               backgroundImage: NetworkImage(

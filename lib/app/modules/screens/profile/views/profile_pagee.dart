@@ -43,7 +43,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
       height: size.height,
       width: MediaQuery.of(context).size.width * 0.874,
       child: GetBuilder<ProfileController>(builder: (_) {
-        return ListView(
+        return ListView(primary: true,
+          scrollDirection: Axis.vertical,
           shrinkWrap: true,
           children: [
             Stack(
@@ -135,7 +136,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
 
                 // Positioned(
-                //     left: 50, child: Image.asset('assets/images/createprofile.png'))
+                //     left: 50, child: Image.asset('assets/images/profile_icon.png'))
               ],
             ),
             Padding(

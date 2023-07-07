@@ -58,7 +58,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                 children: [
                   postsController.profileData.first.profilePicture == null
                       ? Image.asset(
-                          'assets/images/createprofile.png',
+                          'assets/images/profile_icon.png',
                           height: 60,
                           fit: BoxFit.fitHeight,
                         )
@@ -78,16 +78,17 @@ class _CreateWidgetState extends State<CreateWidget> {
                             style: TextStyle(
                                 fontSize: 15, fontWeight: FontWeight.bold),
                           ),
-                        if (postsController.profileData.isNotEmpty)
-                          Padding(
-                            padding: const EdgeInsets.only(top: 3),
-                            child: Text(
-                              postsController.profileData.first.department,
-                              style: TextStyle(
-                                fontSize: 14,
-                              ),
-                            ),
-                          )
+                        // if (postsController.profileData.isNotEmpty)
+                        //   Padding(
+                        //     padding: const EdgeInsets.only(top: 3),
+                        //     child: Text(
+                        //       postsController.profileData.first.department
+                        //           .toString(),
+                        //       style: TextStyle(
+                        //         fontSize: 14,
+                        //       ),
+                        //     ),
+                        //   )
                       ],
                     ),
                   ),

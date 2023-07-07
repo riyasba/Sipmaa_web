@@ -46,6 +46,7 @@ import '../../services/post_api_service/post_liked_list_api_services.dart';
 import '../../services/profile_api_service/forgetPwd_verify_otp_api_services.dart';
 import '../../services/profile_api_service/forget_password_api_service.dart';
 import '../../services/profile_api_service/my_friend_list_api_services.dart';
+import '../../services/profile_api_service/resend_otp_api_service.dart';
 import '../../services/profile_api_service/reset_password_api_service.dart';
 import '../../services/profile_api_service/send_friend_request.dart';
 import '../../services/profile_api_service/update_profile_pic.dart';
@@ -362,7 +363,7 @@ class ProfileController extends GetxController {
       if (isFromMobile) {
         Get.to(const CreateNewPassword());
       } else {
-        Get.to(ConformPASSWORD ());
+        Get.to(ConformPASSWORD());
       }
     } else if (response.statusCode == 404) {
       Get.rawSnackbar(
@@ -409,14 +410,13 @@ class ProfileController extends GetxController {
 
     if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
-      print(
-          "OTP---------------------------------->>>>>>>${response.data["data"].toString()}");
+   
       await prefs.setString("data", response.data["data"].toString());
 
       if (isFromMobile) {
-        Get.to(const Forgotpasswordverifiypage());
+        Get.to( Forgotpasswordverifiypage(mobile: mobileoremail,));
       } else {
-        Get.to(OtpForgot());
+        Get.to(OtpForgot(mobile: mobileoremail,));
       }
     } else {
       Get.rawSnackbar(
@@ -433,15 +433,19 @@ class ProfileController extends GetxController {
   ResetPwdApiServices resetPwdApiServices = ResetPwdApiServices();
 
   resetPassword(
-      {required String password, required String confirmPassword,required bool isFromMobile}) async {
+      {required String password,
+      required String confirmPassword,
+      required bool isFromMobile}) async {
     dio.Response<dynamic> response =
         await resetPwdApiServices.resetPwdApiServices(
             password: password, confirmPassword: confirmPassword);
 
     if (response.statusCode == 200) {
-      if(isFromMobile){
-      Get.to(const Sucessfullscreen());
-      }else{Get.to(Verified());}
+      if (isFromMobile) {
+        Get.to(const Sucessfullscreen());
+      } else {
+        Get.to(Verified());
+      }
     } else if (response.statusCode == 422) {
       Get.rawSnackbar(
         messageText: const Text(
@@ -468,4 +472,25 @@ class ProfileController extends GetxController {
       );
     }
   }
+
+  //resend otp
+  ResendOtpApiServices resendOtpApiServices = ResendOtpApiServices();
+
+  resendOtp({required String mobile}) async {
+
+    dio.Response<dynamic> response = await resendOtpApiServices.
+    resendOtpApiServices(mobile: mobile);
+
+    if(response.statusCode == 200){
+
+    } else {
+      Get.rawSnackbar(
+        messageText: const Text("Something went wrong",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
+
 }

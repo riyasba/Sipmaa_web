@@ -45,7 +45,8 @@ class _Resgister2State extends State<Resgister2> {
     return Scaffold(
       backgroundColor: kblue,
       body: Center(
-        child: SingleChildScrollView(
+        child: SingleChildScrollView(primary: true,
+          scrollDirection: Axis.vertical,
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(

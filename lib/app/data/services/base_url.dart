@@ -109,7 +109,8 @@ abstract class BaseApiService {
   //reset password
   String resetPassword = "https://sipmaaindia.com/api/resetpassword";
 
-
+  //resend otp
+  String resendOtp = "https://sipmaaindia.com/api/resendOTP";
 }
 //  final String updateProfileURL =
 //       "https://sipmaaindia.com/api/auth/profile_update";

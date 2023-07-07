@@ -362,8 +362,8 @@ class _SignInViewState extends State<SignInView> {
                                       validator: (value) {
                                         if (value!.isEmpty) {
                                           return "Password can't be empty";
-                                        } else if (value.length < 4) {
-                                          return "Password must be of four characters";
+                                        } else if (value.length < 8) {
+                                          return "Password must be of eight characters";
                                         }
                                         return null;
                                       },
@@ -394,7 +394,7 @@ class _SignInViewState extends State<SignInView> {
                                     width: double.infinity,
                                     child: Padding(
                                       padding: const EdgeInsets.only(
-                                          left: 20, right: 20),
+                                          left: 8, right: 8),
                                       child: authController.isLoading.isTrue
                                           ? ElevatedButton(
                                               style: ElevatedButton.styleFrom(

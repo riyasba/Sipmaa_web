@@ -396,7 +396,7 @@ class _loginpagerespoState extends State<loginpagerespo> {
                                       validator: (value) {
                                         if (value!.isEmpty) {
                                           return "Password can't be empty";
-                                        } else if (value.length < 6) {
+                                        } else if (value.length < 8) {
                                           return "Password must be of 6 characters";
                                         }
                                         return null;

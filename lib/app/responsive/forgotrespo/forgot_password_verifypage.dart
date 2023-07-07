@@ -1,6 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
@@ -10,7 +12,10 @@ import '../../data/components/constands/constands.dart';
 
 
 class Forgotpasswordverifiypage extends StatefulWidget {
-  const Forgotpasswordverifiypage({super.key});
+    String mobile;
+
+ 
+   Forgotpasswordverifiypage({super.key,required this.mobile});
 
   @override
   State<Forgotpasswordverifiypage> createState() =>
@@ -29,7 +34,30 @@ class _ForgotpasswordverifiypageState extends State<Forgotpasswordverifiypage> {
 
    String otpValue = "";
 
-  
+   int _start = 60; // Timer duration in seconds
+  bool _isActive = false;
+  late Timer _timer;
+
+  void startTimer() {
+    const oneSec = Duration(seconds: 1);
+    _timer = Timer.periodic(oneSec, (timer) {
+      setState(() {
+        if (_start == 1) {
+          _isActive = false;
+          timer.cancel();
+          _start = 60;
+        } else {
+          _start--;
+        }
+      });
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel(); // Cancel the timer to avoid memory leaks
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +71,7 @@ class _ForgotpasswordverifiypageState extends State<Forgotpasswordverifiypage> {
         // ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20),
+        padding: const EdgeInsets.only(left: 45, right: 45, bottom: 20, top: 30),
         child: ListView(
           children: [
             Column(
@@ -100,13 +128,27 @@ class _ForgotpasswordverifiypageState extends State<Forgotpasswordverifiypage> {
                        Row(
                         //mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Text("Don't receive it ?",style: TextStyle(color: Colors.grey),),
-                          TextButton(
-                              onPressed: () {},
-                              child: const Text(
-                                'Resend',
-                                style: TextStyle(color: Colors.blue),
-                              ))
+                    const Text("Don't receive it ?",style: TextStyle(color: Colors.grey),),
+                          _isActive
+                        ? Text(
+                            "Resend in $_start",
+                            style:const TextStyle(color: Colors.blue),
+                          )
+                        : InkWell(
+                            onTap: () async {
+                              profileController.resendOtp(mobile: widget.mobile);
+                              setState(() {
+                                _isActive = true;
+                               // widget.otp = tempOtp;
+                              });
+                              startTimer();
+                            },
+                            child:const Text(
+                              "Resend",
+                              style: TextStyle(
+                                  color: Colors.blue),
+                            ),
+                          ),
                         ],
                       ),
               ],

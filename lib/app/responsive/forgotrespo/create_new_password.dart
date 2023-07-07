@@ -70,7 +70,7 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
         // ),
       ),
       body: Padding(
-        padding: const EdgeInsets.only(left: 20,right: 20,bottom: 20),
+        padding: const EdgeInsets.only(left: 45, right: 45, bottom: 20, top: 30),
         child: ListView(
           children: [
             Column(

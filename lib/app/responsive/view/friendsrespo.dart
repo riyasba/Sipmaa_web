@@ -267,7 +267,7 @@ class _Friends_screenState extends State<Friends_screen> {
           //                               ? const CircleAvatar(
           //                                   radius: 40,
           //                                   backgroundImage: AssetImage(
-          //                                       'assets/images/img.jpg'),
+          //                                       'assets/images/profile_icon.png'),
           //                                 )
           //                               : CircleAvatar(
           //                                   radius: 40,
@@ -329,7 +329,7 @@ class _Friends_screenState extends State<Friends_screen> {
                                           child: CircleAvatar(
                                             radius: 35,
                                             backgroundImage: AssetImage(
-                                                'assets/images/img.jpg'),
+                                                'assets/images/profile_icon.png'),
                                           ),
                                         )
                                       : Padding(

@@ -28,7 +28,7 @@ class _FORGOTPASSWORDState extends State<FORGOTPASSWORD> {
     return Scaffold(
       backgroundColor: kblue,
       body: Padding(
-        padding: const EdgeInsets.all(50.0),
+        padding: const EdgeInsets.only(left: 45, right: 45, bottom: 20, top: 30),
         child: Center(
           child: Container(
             decoration: BoxDecoration(
@@ -57,7 +57,7 @@ class _FORGOTPASSWORDState extends State<FORGOTPASSWORD> {
                         ),
                         ksizedbox30,
                         Text(
-                          'Please Enter Your Email Addreass or',
+                          'Please Enter Your Email Address or',
                           style: TextStyle(
                               fontWeight: FontWeight.w600,
                               color: kgrey,
@@ -74,10 +74,11 @@ class _FORGOTPASSWORDState extends State<FORGOTPASSWORD> {
 
                         Padding(
                           padding: const EdgeInsets.all(12.0),
-                          child: TextPhoneformfieldWidget(
-                              controller: mobileOrEmailController,
-                              text: 'Enter Email Addreass or Mobile Number',
-                              textt: 'Enter Email Addreass or Mobile Number'),
+                          child: TextformfieldWidget(
+              controller: mobileOrEmailController,
+              text: 'Enter Email Address or Mobile Number',
+              textt: "Enter Email Address or Mobile Number",
+            ),
                         ),
                         ksizedbox30,
                         SizedBox(

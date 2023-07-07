@@ -230,7 +230,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
                                               child: CircleAvatar(
                                                 radius: 35,
                                                 backgroundImage: AssetImage(
-                                                    'assets/images/img.jpg'),
+                                                    'assets/images/profile_icon.png'),
                                               ),
                                             )
                                           : Padding(

@@ -26,7 +26,7 @@ class friendrequest extends StatelessWidget {
                 ListTile(
                   leading: CircleAvatar(
                     radius: 40,
-                    backgroundImage: AssetImage('assets/images/img.jpg'),
+                    backgroundImage: AssetImage('assets/images/profile_icon.png'),
                   ),
                   title: Text("Riyas"),
                   subtitle: Text("HR Communityy"),

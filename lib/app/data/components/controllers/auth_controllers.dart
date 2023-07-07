@@ -100,6 +100,7 @@ class AuthController extends GetxController {
         Get.to(OTPVIEWS(
           phoneNumber: registerModel.mobile,
           otp: response.data["user"]["otp"].toString(),
+      //    mobile: ,
         ));
         //desk
       }
@@ -227,8 +228,15 @@ class AuthController extends GetxController {
         ),
         backgroundColor: Colors.red,
       );
-    }
-  }
+    }else {
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Invalid User name / Password",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }}
 
   checkUserName({required String userName}) async {
     dio.Response<dynamic> response =

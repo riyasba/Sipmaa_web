@@ -48,7 +48,8 @@ class _RegisterDetailsViewState extends State<RegisterDetailsView> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      body: SingleChildScrollView(
+      body: SingleChildScrollView(primary: true,
+          scrollDirection: Axis.vertical,
         child: Column(children: [
           Padding(
             padding:
