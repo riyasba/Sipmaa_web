@@ -65,7 +65,7 @@ class _HomeContainerState extends State<HomeContainer> {
                 : ListView.separated(
                     primary: true,
                     scrollDirection: Axis.vertical,
-                    physics: BouncingScrollPhysics(),
+                    physics:const BouncingScrollPhysics(),
                     separatorBuilder: (BuildContext context, int index) =>
                         const SizedBox(height: 10),
                     shrinkWrap: true,
@@ -78,7 +78,7 @@ class _HomeContainerState extends State<HomeContainer> {
                             color: kwhite,
                             boxShadow: <BoxShadow>[
                               BoxShadow(
-                                  offset: Offset(0.0, 0.7),
+                                  offset:const Offset(0.0, 0.7),
                                   blurRadius: 0.5,
                                   color: kgrey)
                             ],
@@ -227,8 +227,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                               ],
                                                             ),
                                                             ksizedbox10,
-                                                            GetBuilder<
-                                                                    PostsController>(
+                                                            GetBuilder<PostsController>(
                                                                 builder: (_) {
                                                               return Container(
                                                                 height: 350,
@@ -554,7 +553,9 @@ class _HomeContainerState extends State<HomeContainer> {
                                                 ),
                                         ),
                                       ));
-                                })),
+                                }
+                                ),
+                                ),
                             ksizedbox20,
                           ],
                         ),
@@ -570,33 +571,44 @@ class _HomeContainerState extends State<HomeContainer> {
         context: context,
         builder: (context) {
           return Padding(
-            padding: const EdgeInsets.only(left: 110),
+            padding: const EdgeInsets.only(left: 120),
             child: Row(
               children: [
                 Container(
                   height: 350,
                   width: MediaQuery.of(context).size.width * 0.53,
-                  decoration: BoxDecoration(color: kwhite),
+                  decoration: BoxDecoration(
+                    color: kwhite,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   child: Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 15),
-                        child: Row(
-                          children: [
-                            Image.network(
-                              postsController.allPostList[index].body,
-                              fit: BoxFit.contain,
-                              width: size.width * 0.3,
-                              height: size.height * 0.4,
-                            ),
-                          ],
-                        ),
+                        padding: const EdgeInsets.only(left: 5),
+                        child: postController.allPostList[index].body == ""
+                                ? ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Image.asset(
+                                      'assets/images/noimage.jpg',
+                                      fit: BoxFit.cover,
+                                      width: size.width * 0.3,
+                                    ),
+                                  ) : 
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Image.network(
+                            postsController.allPostList[index].body,
+                            fit: BoxFit.contain,
+                            width: size.width * 0.3,
+                            height: size.height * 0.4,
+                                                      ),
+                          ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 35, left: 20),
                         child: Container(
                           height: 300,
-                          width: 250,
+                          width: 280,
                           child: GetBuilder<PostsController>(builder: (_) {
                             return postsController.commentsList.isEmpty
                                 ? const Center(

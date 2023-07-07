@@ -50,6 +50,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xffCAE1FF),
@@ -92,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                 homeController.homeindex(4);
               },
             child: GetBuilder<ProfileController>(builder: (_) {
-              return Padding(
+              return profileController.profileData.isEmpty ? Container() : Padding(
                 padding: const EdgeInsets.only(right: 10),
                 child: profileController.profileData.first.user.profilePicture ==
                         null
@@ -113,7 +114,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           Obx(
             () => Container(
-              width: MediaQuery.of(context).size.width / 8,
+              width: size.width * 0.13,
               color: kblue,
               child: Column(
                 children: [
@@ -463,10 +464,10 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 16, right: 16, top: 135),
+                        const EdgeInsets.only(left: 16, right: 16, top: 30),
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            minimumSize: Size(52, 52),
+                            minimumSize:const Size(52, 52),
                             backgroundColor: kwhite.withOpacity(0.7),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(15))),
@@ -490,11 +491,10 @@ class _HomePageState extends State<HomePage> {
                                       child: Column(
                                         children: [
                                           ksizedbox10,
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(top: 15),
+                                          const Padding(
+                                            padding:EdgeInsets.only(top: 15),
                                             child: Text(
-                                              'Do you want to LogOut ?',
+                                              'Do you want to Logout ?',
                                               style: TextStyle(
                                                   fontWeight: FontWeight.w900),
                                             ),
@@ -510,14 +510,9 @@ class _HomePageState extends State<HomePage> {
                                                 child: ElevatedButton(
                                                     style: ElevatedButton
                                                         .styleFrom(
-                                                      backgroundColor: Color(
-                                                        0xFF3C73B1,
-                                                      ),
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10.0),
+                                                      backgroundColor:const Color(0xFF3C73B1),
+                                                      shape: RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(10.0),
                                                       ),
                                                     ),
                                                     onPressed: () {
@@ -528,7 +523,7 @@ class _HomePageState extends State<HomePage> {
                                                     // BottomNavigationBarExample(),
                                                     //);
 
-                                                    child: Text(
+                                                    child:const Text(
                                                       'Yes',
                                                       style: TextStyle(
                                                           color: Colors.white,
@@ -542,14 +537,9 @@ class _HomePageState extends State<HomePage> {
                                                 child: ElevatedButton(
                                                     style: ElevatedButton
                                                         .styleFrom(
-                                                      backgroundColor: Color(
-                                                        0xFF3C73B1,
-                                                      ),
-                                                      shape:
-                                                          RoundedRectangleBorder(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10.0),
+                                                      backgroundColor:const Color(0xFF3C73B1,),
+                                                      shape:RoundedRectangleBorder(
+                                                      borderRadius: BorderRadius.circular(10.0),
                                                       ),
                                                     ),
                                                     onPressed: () {
@@ -560,8 +550,7 @@ class _HomePageState extends State<HomePage> {
                                                     // BottomNavigationBarExample(),
                                                     //);
 
-                                                    child: Text(
-                                                      'No',
+                                                    child:const Text('No',
                                                       style: TextStyle(
                                                           color: Colors.white,
                                                           fontWeight:
@@ -579,11 +568,11 @@ class _HomePageState extends State<HomePage> {
                             );
                           }
                         },
-                        child: Row(
+                        child:const Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 5, left: 6),
+                              padding: EdgeInsets.only(top: 5, left: 6),
                               child: Column(
                                 children: [
                                   Text(
@@ -607,7 +596,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 4, top: 5),
+                              padding: EdgeInsets.only(left: 4, top: 5),
                               child: Icon(
                                 Icons.power_settings_new,
                                 size: 17,
