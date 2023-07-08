@@ -10,6 +10,7 @@ import '../../../../data/components/constands/constands.dart';
 //import '../../../../data/components/constands/constands.dart';
 
 import '../../../../data/components/controllers/auth_controllers.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SignInView extends StatefulWidget {
   const SignInView({super.key});
@@ -52,7 +53,12 @@ class _SignInViewState extends State<SignInView> {
         child: Center(
           child: Container(
             decoration: BoxDecoration(
-                color: kwhite, borderRadius: BorderRadius.circular(6)),
+                color: kwhite, borderRadius: BorderRadius.circular(10),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(blurRadius: 5,
+                  color: kgrey,
+                  offset: Offset(0.0, 0.75))
+                ]),
             child: Row(
               children: [
                 Expanded(
@@ -74,10 +80,19 @@ class _SignInViewState extends State<SignInView> {
                                           i++)
                                         ClipRRect(
                                           borderRadius:
-                                              BorderRadius.circular(10),
+                                              BorderRadius.circular(15),
                                           child: Container(
-                                            height: 8,
-                                            color: kblue,
+                                             decoration: BoxDecoration(
+                                                     color: kblue,
+                                                     boxShadow: <BoxShadow>[
+                                                      BoxShadow(
+                                                        offset: Offset(0.0, 0.75),
+                                                        blurRadius: 5,
+                                                        color: kblue
+                                                      )
+                                                     ]
+                                             ),
+                                           
                                             width: 600,
                                             child: Row(
                                               mainAxisAlignment:
@@ -86,12 +101,13 @@ class _SignInViewState extends State<SignInView> {
                                                 Padding(
                                                   padding: const EdgeInsets.all(
                                                       15.0),
-                                                  child: Container(
-                                                    width: 80,
+                                                  child: ClipRRect(
+                                                    borderRadius: BorderRadius.circular(10),
+                                                    
                                                     child: Image.network(
                                                         authController
                                                             .sliderList[i]
-                                                            .image),
+                                                            .image,height: 45,width: 100,fit: BoxFit.fitHeight,),
                                                   ),
                                                 ),
                                                 // Image.asset(
@@ -102,25 +118,34 @@ class _SignInViewState extends State<SignInView> {
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
                                                   children: [
-                                                    Text(
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(bottom: 0),
+                                                      child: Text(
+                                                          authController
+                                                              .sliderList[i]
+                                                              .title,
+                                                          style: TextStyle(
+                                                              color: kwhite,
+                                                              fontSize: 25,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w700)),
+                                                    ),
+                                                    SizedBox(
+                                                      height: 5,
+                                                    ),
+                                                    Padding(
+                                                      padding: const EdgeInsets.only(bottom: 10),
+                                                      child: Text(
                                                         authController
                                                             .sliderList[i]
-                                                            .title,
-                                                        style: TextStyle(
-                                                            color: kwhite,
-                                                            fontSize: 25,
+                                                            .description,
+                                                        style: const TextStyle(
+                                                            fontSize: 14,
+                                                            color: Colors.white,
                                                             fontWeight:
-                                                                FontWeight
-                                                                    .w700)),
-                                                    Text(
-                                                      authController
-                                                          .sliderList[i]
-                                                          .description,
-                                                      style: const TextStyle(
-                                                          fontSize: 14,
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w500),
+                                                                FontWeight.w500),
+                                                      ),
                                                     ),
                                                   ],
                                                 )
@@ -231,12 +256,12 @@ class _SignInViewState extends State<SignInView> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   ksizedbox10,
-                                  const Text(
-                                    "WELCOME",
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 26,
-                                        fontWeight: FontWeight.bold),
+                                  Text(
+                                    "WELCOME TO SIPMAA",
+                                    style:GoogleFonts.openSans(
+                                      fontSize: 24.5,
+                                      fontWeight: FontWeight.bold
+                                    )
                                   ),
                             
                                   // Text(
@@ -244,9 +269,14 @@ class _SignInViewState extends State<SignInView> {
                                   //   style: ktextstyle,
                                   // ),
                             
-                                  Text(
-                                    'Login Back to Sipmaa HR Community',
-                                    style: ktextstyle22,
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 5),
+                                    child: Text(
+                                      ' HR Community',
+                                      style: GoogleFonts.openSans(
+                                        fontSize: 18
+                                      ),
+                                    ),
                                   ),
                                   ksizedbox30,
                             
@@ -382,7 +412,7 @@ class _SignInViewState extends State<SignInView> {
                                   ),
                                   //  ksizedbox10,
                                   // ksizedbox10,
-                                  ksizedbox30,
+                                  
                                   Obx(
                                     () => SizedBox(
                                       height: 45,
@@ -443,7 +473,7 @@ class _SignInViewState extends State<SignInView> {
                                   //   },
                                   //   text: 'Login',
                                   // ),
-                                  ksizedbox10,
+                                
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
@@ -476,6 +506,15 @@ class _SignInViewState extends State<SignInView> {
                 ),
                 Expanded(
                     child: Container(
+                      decoration: BoxDecoration(
+                        boxShadow: <BoxShadow>[
+                          BoxShadow(
+                            offset: Offset(0.0, 0.75),
+                            blurRadius: 1,
+                            color: kwhite
+                          )
+                        ]
+                      ),
                         child: Image.asset('assets/images/Group 89.png')))
               ],
             ),

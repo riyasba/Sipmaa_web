@@ -1,3 +1,4 @@
+import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -19,14 +20,23 @@ class Profilewidget extends StatefulWidget {
 
 class _ProfilewidgetState extends State<Profilewidget> {
   var nameController = TextEditingController();
-  var bioController = TextEditingController();
   var positionController = TextEditingController();
   var emailController = TextEditingController();
   var numberController = TextEditingController();
   var interestController = TextEditingController();
   var genderController = TextEditingController();
   var birthdayController = TextEditingController();
-
+  var hisherController = TextEditingController();
+  var addcurentController = TextEditingController();
+  var titleController = TextEditingController();
+  var employmentController = TextEditingController();
+  var companynameController = TextEditingController();
+  var locationController = TextEditingController();
+  var startdateController = TextEditingController();
+  var todateController = TextEditingController();
+  var intusryController = TextEditingController();
+  var descriptionController = TextEditingController();
+  var skillsController = TextEditingController();
   final profileController = Get.find<ProfileController>();
 
   @override
@@ -38,7 +48,7 @@ class _ProfilewidgetState extends State<Profilewidget> {
   setDefaullt() async {
     if (profileController.profileData.isNotEmpty) {
       nameController.text = profileController.profileData.first.user.name;
-      bioController.text = profileController.profileData.first.user.bio ?? "";
+      hisherController.text = profileController.profileData.first.user.bio ?? "";
       positionController.text =
           profileController.profileData.first.user.designation ?? "";
       numberController.text = profileController.profileData.first.user.mobile;
@@ -46,7 +56,38 @@ class _ProfilewidgetState extends State<Profilewidget> {
           profileController.profileData.first.user.officialEmail ?? "";
     }
   }
+   DateTime selectedDate = DateTime.now();
+     DateTime toselectedDate = DateTime.now();
+   var dateSelected;
+    var todateselected;
+  
 
+Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: selectedDate,
+        firstDate: DateTime(2015, 8),
+        lastDate: DateTime(2101));
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+        dateSelected=picked;
+      });
+    }
+  }
+
+  Future<void>_toselectedDate(BuildContext context)async{
+    final DateTime? todatepicked=await showDatePicker(context: context,
+     initialDate: toselectedDate, 
+     firstDate:DateTime(2015,8), 
+     lastDate:DateTime(2101) );
+     if(todatepicked!=null&&todatepicked!=toselectedDate){
+      setState(() {
+        toselectedDate=todatepicked;
+        todateselected=todatepicked;
+      });
+     }
+  }
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -57,12 +98,14 @@ class _ProfilewidgetState extends State<Profilewidget> {
             child:
                 profileController.profileData.first.user.profilePicture == null
                     ? const CircleAvatar(
-                      radius: 100,
+                      radius: 60,
+                      foregroundColor: Colors.grey,
                         backgroundImage:
                             AssetImage('assets/images/profile_icon.png'),
                       )
                     : CircleAvatar(
-                      radius: 100,
+                      radius: 60,
+                      foregroundColor: Colors.grey,
                         backgroundImage: NetworkImage(profileController
                             .profileData.first.user.profilePicture),
                       ),
@@ -86,61 +129,155 @@ class _ProfilewidgetState extends State<Profilewidget> {
         //         style: TextStyle(fontSize: 17, color: kblue),
         //       ),
         //     ),
-        ksizedbox10,
+        ksizedbox30,
         Container(
-            width: 700,
+            width: MediaQuery.of(context).size.width*0.45,
             child: Column(
               children: [
                 Textformfield(
                   controller: nameController,
-                  text: 'Name',
+                  text: 'First Name',
                 ),
-                ksizedbox10,
+                ksizedbox30,
                 Textformfield(
-                  controller: bioController,
-                  text: 'Bio',
+                  controller: hisherController,
+                  text: 'Last Name',
                 ),
-                ksizedbox10,
+                ksizedbox30,
                 Textformfield(
                   controller: positionController,
-                  text: 'Position',
+                  text: 'His/Her',
                 ),
-                ksizedbox10,
+              
+                ksizedbox30,
                 Textformfield(
                   controller: emailController,
                   text: 'Email Addreass',
                 ),
-                ksizedbox10,
+                ksizedbox30,
                 Textformfield(
                   controller: numberController,
                   text: 'Phone Number',
                 ),
-                ksizedbox10,
+                ksizedbox30,
                 Textformfield(
                   controller: interestController,
                   text: 'Interest',
                 ),
-                ksizedbox10,
+                ksizedbox30,
                 Textformfield(
                   controller: genderController,
                   text: 'Gender',
                 ),
-                ksizedbox10,
+                ksizedbox30,
                 Textformfield(
                   controller: birthdayController,
                   text: 'Birthday',
+                ),
+                   ksizedbox30,
+                Textformfield(
+                  controller: positionController,
+                  text: 'Current Position',
+                ),
+                 ksizedbox30,
+                Textformfield(
+                  controller: addcurentController,
+                  text: '+ Add new position ',
+                ),
+                ksizedbox30,
+                 Textformfield(
+                  controller: titleController,
+                  text: 'Title',
+                ),
+                ksizedbox30,
+                Textformfield(
+                  controller: employmentController,
+                  text: 'Employment Type',
+                ),
+                ksizedbox30,
+                 Textformfield(
+                  controller: companynameController,
+                  text: 'Company Name',
+                ),
+                ksizedbox30,
+                 Textformfield(
+                  controller: locationController,
+                  text: 'Location',
+                ),
+                ksizedbox30,
+                Container(
+                  height: 52,
+                  width: MediaQuery.of(context).size.width*45,
+                  decoration: BoxDecoration(
+                    color: kwhite.withOpacity(0.2),
+                    border: Border.all(
+                      color: kgrey
+                    ),
+                    borderRadius: BorderRadius.circular(10)
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 10,right: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                         Row(
+                           children: [
+                             Text(dateSelected == null ? "Start Date" : 
+                             formatDate(dateSelected, [dd,"-",mm,"-",yyyy]),
+                             style: TextStyle(
+                              fontSize: 15,
+                              color: kgrey
+                             ),),
+                              IconButton(onPressed: (){
+                            setState(() {
+                                  _selectDate(context);
+                            });
+                          }, 
+                          icon:  const Icon(Icons.date_range)),
+                           ],
+                         ) ,
+                         
+                          Row(
+                            children: [
+                              Text(todateselected==null?"End Date":
+                              formatDate(todateselected, [dd,'-',mm,'-',yyyy])),
+                              IconButton(onPressed: (){
+                                setState(() {
+                                  _toselectedDate(context);
+                                });
+                              }, 
+                              icon: Icon(Icons.date_range)),
+                            ],
+                          )
+                      ],
+                    ),
+                  ),
+                ),
+                ksizedbox30,
+                  Textformfield(
+                  controller: intusryController,
+                  text: 'Industry',
+                ),
+                ksizedbox30,
+                Textformfield(
+                  controller: descriptionController,
+                  text: 'Description',
+                ),ksizedbox30,
+                 Textformfield(
+                  controller: skillsController,
+                  text: 'Skills',
                 ),
                 ksizedbox40,
                 CUSTOMBUTTON(
                   onTap: () {
                     if (nameController.text.isNotEmpty &&
-                        bioController.text.isNotEmpty &&
+                        hisherController.text.isNotEmpty &&
                         positionController.text.isNotEmpty &&
                         emailController.text.isNotEmpty &&
                         numberController.text.isNotEmpty) {
                       profileController.updateUserDetails(
                           name: nameController.text,
-                          bio: bioController.text,
+                          bio: hisherController.text,
                           designation: positionController.text,
                           email: emailController.text,
                           mobile: numberController.text);
@@ -154,7 +291,8 @@ class _ProfilewidgetState extends State<Profilewidget> {
                       );
                     }
                   },
-                  text: 'Next',
+                  text: 'Save',
+                  
                 ),
                 ksizedbox40
               ],

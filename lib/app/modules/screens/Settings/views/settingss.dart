@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:google_fonts/google_fonts.dart';
 //import 'package:reg_login/app/modules/screens/Settings/controller/settings_controller.dart';
 
 import 'package:reg_login/app/modules/screens/Settings/views/widgets/mywidgets.dart';
@@ -48,12 +49,14 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: Center(
                             child: Text(
                               'Profile',
-                              style: TextStyle(
+                              style: GoogleFonts.openSans(
+                                //letterSpacing: 0.5,
                                   color:
                                       settingsController.settingIndex.value == 0
                                           ? kblue
                                           : kwhite,
-                                  fontWeight: FontWeight.w500),
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14.5),
                             ),
                           ),
                           height: 25,
@@ -62,7 +65,14 @@ class _SettingsPageState extends State<SettingsPage> {
                               color: settingsController.settingIndex.value == 0
                                   ? kwhite
                                   : kblue,
-                              borderRadius: BorderRadius.circular(4)),
+                              borderRadius: BorderRadius.circular(4),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                  offset: Offset(0.0, 0.75),
+                                  blurRadius: 7,
+                                  color: kblue
+                                )
+                              ]),
                         ),
                       ),
                       InkWell(
@@ -76,13 +86,14 @@ class _SettingsPageState extends State<SettingsPage> {
                                   const EdgeInsets.only(left: 10, right: 10),
                               child: Text(
                                 'Change password',
-                                style: TextStyle(
+                                style: GoogleFonts.openSans(
                                     color:
                                         settingsController.settingIndex.value ==
                                                 1
                                             ? kblue
                                             : kwhite,
-                                    fontWeight: FontWeight.w500),
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14.5),
                               ),
                             ),
                           ),
@@ -91,7 +102,15 @@ class _SettingsPageState extends State<SettingsPage> {
                               color: settingsController.settingIndex.value == 1
                                   ? kwhite
                                   : kblue,
-                              borderRadius: BorderRadius.circular(4)),
+                              borderRadius: BorderRadius.circular(4),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                  offset: Offset(0.0, 0.75),
+                                  blurRadius: 7,
+                                  color: kblue,
+
+                                )
+                              ]),
                         ),
                       ),
                       InkWell(
@@ -102,12 +121,13 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: Center(
                             child: Text(
                               'Privacy',
-                              style: TextStyle(
+                              style: GoogleFonts.openSans(
                                   color:
                                       settingsController.settingIndex.value == 2
                                           ? kblue
                                           : kwhite,
-                                  fontWeight: FontWeight.w500),
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14.5),
                             ),
                           ),
                           height: 25,
@@ -116,7 +136,15 @@ class _SettingsPageState extends State<SettingsPage> {
                               color: settingsController.settingIndex.value == 2
                                   ? kwhite
                                   : kblue,
-                              borderRadius: BorderRadius.circular(4)),
+                              borderRadius: BorderRadius.circular(4),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                  offset: Offset(0.0, 0.75),
+                                  blurRadius: 7,
+                                  color: kblue,
+                                  
+                                )
+                              ]),
                         ),
                       ),
                       InkWell(
@@ -127,29 +155,39 @@ class _SettingsPageState extends State<SettingsPage> {
                           child: Center(
                             child: Text(
                               'Terms & Conditions',
-                              style: TextStyle(
+                              style: GoogleFonts.openSans(
                                   color:
                                       settingsController.settingIndex.value == 3
                                           ? kblue
                                           : kwhite,
-                                  fontWeight: FontWeight.w500),
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 14.5),
                             ),
                           ),
                           height: 25,
-                          width: 150,
+                          width: 155,
                           decoration: BoxDecoration(
                               color: settingsController.settingIndex.value == 3
                                   ? kwhite
                                   : kblue,
-                              borderRadius: BorderRadius.circular(4)),
+                              borderRadius: BorderRadius.circular(4),
+                              boxShadow: <BoxShadow>[
+                                BoxShadow(
+                                  offset: Offset(0.0, 0.75,
+                                  ),
+                                  blurRadius: 7,
+                                  color: kblue,
+
+                                )
+                              ]),
                         ),
                       )
                     ],
                   ),
-                  height: 30,
+                  height: 40,
                   width: 700,
                   decoration: BoxDecoration(
-                      color: kblue, borderRadius: BorderRadius.circular(4)),
+                      color: kblue, borderRadius: BorderRadius.circular(8)),
                 ),
                 ksizedbox30,
                 if (settingsController.settingIndex.value == 0) Profilewidget(),

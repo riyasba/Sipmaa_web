@@ -23,6 +23,9 @@ class _ChangepasswordState extends State<Changepassword> {
   var confrmPasswordController = TextEditingController();
 
   final profileController = Get.find<ProfileController>();
+  var oldvisibility=true;
+  var newpasswordvisibility=true;
+  var confirmpasswordvisibility=true;
 
   @override
   Widget build(BuildContext context) {
@@ -30,18 +33,71 @@ class _ChangepasswordState extends State<Changepassword> {
         width: 700,
         child: Column(
           children: [
-            Textformfield(
+            ksizedbox30,
+           Padding(
+             padding: const EdgeInsets.only(left: 20,right: 20),
+             child: TextField(
+              obscureText: oldvisibility,
               controller: oldPasswordController,
-              text: 'Old Password',
+              decoration: InputDecoration(
+              
+                suffixIcon: IconButton(onPressed: (){
+                  setState(() {
+                  oldvisibility=!oldvisibility;
+                  });
+               },
+                icon:oldvisibility? Icon(Icons.visibility):Icon(Icons.visibility_off)),
+                hintText: 'Old Password',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10)
+                ),
+                
+              ),
+              
+             ),
+           ),
+            ksizedbox30,
+            Padding(
+              padding: const EdgeInsets.only(left: 20,right: 20),
+              child: TextField(
+                obscureText: newpasswordvisibility,
+                controller: newPasswordController,
+                decoration: InputDecoration(
+                  suffixIcon: IconButton(onPressed: (){
+                    setState(() {
+                      newpasswordvisibility=!newpasswordvisibility;
+                    });
+                  }, 
+                  icon: newpasswordvisibility?Icon(Icons.visibility):Icon(Icons.visibility_off)),
+                  hintText: 'New Password',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10)
+                  )
+                ),
+                ),
             ),
-            ksizedbox10,
-            Textformfield(
-              controller: newPasswordController,
-              text: 'New Password'),
-            ksizedbox10,
-            Textformfield(
-              controller: confrmPasswordController,
-              text: 'Confirm Password'),
+            ksizedbox30,
+            Padding(
+              padding: const EdgeInsets.only(left: 20,right: 20),
+              child: TextField(
+                obscureText: confirmpasswordvisibility,
+                controller: confrmPasswordController,
+                decoration: InputDecoration(
+                  hintText: 'Confirm Password',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    
+                  ),
+                  suffixIcon: IconButton(onPressed: (){
+                    setState(() {
+                      confirmpasswordvisibility=!confirmpasswordvisibility;
+                    });
+                  }, 
+                  icon:confirmpasswordvisibility? Icon(Icons.visibility):
+                  Icon(Icons.visibility_off))
+                ),
+              ),
+            ),
             ksizedbox30,
             CUSTOMBUTTON(
               text: 'Save',
