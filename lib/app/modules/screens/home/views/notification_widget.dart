@@ -1,15 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
-import 'package:get/get_navigation/get_navigation.dart';
 import 'package:reg_login/app/data/components/constands/constands.dart';
-import 'package:reg_login/app/data/components/search_field.dart';
 import 'package:reg_login/app/data/models/notification_model.dart';
 import 'package:reg_login/app/modules/screens/home/controler/controler.dart';
-
 import '../../../../data/components/controllers/posts_controller.dart';
 import '../../../../data/components/controllers/profile_controller.dart';
 
