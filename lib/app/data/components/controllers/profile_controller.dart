@@ -29,7 +29,7 @@ import 'package:dio/dio.dart' as dio;
 // import 'package:simpa/view/profile_sccuessful_page.dart';
 
 import '../../../modules/authentication/forgotPassword/views/conformpassword.dart';
-import '../../../modules/authentication/forgotPassword/views/forgotpassword.dart';
+
 import '../../../modules/authentication/forgotPassword/views/otp_forgot.dart';
 import '../../../modules/authentication/forgotPassword/views/verified_screen.dart';
 import '../../../responsive/forgotrespo/create_new_password.dart';

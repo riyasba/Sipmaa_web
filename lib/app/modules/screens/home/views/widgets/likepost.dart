@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reg_login/app/data/components/controllers/posts_controller.dart';
 
-
 class LikeButton extends StatefulWidget {
   bool isliked;
   int postId;

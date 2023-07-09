@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:reg_login/app/data/components/constands/constands.dart';
 import 'package:reg_login/app/data/components/constands/message_types.dart';
 import 'package:reg_login/app/data/models/chat_models.dart';
 import 'package:reg_login/app/data/models/friend_list_model.dart';
 import 'package:reg_login/app/responsive/widgets/chat_view/respochat/viewmsgrespo.dart';
 import 'package:reg_login/app/responsive/widgets/chat_view/view_message_screen.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../../data/components/controllers/profile_controller.dart';
 
@@ -53,15 +55,19 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               children: [
                 Text(
                   'Friends',
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
                 )
+                    .text
+                    .bold
+                    .xl4
+                    .fontFamily(GoogleFonts.poppins().fontFamily!)
+                    .make(),
               ],
             ),
           ),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 10, top: 20),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 InkWell(
                   onTap: () {
@@ -70,8 +76,8 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
                     });
                   },
                   child: Container(
-                    height: 30,
-                    width: 90,
+                    height: 40,
+                    width: 120,
                     decoration: BoxDecoration(
                         color: _friendsindex == 0 ? kblue : kwhite,
                         boxShadow: <BoxShadow>[
@@ -85,7 +91,8 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
                         child: Text(
                       'Your Friends',
                       style: TextStyle(
-                          fontSize: 12.5,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
                           color: _friendsindex == 0 ? kwhite : Colors.black),
                     )),
                   ),
@@ -98,8 +105,8 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
                     profileController.getMyFriendRequestList();
                   },
                   child: Container(
-                    height: 30,
-                    width: 90,
+                    height: 40,
+                    width: 120,
                     decoration: BoxDecoration(
                         color: _friendsindex == 1 ? kblue : kwhite,
                         boxShadow: <BoxShadow>[
@@ -113,7 +120,8 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
                         child: Text(
                       'Request',
                       style: TextStyle(
-                          fontSize: 12.5,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
                           color: _friendsindex == 1 ? kwhite : Colors.black),
                     )),
                   ),
@@ -127,8 +135,8 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               height: size.height * 0.7,
               child: GetBuilder<ProfileController>(builder: (_) {
                 return profileController.myFriendList.isEmpty
-                    ? const Center(
-                        child: Text("No Friends"),
+                    ? Center(
+                        child: Text("No Friends").text.semiBold.xl.make(),
                       )
                     : SingleChildScrollView(
                         child: Column(
@@ -201,145 +209,151 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
               }),
             ),
           if (_friendsindex == 1)
-            GetBuilder<ProfileController>(
-              builder: (_) {
-                return profileController.friendRequestList.isEmpty
-                    ? const Center(
-                        child: Text("No Requests"),
-                      )
-                    : ListView.builder(
-                        shrinkWrap: true,
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: profileController.friendRequestList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return GestureDetector(
-                            onTap: () {},
-                            child: Card(
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    children: [
-                                      profileController.friendRequestList[index]
-                                                  .profile ==
-                                              null
-                                          ? Padding(
-                                              padding:
-                                                  const EdgeInsets.all(7.0),
-                                              child: CircleAvatar(
-                                                radius: 35,
-                                                backgroundImage: AssetImage(
-                                                    'assets/images/profile_icon.png'),
+            Container(
+              width: size.width * 0.7,
+              height: size.height * 0.7,
+              child: GetBuilder<ProfileController>(
+                builder: (_) {
+                  return profileController.friendRequestList.isEmpty
+                      ? Center(
+                          child: Text("No Requests").text.semiBold.xl.make(),
+                        )
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: profileController.friendRequestList.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return GestureDetector(
+                              onTap: () {},
+                              child: Card(
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        profileController
+                                                    .friendRequestList[index]
+                                                    .profile ==
+                                                null
+                                            ? Padding(
+                                                padding:
+                                                    const EdgeInsets.all(7.0),
+                                                child: CircleAvatar(
+                                                  radius: 35,
+                                                  backgroundImage: AssetImage(
+                                                      'assets/images/profile_icon.png'),
+                                                ),
+                                              )
+                                            : Padding(
+                                                padding:
+                                                    const EdgeInsets.all(7.0),
+                                                child: CircleAvatar(
+                                                  radius: 35,
+                                                  backgroundImage: NetworkImage(
+                                                      profileController
+                                                          .friendRequestList[
+                                                              index]
+                                                          .profile),
+                                                ),
                                               ),
-                                            )
-                                          : Padding(
-                                              padding:
-                                                  const EdgeInsets.all(7.0),
-                                              child: CircleAvatar(
-                                                radius: 35,
-                                                backgroundImage: NetworkImage(
-                                                    profileController
-                                                        .friendRequestList[
-                                                            index]
-                                                        .profile),
+                                        Container(
+                                          width: 110,
+                                          height: 50,
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                profileController
+                                                    .friendRequestList[index]
+                                                    .name,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: const TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                               ),
-                                            ),
-                                      Container(
-                                        width: 110,
-                                        height: 50,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              profileController
-                                                  .friendRequestList[index]
-                                                  .name,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            Text(
-                                              profileController
-                                                  .friendRequestList[index]
-                                                  .designation,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ],
+                                              Text(
+                                                profileController
+                                                    .friendRequestList[index]
+                                                    .designation,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        InkWell(
+                                          onTap: () {
+                                            profileController.respondRequest(
+                                                userId: profileController
+                                                    .friendRequestList[index]
+                                                    .friendId
+                                                    .toString(),
+                                                status: "1");
+                                          },
+                                          child: Icon(Icons.done),
+                                          // child: Container(
+                                          //   child: Center(
+                                          //       child: Text(
+                                          //     "Accept",
+                                          //     style: TextStyle(
+                                          //         color: kwhite,
+                                          //         fontWeight: FontWeight.w600),
+                                          //   )),
+                                          //   height: 30,
+                                          //   width: 80,
+                                          //   decoration: BoxDecoration(
+                                          //       borderRadius:
+                                          //           BorderRadius.circular(17),
+                                          //       color: kblue),
+                                          // ),
                                         ),
-                                      )
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      InkWell(
-                                        onTap: () {
-                                          profileController.respondRequest(
-                                              userId: profileController
-                                                  .friendRequestList[index]
-                                                  .friendId
-                                                  .toString(),
-                                              status: "1");
-                                        },
-                                        child: Icon(Icons.done),
-                                        // child: Container(
-                                        //   child: Center(
-                                        //       child: Text(
-                                        //     "Accept",
-                                        //     style: TextStyle(
-                                        //         color: kwhite,
-                                        //         fontWeight: FontWeight.w600),
-                                        //   )),
-                                        //   height: 30,
-                                        //   width: 80,
-                                        //   decoration: BoxDecoration(
-                                        //       borderRadius:
-                                        //           BorderRadius.circular(17),
-                                        //       color: kblue),
-                                        // ),
-                                      ),
-                                      kwidth10,
-                                      ksizedbox10,
-                                      InkWell(
-                                        onTap: () {
-                                          profileController.respondRequest(
-                                              userId: profileController
-                                                  .friendRequestList[index]
-                                                  .friendId
-                                                  .toString(),
-                                              status: "2");
-                                        },
-                                        child: Icon(Icons.close),
-                                        // child: Container(
-                                        //   child: Center(
-                                        //       child: Text(
-                                        //     "Remove",
-                                        //     style: TextStyle(
-                                        //         color: kblue,
-                                        //         fontWeight: FontWeight.w600),
-                                        //   )),
-                                        //   height: 30,
-                                        //   width: 80,
-                                        //   decoration: BoxDecoration(
-                                        //       border: Border.all(
-                                        //           color: kblue, width: 1),
-                                        //       borderRadius:
-                                        //           BorderRadius.circular(17),
-                                        //       color: kwhite),
-                                        // ),
-                                      ),
-                                      kwidth10,
-                                    ],
-                                  ),
-                                ],
+                                        kwidth10,
+                                        ksizedbox10,
+                                        InkWell(
+                                          onTap: () {
+                                            profileController.respondRequest(
+                                                userId: profileController
+                                                    .friendRequestList[index]
+                                                    .friendId
+                                                    .toString(),
+                                                status: "2");
+                                          },
+                                          child: Icon(Icons.close),
+                                          // child: Container(
+                                          //   child: Center(
+                                          //       child: Text(
+                                          //     "Remove",
+                                          //     style: TextStyle(
+                                          //         color: kblue,
+                                          //         fontWeight: FontWeight.w600),
+                                          //   )),
+                                          //   height: 30,
+                                          //   width: 80,
+                                          //   decoration: BoxDecoration(
+                                          //       border: Border.all(
+                                          //           color: kblue, width: 1),
+                                          //       borderRadius:
+                                          //           BorderRadius.circular(17),
+                                          //       color: kwhite),
+                                          // ),
+                                        ),
+                                        kwidth10,
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
-                      );
-              },
+                            );
+                          },
+                        );
+                },
+              ),
             ),
           // Container(
           //   width: size.width * 0.7,
@@ -376,10 +390,9 @@ class _friendContinerState extends State<friendContiner> {
           children: [
             widget.friendList.profile == ""
                 ? const CircleAvatar(
-                  foregroundColor: Colors.white,
+                    foregroundColor: Colors.white,
                     backgroundImage:
                         AssetImage('assets/images/profile_icon.png'),
-                    
                   )
                 : CircleAvatar(
                     backgroundImage: NetworkImage(widget.friendList.profile),

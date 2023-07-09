@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:reg_login/app/data/components/constands/constands.dart';
 
 import '../../../../../../data/components/controllers/posts_controller.dart';
 import '../../../../../../data/components/controllers/profile_controller.dart';
@@ -41,16 +42,19 @@ class _comentsContainerState extends State<comentsContainer> {
         //             ),
         //     );
         //   }),
-        Container(
-          width: 40,
-          height: 40,
-          child: ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-            child: Image.network(
-              widget.commentsList.picture,
-              fit: BoxFit.cover,
-              width: 20,
-              height: 20,
+        Padding(
+          padding: const EdgeInsets.only(top: 7),
+          child: Container(
+            width: 40,
+            height: 40,
+            child: ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+              child: Image.network(
+                widget.commentsList.picture,
+                fit: BoxFit.cover,
+                width: 20,
+                height: 20,
+              ),
             ),
           ),
         ),
@@ -81,8 +85,8 @@ class _comentsContainerState extends State<comentsContainer> {
                   widget.commentsList.comment,
                   style: const TextStyle(fontSize: 11.3, fontWeight: FontWeight.w600),
                 ),
-              )
-            ],
+              ),
+        ksizedbox10 ],
           ),
         ),
       ],

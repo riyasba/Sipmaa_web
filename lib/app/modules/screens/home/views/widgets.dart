@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:reg_login/app/data/components/constands/constands.dart';
 
 import 'package:reg_login/app/modules/screens/home/views/widgets/continers/comentcontiner.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets/likepost.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../data/components/controllers/auth_controllers.dart';
 import '../../../../data/components/controllers/posts_controller.dart';
@@ -65,7 +67,7 @@ class _HomeContainerState extends State<HomeContainer> {
                 : ListView.separated(
                     primary: true,
                     scrollDirection: Axis.vertical,
-                    physics:const BouncingScrollPhysics(),
+                    physics: const BouncingScrollPhysics(),
                     separatorBuilder: (BuildContext context, int index) =>
                         const SizedBox(height: 10),
                     shrinkWrap: true,
@@ -78,7 +80,7 @@ class _HomeContainerState extends State<HomeContainer> {
                             color: kwhite,
                             boxShadow: <BoxShadow>[
                               BoxShadow(
-                                  offset:const Offset(0.0, 0.7),
+                                  offset: const Offset(0.0, 0.7),
                                   blurRadius: 0.5,
                                   color: kgrey)
                             ],
@@ -87,13 +89,15 @@ class _HomeContainerState extends State<HomeContainer> {
                           children: [
                             ksizedbox10,
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 20, vertical: 10),
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       postsController.allPostList[index].user
                                                   .profilePicture ==
@@ -101,7 +105,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                           ? const CircleAvatar(
                                               backgroundImage: AssetImage(
                                                   'assets/icons/profile_icon.png'),
-                                              radius: 25,
+                                              radius: 35,
                                             )
                                           : CircleAvatar(
                                               backgroundImage: NetworkImage(
@@ -109,6 +113,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                       .allPostList[index]
                                                       .user
                                                       .profilePicture),
+                                              radius: 35,
                                             ),
                                       const SizedBox(
                                         width: 10,
@@ -120,43 +125,66 @@ class _HomeContainerState extends State<HomeContainer> {
                                           Text(
                                             postsController
                                                 .allPostList[index].user.name,
-                                            style: ktextstyle22,
-                                          ),
+                                          )
+                                              .text
+                                              .bold
+                                              .xl2
+                                              .fontFamily(GoogleFonts.poppins()
+                                                  .fontFamily!)
+                                              .make(),
                                           Text(postsController
-                                                  .allPostList[index]
-                                                  .user
-                                                  .designation ??
-                                              postsController.allPostList[index]
-                                                  .user.userName)
+                                                      .allPostList[index]
+                                                      .user
+                                                      .designation ??
+                                                  postsController
+                                                      .allPostList[index]
+                                                      .user
+                                                      .userName)
+                                              .text
+                                              .semiBold
+                                              .sm
+                                              .fontFamily(GoogleFonts.poppins()
+                                                  .fontFamily!)
+                                              .make(),
                                         ],
                                       ),
                                     ],
                                   ),
-                                  Text(
-                                    timeago.format(postsController
-                                        .allPostList[index].createdAt),
-                                    style: const TextStyle(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      timeago.format(postsController
+                                          .allPostList[index].createdAt),
+                                    )
+                                        .text
+                                        .sm
+                                        .semiBold
+                                        .fontFamily(
+                                            GoogleFonts.poppins().fontFamily!)
+                                        .make(),
                                   ),
                                 ],
                               ),
                             ),
-                            ksizedbox30,
+                            ksizedbox10,
                             Padding(
-                              padding: const EdgeInsets.only(left: 35, top: 5),
+                              padding: const EdgeInsets.only(
+                                left: 35,
+                              ),
                               child: Row(
                                 children: [
                                   Text(
                                     postsController.allPostList[index].title,
-                                    style: const TextStyle(
-                                        fontSize: 18.5,
-                                        fontWeight: FontWeight.w500),
                                   )
+                                      .text
+                                      .semiBold
+                                      .fontFamily(
+                                          GoogleFonts.poppins().fontFamily!)
+                                      .make(),
                                 ],
                               ),
                             ),
-                            ksizedbox30,
+                            ksizedbox10,
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -182,8 +210,8 @@ class _HomeContainerState extends State<HomeContainer> {
                               ],
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Row(
+                              padding: const EdgeInsets.symmetric(horizontal: 20),
+                              child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
                                   Row(
                                     children: [
@@ -217,17 +245,18 @@ class _HomeContainerState extends State<HomeContainer> {
                                                                             .arrow_back)),
                                                                 const Text(
                                                                   'Reactions',
-                                                                  style: TextStyle(
-                                                                      fontSize:
-                                                                          16,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w900),
                                                                 )
+                                                                    .text
+                                                                    .bold
+                                                                    .fontFamily(
+                                                                        GoogleFonts.poppins()
+                                                                            .fontFamily!)
+                                                                    .make(),
                                                               ],
                                                             ),
                                                             ksizedbox10,
-                                                            GetBuilder<PostsController>(
+                                                            GetBuilder<
+                                                                    PostsController>(
                                                                 builder: (_) {
                                                               return Container(
                                                                 height: 350,
@@ -235,9 +264,13 @@ class _HomeContainerState extends State<HomeContainer> {
                                                                 child: postController
                                                                         .likesList
                                                                         .isEmpty
-                                                                    ? const Center(
-                                                                        child: Text(
-                                                                            "No Likes Yet!"),
+                                                                    ? Center(
+                                                                        child: Text("No Likes Yet!")
+                                                                            .text
+                                                                            .sm
+                                                                            .semiBold
+                                                                            .fontFamily(GoogleFonts.poppins().fontFamily!)
+                                                                            .make(),
                                                                       )
                                                                     : ListView
                                                                         .separated(
@@ -252,28 +285,29 @@ class _HomeContainerState extends State<HomeContainer> {
                                                                           return GestureDetector(
                                                                             onTap:
                                                                                 () {},
-                                                                            child: ListTile(
-                                                                                leading: postController.likesList[index].picture == ""
-                                                                                    ? const CircleAvatar(
-                                                                                        radius: 40,
-                                                                                        backgroundImage: AssetImage('assets/images/profile_icon.png'),
-                                                                                      )
-                                                                                    : CircleAvatar(
-                                                                                        radius: 40,
-                                                                                        backgroundImage: NetworkImage(postController.likesList[index].picture),
-                                                                                      ),
-                                                                                title: Text(postController.likesList[index].userName),
-                                                                                subtitle: Text(postController.likesList[index].userName),
-                                                                                trailing: Text(
-                                                                                  timeago.format(postController.likesList[index].createdAt),
-                                                                                  style: const TextStyle(fontSize: 10),
-                                                                                )),
+                                                                            child:
+                                                                                ListTile(
+                                                                              leading: postController.likesList[index].picture == ""
+                                                                                  ? const CircleAvatar(
+                                                                                      radius: 40,
+                                                                                      backgroundImage: AssetImage('assets/images/profile_icon.png'),
+                                                                                    )
+                                                                                  : CircleAvatar(
+                                                                                      radius: 40,
+                                                                                      backgroundImage: NetworkImage(postController.likesList[index].picture),
+                                                                                    ),
+                                                                              title: Text(postController.likesList[index].userName).text.semiBold.fontFamily(GoogleFonts.poppins().fontFamily!).make(),
+                                                                              subtitle: Text(postController.likesList[index].userName).text.size(7).fontFamily(GoogleFonts.poppins().fontFamily!).make(),
+                                                                              trailing: Text(
+                                                                                timeago.format(postController.likesList[index].createdAt),
+                                                                              ).text.size(7).tight.fontFamily(GoogleFonts.poppins().fontFamily!).make(),
+                                                                            ),
                                                                           );
                                                                         },
                                                                         separatorBuilder:
                                                                             (BuildContext context,
                                                                                 int index) {
-                                                                          return const Divider(
+                                                                          return Divider(
                                                                             height:
                                                                                 1,
                                                                           );
@@ -290,7 +324,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                           },
                                           icon: Icon(
                                             Icons.favorite,
-                                            color: Colors.pink,
+                                            color: Colors.red,
                                             size: 15,
                                           )),
                                       Text(
@@ -310,35 +344,39 @@ class _HomeContainerState extends State<HomeContainer> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 20),
                                     child: InkWell(
-                                        onTap: () {
-                                          postController.getComments(
-                                              postId: postsController
-                                                  .allPostList[index].id
-                                                  .toString());
-
-                                          coments(context, index, size);
-                                        },
-                                        child: Text(
-                                          '${postsController.allPostList[index].comment} Comments'
-                                              .toString(),
-                                          //   '${postsController.allPostList[index].comment} comments',
-                                          //   postsController
-                                          //                          .allPostList[index]
-                                          //                           .likeCount
-                                          //                          .toString(),
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              fontWeight: FontWeight.w500),
-                                        )),
-                                  )
-                                ],
+                                      onTap: () {
+                                        postController.getComments(
+                                            postId: postsController
+                                                .allPostList[index].id
+                                                .toString());
+                            
+                                        coments(context, index, size);
+                                      },
+                                      child: Text(
+                                        '${postsController.allPostList[index].comment}  Comments'
+                                            .toString(),
+                                        //   '${postsController.allPostList[index].comment} comments',
+                                        //   postsController
+                                        //                          .allPostList[index]
+                                        //                           .likeCount
+                                        //                          .toString(),
+                                      )
+                                          .text
+                                          .sm
+                                          .semiBold
+                                          .fontFamily(
+                                              GoogleFonts.poppins().fontFamily!)
+                                          .make(),
+                                    ),
+                                  ),
+                             kwidth10   ],
                               ),
                             ),
                             Padding(
                               padding:
                                   const EdgeInsets.only(left: 10, right: 10),
                               child: Divider(
-                                color: Colors.black,
+                                color: kgrey,
                               ),
                             ),
                             Padding(
@@ -370,191 +408,204 @@ class _HomeContainerState extends State<HomeContainer> {
                             ),
                             ksizedbox30,
                             Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 30, right: 30),
-                                // child: Container(
-                                //   decoration: BoxDecoration(
-                                //     color: Colors.white,
-                                //     boxShadow: [
-                                //       BoxShadow(
-                                //           blurRadius: 5,
-                                //           color: Colors.grey.withOpacity(0.5)),
-                                //     ],
-                                //   ),
-                                //   height: 60,
-                                //   width: 333,
-                                //   child: Padding(
-                                //     padding: const EdgeInsets.only(left: 10, right: 10),
-                                //     child:
-                                //     postController.profileData.isEmpty
-                                //         ? Container(
-                                //             width: 5,
-                                //           )
-                                //        :
-                                //          Container(
-                                //           width: 222,
-                                //            child: Row(
-                                //             children: [
-                                //               postController
-                                //                           .profileData.first.profilePicture ==
-                                //                       null
-                                //                   ? const CircleAvatar(
-                                //                       backgroundImage: AssetImage(
-                                //                           'assets/images/Group 89.png'),
-                                //                     )
-                                //                   : CircleAvatar(
-                                //                       backgroundImage: NetworkImage(
-                                //                           postController.profileData.first
-                                //                               .profilePicture),
-                                //                     ),
-                                //               const SizedBox(width: 10),
-                                //               Expanded(
-                                //                 child: TextField(
-                                //                     controller: commentTextController,
-                                //                     decoration:
-                                //                         const InputDecoration.collapsed(
-                                //                             hintText: "Add a comments")),
-                                //               ),
-                                //               const SizedBox(width: 10),
-                                //               InkWell(
-                                // onTap: () {
-                                //   if (commentTextController
-                                //       .text.isNotEmpty) {
-                                //     postController.postComments(
-                                //         userID: postController
-                                //             .profileData.first.id
-                                //             .toString(),
-                                //         postId: postsController
-                                //             .allPostList[index].id
-                                //             .toString(),
-                                //         comment:
-                                //             commentTextController.text);
-                                //     commentTextController.clear();
-                                //   } else {
-                                //     Get.rawSnackbar(
-                                //       messageText: const Text(
-                                //         "type anything before commenting",
-                                //         style:
-                                //             TextStyle(color: Colors.white),
-                                //       ),
-                                //       backgroundColor: Colors.red,
-                                //     );
-                                //   }
-                                // },
-                                //                   child: Icon(Icons.send)),
-                                //             ]),
-                                //          ),
-                                //   ),
-                                // ),
-                                child:
-                                    GetBuilder<ProfileController>(builder: (_) {
-                                  return Container(
-                                      decoration: BoxDecoration(
-                                          color: Colors.white.withOpacity(0.75),
-                                          borderRadius: BorderRadius.circular(15),
-                                          boxShadow: <BoxShadow>[
-                                            BoxShadow(
-                                                offset:const Offset(0.0, 0.80),
-                                                color: kgrey.withOpacity(0.4),
-                                                blurRadius: 0.2)
-                                          ]),
-                                      height: 42,
-                                      width: MediaQuery.of(context).size.width,
-                                      child: TextField(
-                                        controller: postsController
-                                            .allPostList[index]
-                                            .textEditingController,
-                                        decoration: InputDecoration(
-                                          border:const OutlineInputBorder(
-                                              borderSide: BorderSide.none),
-                                          suffixIcon: InkWell(
-                                              onTap: () {
-                                                print(postsController
+                              padding:
+                                  const EdgeInsets.only(left: 30, right: 30),
+                              // child: Container(
+                              //   decoration: BoxDecoration(
+                              //     color: Colors.white,
+                              //     boxShadow: [
+                              //       BoxShadow(
+                              //           blurRadius: 5,
+                              //           color: Colors.grey.withOpacity(0.5)),
+                              //     ],
+                              //   ),
+                              //   height: 60,
+                              //   width: 333,
+                              //   child: Padding(
+                              //     padding: const EdgeInsets.only(left: 10, right: 10),
+                              //     child:
+                              //     postController.profileData.isEmpty
+                              //         ? Container(
+                              //             width: 5,
+                              //           )
+                              //        :
+                              //          Container(
+                              //           width: 222,
+                              //            child: Row(
+                              //             children: [
+                              //               postController
+                              //                           .profileData.first.profilePicture ==
+                              //                       null
+                              //                   ? const CircleAvatar(
+                              //                       backgroundImage: AssetImage(
+                              //                           'assets/images/Group 89.png'),
+                              //                     )
+                              //                   : CircleAvatar(
+                              //                       backgroundImage: NetworkImage(
+                              //                           postController.profileData.first
+                              //                               .profilePicture),
+                              //                     ),
+                              //               const SizedBox(width: 10),
+                              //               Expanded(
+                              //                 child: TextField(
+                              //                     controller: commentTextController,
+                              //                     decoration:
+                              //                         const InputDecoration.collapsed(
+                              //                             hintText: "Add a comments")),
+                              //               ),
+                              //               const SizedBox(width: 10),
+                              //               InkWell(
+                              // onTap: () {
+                              //   if (commentTextController
+                              //       .text.isNotEmpty) {
+                              //     postController.postComments(
+                              //         userID: postController
+                              //             .profileData.first.id
+                              //             .toString(),
+                              //         postId: postsController
+                              //             .allPostList[index].id
+                              //             .toString(),
+                              //         comment:
+                              //             commentTextController.text);
+                              //     commentTextController.clear();
+                              //   } else {
+                              //     Get.rawSnackbar(
+                              //       messageText: const Text(
+                              //         "type anything before commenting",
+                              //         style:
+                              //             TextStyle(color: Colors.white),
+                              //       ),
+                              //       backgroundColor: Colors.red,
+                              //     );
+                              //   }
+                              // },
+                              //                   child: Icon(Icons.send)),
+                              //             ]),
+                              //          ),
+                              //   ),
+                              // ),
+                              child:
+                                  GetBuilder<ProfileController>(builder: (_) {
+                                return Container(
+                                    decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.75),
+                                        borderRadius: BorderRadius.circular(15),
+                                        boxShadow: <BoxShadow>[
+                                          BoxShadow(
+                                              offset: const Offset(0.0, 0.80),
+                                              color: kgrey.withOpacity(0.4),
+                                              blurRadius: 0.2)
+                                        ]),
+                                    height: 42,
+                                    width: MediaQuery.of(context).size.width,
+                                    child: TextField(
+                                      controller: postsController
+                                          .allPostList[index]
+                                          .textEditingController,
+                                      onChanged: (value) {
+                                        postsController.update();
+                                      },
+                                      decoration: InputDecoration(
+                                        border: const OutlineInputBorder(
+                                            borderSide: BorderSide.none),
+                                        suffixIcon: InkWell(
+                                            onTap: () {
+                                              print(postsController
+                                                  .allPostList[index]
+                                                  .textEditingController
+                                                  .text);
+                                              if (postsController
+                                                  .allPostList[index]
+                                                  .textEditingController
+                                                  .text
+                                                  .isNotEmpty) {
+                                                postController.postComments(
+                                                    index: index,
+                                                    userID: profileController
+                                                        .profileData
+                                                        .first
+                                                        .user
+                                                        .id
+                                                        .toString(),
+                                                    postId: postsController
+                                                        .allPostList[index].id
+                                                        .toString(),
+                                                    comment: postsController
+                                                        .allPostList[index]
+                                                        .textEditingController
+                                                        .text);
+                                                postsController
                                                     .allPostList[index]
                                                     .textEditingController
-                                                    .text);
-                                                if (postsController
+                                                    .clear();
+                                                postController.update();
+                                              } else {
+                                                Get.rawSnackbar(
+                                                  messageText: const Text(
+                                                    "Type anything before commenting",
+                                                    style: TextStyle(
+                                                        color: Colors.white),
+                                                  ),
+                                                  backgroundColor:
+                                                      const Color.fromARGB(
+                                                          255, 194, 171, 169),
+                                                );
+                                              }
+                                            },
+                                            child: postsController
                                                     .allPostList[index]
                                                     .textEditingController
                                                     .text
-                                                    .isNotEmpty) {
-                                                  postController.postComments(
-                                                      index: index,
-                                                      userID: profileController
-                                                          .profileData
-                                                          .first
-                                                          .user
-                                                          .id
-                                                          .toString(),
-                                                      postId: postsController
-                                                          .allPostList[index].id
-                                                          .toString(),
-                                                      comment: postsController
-                                                          .allPostList[index]
-                                                          .textEditingController
-                                                          .text);
-                                                  postsController
-                                                      .allPostList[index]
-                                                      .textEditingController
-                                                      .clear();
-                                                  postController.update();
-                                                } else {
-                                                  Get.rawSnackbar(
-                                                    messageText: const Text(
-                                                      "Type anything before commenting",
-                                                      style: TextStyle(
-                                                          color: Colors.white),
-                                                    ),
-                                                    backgroundColor: Colors.red,
-                                                  );
-                                                }
-                                              },
-                                              child:const Icon(Icons.send)),
-                                          hintText: 'Write Comment',
-                                          hintStyle: const TextStyle(
-                                              fontSize: 12,
-                                              color: Colors.black),
-                                          prefixIcon: profileController
-                                                  .profileData.isEmpty
-                                              ? Container(
-                                                  width: 5,
-                                                  height: 10,
-                                                  color: Colors.red,
-                                                )
-                                              : Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          right: 30),
-                                                  child: Container(
-                                                    width: 20,
-                                                    child: Row(children: [
-                                                      profileController
-                                                                  .profileData
-                                                                  .first
-                                                                  .user
-                                                                  .profilePicture ==
-                                                              null
-                                                          ? const CircleAvatar(
-                                                              backgroundImage:
-                                                                  AssetImage(
-                                                                      'assets/images/profile_icon.png'),
-                                                            )
-                                                          : CircleAvatar(
-                                                              backgroundImage: NetworkImage(
-                                                                  profileController
-                                                                      .profileData
-                                                                      .first
-                                                                      .user
-                                                                      .profilePicture),
-                                                            ),
-                                                    ]),
-                                                  ),
+                                                    .isNotEmpty
+                                                ? Icon(Icons.send)
+                                                : Container(
+                                                    width: 5,
+                                                  )),
+                                        hintText: 'Write Comment',
+                                        hintStyle: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w500,
+                                            color: Colors.black),
+                                        prefixIcon: profileController
+                                                .profileData.isEmpty
+                                            ? Container(
+                                                width: 5,
+                                                height: 10,
+                                                color: const Color.fromARGB(
+                                                    255, 231, 219, 218),
+                                              )
+                                            : Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 30),
+                                                child: Container(
+                                                  width: 20,
+                                                  child: Row(children: [
+                                                    profileController
+                                                                .profileData
+                                                                .first
+                                                                .user
+                                                                .profilePicture ==
+                                                            null
+                                                        ? const CircleAvatar(
+                                                            backgroundImage:
+                                                                AssetImage(
+                                                                    'assets/images/profile_icon.png'),
+                                                          )
+                                                        : CircleAvatar(
+                                                            backgroundImage: NetworkImage(
+                                                                profileController
+                                                                    .profileData
+                                                                    .first
+                                                                    .user
+                                                                    .profilePicture),
+                                                          ),
+                                                  ]),
                                                 ),
-                                        ),
-                                      ));
-                                }
-                                ),
-                                ),
+                                              ),
+                                      ),
+                                    ));
+                              }),
+                            ),
                             ksizedbox20,
                           ],
                         ),
@@ -570,182 +621,190 @@ class _HomeContainerState extends State<HomeContainer> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            content: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Row(
-                children: [
-                  Container(
-                    height: 350,
-                    width: 700,
-                    decoration: BoxDecoration(
-                      color: kwhite,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5),
-                          child: postController.allPostList[index].body == ""
-                                  ? ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Image.asset(
-                                        'assets/images/noimage.jpg',
-                                        fit: BoxFit.cover,
-                                        width: 150,
-                                      ),
-                                    ) : 
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(10),
-                              child: Image.network(
-                              postsController.allPostList[index].body,
-                              fit: BoxFit.contain,
-                              width: 250,
-                              height: 250,
-                            ),
-                            ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 35, left: 20),
-                          child: Column(
-                            children: [
-                              Container(
-                                color: Colors.amber,
-                                height: 250,
-                                width: 320,
-                                child: GetBuilder<PostsController>(builder: (_) {
-                                  return postsController.commentsList.isEmpty
-                                      ? const Center(
-                                          child: Text("No Comments Yet!"),
-                                        )
-                                      : ListView.builder(
-                                          shrinkWrap: true,
-                                          itemBuilder: (context, index) =>
-                                              comentsContainer(
-                                            commentsList:postsController.commentsList[index],
-                                          ),
-                                          itemCount:
-                                              postsController.commentsList.length,
-                                        );
-                                }),
+            content: Row(
+              children: [
+                Container(
+                  height: 350,
+                  width: 700,
+                  decoration: BoxDecoration(
+                    color: kwhite,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5),
+                        child: postController.allPostList[index].body == ""
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.asset(
+                                  'assets/images/noimage.jpg',
+                                  fit: BoxFit.cover,
+                                  width: 150,
+                                ),
+                              )
+                            : ClipRRect(
+                                borderRadius: BorderRadius.circular(10),
+                                child: Image.network(
+                                  postsController.allPostList[index].body,
+                                  fit: BoxFit.contain,
+                                  width: 250,
+                                  height: 250,
+                                ),
                               ),
-                              //
-                              ksizedbox20,
-                              GetBuilder<ProfileController>(builder: (_) {
-                                    return Container(
-                                       height: 42,
-                                        width: 280,
-                                        decoration: BoxDecoration(
-                                            color: Colors.white.withOpacity(0.75),
-                                            borderRadius: BorderRadius.circular(15),
-                                            boxShadow: <BoxShadow>[
-                                              BoxShadow(
-                                                  offset:const Offset(0.0, 0.80),
-                                                  color: kgrey.withOpacity(0.4),
-                                                  blurRadius: 0.2)
-                                            ]),
-                                        child: TextField(
-                                          controller: postsController
-                                              .allPostList[index]
-                                              .textEditingController,
-                                          decoration: InputDecoration(
-                                            border:const OutlineInputBorder(
-                                                borderSide: BorderSide.none),
-                                            suffixIcon: InkWell(
-                                                onTap: () {
-                                                  print(postsController
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 35, left: 20),
+                        child: Column(
+                          children: [
+                            Container(
+                              color: kwhite,
+                              height: 250,
+                              width: 320,
+                              child: GetBuilder<PostsController>(builder: (_) {
+                                return postsController.commentsList.isEmpty
+                                    ? Center(
+                                        child: Text("No Comments Yet!")
+                                            .text
+                                            .semiBold
+                                            .fontFamily(GoogleFonts.poppins()
+                                                .fontFamily!)
+                                            .make(),
+                                      )
+                                    : ListView.separated(
+                                        separatorBuilder:
+                                            (BuildContext context, int index) {
+                                          return Divider(
+                                            height: 3,
+                                          );
+                                        },
+                                        shrinkWrap: true,
+                                        itemBuilder: (context, index) =>
+                                            comentsContainer(
+                                          commentsList: postsController
+                                              .commentsList[index],
+                                        ),
+                                        itemCount:
+                                            postsController.commentsList.length,
+                                      );
+                              }),
+                            ),
+                            //
+                            ksizedbox20,
+                            GetBuilder<ProfileController>(builder: (_) {
+                              return Container(
+                                  height: 42,
+                                  width: 280,
+                                  decoration: BoxDecoration(
+                                      color: Colors.white.withOpacity(0.75),
+                                      borderRadius: BorderRadius.circular(15),
+                                      boxShadow: <BoxShadow>[
+                                        BoxShadow(
+                                            offset: const Offset(0.0, 0.80),
+                                            color: kgrey.withOpacity(0.4),
+                                            blurRadius: 0.2)
+                                      ]),
+                                  child: TextField(
+                                    controller: postsController
+                                        .allPostList[index]
+                                        .textEditingController,
+                                    decoration: InputDecoration(
+                                      border: const OutlineInputBorder(
+                                          borderSide: BorderSide.none),
+                                      suffixIcon: InkWell(
+                                          onTap: () {
+                                            print(postsController
+                                                .allPostList[index]
+                                                .textEditingController
+                                                .text);
+                                            if (postsController
+                                                .allPostList[index]
+                                                .textEditingController
+                                                .text
+                                                .isNotEmpty) {
+                                              postController.postComments(
+                                                  index: index,
+                                                  userID: profileController
+                                                      .profileData.first.user.id
+                                                      .toString(),
+                                                  postId: postsController
+                                                      .allPostList[index].id
+                                                      .toString(),
+                                                  comment: postsController
                                                       .allPostList[index]
                                                       .textEditingController
                                                       .text);
-                                                  if (postsController
-                                                      .allPostList[index]
-                                                      .textEditingController
-                                                      .text
-                                                      .isNotEmpty) {
-                                                    postController.postComments(
-                                                        index: index,
-                                                        userID: profileController
-                                                            .profileData
-                                                            .first
-                                                            .user
-                                                            .id
-                                                            .toString(),
-                                                        postId: postsController
-                                                            .allPostList[index].id
-                                                            .toString(),
-                                                        comment: postsController
-                                                            .allPostList[index]
-                                                            .textEditingController
-                                                            .text);
-                                                    postsController
-                                                        .allPostList[index]
-                                                        .textEditingController
-                                                        .clear();
-                                                    postController.update();
-                                                  } else {
-                                                    Get.rawSnackbar(
-                                                      messageText: const Text(
-                                                        "Type anything before commenting",
-                                                        style: TextStyle(
-                                                            color: Colors.white),
-                                                      ),
-                                                      backgroundColor: Colors.red,
-                                                    );
-                                                  }
-                                                },
-                                                child:const Icon(Icons.send)),
-                                            hintText: 'Write Comment',
-                                            hintStyle: const TextStyle(
-                                                fontSize: 12,
-                                                color: Colors.black),
-                                            prefixIcon: profileController
-                                                    .profileData.isEmpty
-                                                ? Container(
-                                                    width: 5,
-                                                    height: 10,
-                                                    color: Colors.red,
-                                                  )
-                                                : Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 30),
-                                                    child: Container(
-                                                      width: 20,
-                                                      child: Row(children: [
-                                                        profileController
-                                                                    .profileData
-                                                                    .first
-                                                                    .user
-                                                                    .profilePicture ==
-                                                                null
-                                                            ? const CircleAvatar(
-                                                                backgroundImage:
-                                                                    AssetImage(
-                                                                        'assets/images/profile_icon.png'),
-                                                              )
-                                                            : CircleAvatar(
-                                                                backgroundImage: NetworkImage(
-                                                                    profileController
-                                                                        .profileData
-                                                                        .first
-                                                                        .user
-                                                                        .profilePicture),
-                                                              ),
-                                                      ]),
-                                                    ),
-                                                  ),
-                                          ),
-                                        ));
-                                  }
-                                  ),
-                              //
-                            ],
-                          ),
+                                              postsController.allPostList[index]
+                                                  .textEditingController
+                                                  .clear();
+                                              postController.update();
+                                            } else {
+                                              Get.rawSnackbar(
+                                                messageText: const Text(
+                                                  "Type anything before commenting",
+                                                  style: TextStyle(
+                                                      color: Colors.white),
+                                                ),
+                                                backgroundColor:
+                                                    const Color.fromARGB(
+                                                        255, 246, 244, 244),
+                                              );
+                                            }
+                                          },
+                                          child: const Icon(Icons.send)),
+                                      hintText: 'Write Comment',
+                                      hintStyle: const TextStyle(
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500,
+                                        color: Colors.black,
+                                      ),
+                                      prefixIcon: profileController
+                                              .profileData.isEmpty
+                                          ? Container(
+                                              width: 5,
+                                              height: 10,
+                                              color: const Color.fromARGB(
+                                                  255, 238, 234, 233),
+                                            )
+                                          : Padding(
+                                              padding: const EdgeInsets.only(
+                                                  right: 30),
+                                              child: Container(
+                                                width: 20,
+                                                child: Row(children: [
+                                                  profileController
+                                                              .profileData
+                                                              .first
+                                                              .user
+                                                              .profilePicture ==
+                                                          null
+                                                      ? const CircleAvatar(
+                                                          backgroundImage:
+                                                              AssetImage(
+                                                                  'assets/images/profile_icon.png'),
+                                                        )
+                                                      : CircleAvatar(
+                                                          backgroundImage: NetworkImage(
+                                                              profileController
+                                                                  .profileData
+                                                                  .first
+                                                                  .user
+                                                                  .profilePicture),
+                                                        ),
+                                                ]),
+                                              ),
+                                            ),
+                                    ),
+                                  ));
+                            }),
+                            //
+                          ],
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           );
         });

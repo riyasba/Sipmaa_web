@@ -5,23 +5,13 @@ import 'package:reg_login/app/modules/screens/home/views/chat.dart';
 import 'package:reg_login/app/modules/screens/home/views/create_widget.dart';
 import 'package:reg_login/app/modules/screens/home/views/notification_widget.dart';
 import 'package:reg_login/app/modules/screens/Settings/views/settingss.dart';
-//import 'package:reg_login/app/modules/screens/Settings/views/widgets/change_password.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets/friends_search_screen.dart';
 import 'package:reg_login/app/modules/screens/profile/views/profile_pagee.dart';
 import 'package:reg_login/app/modules/screens/home/views/searchcontainer.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets.dart';
 import 'package:reg_login/app/data/components/constands/constands.dart';
-//import 'package:reg_login/controller/home_controller.dart';
-//import 'package:reg_login/widget/filtter_widget.dart';
-//import 'package:reg_login/widget/home_friends.dart';
-//import 'package:reg_login/widget/search_container.dart';
-
 import '../../../../data/components/controllers/posts_controller.dart';
-import '../../../../data/components/search_field.dart';
-//import '../../profile/views/profile_page.dart';
 import 'widgets/friends_widget.dart';
-//import '../widget/home_container.dart';
-//import '../widget/search_field.dart';
 import '../controler/controler.dart';
 import 'filter_widget.dart';
 
@@ -52,6 +42,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: kwhite,
       appBar: AppBar(
         backgroundColor: const Color(0xffCAE1FF),
         leadingWidth: 100,
@@ -72,6 +63,7 @@ class _HomePageState extends State<HomePage> {
           //     textController: textController,
           //   ),
           // ),
+
           IconButton(
               onPressed: () {
                 homeController.homeindex(7);
@@ -89,23 +81,27 @@ class _HomePageState extends State<HomePage> {
                 Icons.notifications_outlined,
                 color: Colors.black,
               )),
-          InkWell( onTap:  () {
-                homeController.homeindex(4);
-              },
+          InkWell(
+            onTap: () {
+              homeController.homeindex(4);
+            },
             child: GetBuilder<ProfileController>(builder: (_) {
-              return profileController.profileData.isEmpty ? Container() : Padding(
-                padding: const EdgeInsets.only(right: 10),
-                child: profileController.profileData.first.user.profilePicture ==
-                        null
-                    ? const CircleAvatar(
-                        backgroundImage:
-                            AssetImage('assets/images/profile_icon.png'),
-                      )
-                    : CircleAvatar(
-                        backgroundImage: NetworkImage(profileController
-                            .profileData.first.user.profilePicture),
-                      ),
-              );
+              return profileController.profileData.isEmpty
+                  ? Container()
+                  : Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: profileController
+                                  .profileData.first.user.profilePicture ==
+                              null
+                          ? const CircleAvatar(
+                              backgroundImage:
+                                  AssetImage('assets/images/profile_icon.png'),
+                            )
+                          : CircleAvatar(
+                              backgroundImage: NetworkImage(profileController
+                                  .profileData.first.user.profilePicture),
+                            ),
+                    );
             }),
           ),
         ],
@@ -120,18 +116,21 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 15),
+                    padding: const EdgeInsets.only(left: 15, right: 25),
                     child: Column(
                       children: [
                         ElevatedButton(
                             style: ElevatedButton.styleFrom(
+                                minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.95,
+                                    50),
                                 elevation: 0,
                                 backgroundColor:
                                     homeController.homeindex.value == 0
                                         ? kwhite
                                         : kblue,
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10))),
+                                    borderRadius: BorderRadius.circular(15))),
                             onPressed: () {
                               homeController.homeindex(0);
                               homeController.update();
@@ -146,8 +145,7 @@ class _HomePageState extends State<HomePage> {
                                 ),
                                 ksizedbox10,
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.only( left: 6),
+                                  padding: const EdgeInsets.only(left: 6),
                                   child: Text(
                                     'Home',
                                     style: TextStyle(
@@ -165,18 +163,20 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 5),
+                    padding: const EdgeInsets.only(left: 15, right: 25),
                     child: Column(
                       children: [
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(
+                            style: ElevatedButton.styleFrom(minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.95,
+                                    50),
                                 elevation: 0,
                                 backgroundColor:
                                     homeController.homeindex.value == 1
                                         ? kwhite
                                         : kblue,
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10))),
+                                    borderRadius: BorderRadius.circular(15))),
                             onPressed: () {
                               homeController.homeindex(1);
                               homeController.update();
@@ -209,17 +209,21 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 15,right: 5),
+                    padding: const EdgeInsets.only(left: 15, right: 25),
                     child: Column(
                       children: [
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                elevation: 0,
-                                backgroundColor: homeController.homeindex == 2
-                                    ? kwhite
-                                    : kblue,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10))),
+                            style: ElevatedButton.styleFrom(minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.95,
+                                    50),
+                              elevation: 0,
+                              backgroundColor: homeController.homeindex == 2
+                                  ? kwhite
+                                  : kblue,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                            ),
                             onPressed: () {
                               homeController.homeindex(2);
                               homeController.update();
@@ -252,17 +256,19 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 5),
+                    padding: const EdgeInsets.only(left: 15, right: 25),
                     child: Column(
                       children: [
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(
+                            style: ElevatedButton.styleFrom(minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.95,
+                                    50),
                                 elevation: 0,
                                 backgroundColor: homeController.homeindex == 3
                                     ? kwhite
                                     : kblue,
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10))),
+                                    borderRadius: BorderRadius.circular(15))),
                             onPressed: () {
                               homeController.homeindex(3);
                               homeController.update();
@@ -295,17 +301,19 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 5),
+                    padding: const EdgeInsets.only(left: 15, right: 25),
                     child: Column(
                       children: [
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(
+                            style: ElevatedButton.styleFrom(minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.95,
+                                    50),
                                 elevation: 0,
                                 backgroundColor: homeController.homeindex == 4
                                     ? kwhite
                                     : kblue,
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10))),
+                                    borderRadius: BorderRadius.circular(15))),
                             onPressed: () {
                               homeController.homeindex(4);
                               homeController.update();
@@ -338,15 +346,17 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 5, top: 0),
+                    padding: const EdgeInsets.only(left: 15, right: 25, top: 0),
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
+                        style: ElevatedButton.styleFrom(minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.95,
+                                    50),
                             elevation: 0,
                             backgroundColor: homeController.homeindex.value == 5
                                 ? kwhite
                                 : kblue,
                             shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10))),
+                                borderRadius: BorderRadius.circular(15))),
                         onPressed: () {
                           homeController.homeindex(5);
                           homeController.update();
@@ -376,18 +386,20 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 5),
+                    padding: const EdgeInsets.only(left: 15, right: 25),
                     child: Column(
                       children: [
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(
+                            style: ElevatedButton.styleFrom(minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.95,
+                                    50),
                                 elevation: 0,
                                 backgroundColor:
                                     homeController.homeindex.value == 6
                                         ? kwhite
                                         : kblue,
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10))),
+                                    borderRadius: BorderRadius.circular(15))),
                             onPressed: () {
                               homeController.homeindex(6);
                               homeController.update();
@@ -420,18 +432,20 @@ class _HomePageState extends State<HomePage> {
                   ),
                   ksizedbox20,
                   Padding(
-                    padding: const EdgeInsets.only(left: 15, right: 5),
+                    padding: const EdgeInsets.only(left: 15, right: 25),
                     child: Column(
                       children: [
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(
+                          style: ElevatedButton.styleFrom(minimumSize: Size(
+                                    MediaQuery.of(context).size.width * 0.95,
+                                    50),
                               elevation: 0,
                               backgroundColor:
                                   homeController.homeindex.value == 8
                                       ? kwhite
                                       : kblue,
                               shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10))),
+                                  borderRadius: BorderRadius.circular(15))),
                           onPressed: () {
                             homeController.homeindex(8);
                             homeController.update();
@@ -466,146 +480,157 @@ class _HomePageState extends State<HomePage> {
                     padding:
                         const EdgeInsets.only(left: 15, right: 15, top: 30),
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            minimumSize:const Size(52, 52),
-                            backgroundColor: kwhite.withOpacity(0.7),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15))),
-                        onPressed: () {
-                          {
-                            showDialog(
-                              context: context,
-                              builder: (context) {
-                                return Dialog(
-                                  child: Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.2,
-                                    width:
-                                        MediaQuery.of(context).size.width * 0.2,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(7),
-                                      color: kwhite,
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(top: 10),
-                                      child: Column(
-                                        children: [
-                                          ksizedbox10,
-                                          const Padding(
-                                            padding:EdgeInsets.only(top: 15),
-                                            child: Text(
-                                              'Do you want to Logout ?',
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.w900),
-                                            ),
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: const Size(52, 52),
+                          backgroundColor: kwhite.withOpacity(0.7),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                      onPressed: () {
+                        {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return Dialog(
+                                child: Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.2,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.2,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(7),
+                                    color: kwhite,
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(top: 10),
+                                    child: Column(
+                                      children: [
+                                        ksizedbox10,
+                                        const Padding(
+                                          padding: EdgeInsets.only(top: 15),
+                                          child: Text(
+                                            'Do you want to Logout ?',
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w900),
                                           ),
-                                          ksizedbox30,
-                                          Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              SizedBox(
-                                                height: 30,
-                                                width: 80,
-                                                child: ElevatedButton(
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      backgroundColor:const Color(0xFF3C73B1),
-                                                      shape: RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(10.0),
-                                                      ),
+                                        ),
+                                        ksizedbox30,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            SizedBox(
+                                              height: 30,
+                                              width: 80,
+                                              child: ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    backgroundColor:
+                                                        const Color(0xFF3C73B1),
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.0),
                                                     ),
-                                                    onPressed: () {
-                                                      Get.toNamed('/sign-in');
-                                                    },
-                                                    // Get.to(
+                                                  ),
+                                                  onPressed: () {
+                                                    Get.toNamed('/sign-in');
+                                                  },
+                                                  // Get.to(
 
-                                                    // BottomNavigationBarExample(),
-                                                    //);
+                                                  // BottomNavigationBarExample(),
+                                                  //);
 
-                                                    child:const Text(
-                                                      'Yes',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    )),
-                                              ),
-                                              SizedBox(
-                                                height: 30,
-                                                width: 80,
-                                                child: ElevatedButton(
-                                                    style: ElevatedButton
-                                                        .styleFrom(
-                                                      backgroundColor:const Color(0xFF3C73B1,),
-                                                      shape:RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(10.0),
-                                                      ),
+                                                  child: const Text(
+                                                    'Yes',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ),
+                                            SizedBox(
+                                              height: 30,
+                                              width: 80,
+                                              child: ElevatedButton(
+                                                  style:
+                                                      ElevatedButton.styleFrom(
+                                                    backgroundColor:
+                                                        const Color(
+                                                      0xFF3C73B1,
                                                     ),
-                                                    onPressed: () {
-                                                      Get.back();
-                                                    },
-                                                    // Get.to(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.0),
+                                                    ),
+                                                  ),
+                                                  onPressed: () {
+                                                    Get.back();
+                                                  },
+                                                  // Get.to(
 
-                                                    // BottomNavigationBarExample(),
-                                                    //);
+                                                  // BottomNavigationBarExample(),
+                                                  //);
 
-                                                    child:const Text('No',
-                                                      style: TextStyle(
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    )),
-                                              ),
-                                            ],
-                                          )
-                                        ],
-                                      ),
+                                                  child: const Text(
+                                                    'No',
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  )),
+                                            ),
+                                          ],
+                                        )
+                                      ],
                                     ),
                                   ),
-                                );
-                              },
-                            );
-                          }
-                        },
-                        child:const Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(left: 5, top: 0),
-                              child: Icon(
-                                Icons.power_settings_new,
-                                size: 17,
-                                color: Colors.black,
-                              ),
+                                ),
+                              );
+                            },
+                          );
+                        }
+                      },
+                      child: const Row(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.only(left: 5, top: 0),
+                            child: Icon(
+                              Icons.power_settings_new,
+                              size: 17,
+                              color: Colors.black,
                             ),
-                            Padding(
-                              padding: EdgeInsets.only(top: 0, left: 10),
-                              child: Column(
-                                children: [
-                                  Text(
-                                    'Log out',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w900,
-                                        fontSize: 12),
-                                  ),
-                                  // Padding(
-                                  //   padding: const EdgeInsets.only(top: 1),
-                                  //   child: Text(
-                                  //     'Developer',
-                                  //     style: TextStyle(
-                                  //         fontSize: 8,
-                                  //         color: Colors.black,
-                                  //         fontWeight: FontWeight.w800),
-                                  //   ),
-                                  // )
-                                ],
-                              ),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.only(top: 0, left: 10),
+                            child: Column(
+                              children: [
+                                Text(
+                                  'Log out',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w900,
+                                      fontSize: 12),
+                                ),
+                                // Padding(
+                                //   padding: const EdgeInsets.only(top: 1),
+                                //   child: Text(
+                                //     'Developer',
+                                //     style: TextStyle(
+                                //         fontSize: 8,
+                                //         color: Colors.black,
+                                //         fontWeight: FontWeight.w800),
+                                //   ),
+                                // )
+                              ],
                             ),
-                            
-                          ],
-                        )),
-                  )
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
