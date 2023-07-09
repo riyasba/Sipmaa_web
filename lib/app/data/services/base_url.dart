@@ -111,6 +111,12 @@ abstract class BaseApiService {
 
   //resend otp
   String resendOtp = "https://sipmaaindia.com/api/resendOTP";
+
+
+
+
+  //post report
+  String postReport = "https://sipmaaindia.com/api/auth/post_report";
 }
 //  final String updateProfileURL =
 //       "https://sipmaaindia.com/api/auth/profile_update";

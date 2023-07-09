@@ -513,13 +513,13 @@ class _FillterWidgetState extends State<FillterWidget> {
                                       padding: const EdgeInsets.only(left: 20),
                                       child: Row(
                                         children: [
-                                          LikeButton(
-                                            isliked: postsController
-                                                .filterList[index].likedByUser,
-                                            postId: postsController
-                                                .filterList[index].id,
-                                            indexOfPost: index,
-                                          ),
+                                          // LikeButton(
+                                          //   isliked: postsController
+                                          //       .filterList[index].likedByUser,
+                                          //   postId: postsController
+                                          //       .filterList[index].id,
+                                          //   indexOfPost: index,
+                                          // ),
                                           InkWell(
                                             onTap: () {
                                               postController.getComments(

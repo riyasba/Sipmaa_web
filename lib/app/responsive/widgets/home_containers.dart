@@ -10,6 +10,7 @@ import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
 import '../../data/components/constands/constands.dart';
+import '../../modules/screens/home/views/widgets/likepost.dart';
 import '../view/coments.dart';
 import '../view/reactions_page.dart';
 import 'like.dart';

@@ -4,18 +4,18 @@ import 'package:reg_login/app/data/services/base_url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-import '../../../services/base_urls/base_urls.dart';
-//  final String getProfileDetailsURL =
-  //    "https://sipmaa.batechnology.in.net/api/auth/profile";
-class GetOtherProfileApiServices extends BaseApiService {
-  Future getOtherProfile({required String userId}) async {
+class ReportAPostApiServices extends BaseApiService {
+  Future reportAPostApiServices(
+      {required String userId,
+      required String postId,
+      required String comment}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.post(getProfileDetailsURL,
+      var response = await dio.post(postReport,
           options: Options(
               headers: {
                 'Accept': 'application/json',
@@ -27,8 +27,10 @@ class GetOtherProfileApiServices extends BaseApiService {
               }),
           data: {
             "user_id": userId,
+            "post_id": postId,
+            "comment": comment,
           });
-      print("::::::::<get profile Api>::::::::status code::::::::::");
+      print("::::::::<Report user Api>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

@@ -107,11 +107,11 @@ class container extends StatelessWidget {
                 SizedBox(
                   width: 5,
                 ),
-                LikeButton(
-                  isliked: false,
-                  postId: 0,
-                  indexOfPost: 0,
-                ),
+                // LikeButton(
+                //   isliked: false,
+                //   postId: 0,
+                //   indexOfPost: 0,
+                // ),
                 SizedBox(
                   width: 10,
                 ),

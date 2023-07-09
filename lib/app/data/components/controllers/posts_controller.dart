@@ -3,6 +3,7 @@ import 'dart:io';
 //import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/data/components/constands/constands.dart';
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/responsive/respologin.dart';
 import 'package:reg_login/app/data/services/post_api_service/post_liked_list_api_services.dart';
@@ -41,6 +42,7 @@ import '../../services/post_api_service/post_comment_api_services.dart';
 import '../../services/post_api_service/post_comment_list_api_services.dart';
 import '../../services/post_api_service/post_delete_api_services.dart';
 import '../../services/post_api_service/post_like_api_services.dart';
+import '../../services/post_api_service/report_a_post_api_services.dart';
 import 'auth_controllers.dart';
 // import 'package:simpa/view/login/login_view/loginpage.dart';
 // import 'package:simpa/view/post_splash.dart';
@@ -60,7 +62,7 @@ class PostsController extends GetxController {
   PostLikesListApiServices postLikesListApiServices =
       PostLikesListApiServices();
   PostFilterApiServices postFilterApiServices = PostFilterApiServices();
-
+ ReportAPostApiServices reportAPostApiServices = ReportAPostApiServices();
   PostDelteApiServices postDelteApiServices = PostDelteApiServices();
 
   List<Post> allPostList = [];
@@ -282,5 +284,45 @@ class PostsController extends GetxController {
         backgroundColor: const Color.fromARGB(255, 44, 44, 44),
       );
     }
+  }
+
+
+
+
+
+
+    reportAPost({
+    required String userId,
+    required String postId,
+    required String comment,
+  }) async {
+    dio.Response<dynamic> response =
+        await reportAPostApiServices.reportAPostApiServices(
+            userId: userId, postId: postId, comment: comment);
+
+    if (response.statusCode == 200) {
+      Get.rawSnackbar(
+          messageText: Text(
+            "Thank you for your report. We will look into it and get back to you",
+            style: primaryfont.copyWith(color: Colors.white),
+          ),
+          backgroundColor: Colors.black);
+    }
+  }
+
+
+    Future<String> getLikedNames({required String postId}) async {
+    String name = "";
+    dio.Response<dynamic> response =
+        await postLikesListApiServices.postLikesLists(postId: postId);
+
+    if (response.statusCode == 201) {
+      LikesListModel likesListModel = LikesListModel.fromJson(response.data);
+      likesList = likesListModel.likesList;
+      name = likesList.first.userName;
+      print(likesList.first.userName);
+      print(name);
+    }
+    return name;
   }
 }

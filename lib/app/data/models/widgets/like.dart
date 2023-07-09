@@ -10,7 +10,7 @@ class LikeButton extends StatefulWidget {
   LikeButton({
     required this.isliked,
     required this.postId,
-    required this.indexOfPost,
+    required this.indexOfPost, required bool isLiked, required Future<bool> Function(bool isLiked) onTap, required int size, required circleColor,
   });
   @override
   _LikeButtonState createState() => _LikeButtonState();
