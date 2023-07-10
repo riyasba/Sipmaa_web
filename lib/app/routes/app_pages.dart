@@ -5,6 +5,7 @@
 import 'package:get/get.dart';
 import 'package:reg_login/app/modules/authentication/signin/views/signin.dart';
 import 'package:reg_login/app/modules/screens/home/views/splash_view.dart';
+import 'package:reg_login/app/responsive/view/regiterform2_responsive.dart';
 
 import '../responsive/responsive_homescreen.dart';
 import '../modules/screens/Settings/views/settingss.dart';
@@ -62,7 +63,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.Resgister_2,
-      page: () => const Resgister2(),
+      page: () => const ResgisterDetailsWeb(),
       // binding: SignInBinding(),
     ),
     GetPage(
@@ -90,5 +91,11 @@ class AppPages {
       page: () => const demo (),
       // binding: SignInBinding(),
     ),
+    GetPage(
+      name: _Paths.responsive_registerDetails,
+      page: () => const RegisterFormDetailsResponsive (),
+      // binding: SignInBinding(),
+    ),
+    
     ];
 }

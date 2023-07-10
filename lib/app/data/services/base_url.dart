@@ -117,6 +117,12 @@ abstract class BaseApiService {
 
   //post report
   String postReport = "https://sipmaaindia.com/api/auth/post_report";
+
+  String industriesURL = "https://sipmaaindia.com/api/industries_get";
+
+  String sendEmailVerify = "https://sipmaaindia.com/api/sendemail_verrify";
+
+  String checkVerificationURL = "https://sipmaaindia.com/api/checkVerificationStatus";
 }
 //  final String updateProfileURL =
 //       "https://sipmaaindia.com/api/auth/profile_update";

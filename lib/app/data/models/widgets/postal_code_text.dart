@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:reg_login/app/data/components/constands/constands.dart';
 
 class TextPostalCodeformfieldWidget extends StatelessWidget {
   TextPostalCodeformfieldWidget({
@@ -8,10 +9,12 @@ class TextPostalCodeformfieldWidget extends StatelessWidget {
     super.key,
     this.controller,
     this.textt,
+    this.isMandatory = false,
     bool? autofocus,
   });
   // final String? Function(String?)? validator;
   String? text;
+  bool isMandatory;
   String? textt;
   TextEditingController? controller;
   @override
@@ -23,8 +26,17 @@ class TextPostalCodeformfieldWidget extends StatelessWidget {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              textt!,
+            child: Row(
+              children: [
+                Text(
+                  textt!,
+                ),
+                if (isMandatory == true)
+                  Text(
+                    "*",
+                    style: primaryfont.copyWith(color: Colors.red),
+                  ),
+              ],
             ),
           ),
           TextFormField(

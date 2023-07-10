@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:reg_login/app/data/components/constands/constands.dart';
 
 class TextformfieldWidget extends StatefulWidget {
   TextformfieldWidget({
@@ -8,6 +9,7 @@ class TextformfieldWidget extends StatefulWidget {
     this.controller,
     this.textt,
     this.keyValue,
+    this.isMandatory = false,
     this.validationText = "Value can't be empty",
     bool? autofocus,
   });
@@ -16,6 +18,7 @@ class TextformfieldWidget extends StatefulWidget {
   String? textt;
   String? validationText;
   GlobalKey? keyValue;
+  bool isMandatory;
   TextEditingController? controller;
 
   @override
@@ -32,8 +35,17 @@ class _TextformfieldWidgetState extends State<TextformfieldWidget> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              widget.textt!,
+            child: Row(
+              children: [
+                Text(
+                  widget.textt!,
+                ),
+                 if (widget.isMandatory)
+                  Text(
+                    "*",
+                    style: primaryfont.copyWith(color: Colors.red),
+                  ),
+              ],
             ),
           ),
           TextFormField(

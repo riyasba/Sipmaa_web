@@ -30,15 +30,27 @@ class _SplashState extends State<Splash> {
     Get.offAllNamed(Routes.SIGN_IN);
   }
 
+  toregisterDetailsPage() async {
+    await Future.delayed(const Duration(milliseconds: 3900));
+    Get.offAllNamed(Routes.responsive_registerDetails);
+  }
+
   checkForAuth() async {
     final prefs = await SharedPreferences.getInstance();
     String? authtoken = prefs.getString("auth_token");
+    String? verify = prefs.getString("verify");
     print("Token is here");
     print(authtoken);
     if (authtoken == "null" || authtoken == null) {
       toLoginPage();
     } else {
-      toHomePage();
+      print("---------inside login---------");
+      if (verify == "true") {
+        toHomePage();
+      } else {
+        print("---------verify false---------");
+        toregisterDetailsPage();
+      }
     }
   }
 

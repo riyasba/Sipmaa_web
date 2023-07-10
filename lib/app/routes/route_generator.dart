@@ -4,6 +4,7 @@ import 'package:reg_login/app/modules/authentication/register/views/registerscre
 import 'package:reg_login/app/modules/screens/home/views/splash_view.dart';
 import 'package:reg_login/app/responsive/responsive_homescreen.dart';
 import 'package:reg_login/app/responsive/view/home_responsive_view.dart';
+import 'package:reg_login/app/responsive/view/regiterform2_responsive.dart';
 import 'package:reg_login/app/routes/app_pages.dart';
 
 import '../modules/authentication/OTP/views/otp.dart';
@@ -29,9 +30,13 @@ class RouteGenerator {
         return _GeneratePageRoute(
             widget: FORGOTPASSWORD(), routeName: settings.name);
 
+    case Routes.responsive_registerDetails:
+        return _GeneratePageRoute(
+            widget: RegisterFormDetailsResponsive(), routeName: settings.name);
+
    case Routes.Resgister_2:
         return _GeneratePageRoute(
-            widget: Resgister2(), routeName: settings.name);
+            widget: ResgisterDetailsWeb(), routeName: settings.name);
 
 
   case Routes.Resgister_Splash:

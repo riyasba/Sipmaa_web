@@ -1,39 +1,29 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
-import 'package:reg_login/app/data/models/profile_update_model.dart';
 import 'package:reg_login/app/data/services/base_url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileUpdateServicesApi extends BaseApiService {
-  Future profileUpdate(ProfileUpdateModel profileUpdateModel) async {
+class RegisterOtpVerifyServicesApi extends BaseApiService {
+  Future registerotpVerifyApi({required String otp}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
+      String? tempauthtoken = prefs.getString("temp_auth_token");
 
-      var response = await dio.post(updateProfileURL,
+      var response = await dio.post(otpVerifyURL,
           options: Options(
               headers: {
                 'Accept': 'application/json',
-                'Authorization': 'Bearer $authtoken',
+                'Authorization': 'Bearer $tempauthtoken',
               },
               followRedirects: false,
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {
-            "current_company": profileUpdateModel.currentCompany,
-            "designation": profileUpdateModel.department,
-            "department": profileUpdateModel.designation,
-            "industry_name": profileUpdateModel.industries,
-            "official_email": profileUpdateModel.officialEmail,
-            "address": profileUpdateModel.address,
-            "pincode": profileUpdateModel.pincode,
-            "city": profileUpdateModel.city,
-            "state": profileUpdateModel.state
-          });
-      print("::::::::<Update Profile>::::::::status code::::::::::");
+          data: {"otp": otp});
+      print("::::::::<Login Api>::::::::status code:::::::$authtoken:::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

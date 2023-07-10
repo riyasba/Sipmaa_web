@@ -167,7 +167,9 @@ final profileController = Get.find<ProfileController>();
                                   ),
                                 ),
                                 onPressed: () {
-                                  authController.otpVerify(otpValue,true);
+                                   print(otpValue);
+                                  authController.registerOtpVerify(otpValue, true);
+                                  //authController.otpVerify(otpValue,true);
                                 },
                                 //=> Get.toNamed('/register-2'),
                                 child: Text(

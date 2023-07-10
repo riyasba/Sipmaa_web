@@ -184,8 +184,9 @@ final profileController = Get.find<ProfileController>();
                                     ),
                                   ),
                                   onPressed: () {
-                                    print(otpValue);
-                                    authController.otpVerify(otpValue,false);
+                                     print(otpValue);
+                                     authController.registerOtpVerify(otpValue, false);
+                                    // authController.otpVerify(otpValue,false);
                                   },
                                   child: const Text(
                                     'Submit',

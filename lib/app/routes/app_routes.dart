@@ -17,6 +17,7 @@ abstract class Routes {
   static const Profile_Screen = _Paths.Profile_Screen;
   static const Settings_page = _Paths.Settings_page;
   static const Change_password = _Paths.Change_password;
+  static const responsive_registerDetails = _Paths.responsive_registerDetails;
 }
 
 abstract class _Paths {
@@ -34,4 +35,5 @@ abstract class _Paths {
   static const Profile_Screen = '/profile-screen';
   static const Settings_page = '/settings-page';
   static const Change_password = '/change-password';
+  static const responsive_registerDetails = '/responsive_registerDetails';
 }

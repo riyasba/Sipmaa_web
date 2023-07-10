@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
@@ -46,6 +48,66 @@ class _RegisterViewsState extends State<RegisterViews> {
     super.initState();
     userNameController.addListener(checkUser);
   }
+
+  bool isEmailVerified = true;
+
+  Future<void> _showMyDialog() async {
+    return showDialog<void>(
+      context: context,
+      barrierDismissible: false, // user must tap button!
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Verify your email'),
+          content: SingleChildScrollView(
+            child: ListBody(
+              children: <Widget>[
+                Text(
+                  'Please check your email for confirmation mail.',
+                  style: primaryfont.copyWith(fontSize: 13),
+                ),
+                Text(
+                  'Click link in email to verify',
+                  style: primaryfont.copyWith(fontSize: 13),
+                ),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            TextButton(
+              child: const Text('Refresh'),
+              onPressed: () {
+                authController.checkEmailVerification(
+                    emailId: emailIdController.text);
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void checkForEmailVerify() async {
+    const onsec = Duration(seconds: 5);
+    Timer timer = Timer.periodic(onsec, (timer) async {
+      bool tempIsEmailVerified = await authController.checkEmailVerification(
+          emailId: emailIdController.text);
+
+      if (tempIsEmailVerified == true) {
+        setState(() {
+          isEmailVerified = true;
+        });
+        timer.cancel();
+        Get.back();
+      }
+    });
+  }
+
 
   checkUser() {
     authController.checkUserName(userName: userNameController.text);
@@ -341,78 +403,152 @@ class _RegisterViewsState extends State<RegisterViews> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(left: 10, right: 10),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Text(
+                              "Email ID",
+                            ),
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  "Email ID",
+                              TextFormField(
+                                controller: emailIdController,
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                validator: (value) {
+                                  if (value!.isEmpty) {
+                                    return "Email ID can't be empty";
+                                  }
+                                  return null;
+                                },
+                                onChanged: (val) {
+                                  print("changes-------------------------");
+                                  setState(() {
+                                    isEmailVerified = false;
+                                  });
+                                },
+                                decoration: InputDecoration(
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  fillColor: Colors.grey[250],
+                                  labelText: 'Enter Email ID',
+                                  hintStyle: TextStyle(
+                                    color: Colors.grey[500],
+                                  ),
+                                  border: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Color.fromARGB(0, 158, 158, 158),
+                                        width: 2.0),
+                                    borderRadius: BorderRadius.circular(16.0),
+                                  ),
+                                  filled: true,
+                                  suffixIcon: emailIdController.text.length > 3
+                                      ? isEmailVerified
+                                          ? Container(
+                                              width: 30,
+                                              child: Icon(
+                                                Icons.verified,
+                                                color: Colors.green,
+                                              ),
+                                            )
+                                          : InkWell(
+                                              onTap: () async {
+                                                if (emailIdController
+                                                    .text.isEmail) {
+                                                  bool isEmailSent =
+                                                      await authController
+                                                          .sendEmailVerification(
+                                                              emailId:
+                                                                  (emailIdController
+                                                                      .text));
+
+                                                  if (isEmailSent == true) {
+                                                    checkForEmailVerify();
+                                                    _showMyDialog();
+                                                  }
+                                                } else {
+                                                  Get.rawSnackbar(
+                                                      message:
+                                                          "Enter a valid Email Id");
+                                                }
+                                              },
+                                              child: Container(
+                                                width: 60,
+                                                child: Row(
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 3,
+                                                              right: 3),
+                                                      child: Container(
+                                                          height: 25,
+                                                          decoration: BoxDecoration(
+                                                              color:
+                                                                  Colors.green,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          20)),
+                                                          alignment:
+                                                              Alignment.center,
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 10,
+                                                                    right: 10),
+                                                            child: Text(
+                                                              "Verify",
+                                                              style: primaryfont
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          13,
+                                                                      color: Colors
+                                                                          .white),
+                                                            ),
+                                                          )),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            )
+                                      : Container(
+                                          width: 5,
+                                        ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Color.fromARGB(0, 158, 158, 158),
+                                        width: 2.0),
+                                    borderRadius: BorderRadius.circular(16.0),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                        color: Color.fromARGB(0, 158, 158, 158),
+                                        width: 2.0),
+                                    borderRadius: BorderRadius.circular(16.0),
+                                  ),
+                                  contentPadding: const EdgeInsets.fromLTRB(
+                                      17.0, 8.0, 17.0, 7.0),
                                 ),
                               ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  TextFormField(
-                                    controller: emailIdController,
-                                    autovalidateMode:
-                                        AutovalidateMode.onUserInteraction,
-                                    validator: (value) {
-                                      if (value!.isEmpty) {
-                                        return "Email ID can't be empty";
-                                      }
-                                      return null;
-                                    },
-                                    decoration: InputDecoration(
-                                      floatingLabelBehavior:
-                                          FloatingLabelBehavior.never,
-                                      fillColor: Colors.grey[250],
-                                      labelText: 'Enter Email ID',
-                                      hintStyle: TextStyle(
-                                        color: Colors.grey[500],
-                                      ),
-                                      border: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Color.fromARGB(
-                                                0, 158, 158, 158),
-                                            width: 2.0),
-                                        borderRadius:
-                                            BorderRadius.circular(16.0),
-                                      ),
-                                      filled: true,
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Color.fromARGB(
-                                                0, 158, 158, 158),
-                                            width: 2.0),
-                                        borderRadius:
-                                            BorderRadius.circular(16.0),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
-                                            color: Color.fromARGB(
-                                                0, 158, 158, 158),
-                                            width: 2.0),
-                                        borderRadius:
-                                            BorderRadius.circular(16.0),
-                                      ),
-                                      contentPadding: const EdgeInsets.fromLTRB(
-                                          17.0, 8.0, 17.0, 7.0),
-                                    ),
-                                  ),
-                                  // const Text(
-                                  //   'Verify',
-                                  //   style: TextStyle(
-                                  //       color: Colors.green,
-                                  //       fontSize: 12,
-                                  //       fontWeight: FontWeight.w600),
-                                  // )
-                                ],
-                              ),
+                              // const Text(
+                              //   'Verify',
+                              //   style: TextStyle(
+                              //       color: Colors.green,
+                              //       fontSize: 12,
+                              //       fontWeight: FontWeight.w600),
+                              // )
                             ],
                           ),
-                        ),
+                        ],
+                      ),
+                    ),
                         // TextformfieldWidget(
                         //   text: 'User Name',
                         //   textt: "User Name",
@@ -499,7 +635,10 @@ class _RegisterViewsState extends State<RegisterViews> {
                                       ),
                                       onPressed: () {
                                         if (_formKey.currentState!.validate()) {
-                                          if (createPassWordController.text ==
+
+                                        if(isEmailVerified){
+
+                                            if (createPassWordController.text ==
                                               confirmPasswordController.text) {
                                             print(
                                                 "----------------------------changes------------------------");
@@ -540,6 +679,17 @@ class _RegisterViewsState extends State<RegisterViews> {
                                               backgroundColor: Colors.red,
                                             );
                                           }
+
+                                        }else{
+                                          Get.rawSnackbar(
+                                          messageText: const Text(
+                                            "Verify your email to continue.",
+                                            style:
+                                                TextStyle(color: Colors.white),
+                                          ),
+                                          backgroundColor: Colors.red,
+                                        );
+                                        }
                                         }
                                       },
                                       child: const Text(

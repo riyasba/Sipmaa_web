@@ -6,6 +6,7 @@ import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:reg_login/app/data/components/controllers/auth_controllers.dart';
 import 'package:reg_login/app/data/models/department_model.dart';
+import 'package:reg_login/app/data/models/industries_model.dart';
 import 'package:reg_login/app/data/models/profile_update_model.dart';
 
 import '../../../../data/components/constands/constands.dart';
@@ -14,17 +15,18 @@ import '../../../../data/models/widgets/email_text_field.dart';
 import '../../../../data/models/widgets/postal_code_text.dart';
 import '../../../../data/models/widgets/textfield.dart';
 
-class Resgister2 extends StatefulWidget {
-  const Resgister2({super.key});
+class ResgisterDetailsWeb extends StatefulWidget {
+  const ResgisterDetailsWeb({super.key});
 
   @override
-  State<Resgister2> createState() => _Resgister2State();
+  State<ResgisterDetailsWeb> createState() => _ResgisterDetailsWebState();
 }
 
-class _Resgister2State extends State<Resgister2> {
+class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
   final authController = Get.find<AuthController>();
 
   var designation;
+  var industries;
 
   var currentCompanyController = TextEditingController();
   var officialController = TextEditingController();
@@ -38,6 +40,7 @@ class _Resgister2State extends State<Resgister2> {
   void initState() {
     super.initState();
     authController.getDepartmentList();
+    authController.getIndustriesList();
   }
 
   @override
@@ -183,12 +186,102 @@ class _Resgister2State extends State<Resgister2> {
                       // }),
                       TextformfieldWidget(
                           controller: currentCompanyController,
+                          isMandatory: true,
                           text: 'Current Company',
                           textt: 'Current Company'),
                       TextformfieldWidget(
                           controller: designationController,
+                          isMandatory: true,
                           text: 'Enter Designation',
                           textt: 'Designation'),
+
+                      GetBuilder<AuthController>(builder: (_) {
+                      return Padding(
+                        padding: const EdgeInsets.fromLTRB(10.0, 10, 10, 0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  const Text(
+                                    "Industries",
+                                  ),
+                                  Text(
+                                    "*",
+                                    style:
+                                        primaryfont.copyWith(color: Colors.red),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              height: 50,
+                              //width: 330,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  border: Border.all(
+                                      color: const Color.fromARGB(
+                                              255, 158, 158, 158)
+                                          .withOpacity(0.2))),
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    left: 10, right: 10, top: 10),
+                                child: DropdownButton<Industry>(
+                                  value: industries,
+                                  isExpanded: true,
+                                  icon: const Icon(
+                                      Icons.keyboard_arrow_down_outlined),
+                                  elevation: 0,
+                                  itemHeight: 55,
+                                  isDense: true,
+                                  dropdownColor: Colors.grey[250],
+                                  style: const TextStyle(color: Colors.black54),
+                                  hint: const Text(
+                                    "Industries",
+                                    style: TextStyle(fontSize: 14),
+                                  ),
+                                  onChanged: (Industry? value) {
+                                    // This is called when the user selects an item.
+                                    setState(() {
+                                      authController
+                                          .isInduaturesSelected(false);
+                                      industries = value!;
+                                    });
+                                  },
+                                  items: authController.industriesList
+                                      .map<DropdownMenuItem<Industry>>(
+                                          (Industry value) {
+                                    return DropdownMenuItem<Industry>(
+                                      value: value,
+                                      child: Text(value.name),
+                                    );
+                                  }).toList(),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Obx(
+                              () => authController.isInduaturesSelected.isTrue
+                                  ? const Padding(
+                                      padding: EdgeInsets.only(left: 15),
+                                      child: Text(
+                                        "Please select Industries",
+                                        style: TextStyle(
+                                            color: Color.fromARGB(
+                                                255, 230, 46, 33),
+                                            fontSize: 12),
+                                      ),
+                                    )
+                                  : Container(),
+                            )
+                          ],
+                        ),
+                      );
+                    }),    
 
                       GetBuilder<AuthController>(builder: (_) {
                         return Padding(
@@ -196,10 +289,19 @@ class _Resgister2State extends State<Resgister2> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: Text(
-                                  "Department",
+                               Padding(
+                                padding:const EdgeInsets.all(8.0),
+                                child: Row(
+                                  children: [
+                                    const Text(
+                                      "Department",
+                                    ),
+                                    Text(
+                                    "*",
+                                    style:
+                                        primaryfont.copyWith(color: Colors.red),
+                                  ),
+                                  ],
                                 ),
                               ),
                               Container(
@@ -272,18 +374,22 @@ class _Resgister2State extends State<Resgister2> {
                       }),
                       TextformEmailfieldWidget(
                           controller: officialController,
+                          isMandatory: true,
                           text: 'Enter Official Email ID',
                           textt: 'Official Email ID'),
                       TextformfieldWidget(
                           controller: cityController,
+                          isMandatory: true,
                           text: 'Enter City',
                           textt: 'City'),
                       TextformfieldWidget(
                           controller: stateController,
+                          isMandatory: true,
                           text: 'Enter State',
                           textt: 'State'),
                       TextPostalCodeformfieldWidget(
                           controller: postalCodeController,
+                          isMandatory: true,
                           text: 'Postal Code',
                           textt: 'Postal Code'),
                       // TextformfieldWidgett(
@@ -323,8 +429,12 @@ class _Resgister2State extends State<Resgister2> {
                                 ),
                               ),
                               onPressed: () {
-                                if (authController
-                                    .isDesignationSelected.isFalse) {
+                                if (industries == null) {
+                                      authController.isInduaturesSelected(true);
+                                    }
+                                if (authController.isDesignationSelected.isFalse &&
+                                authController
+                                              .isInduaturesSelected.isFalse) {
                                   ProfileUpdateModel profileUpdateModel =
                                       ProfileUpdateModel(
                                     currentCompany:
@@ -336,6 +446,7 @@ class _Resgister2State extends State<Resgister2> {
                                     officialEmail: officialController.text,
                                     pincode: postalCodeController.text,
                                     state: stateController.text,
+                                    industries: industries.id.toString()
                                   );
                                   authController
                                       .updateProfile(profileUpdateModel);

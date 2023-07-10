@@ -9,6 +9,7 @@ class ProfileUpdateModel {
   String designation;
   String department;
   String officialEmail;
+  String industries;
   String address;
   String pincode;
   String city;
@@ -19,6 +20,7 @@ class ProfileUpdateModel {
     required this.designation,
     required this.department,
     required this.officialEmail,
+     required this.industries,
     required this.address,
     required this.pincode,
     required this.city,

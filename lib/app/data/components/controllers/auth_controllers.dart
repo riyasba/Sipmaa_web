@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/data/components/constands/constands.dart';
 import 'package:reg_login/app/data/models/department_model.dart';
+import 'package:reg_login/app/data/models/industries_model.dart';
 import 'package:reg_login/app/data/models/profile_update_model.dart';
+import 'package:reg_login/app/data/services/auth_api_service/check_email_verify_api_services.dart';
 import 'package:reg_login/app/data/services/auth_api_service/get_department_api_services.dart';
+import 'package:reg_login/app/data/services/auth_api_service/get_industries_api_services.dart';
 import 'package:reg_login/app/data/services/auth_api_service/otp_verify_api_services.dart';
+import 'package:reg_login/app/data/services/auth_api_service/register_otp_verify_api_services.dart';
+import 'package:reg_login/app/data/services/auth_api_service/send_email_verify_api_services.dart';
 import 'package:reg_login/app/data/services/auth_api_service/update_profile_api_service.dart';
 import 'package:reg_login/app/modules/authentication/OTP/views/otp.dart';
 import 'package:reg_login/app/modules/authentication/register/views/register.dart';
@@ -32,13 +38,14 @@ import 'package:dio/dio.dart' as dio;
 import '../../../get_slider_api_services.dart';
 import '../../../modules/screens/home/views/home_screen.dart';
 import '../../../responsive/view/otp_page.dart';
-import '../../../responsive/view/register_details_page.dart';
+import '../../../responsive/view/mob_register_details_page.dart';
 import '../../models/slider_model.dart';
 import '../../services/auth_api_service/login_api_services.dart';
 import '../../models/register_model.dart';
 
 class AuthController extends GetxController {
   RxBool isDesignationSelected = false.obs;
+  RxBool isInduaturesSelected = false.obs;
   RxBool isLoading = false.obs;
   RxInt selctedIndex = 100.obs;
   RxBool isUserNameAvailable = false.obs;
@@ -89,7 +96,9 @@ class AuthController extends GetxController {
 
     if (response.statusCode == 201) {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString("auth_token", response.data["token"]);
+      //await prefs.setString("auth_token", response.data["token"]);
+      await prefs.setString("temp_auth_token", response.data["token"]);
+      await prefs.setString("verify", "false");
       if (isMobile) {
         Get.to(otp_page(
           phoneNumber: registerModel.mobile,
@@ -132,13 +141,52 @@ class AuthController extends GetxController {
         await otpVerifyServicesApi.otpVerifyApi(otp: otp);
     isLoading(false);
     if (response.statusCode == 200) {
+      final prefs = await SharedPreferences.getInstance();
+      String? tempAuthToken = prefs.getString("temp_auth_token");
+      await prefs.setString("auth_token", tempAuthToken!);
       if (isMobile) {
-        Get.to(Resgister2());
+        Get.to(ResgisterDetailsWeb());
       } else {
-        Get.to(RegisterDetailsView());
+        Get.to(RegisterDetailsMobView());
       }
 
       //Get.offAll(const Resgister2());
+      //success
+      Get.rawSnackbar(
+        messageText: const Text(
+          "OTP Verified Successfully",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      );
+    } else if (response.statusCode == 400) {
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Invalid OTP",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
+
+  RegisterOtpVerifyServicesApi registerOtpVerifyServicesApi =
+      RegisterOtpVerifyServicesApi();
+
+  registerOtpVerify(String otp, bool isMobile) async {
+    isLoading(true);
+    dio.Response<dynamic> response =
+        await registerOtpVerifyServicesApi.registerotpVerifyApi(otp: otp);
+    isLoading(false);
+    if (response.statusCode == 200) {
+      final prefs = await SharedPreferences.getInstance();
+      String? tempAuthToken = prefs.getString("temp_auth_token");
+      await prefs.setString("auth_token", tempAuthToken!);
+      if (isMobile) {
+        Get.to(ResgisterDetailsWeb());
+      } else {
+        Get.to(RegisterDetailsMobView());
+      }
       //success
       Get.rawSnackbar(
         messageText: const Text(
@@ -176,7 +224,7 @@ class AuthController extends GetxController {
     isLoading(false);
     if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString("auth_token", "null");
+      await prefs.setString("verify", "true");
       Get.off(Registersplash());
       Get.rawSnackbar(
         messageText: const Text(
@@ -261,4 +309,77 @@ class AuthController extends GetxController {
     }
     update();
   }
+
+  GetIndustriesApiServices getIndustriesApiServices =
+      GetIndustriesApiServices();
+
+  List<Industry> industriesList = [];
+
+  getIndustriesList() async {
+    dio.Response<dynamic> response =
+        await getIndustriesApiServices.getIndustriePostApiServices();
+
+    if (response.statusCode == 200) {
+      IndustriesModel departmentModel = IndustriesModel.fromJson(response.data);
+      industriesList = departmentModel.industries;
+      update();
+    }
+  }
+
+  SendVerificationApiService sendVerificationApiService =
+      SendVerificationApiService();
+
+  sendEmailVerification({required String emailId}) async {
+    bool isEmailSent = false;
+    dio.Response<dynamic> response =
+        await sendVerificationApiService.sendVerification(emailId: emailId);
+
+    if (response.statusCode == 200) {
+      isEmailSent = true;
+      Get.rawSnackbar(
+          messageText: Text(
+            "Email verification link sent",
+            style: primaryfont.copyWith(
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: Colors.green);
+    } else if (response.statusCode == 400) {
+      isEmailSent = false;
+      Get.rawSnackbar(
+          messageText: Text(
+            "Email is Already Verified or Taken",
+            style: primaryfont.copyWith(
+              color: Colors.white,
+            ),
+          ),
+          backgroundColor: Colors.red);
+    }
+
+    return isEmailSent;
+  }
+
+   CheckVerificationApiService checkVerificationApiService =
+      CheckVerificationApiService();
+
+  checkEmailVerification({required String emailId}) async {
+    bool isverified = false;
+    dio.Response<dynamic> response =
+        await checkVerificationApiService.checkVerification(emailId: emailId);
+
+    if (response.statusCode == 200) {
+      if (response.data["status"] == 1) {
+        isverified = true;
+      } else {
+        isverified = false;
+      }
+    } else {
+      isverified = false;
+    }
+
+    return isverified;
+  }
 }
+
+
+
