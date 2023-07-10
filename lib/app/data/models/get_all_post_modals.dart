@@ -57,16 +57,30 @@ class Post {
   });
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
-        id: json["id"],
-        title: json["title"] ?? "",
-        body: json["body"] ?? "",
-        user:json["user"] == null ? PostUser(id: 0, roleId: 0, name: "", email: "", mobile: "", isVerrifiedMobile: "", lastName: "", userName: "", otp: "", keyStatus: "", status: "", createdAt: DateTime.now(), updatedAt: DateTime.now()): PostUser.fromJson(json["user"]),
-        createdAt: DateTime.parse(json["created_at"]),
-        likeCount: json["like_count"],
-        likedByUser: json["liked_by_user"],
-        comment: json["comment"],
-        textEditingController: TextEditingController()
-      );
+      id: json["id"],
+      title: json["title"] ?? "",
+      body: json["body"] ?? "",
+      user: json["user"] == null
+          ? PostUser(
+              id: 0,
+              roleId: 0,
+              name: "",
+              email: "",
+              mobile: "",
+              isVerrifiedMobile: "",
+              lastName: "",
+              userName: "",
+              otp: "",
+              keyStatus: "",
+              status: "",
+              createdAt: DateTime.now(),
+              updatedAt: DateTime.now())
+          : PostUser.fromJson(json["user"]),
+      createdAt: DateTime.parse(json["created_at"]),
+      likeCount: json["like_count"],
+      likedByUser: json["liked_by_user"],
+      comment: json["comment"],
+      textEditingController: TextEditingController());
 
   Map<String, dynamic> toJson() => {
         "id": id,

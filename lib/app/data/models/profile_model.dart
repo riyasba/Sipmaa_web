@@ -4,9 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:reg_login/app/data/models/get_all_post_modals.dart';
 
-
-import 'get_all_post_modals.dart';
 
 ProfileModel profileModelFromJson(String str) =>
     ProfileModel.fromJson(json.decode(str));
@@ -15,8 +14,10 @@ String profileModelToJson(ProfileModel data) => json.encode(data.toJson());
 
 class ProfileModel {
   String message;
-  User user;
+   User user;
   List<Post> posts;
+  List<Position> positions;
+  List<Skill> skills;
   int totalFriends;
   int isFriend;
   int totalLikes;
@@ -30,6 +31,8 @@ class ProfileModel {
     required this.isFriend,
     required this.totalLikes,
     required this.totalPosts,
+    required this.positions,
+    required this.skills,
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
@@ -40,6 +43,9 @@ class ProfileModel {
         isFriend: json["is_friend"],
         totalLikes: json["total_likes"],
         totalPosts: json["total_posts"],
+        positions: List<Position>.from(
+            json["positions"].map((x) => Position.fromJson(x))),
+        skills: List<Skill>.from(json["skills"].map((x) => Skill.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -53,11 +59,11 @@ class ProfileModel {
       };
 }
 
-
 class User {
   int id;
   dynamic roleId;
   String name;
+  dynamic hisHer;
   String email;
   String mobile;
   dynamic isVerrifiedMobile;
@@ -73,14 +79,14 @@ class User {
   dynamic clientSecret;
   dynamic clientId;
   dynamic keyName;
-  dynamic keyStatus;
+  String keyStatus;
   dynamic emailVerifiedAt;
   dynamic address;
   dynamic bio;
   dynamic pincode;
   dynamic city;
   dynamic state;
-  dynamic status;
+  String status;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -88,6 +94,7 @@ class User {
     required this.id,
     required this.roleId,
     required this.name,
+    required this.hisHer,
     required this.email,
     required this.mobile,
     required this.isVerrifiedMobile,
@@ -119,6 +126,7 @@ class User {
         id: json["id"],
         roleId: json["role_id"],
         name: json["name"],
+        hisHer: json["his_her"],
         email: json["email"],
         mobile: json["mobile"],
         isVerrifiedMobile: json["is_verrified_mobile"],
@@ -141,7 +149,7 @@ class User {
         pincode: json["pincode"],
         city: json["city"],
         state: json["state"],
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );
@@ -173,6 +181,98 @@ class User {
         "city": city,
         "state": state,
         "status": status,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
+}
+
+class Position {
+  int id;
+  int userId;
+  String title;
+  String employmentType;
+  String companyName;
+  String location;
+  String startDate;
+  String? endDate;
+  String industryName;
+  String description;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  Position({
+    required this.id,
+    required this.userId,
+    required this.title,
+    required this.employmentType,
+    required this.companyName,
+    required this.location,
+    required this.startDate,
+    this.endDate,
+    required this.industryName,
+    required this.description,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory Position.fromJson(Map<String, dynamic> json) => Position(
+        id: json["id"],
+        userId: json["user_id"],
+        title: json["title"],
+        employmentType: json["employment_type"],
+        companyName: json["company_name"],
+        location: json["location"],
+        startDate: json["start_date"],
+        endDate: json["end_date"],
+        industryName: json["industry_name"],
+        description: json["description"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "user_id": userId,
+        "title": title,
+        "employment_type": employmentType,
+        "company_name": companyName,
+        "location": location,
+        "start_date": startDate,
+        "end_date": endDate,
+        "industry_name": industryName,
+        "description": description,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
+}
+
+class Skill {
+  int id;
+  int userId;
+  String name;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  Skill({
+    required this.id,
+    required this.userId,
+    required this.name,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory Skill.fromJson(Map<String, dynamic> json) => Skill(
+        id: json["id"],
+        userId: json["user_id"],
+        name: json["name"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "user_id": userId,
+        "name": name,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
       };

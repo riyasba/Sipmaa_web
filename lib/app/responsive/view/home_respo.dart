@@ -310,9 +310,7 @@ class _HomepageRespoState extends State<HomepageRespo> {
                                                       .allPostList[index]
                                                       .body ==
                                                   ""
-                                              ? const Image(
-                                                  image: AssetImage(
-                                                      "assets/images/noimage.jpg"))
+                                              ? const Text('')
                                               : Image.network(
                                                 postsController
                                                       .allPostList[index].body

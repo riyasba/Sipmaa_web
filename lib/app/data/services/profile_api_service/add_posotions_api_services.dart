@@ -1,19 +1,22 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:reg_login/app/data/services/base_url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-import '../base_url.dart';
+import '../../models/add_positions_model.dart';
 
-class SendFriendRequestAPIServices extends BaseApiService {
-  Future sendFriendRequest(
-      {required String userId,required String friendId}) async {
+class AddPositonsApiServices extends BaseApiService {
+  Future addPositions(
+      {required AddPositonsModel addPostionsModel,
+      required String useId}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
-      var response = await dio.post(sendFriendRequestURL,
+
+      var response = await dio.post(addPositionURL,
           options: Options(
               headers: {
                 'Accept': 'application/json',
@@ -23,8 +26,19 @@ class SendFriendRequestAPIServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: { "friend_id": userId});
-      print("::::::::<Send Friend request>::::::::status code::::::::::");
+          data: {
+            "user_id": useId,
+            "title": addPostionsModel.title,
+            "employment_type": addPostionsModel.employment_type,
+            "company_name": addPostionsModel.company_name,
+            "location": addPostionsModel.location,
+            "start_date": addPostionsModel.start_date,
+            if (addPostionsModel.end_date != "null")
+              "end_date": addPostionsModel.end_date,
+            "industry_name": addPostionsModel.industry_name,
+            "description": addPostionsModel.description,
+          });
+
       print(response.statusCode);
       print(response.data);
       responseJson = response;

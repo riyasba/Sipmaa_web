@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reg_login/app/responsive/view/post_view/post_view.dart';
+import 'package:reg_login/app/responsive/view/public_profle_view/setting_proifile_page.dart';
 import 'package:reg_login/app/responsive/view/setting_privacy.dart';
 import 'package:reg_login/app/responsive/view/setting_proifile_page.dart';
 import 'package:reg_login/app/responsive/view/setting_term_condition.dart';

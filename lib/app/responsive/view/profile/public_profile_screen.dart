@@ -10,9 +10,11 @@ import 'package:reg_login/app/responsive/view/post_view/post_view.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../data/components/constands/constands.dart';
+import '../../../data/components/constands/message_types.dart';
 import '../../../data/components/controllers/posts_controller.dart';
 import '../../../data/components/controllers/profile_controller.dart';
-
+import '../../../data/models/chat_models.dart';
+import '../../widgets/chat_view/view_message_screen.dart';
 
 class PublicProfilePageView extends StatefulWidget {
   int userId;
@@ -64,7 +66,7 @@ class _ProfilePageState extends State<PublicProfilePageView> {
                           final prefs = await SharedPreferences.getInstance();
                           await FirebaseMessaging.instance.deleteToken();
                           await prefs.setString("auth_token", "null");
-                    //      Get.to(loginpage());
+                          //      Get.to(loginpage());
                         },
                         child: Text(
                           'Log Out',
@@ -97,64 +99,64 @@ class _ProfilePageState extends State<PublicProfilePageView> {
 
   void _showDeletePostOptions(String postId) {
     showModalBottomSheet(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        context: context,
-        builder: (builder) {
-          return new Container(
-            height: 162,
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 28,
-                ),
-                Center(
-                    child: Text(
-                  "Do you want to Delete this post?",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                )),
-                SizedBox(
-                  height: 32,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            minimumSize: Size(100, 40),
-                            backgroundColor: kblue,
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(18))),
-                        onPressed: () async {
-                          Get.find<PostsController>()
-                              .deletePost(postId: postId);
-                        },
-                        child: Text(
-                          'Delete',
-                          style: TextStyle(fontSize: 15, color: kwhite),
-                        )),
-                    SizedBox(
-                      width: 40,
-                    ),
-                    OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            side: BorderSide(color: kblue, width: 1),
-                            minimumSize: Size(110, 40),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18),
-                            )),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                        child: Text(
-                          'Cancel',
-                          style: TextStyle(fontSize: 15, color: kblue),
-                        ))
-                  ],
-                )
-              ],
-            ),
-          );
-        });
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      context: context,
+      builder: (builder) {
+        return new Container(
+          height: 162,
+          child: Column(
+            children: [
+              SizedBox(
+                height: 28,
+              ),
+              Center(
+                  child: Text(
+                "Do you want to Delete this post?",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+              )),
+              SizedBox(
+                height: 32,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          minimumSize: Size(100, 40),
+                          backgroundColor: kblue,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18))),
+                      onPressed: () async {
+                        Get.find<PostsController>().deletePost(postId: postId);
+                      },
+                      child: Text(
+                        'Delete',
+                        style: TextStyle(fontSize: 15, color: kwhite),
+                      )),
+                  SizedBox(
+                    width: 40,
+                  ),
+                  OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                          side: BorderSide(color: kblue, width: 1),
+                          minimumSize: Size(110, 40),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(18),
+                          )),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text(
+                        'Cancel',
+                        style: TextStyle(fontSize: 15, color: kblue),
+                      ))
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
   }
 
   final profileController = Get.find<ProfileController>();
@@ -177,7 +179,8 @@ class _ProfilePageState extends State<PublicProfilePageView> {
         ),
         elevation: 0,
       ),
-      body: SafeArea(child: GetBuilder<ProfileController>(builder: (_) {
+      body: SafeArea(
+        child: GetBuilder<ProfileController>(builder: (_) {
         return profileController.isLoading.isTrue
             ? const Center(
                 child: CircularProgressIndicator(),
@@ -197,7 +200,7 @@ class _ProfilePageState extends State<PublicProfilePageView> {
                         width: MediaQuery.of(context).size.width,
                         color: kblue,
                         child: Image.asset(
-                          'assets/images/searchimage.png',
+                          'assets/images/Rectangle 800.png',
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -242,6 +245,7 @@ class _ProfilePageState extends State<PublicProfilePageView> {
                           ),
                         ],
                       ),
+                     
                       // Positioned(
                       //     top: 168,
                       //     left: 50,
@@ -285,9 +289,8 @@ class _ProfilePageState extends State<PublicProfilePageView> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(profileController.otherUserProfileData.first
-                                          .user.designation ??
-                                      "")
-                                  
+                                      .user.designation ??
+                                  "")
                             ],
                           ),
                     // Padding(
@@ -313,6 +316,119 @@ class _ProfilePageState extends State<PublicProfilePageView> {
                     //         ],
                     //       )),
                     // ),
+
+
+                      if (profileController.otherUserProfileData.first.isFriend ==
+                        0)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18)),
+                                  backgroundColor: kblue,
+                                  minimumSize: Size(50, 40)),
+                              onPressed: () async {
+                                bool isRequested = await profileController
+                                    .sendRequestFromProfile(
+                                        userId: widget.userId.toString());
+
+                                if (isRequested) {
+                                  profileController
+                                      .otherUserProfileData.first.isFriend = 2;
+                                  profileController.update();
+                                }
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset('assets/images/iconimage.png'),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  const Text(
+                                    'Request',
+                                    style: TextStyle(color: Colors.white),
+                                  )
+                                ],
+                              )),
+                        ],
+                      ),ksizedbox20,
+                    if (profileController.otherUserProfileData.first.isFriend ==
+                        1)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18)),
+                                  backgroundColor: kblue,
+                                  minimumSize: Size(50, 40)),
+                              onPressed: () {
+                                final myprofileController =
+                                    Get.find<ProfileController>();
+                                String tchatId = "";
+
+                                if (profileController
+                                        .otherUserProfileData.first.user.id >
+                                    myprofileController
+                                        .profileData.first.user.id) {
+                                  tchatId =
+                                      "chatId${profileController.otherUserProfileData.first.user.id}0${myprofileController.profileData.first.user.id}";
+                                } else {
+                                  tchatId =
+                                      "chatId${myprofileController.profileData.first.user.id}0${profileController.otherUserProfileData.first.user.id}";
+                                }
+                                ChatListModel chatListModel = ChatListModel(
+                                    userId: profileController
+                                        .otherUserProfileData.first.user.id,
+                                    firstName: profileController
+                                        .otherUserProfileData.first.user.name,
+                                    lastName: "",
+                                    photo: profileController
+                                        .otherUserProfileData
+                                        .first
+                                        .user
+                                        .profilePicture,
+                                    pin: 0,
+                                    isArchived: false,
+                                    isBlocked: false,
+                                    isMuted: false,
+                                    userName: "",
+                                    chatId: tchatId,
+                                    message: "",
+                                    messageType: MessageType().text,
+                                    unreadCount: 1,
+                                    readStatus: false,
+                                    createdAt: DateTime.now()
+                                        .millisecondsSinceEpoch
+                                        .toString(),
+                                    updatedAt: DateTime.now()
+                                        .millisecondsSinceEpoch
+                                        .toString(),
+                                    users: [
+                                      myprofileController
+                                          .profileData.first.user.id
+                                    ]);
+
+                                Get.to(() => ViewMessageScreen(
+                                      chatModel: chatListModel,
+                                      peerId: widget.userId,
+                                    ));
+                              },
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'Chat',
+                                    style: TextStyle(color: Colors.white),
+                                  )
+                                ],
+                              )),
+                        ],
+                      ),
                     const SizedBox(
                       height: 20,
                     ),
@@ -350,6 +466,9 @@ class _ProfilePageState extends State<PublicProfilePageView> {
                                   )
                                 ],
                               ),
+
+
+                              
                               const SizedBox(
                                 height: 8,
                               ),

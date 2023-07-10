@@ -2,7 +2,7 @@
 //
 //     final profileUpdateModel = profileUpdateModelFromJson(jsonString);
 
-import 'dart:convert';
+
 
 class ProfileUpdateModel {
   String currentCompany;

@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:reg_login/app/responsive/respologin.dart';
-import 'package:reg_login/app/responsive/view/home_responsive_view.dart';
 import 'package:reg_login/app/routes/app_pages.dart';
 
-import '../../../../responsive/loginrespo/logininscreensrespo.dart';
+
 
 class Registersplash extends StatefulWidget {
   const Registersplash({super.key});

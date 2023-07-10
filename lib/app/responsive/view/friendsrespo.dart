@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:get/get.dart';
+import 'package:reg_login/app/responsive/view/profile/public_profile_screen.dart';
 
 //import '../widgets/appbar_friends.dart';
 import '../../data/components/constands/constands.dart';
@@ -135,57 +136,65 @@ class _Friends_screenState extends State<Friends_screen> {
                             if (profileController.myFriendList[i].status
                                     .toString() ==
                                 "1")
-                              InkWell(
-                                onTap: () {
-                                  final myprofileController =
-                                      Get.find<ProfileController>();
-                                  String tchatId = "";
-
-                                  if (profileController
-                                          .myFriendList[i].friendId >
-                                      myprofileController
-                                          .profileData.first.user.id) {
-                                    tchatId =
-                                        "chatId${profileController.myFriendList[i].friendId}0${myprofileController.profileData.first.user.id}";
-                                  } else {
-                                    tchatId =
-                                        "chatId${myprofileController.profileData.first.user.id}0${profileController.myFriendList[i].friendId}";
-                                  }
-                                  ChatListModel chatListModel = ChatListModel(
+                              InkWell( onTap: () {
+                                Get.to(() => PublicProfilePageView(
                                       userId: profileController
-                                          .myFriendList[i].friendId,
-                                      firstName: profileController
-                                          .myFriendList[i].name,
-                                      lastName: "",
-                                      photo: profileController
-                                          .myFriendList[i].profile,
-                                      pin: 0,
-                                      isArchived: false,
-                                      isBlocked: false,
-                                      isMuted: false,
-                                      userName: "",
-                                      chatId: tchatId,
-                                      message: "",
-                                      messageType: MessageType().text,
-                                      unreadCount: 1,
-                                      readStatus: false,
-                                      createdAt: DateTime.now()
-                                          .millisecondsSinceEpoch
-                                          .toString(),
-                                      updatedAt: DateTime.now()
-                                          .millisecondsSinceEpoch
-                                          .toString(),
-                                      users: [
-                                        myprofileController
-                                            .profileData.first.user.id
-                                      ]);
+                                          .myFriendList[index].friendId,
+                                    ));
+                              },
+                              //  onTap: () {
 
-                                  Get.to(() => ViewMessageScreen(
-                                        chatModel: chatListModel,
-                                        peerId: profileController
-                                            .myFriendList[i].friendId,
-                                      ));
-                                },
+
+                                  
+                                  // final myprofileController =
+                                  //     Get.find<ProfileController>();
+                                  // String tchatId = "";
+
+                                  // if (profileController
+                                  //         .myFriendList[i].friendId >
+                                  //     myprofileController
+                                  //         .profileData.first.user.id) {
+                                  //   tchatId =
+                                  //       "chatId${profileController.myFriendList[i].friendId}0${myprofileController.profileData.first.user.id}";
+                                  // } else {
+                                  //   tchatId =
+                                  //       "chatId${myprofileController.profileData.first.user.id}0${profileController.myFriendList[i].friendId}";
+                                  // }
+                                  // ChatListModel chatListModel = ChatListModel(
+                                  //     userId: profileController
+                                  //         .myFriendList[i].friendId,
+                                  //     firstName: profileController
+                                  //         .myFriendList[i].name,
+                                  //     lastName: "",
+                                  //     photo: profileController
+                                  //         .myFriendList[i].profile,
+                                  //     pin: 0,
+                                  //     isArchived: false,
+                                  //     isBlocked: false,
+                                  //     isMuted: false,
+                                  //     userName: "",
+                                  //     chatId: tchatId,
+                                  //     message: "",
+                                  //     messageType: MessageType().text,
+                                  //     unreadCount: 1,
+                                  //     readStatus: false,
+                                  //     createdAt: DateTime.now()
+                                  //         .millisecondsSinceEpoch
+                                  //         .toString(),
+                                  //     updatedAt: DateTime.now()
+                                  //         .millisecondsSinceEpoch
+                                  //         .toString(),
+                                  //     users: [
+                                  //       myprofileController
+                                  //           .profileData.first.user.id
+                                  //     ]);
+
+                                  // Get.to(() => ViewMessageScreen(
+                                  //       chatModel: chatListModel,
+                                  //       peerId: profileController
+                                  //           .myFriendList[i].friendId,
+                                  //     ));
+                            //    },
                                 child: friendContiner(
                                   friendList: profileController.myFriendList[i],
                                 ),

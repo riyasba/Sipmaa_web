@@ -117,7 +117,7 @@ class _ProfilePageState extends State<PublicProfileView> {
                   width: MediaQuery.of(context).size.width,
                   color: kblue,
                   child: Image.asset(
-                    'assets/images/searchimage.png',
+                    'assets/images/Rectangle 800.png',
                     fit: BoxFit.cover,
                   ),
                 ),

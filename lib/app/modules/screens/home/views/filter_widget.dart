@@ -184,7 +184,7 @@ class _FillterWidgetState extends State<FillterWidget> {
                       )
                     : postsController.filterList.isEmpty
                         ? Center(
-                            child: Image.asset("assets/icons/no_post.png"),
+                            child: Text(''),
                           )
                         : ListView.separated(
                             primary: true,
@@ -258,7 +258,7 @@ class _FillterWidgetState extends State<FillterWidget> {
                                                       .text
                                                       .bold
                                                       .xl2
-                                                      .fontFamily(
+                                                      .fontFamily( 
                                                           GoogleFonts.poppins()
                                                               .fontFamily!)
                                                       .make(),
@@ -327,7 +327,8 @@ class _FillterWidgetState extends State<FillterWidget> {
                                             ? ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(10),
-                                                child: Image.asset(
+                                                child: 
+Image.asset(
                                                   'assets/images/noimage.jpg',
                                                   fit: BoxFit.cover,
                                                   width: size.width * 0.3,
@@ -478,7 +479,7 @@ class _FillterWidgetState extends State<FillterWidget> {
                                                         .filterList[index].id
                                                         .toString());
 
-                                                    coments(context, index, size);
+                                                coments(context, index, size);
                                               },
                                               child: Text(
                                                 '${postsController.filterList[index].comment}  Comments'

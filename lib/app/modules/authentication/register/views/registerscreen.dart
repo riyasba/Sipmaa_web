@@ -14,6 +14,8 @@ import '../../../../data/models/register_model.dart';
 import '../../../../data/models/widgets/password_text_field.dart';
 import '../../../../data/models/widgets/phone_number_text_field.dart';
 import '../../../../data/models/widgets/textfield.dart';
+import 'package:dio/dio.dart' as dio;
+import '../../../../data/services/auth_api_service/check_email_verify_api_services.dart';
 
 class RegisterViews extends StatefulWidget {
   const RegisterViews({super.key});
@@ -36,6 +38,8 @@ class _RegisterViewsState extends State<RegisterViews> {
   var createPassWordController = TextEditingController();
 
   var confirmPasswordController = TextEditingController();
+  CheckVerificationApiService checkVerificationApiService =
+      CheckVerificationApiService();
 
   // final firstNameKey = GlobalKey<FormState>();
   final _formKey = GlobalKey<FormState>();
@@ -106,6 +110,24 @@ class _RegisterViewsState extends State<RegisterViews> {
         Get.back();
       }
     });
+
+      checkEmailVerification({required String emailId}) async {
+    bool isverified = false;
+    dio.Response<dynamic> response =
+        await checkVerificationApiService.checkVerification(emailId: emailId);
+
+    if (response.statusCode == 200) {
+      if (response.data["status"] == 1) {
+        isverified = true;
+      } else {
+        isverified = false;
+      }
+    } else {
+      isverified = false;
+    }
+
+    return isverified;
+  }
   }
 
 

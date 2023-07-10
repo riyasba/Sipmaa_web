@@ -112,17 +112,25 @@ abstract class BaseApiService {
   //resend otp
   String resendOtp = "https://sipmaaindia.com/api/resendOTP";
 
-
+  String industriesURL = "https://sipmaaindia.com/api/industries_get";
 
 
   //post report
   String postReport = "https://sipmaaindia.com/api/auth/post_report";
 
-  String industriesURL = "https://sipmaaindia.com/api/industries_get";
+  // String industriesURL = "https://sipmaaindia.com/api/industries_get";
 
   String sendEmailVerify = "https://sipmaaindia.com/api/sendemail_verrify";
 
   String checkVerificationURL = "https://sipmaaindia.com/api/checkVerificationStatus";
+
+  //add position
+  final String addPositionURL =
+      "https://sipmaaindia.com/api/auth/store_position";
+
+
+      //store skills
+  final String addSkillsURL = "https://sipmaaindia.com/api/auth/store_skill";
 }
 //  final String updateProfileURL =
 //       "https://sipmaaindia.com/api/auth/profile_update";

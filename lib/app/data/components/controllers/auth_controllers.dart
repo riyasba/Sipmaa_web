@@ -40,6 +40,7 @@ import '../../../modules/screens/home/views/home_screen.dart';
 import '../../../responsive/view/otp_page.dart';
 import '../../../responsive/view/mob_register_details_page.dart';
 import '../../models/slider_model.dart';
+import '../../services/auth_api_service/get_industries_api_services.dart';
 import '../../services/auth_api_service/login_api_services.dart';
 import '../../models/register_model.dart';
 
@@ -62,6 +63,13 @@ class AuthController extends GetxController {
       ProfileUpdateServicesApi();
   UserNameApiServices userNameApiServices = UserNameApiServices();
   GetSliderApiServices getSliderApiServices = GetSliderApiServices();
+ SendVerificationApiService sendVerificationApiService =
+      SendVerificationApiService();
+
+  CheckVerificationApiService checkVerificationApiService =
+      CheckVerificationApiService();
+   GetIndustriesApiServices getIndustriesApiServices =
+      GetIndustriesApiServices();
   // registerUser(RegisterModel registerModel) async {
   //   print("---------------------------------2-----------");
   //   isLoading(true);
@@ -113,6 +121,10 @@ class AuthController extends GetxController {
         ));
         //desk
       }
+
+
+
+      
 
       // Get.to(OTPVIEWS(
       //   phoneNumber: registerModel.mobile,
@@ -309,10 +321,7 @@ class AuthController extends GetxController {
     }
     update();
   }
-
-  GetIndustriesApiServices getIndustriesApiServices =
-      GetIndustriesApiServices();
-
+  
   List<Industry> industriesList = [];
 
   getIndustriesList() async {
@@ -326,10 +335,9 @@ class AuthController extends GetxController {
     }
   }
 
-  SendVerificationApiService sendVerificationApiService =
-      SendVerificationApiService();
 
-  sendEmailVerification({required String emailId}) async {
+
+    sendEmailVerification({required String emailId}) async {
     bool isEmailSent = false;
     dio.Response<dynamic> response =
         await sendVerificationApiService.sendVerification(emailId: emailId);
@@ -357,12 +365,12 @@ class AuthController extends GetxController {
     }
 
     return isEmailSent;
+
+
+
+    
   }
-
-   CheckVerificationApiService checkVerificationApiService =
-      CheckVerificationApiService();
-
-  checkEmailVerification({required String emailId}) async {
+    checkEmailVerification({required String emailId}) async {
     bool isverified = false;
     dio.Response<dynamic> response =
         await checkVerificationApiService.checkVerification(emailId: emailId);

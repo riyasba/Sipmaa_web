@@ -61,7 +61,7 @@ class _ProfilewidgetState extends State<Profilewidget> {
    var dateSelected;
     var todateselected;
   
-
+var selectedCategory;
 Future<void> _selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
         context: context,
@@ -276,11 +276,12 @@ Future<void> _selectDate(BuildContext context) async {
                         emailController.text.isNotEmpty &&
                         numberController.text.isNotEmpty) {
                       profileController.updateUserDetails(
+                        hisOrHer: selectedCategory,
                           name: nameController.text,
                           bio: hisherController.text,
                           designation: positionController.text,
                           email: emailController.text,
-                          mobile: numberController.text);
+                          mobile: numberController.text, );
                     } else {
                       Get.rawSnackbar(
                         messageText: const Text(

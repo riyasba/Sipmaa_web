@@ -35,6 +35,8 @@ import '../../../modules/authentication/forgotPassword/views/verified_screen.dar
 import '../../../responsive/forgotrespo/create_new_password.dart';
 import '../../../responsive/forgotrespo/forgot_password_verifypage.dart';
 import '../../../responsive/forgotrespo/sucessfull.dart';
+import '../../../responsive/view/public_profle_view/setting_proifile_page.dart';
+import '../../models/add_positions_model.dart';
 import '../../models/friend_list_model.dart';
 import '../../models/friend_request_model.dart';
 import '../../models/notiofication_list_model.dart';
@@ -43,6 +45,8 @@ import '../../models/profile_model.dart';
 import '../../services/notification_list/notification_list.dart';
 import '../../services/post_api_service/get_other_profile_api_services.dart';
 import '../../services/post_api_service/post_liked_list_api_services.dart';
+import '../../services/profile_api_service/add_posotions_api_services.dart';
+import '../../services/profile_api_service/add_skills_api_services.dart';
 import '../../services/profile_api_service/forgetPwd_verify_otp_api_services.dart';
 import '../../services/profile_api_service/forget_password_api_service.dart';
 import '../../services/profile_api_service/my_friend_list_api_services.dart';
@@ -73,13 +77,13 @@ class ProfileController extends GetxController {
 
   GetOtherProfileApiServices getOtherProfileApiServices =
       GetOtherProfileApiServices();
-
+  AddPositonsApiServices addPositonsApiServices = AddPositonsApiServices();
   UpdateProfilePicApi updateProfilePicApi = UpdateProfilePicApi();
 
   UpdateUserDetailsApi updateUserDetailsApi = UpdateUserDetailsApi();
 
   GetNotificationListApi getNotificationLiistApi = GetNotificationListApi();
-
+  AddSkillssApiServices addSkillssApiServices = AddSkillssApiServices();
   // RespondFriendRequestAPIServices respondFriendRequestAPIServices =
   //   RespondFriendRequestAPIServices();
   List<LikesList> likesList = [];
@@ -160,7 +164,7 @@ class ProfileController extends GetxController {
 
   sendRequest({required String userId, required int index}) async {
     dio.Response<dynamic> response =
-        await sendFriendRequestAPIServices.sendFriendRequest(userId: userId);
+        await sendFriendRequestAPIServices.sendFriendRequest(userId: userId, friendId: profileData.first.user.id.toString());
 
     print("--------------------------");
     print(response.data);
@@ -292,6 +296,7 @@ class ProfileController extends GetxController {
   updateUserDetails({
     required String name,
     required String bio,
+    required String hisOrHer,
     required String designation,
     required String email,
     required String mobile,
@@ -491,6 +496,96 @@ class ProfileController extends GetxController {
         backgroundColor: Colors.red,
       );
     }
+  }
+
+
+
+    addPositions(
+      {required AddPositonsModel addPostionsModel,
+      required String useId}) async {
+    isLoading(true);
+    dio.Response<dynamic> response = await addPositonsApiServices.addPositions(
+        addPostionsModel: addPostionsModel, useId: useId);
+    isLoading(false);
+    if (response.statusCode == 201) {
+      getProfile();
+      Get.offAll(() => SettingProfilePage());
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Added new position",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      );
+    } else {
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Unable to add your position",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
+
+
+
+    addSkills({required String skills, required String useId}) async {
+    isLoading(true);
+    dio.Response<dynamic> response =
+        await addSkillssApiServices.addSkills(skills: skills, useId: useId);
+    isLoading(false);
+    if (response.statusCode == 201) {
+      getProfile();
+      Get.offAll(() => SettingProfilePage());
+      Get.rawSnackbar(
+        messageText: const Text(
+          "New Skill added",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      );
+    } else {
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Unable to add skill",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
+
+
+
+
+    sendRequestFromProfile({required String userId}) async {
+    bool isRequested = false;
+    dio.Response<dynamic> response =
+        await sendFriendRequestAPIServices.sendFriendRequest(
+            userId: userId, friendId: profileData.first.user.id.toString());
+
+    if (response.statusCode == 200) {
+      isRequested = true;
+      update();
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Friend request sended",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      );
+    } else {
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Please try again",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+
+    return isRequested;
   }
 
 }
