@@ -18,7 +18,7 @@ class UploadPostApiServices extends BaseApiService {
       FormData formData = FormData.fromMap({
         "title": title,
         "description": description,
-        "media":  MultipartFile.fromBytes(media, filename: "image"),
+       if(media != null) "media":  MultipartFile.fromBytes(media, filename: "image"),
       });
 
       var response = await dio.post(uploadPostURL,

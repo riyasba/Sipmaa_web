@@ -85,24 +85,26 @@ class _HomePageState extends State<HomePage> {
             onTap: () {
               homeController.homeindex(4);
             },
-            child: GetBuilder<ProfileController>(builder: (_) {
-              return profileController.profileData.isEmpty
-                  ? Container()
-                  : Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: profileController
-                                  .profileData.first.user.profilePicture ==
-                              null
-                          ? const CircleAvatar(
-                              backgroundImage:
-                                  AssetImage('assets/images/profile_icon.png'),
-                            )
-                          : CircleAvatar(
-                              backgroundImage: NetworkImage(profileController
-                                  .profileData.first.user.profilePicture),
-                            ),
-                    );
-            }),
+            child: GetBuilder<ProfileController>(
+              builder: (_) {
+                return profileController.profileData.isEmpty
+                    ? Container()
+                    : Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: profileController
+                                    .profileData.first.user.profilePicture ==
+                                null
+                            ? const CircleAvatar(
+                                backgroundImage: AssetImage(
+                                    'assets/images/profile_icon.png'),
+                              )
+                            : CircleAvatar(
+                                backgroundImage: NetworkImage(profileController
+                                    .profileData.first.user.profilePicture),
+                              ),
+                      );
+              },
+            ),
           ),
         ],
       ),
@@ -167,7 +169,8 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(minimumSize: Size(
+                            style: ElevatedButton.styleFrom(
+                                minimumSize: Size(
                                     MediaQuery.of(context).size.width * 0.95,
                                     50),
                                 elevation: 0,
@@ -213,9 +216,9 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(minimumSize: Size(
-                                    MediaQuery.of(context).size.width * 0.95,
-                                    50),
+                            style: ElevatedButton.styleFrom(
+                              minimumSize: Size(
+                                  MediaQuery.of(context).size.width * 0.95, 50),
                               elevation: 0,
                               backgroundColor: homeController.homeindex == 2
                                   ? kwhite
@@ -260,7 +263,8 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(minimumSize: Size(
+                            style: ElevatedButton.styleFrom(
+                                minimumSize: Size(
                                     MediaQuery.of(context).size.width * 0.95,
                                     50),
                                 elevation: 0,
@@ -305,7 +309,8 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(minimumSize: Size(
+                            style: ElevatedButton.styleFrom(
+                                minimumSize: Size(
                                     MediaQuery.of(context).size.width * 0.95,
                                     50),
                                 elevation: 0,
@@ -348,9 +353,9 @@ class _HomePageState extends State<HomePage> {
                   Padding(
                     padding: const EdgeInsets.only(left: 15, right: 25, top: 0),
                     child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(minimumSize: Size(
-                                    MediaQuery.of(context).size.width * 0.95,
-                                    50),
+                        style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                                MediaQuery.of(context).size.width * 0.95, 50),
                             elevation: 0,
                             backgroundColor: homeController.homeindex.value == 5
                                 ? kwhite
@@ -390,7 +395,8 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         ElevatedButton(
-                            style: ElevatedButton.styleFrom(minimumSize: Size(
+                            style: ElevatedButton.styleFrom(
+                                minimumSize: Size(
                                     MediaQuery.of(context).size.width * 0.95,
                                     50),
                                 elevation: 0,
@@ -436,9 +442,9 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(minimumSize: Size(
-                                    MediaQuery.of(context).size.width * 0.95,
-                                    50),
+                          style: ElevatedButton.styleFrom(
+                              minimumSize: Size(
+                                  MediaQuery.of(context).size.width * 0.95, 50),
                               elevation: 0,
                               backgroundColor:
                                   homeController.homeindex.value == 8

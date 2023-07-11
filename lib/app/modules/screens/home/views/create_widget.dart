@@ -45,9 +45,7 @@ class _CreateWidgetState extends State<CreateWidget> {
       width: MediaQuery.of(context).size.width * 0.38,
       decoration: BoxDecoration(
           color: kwhite,
-          boxShadow: <BoxShadow>[
-            BoxShadow(offset: Offset(0.0, 0.7), blurRadius: 0.5, color: kgrey)
-          ],
+         
           borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: [
@@ -162,7 +160,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                     minimumSize:
                         Size(MediaQuery.of(context).size.width * 0.27, 45)),
                 onPressed: () async {
-                  if (textController.text.isNotEmpty && imagePath != null) {
+                  if (textController.text.isNotEmpty) {
                     int response = await postsController.uplodPost(
                         title: textController.text,
                         description: "",

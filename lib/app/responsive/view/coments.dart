@@ -2,17 +2,17 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
 
 import '../../data/components/controllers/posts_controller.dart';
-import '../widgets/appbar_with_leading.dart';
+
 import '../widgets/common_appbar.dart';
 import '../widgets/drawer.dart';
-import 'home_respo.dart';
+
 import 'package:timeago/timeago.dart' as timeago;
 
 class coments extends StatefulWidget {

@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reg_login/app/data/components/controllers/posts_controller.dart';
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
+import 'package:reg_login/app/modules/screens/home/controler/controler.dart';
+import 'package:reg_login/app/modules/screens/home/views/widgets.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets/continers/comentcontiner.dart';
 
 import '../../../../data/components/constands/constands.dart';
@@ -170,34 +172,36 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    height: 60,
-                    width: 120,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15), color: kblue),
-                    child: Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Friends',
-                            style: TextStyle(
-                                color: kwhite,
-                                fontSize: 16,
-                                fontWeight: FontWeight.w600),
-                          ),
-                          profileController.profileData.isEmpty
-                              ? Container()
-                              : Text(
-                                  profileController
-                                      .profileData.first.totalFriends
-                                      .toString(),
-                                  style: TextStyle(
-                                      color: kwhite,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15),
-                                ),
-                        ],
+                  InkWell(onTap: (){Get.find<HomeController>().homeindex(6);},
+                    child: Container(
+                      height: 60,
+                      width: 120,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15), color: kblue),
+                      child: Center(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Friends',
+                              style: TextStyle(
+                                  color: kwhite,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            profileController.profileData.isEmpty
+                                ? Container()
+                                : Text(
+                                    profileController
+                                        .profileData.first.totalFriends
+                                        .toString(),
+                                    style: TextStyle(
+                                        color: kwhite,
+                                        fontWeight: FontWeight.w500,
+                                        fontSize: 15),
+                                  ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

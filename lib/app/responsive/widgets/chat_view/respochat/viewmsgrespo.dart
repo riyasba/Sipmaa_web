@@ -94,7 +94,9 @@ class _ViewMessageScreenRespoState extends State<ViewMessageScreenRespo> {
       setState(() {
         isRealtime = false;
       });
-      fetchData();
+
+       fetchData();
+     
       // if (activityController.totalPages.value !=
       //     activityController.currentPage.value) {
       //   int page = activityController.currentPage.value + 1;
@@ -146,7 +148,7 @@ class _ViewMessageScreenRespoState extends State<ViewMessageScreenRespo> {
     var size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
-      child: Scaffold(
+      child: Scaffold(backgroundColor: kwhite ,
           appBar: AppBar(
             backgroundColor: kblue,
             elevation: 0,

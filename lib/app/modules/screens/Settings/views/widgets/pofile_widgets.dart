@@ -1,16 +1,12 @@
 import 'package:date_format/date_format.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/modules/screens/Settings/views/widgets/widgets.dart';
-
 import '../../../../../data/components/constands/constands.dart';
 //import '../../../../../data/components/constands.dart';
 import '../../../../../data/components/costom_button.dart';
-
 class Profilewidget extends StatefulWidget {
   const Profilewidget({super.key});
 

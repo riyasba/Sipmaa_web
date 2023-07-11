@@ -13,6 +13,7 @@ import 'package:reg_login/app/modules/screens/Settings/views/widgets/pofile_widg
 
 import '../../../../data/components/constands/constands.dart';
 
+import '../../profile/views/profileupdate_settings.dart';
 import '../controllers/controllers.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -190,7 +191,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       color: kblue, borderRadius: BorderRadius.circular(8)),
                 ),
                 ksizedbox30,
-                if (settingsController.settingIndex.value == 0) Profilewidget(),
+                if (settingsController.settingIndex.value == 0)SettingProfilePageweb()
+                 ,
                 if (settingsController.settingIndex.value == 1)
                   Changepassword(),
                 if (settingsController.settingIndex.value == 2) Privacy(),

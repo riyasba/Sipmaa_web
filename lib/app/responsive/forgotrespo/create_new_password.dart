@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
-
 import '../../data/components/constands/constands.dart';
 import '../../data/components/controllers/profile_controller.dart';
-import '../widgets/bottumnavigationbar.dart';
+
 
 class CreateNewPassword extends StatefulWidget {
   const CreateNewPassword({super.key});
