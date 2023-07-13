@@ -80,9 +80,9 @@ class PostsController extends GetxController {
     if (response.statusCode == 200) {
       ProfileModel profileModel = ProfileModel.fromJson(response.data);
       profileData.add(profileModel.user);
-//  var token = await FirebaseMessaging.instance.getToken();
-//Get.find<AuthController>().fcmtoken(
-//    token: token.toString(), id: profileModel.user.id.toString());
+      //  var token = await FirebaseMessaging.instance.getToken();
+      //Get.find<AuthController>().fcmtoken(
+      //    token: token.toString(), id: profileModel.user.id.toString());
       //  print("............firebase token.......=====================>>>");
       //print(token);
     } else if (response.statusCode == 401) {

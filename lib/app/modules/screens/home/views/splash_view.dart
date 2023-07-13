@@ -38,19 +38,13 @@ class _SplashState extends State<Splash> {
   checkForAuth() async {
     final prefs = await SharedPreferences.getInstance();
     String? authtoken = prefs.getString("auth_token");
-    String? verify = prefs.getString("verify");
     print("Token is here");
     print(authtoken);
     if (authtoken == "null" || authtoken == null) {
       toLoginPage();
     } else {
       print("---------inside login---------");
-      if (verify == "true") {
-        toHomePage();
-      } else {
-        print("---------verify false---------");
-        toregisterDetailsPage();
-      }
+      toHomePage();
     }
   }
 

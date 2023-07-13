@@ -49,7 +49,8 @@ class _HomepageRespoState extends State<HomepageRespo> {
       postsController.getAllPost();
       await postsController.getProfile();
     });
-  } var reporingTextController = TextEditingController();
+  }
+   var reporingTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

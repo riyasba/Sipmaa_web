@@ -236,7 +236,7 @@ class AuthController extends GetxController {
     isLoading(false);
     if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString("verify", "true");
+      // await prefs.setString("verify", "true");
       Get.off(Registersplash());
       Get.rawSnackbar(
         messageText: const Text(
