@@ -192,7 +192,7 @@ class _ProfilePageState extends State<PublicProfileView> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Image.asset('assets/images/iconimage.png'),
+                         // Image.asset('assets/images/iconimage.png'),
                           const SizedBox(
                             width: 5,
                           ),

@@ -61,7 +61,7 @@ class _FillterWidgetState extends State<FillterWidget> {
                       child: Row(
                         children: [
                           Text(
-                            'Fillter',
+                            'Filter',
                             style: TextStyle(
                                 fontWeight: FontWeight.w700, fontSize: 16),
                           ),

@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reg_login/app/data/components/controllers/posts_controller.dart';
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/modules/screens/home/controler/controler.dart';
-import 'package:reg_login/app/modules/screens/home/views/widgets.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets/continers/comentcontiner.dart';
-
 import '../../../../data/components/constands/constands.dart';
+
+
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});

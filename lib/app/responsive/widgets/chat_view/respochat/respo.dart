@@ -2,17 +2,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:reg_login/app/responsive/widgets/chat_view/chat_list.dart';
 import 'package:reg_login/app/responsive/widgets/chat_view/respochat/viewmsgrespo.dart';
 import 'package:reg_login/app/responsive/widgets/chat_view/user_chat_card.dart';
-import 'package:reg_login/app/responsive/widgets/chat_view/view_message_screen.dart';
-
-
 import '../../../../data/components/constands/constands.dart';
 import '../../../../data/components/controllers/chat_controller.dart';
 import '../../../../data/components/controllers/profile_controller.dart';
 import '../../../../data/models/chat_models.dart';
 import '../../../view/search_friends/search_friends_view.dart';
+
+
 
 class ViewChatsUserListRespo extends StatefulWidget {
   const ViewChatsUserListRespo({Key? key}) : super(key: key);

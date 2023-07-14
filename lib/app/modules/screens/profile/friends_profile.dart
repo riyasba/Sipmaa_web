@@ -202,9 +202,7 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                                         userId: widget.userId.toString());
 
                                 if (isRequested) {
-                                  profileController
-                                      .otherUserProfileData.first.isFriend = 2;
-                                  profileController.update();
+                                  
                                 }
                               },
                               child: Row(

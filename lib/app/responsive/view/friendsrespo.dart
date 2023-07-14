@@ -109,7 +109,7 @@ class _Friends_screenState extends State<Friends_screen> {
                       text: "Your Friend",
                     ),
                     // Tab(
-                    //   text: "Friend Request",
+                    //   text: "Friend ",
                     // ),
                     Tab(
                       text: "Request",
