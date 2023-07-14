@@ -14,7 +14,7 @@ import '../modules/authentication/register/views/registersplash.dart';
 import '../modules/authentication/signin/views/signin.dart';
 import '../modules/screens/Settings/views/settingss.dart';
 import '../modules/screens/Settings/views/widgets/change_password.dart';
-import '../modules/screens/profile/views/profile_page.dart';
+
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -44,9 +44,9 @@ class RouteGenerator {
             widget: Registersplash(), routeName: settings.name);
 
 
-  case Routes.Profile_Screen:
-        return _GeneratePageRoute(
-            widget: ps(), routeName: settings.name);
+  // case Routes.Profile_Screen:
+  //       return _GeneratePageRoute(
+  //           widget: ps(), routeName: settings.name);
 
 
 

@@ -43,7 +43,7 @@ import '../../services/post_api_service/post_comment_list_api_services.dart';
 import '../../services/post_api_service/post_delete_api_services.dart';
 import '../../services/post_api_service/post_like_api_services.dart';
 import '../../services/post_api_service/report_a_post_api_services.dart';
-import 'auth_controllers.dart';
+
 // import 'package:simpa/view/login/login_view/loginpage.dart';
 // import 'package:simpa/view/post_splash.dart';
 // import 'package:simpa/widgets/bottumnavigationbar.dart';

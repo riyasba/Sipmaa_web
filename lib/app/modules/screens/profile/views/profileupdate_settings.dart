@@ -387,7 +387,7 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
-                            child: TextButton(
+                            child: TextButton (
                                 onPressed: () {
                                   Get.to(AddNewSkillsView());
                                 },

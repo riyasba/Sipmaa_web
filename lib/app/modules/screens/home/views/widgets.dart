@@ -297,7 +297,7 @@ class _HomeContainerState extends State<HomeContainer> {
                             ),
                             ksizedbox10,
                             Container(
-                              width: size.width * 0.3,
+                              width: size.width * 0.5,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -334,7 +334,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                               .allPostList[index].body
                                               .toString(),
                                           fit: BoxFit.cover,
-                                          width: size.width * 0.3,
+                                          width: size.width * 0.5,
                                         ),
                                       ),
                               ],

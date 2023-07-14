@@ -253,15 +253,19 @@ class _SignInViewState extends State<SignInView> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   ksizedbox10,
-                                  Text(
-                                    "WELCOME TO SIPMAA",
-                                    style:GoogleFonts.openSans(
-                                      fontSize: 24.5,
-                                      fontWeight: FontWeight.bold
-                                    )
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "WELCOME",
+                                        style:GoogleFonts.openSans(
+                                          fontSize: 24.5,
+                                          fontWeight: FontWeight.bold
+                                        )
+                                      ),
+                                    ],
                                   ),
                             
                                   // Text(
@@ -271,11 +275,15 @@ class _SignInViewState extends State<SignInView> {
                             
                                   Padding(
                                     padding: const EdgeInsets.only(top: 5),
-                                    child: Text(
-                                      ' HR Community',
-                                      style: GoogleFonts.openSans(
-                                        fontSize: 18
-                                      ),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          'LOGIN BACK TO SIPMAA HR COMMUNITY',
+                                          style: GoogleFonts.openSans(
+                                            fontSize: 18,fontWeight: FontWeight.w500
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                   ksizedbox30,
@@ -309,25 +317,40 @@ class _SignInViewState extends State<SignInView> {
                                           decoration: InputDecoration(
                                             floatingLabelBehavior:
                                                 FloatingLabelBehavior.never,
-                                            fillColor: Colors.grey[250],
+                                         //  fillColor: Colors.grey[250],
                                             labelText: 'Enter User name',
                                             hintStyle: TextStyle(
                                               color: Colors.grey[500],
                                             ),
-                                            //  border: InputBorder.none,
                                             filled: true,
-                                            border: OutlineInputBorder(
-                                              borderSide: const BorderSide(
-                                                  style: BorderStyle.none,
-                                                  color: Color.fromARGB(
-                                                      241, 255, 255, 255),
-                                                  width: 1.0),
-                                              borderRadius:
-                                                  BorderRadius.circular(6.0),
-                                            ),
-                                            contentPadding:
-                                                const EdgeInsets.fromLTRB(
-                                                    17.0, 8.0, 17.0, 7.0),
+                                      //  border: InputBorder.none,
+                                      fillColor: Colors.grey[250],
+                                     isDense: true, // Reduces height a bit
+                                      border: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Color.fromARGB(
+                                                0, 158, 158, 158),
+                                            width: 2.0),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Color.fromARGB(
+                                                0, 158, 158, 158),
+                                            width: 2.0),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Color.fromARGB(
+                                                0, 158, 158, 158),
+                                            width: 2.0),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
                                           ),
                                         ),
                                       ],
@@ -350,19 +373,35 @@ class _SignInViewState extends State<SignInView> {
                                           floatingLabelBehavior: FloatingLabelBehavior
                                               .never, //Hides label on focus or if filled
                                           labelText: " Password",
-                                          filled: true,
-                                          //  border: InputBorder.none,
-                                          fillColor: Colors.grey[250],
-                                          isDense: true, // Reduces height a bit
-                                          border: OutlineInputBorder(
-                                            borderSide: const BorderSide(
-                                              color: Color.fromARGB(
-                                                  0, 158, 158, 158),
-                                              width: 2.0,
-                                            ),
-                                            borderRadius:
-                                                BorderRadius.circular(6.0),
-                                          ),
+                                         filled: true,
+                                      //  border: InputBorder.none,
+                                      fillColor: Colors.grey[250],
+                                      isDense: true, // Reduces height a bit
+                                      border: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Color.fromARGB(
+                                                0, 158, 158, 158),
+                                            width: 2.0),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Color.fromARGB(
+                                                0, 158, 158, 158),
+                                            width: 2.0),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: const BorderSide(
+                                            color: Color.fromARGB(
+                                                0, 158, 158, 158),
+                                            width: 2.0),
+                                        borderRadius:
+                                            BorderRadius.circular(16.0),
+                                      ),
                             
                                           suffixIcon: Padding(
                                             padding: const EdgeInsets.fromLTRB(
@@ -515,7 +554,7 @@ class _SignInViewState extends State<SignInView> {
                           )
                         ]
                       ),
-                        child: Image.asset('assets/images/Group 89.png')))
+                        child: Image.asset('assets/images/Group 1927.png')))
               ],
             ),
           ),

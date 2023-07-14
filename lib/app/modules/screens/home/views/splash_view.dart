@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/modules/respohome/resposetions.dart';
 import 'package:reg_login/app/routes/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -21,7 +22,7 @@ class _SplashState extends State<Splash> {
   toHomePage() async {
     await Future.delayed(const Duration(milliseconds: 3900));
 
-    Get.offAllNamed(Routes.HOME_PAGE);
+    Get.offAll(MyHomePage());
   }
 
   toLoginPage() async {

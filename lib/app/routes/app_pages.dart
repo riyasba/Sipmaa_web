@@ -11,7 +11,7 @@ import '../responsive/responsive_homescreen.dart';
 import '../modules/screens/Settings/views/settingss.dart';
 import '../modules/screens/Settings/views/widgets/change_password.dart';
 //import '../modules/screens/Settings/views/settings.dart';
-import '../modules/screens/profile/views/profile_page.dart';
+//import '../modules/screens/profile/views/profile_page.dart';
 import '../modules/screens/home/views/home_screen.dart';
 import '../modules/authentication/OTP/views/otp.dart';
 import '../modules/authentication/forgotPassword/views/forgotpassword.dart';
@@ -76,11 +76,11 @@ class AppPages {
       page: () =>  HomepageRespo(),
       // binding: SignInBinding(),
     ),
-   GetPage(
-      name: _Paths.Profile_Screen,
-      page: () => const ps (),
-      // binding: SignInBinding(),
-    ),
+  //  GetPage(
+  //     name: _Paths.Profile_Screen,
+  //     page: () => const ps (),
+  //     // binding: SignInBinding(),
+  //   ),
     GetPage(
       name: _Paths.Settings_page,
       page: () => const SettingsPage(), 

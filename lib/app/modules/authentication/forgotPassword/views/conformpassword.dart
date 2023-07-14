@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:get/get.dart';
-import 'package:reg_login/app/modules/authentication/forgotPassword/views/verified_screen.dart';
+
 
 import '../../../../data/components/constands/constands.dart';
 import '../../../../data/components/controllers/profile_controller.dart';
 import '../../../../data/models/widgets/password_text_field.dart';
-import '../../../../data/models/widgets/textfield.dart';
+
 
 class ConformPASSWORD extends StatefulWidget {
   const ConformPASSWORD({super.key});

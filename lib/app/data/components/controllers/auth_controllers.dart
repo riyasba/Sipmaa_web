@@ -36,6 +36,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 // import '../services/network_api_services/auth_api_services/otp_verify_api_services.dart';
 import 'package:dio/dio.dart' as dio;
 import '../../../get_slider_api_services.dart';
+import '../../../modules/respohome/resposetions.dart';
 import '../../../modules/screens/home/views/home_screen.dart';
 import '../../../responsive/view/otp_page.dart';
 import '../../../responsive/view/mob_register_details_page.dart';
@@ -267,11 +268,12 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", response.data["token"]);
-      if (size < 600) {
-        Get.offAllNamed('/home-screen');
-      } else {
-        Get.offAllNamed(Routes.HOME_PAGE);
-      }
+      Get.offAll(MyHomePage());
+      // if (size < 600) {
+      //   Get.offAllNamed('/home-screen');
+      // } else {
+      //   Get.offAllNamed(Routes.HOME_PAGE);
+      // }
 
       Get.rawSnackbar(
         messageText: const Text(
