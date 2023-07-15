@@ -257,8 +257,7 @@ return Container(
                                                     .profilePicture ==
                                                 null
                                             ? const CircleAvatar(
-                                                backgroundImage: AssetImage(
-                                                    'assets/icons/profile_icon.png'),
+                                                backgroundImage:  AssetImage('assets/images/propic.jpg'),
                                                 radius: 35,
                                               )
                                             : CircleAvatar(
@@ -558,7 +557,7 @@ return Container(
                                                                                       leading: postController.likesList[index].picture == ""
                                                                                           ? const CircleAvatar(
                                                                                               radius: 40,
-                                                                                              backgroundImage: AssetImage('assets/images/profile_icon.png'),
+                                                                                              backgroundImage:  AssetImage('assets/images/propic.jpg'),
                                                                                             )
                                                                                           : CircleAvatar(
                                                                                               radius: 40,
@@ -652,7 +651,7 @@ return Container(
                                                                                       leading: postController.likesList[index].picture == ""
                                                                                           ? const CircleAvatar(
                                                                                               radius: 40,
-                                                                                              backgroundImage: AssetImage('assets/images/profile_icon.png'),
+                                                                                              backgroundImage:  AssetImage('assets/images/propic.jpg'),
                                                                                             )
                                                                                           : CircleAvatar(
                                                                                               radius: 40,
@@ -973,8 +972,7 @@ return Container(
                                                             null
                                                         ? const CircleAvatar(
                                                             backgroundImage:
-                                                                AssetImage(
-                                                                    'assets/images/profile_icon.png'),
+                                                                 AssetImage('assets/images/propic.jpg'),
                                                           )
                                                         : CircleAvatar(
                                                             backgroundImage: NetworkImage(
@@ -1224,7 +1222,7 @@ return Container(
 //                                                                                       leading: postController.likesList[index].picture == ""
 //                                                                                           ? const CircleAvatar(
 //                                                                                               radius: 40,
-//                                                                                               backgroundImage: AssetImage('assets/images/profile_icon.png'),
+//                                                                                               backgroundImage:  AssetImage('assets/images/propic.jpg'),
 //                                                                                             )
 //                                                                                           : CircleAvatar(
 //                                                                                               radius: 40,
@@ -1550,7 +1548,7 @@ return Container(
 //                                                                             null
 //                                                                         ? const CircleAvatar(
 //                                                                             backgroundImage:
-//                                                                                 AssetImage('assets/images/profile_icon.png'),
+//                                                                                  AssetImage('assets/images/propic.jpg'),
 //                                                                           )
 //                                                                         : CircleAvatar(
 //                                                                             backgroundImage:
@@ -1789,7 +1787,7 @@ return Container(
             //                                                                         leading: postController.likesList[index].picture == ""
             //                                                                             ? const CircleAvatar(
             //                                                                                 radius: 40,
-            //                                                                                 backgroundImage: AssetImage('assets/images/profile_icon.png'),
+            //                                                                                 backgroundImage:  AssetImage('assets/images/propic.jpg'),
             //                                                                               )
             //                                                                             : CircleAvatar(
             //                                                                                 radius: 40,
@@ -2165,7 +2163,7 @@ return Container(
             //                                                                 null
             //                                                             ? const CircleAvatar(
             //                                                                 backgroundImage:
-            //                                                                     AssetImage('assets/images/profile_icon.png'),
+            //                                                                      AssetImage('assets/images/propic.jpg'),
             //                                                               )
             //                                                             : CircleAvatar(
             //                                                                 backgroundImage:

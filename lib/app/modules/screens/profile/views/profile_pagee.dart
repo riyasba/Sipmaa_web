@@ -9,8 +9,6 @@ import 'package:reg_login/app/modules/screens/home/controler/controler.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets/continers/comentcontiner.dart';
 import '../../../../data/components/constands/constands.dart';
 
-
-
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -41,10 +39,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      height: size.height,
-      width: MediaQuery.of(context).size.width * 0.874,
+      decoration: BoxDecoration(color: kwhite,borderRadius: BorderRadius.circular(8)),
+      height: MediaQuery.of(context).size.height * 0.88,
+      width: MediaQuery.of(context).size.width * 0.38,
       child: GetBuilder<ProfileController>(builder: (_) {
-        return ListView(primary: true,
+        return ListView(
+          primary: true,
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
           children: [
@@ -62,7 +62,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     Padding(
                       padding:
-                          EdgeInsets.only(top: 100, left: size.width * 0.35),
+                          EdgeInsets.only(top: 100, left: size.width * 0.20),
                       child: Stack(
                         children: [
                           Container(
@@ -89,7 +89,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                       .profilePicture ==
                                                   null
                                               ? Image.asset(
-                                                  "assets/images/profile_icon.png",
+                                                  'assets/images/propic.jpg',
                                                   fit: BoxFit.fill,
                                                 )
                                               : Image.network(
@@ -171,12 +171,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  InkWell(onTap: (){Get.find<HomeController>().homeindex(6);},
+                  InkWell(
+                    onTap: () {
+                      Get.find<HomeController>().homeindex(6);
+                    },
                     child: Container(
                       height: 60,
                       width: 120,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15), color: kblue),
+                          borderRadius: BorderRadius.circular(15),
+                          color: kblue),
                       child: Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,

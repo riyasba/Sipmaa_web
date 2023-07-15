@@ -115,11 +115,12 @@ class _AddNewSkillsViewState extends State<AddNewSkillsView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
+    return Scaffold(backgroundColor: kwhite,
+      appBar: AppBar(leading: InkWell(onTap: (){Get.back();},
+        child: Icon(Icons.arrow_back,color: kblue,)),
         elevation: 0,
-        title: const Text('Profile'),
-        backgroundColor: kblue,
+        title:  Text('Add New Skills',style: TextStyle(color:kblue ),),
+        backgroundColor: kwhite,
       ),
       body: ListView(
         children: [

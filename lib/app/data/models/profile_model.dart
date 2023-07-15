@@ -14,7 +14,7 @@ String profileModelToJson(ProfileModel data) => json.encode(data.toJson());
 
 class ProfileModel {
   String message;
-   User user;
+  User user;
   List<Post> posts;
   List<Position> positions;
   List<Skill> skills;
@@ -70,6 +70,7 @@ class User {
   String lastName;
   String userName;
   dynamic otp;
+  dynamic backgroundImage;
   dynamic currentCompany;
   dynamic department;
   dynamic designation;
@@ -97,6 +98,7 @@ class User {
     required this.hisHer,
     required this.email,
     required this.mobile,
+    required this.backgroundImage,
     required this.isVerrifiedMobile,
     required this.lastName,
     required this.userName,
@@ -129,6 +131,7 @@ class User {
         hisHer: json["his_her"],
         email: json["email"],
         mobile: json["mobile"],
+        backgroundImage: json["backround_image"],
         isVerrifiedMobile: json["is_verrified_mobile"],
         lastName: json["last_name"] ?? "",
         userName: json["user_name"],

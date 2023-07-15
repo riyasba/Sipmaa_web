@@ -36,7 +36,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 // import '../services/network_api_services/auth_api_services/otp_verify_api_services.dart';
 import 'package:dio/dio.dart' as dio;
 import '../../../get_slider_api_services.dart';
-import '../../../modules/respohome/resposetions.dart';
+import '../../../respohome/respohome.dart';
 import '../../../modules/screens/home/views/home_screen.dart';
 import '../../../responsive/view/otp_page.dart';
 import '../../../responsive/view/mob_register_details_page.dart';

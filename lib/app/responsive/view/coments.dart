@@ -62,7 +62,7 @@ class _comentsState extends State<coments> {
             child: Row(children: [
               postController.profileData.first.profilePicture == null
                   ? const CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/profile_icon.png'),
+                      backgroundImage:  AssetImage('assets/images/propic.jpg'),
                     )
                   : CircleAvatar(
                       backgroundImage: NetworkImage(
@@ -117,7 +117,7 @@ class _comentsState extends State<coments> {
                     child: ListTile(
                         leading: postController.commentsList[index].picture == null ? const CircleAvatar(
                           radius: 40,
-                          backgroundImage: AssetImage('assets/images/profile_icon.png'),
+                          backgroundImage:  AssetImage('assets/images/propic.jpg'),
                         ) : CircleAvatar(
                                     radius: 40,
                                     backgroundImage:

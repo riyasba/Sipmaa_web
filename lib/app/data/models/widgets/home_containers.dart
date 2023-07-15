@@ -30,7 +30,7 @@ class container extends StatelessWidget {
                 Row(
                   children: [
                     CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/profile_icon.png'),
+                      backgroundImage:  AssetImage('assets/images/propic.jpg'),
                       radius: 25,
                     ),
                     SizedBox(

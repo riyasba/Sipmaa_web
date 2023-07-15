@@ -42,7 +42,7 @@ class Post {
   int likeCount;
   bool likedByUser;
   int comment;
-  TextEditingController textEditingController;
+  var textEditingController;
 
   Post({
     required this.id,
@@ -57,30 +57,31 @@ class Post {
   });
 
   factory Post.fromJson(Map<String, dynamic> json) => Post(
-      id: json["id"],
-      title: json["title"] ?? "",
-      body: json["body"] ?? "",
-      user: json["user"] == null
-          ? PostUser(
-              id: 0,
-              roleId: 0,
-              name: "",
-              email: "",
-              mobile: "",
-              isVerrifiedMobile: "",
-              lastName: "",
-              userName: "",
-              otp: "",
-              keyStatus: "",
-              status: "",
-              createdAt: DateTime.now(),
-              updatedAt: DateTime.now())
-          : PostUser.fromJson(json["user"]),
-      createdAt: DateTime.parse(json["created_at"]),
-      likeCount: json["like_count"],
-      likedByUser: json["liked_by_user"],
-      comment: json["comment"],
-      textEditingController: TextEditingController());
+        id: json["id"],
+        title: json["title"] ?? "",
+        body: json["body"] ?? "",
+        textEditingController: TextEditingController(),
+        user: json["user"] == null
+            ? PostUser(
+                id: 0,
+                roleId: 0,
+                name: "",
+                email: "",
+                mobile: "",
+                isVerrifiedMobile: "",
+                lastName: "",
+                userName: "",
+                otp: "",
+                keyStatus: "",
+                status: "",
+                createdAt: DateTime.now(),
+                updatedAt: DateTime.now())
+            : PostUser.fromJson(json["user"]),
+        createdAt: DateTime.parse(json["created_at"]),
+        likeCount: json["like_count"],
+        likedByUser: json["liked_by_user"],
+        comment: json["comment"],
+      );
 
   Map<String, dynamic> toJson() => {
         "id": id,
@@ -102,7 +103,7 @@ class PostUser {
   dynamic isVerrifiedMobile;
   String lastName;
   String userName;
-  String otp;
+  dynamic otp;
   dynamic currentCompany;
   dynamic department;
   dynamic designation;
@@ -118,7 +119,7 @@ class PostUser {
   dynamic pincode;
   dynamic city;
   dynamic state;
-  String status;
+  dynamic status;
   DateTime createdAt;
   DateTime updatedAt;
 
@@ -177,7 +178,7 @@ class PostUser {
         pincode: json["pincode"],
         city: json["city"],
         state: json["state"] ?? "",
-        status: json["status"],
+        status: json["status"].toString(),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );

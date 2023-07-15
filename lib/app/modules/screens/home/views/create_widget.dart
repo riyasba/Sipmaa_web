@@ -56,7 +56,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                 children: [
                   postsController.profileData.first.profilePicture == null
                       ? Image.asset(
-                          'assets/images/profile_icon.png',
+                          'assets/images/propic.jpg',
                           height: 60,
                           fit: BoxFit.fitHeight,
                         )

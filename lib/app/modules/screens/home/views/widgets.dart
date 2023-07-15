@@ -117,8 +117,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                     .profilePicture ==
                                                 null
                                             ? const CircleAvatar(
-                                                backgroundImage: AssetImage(
-                                                    'assets/icons/profile_icon.png'),
+                                                backgroundImage:  AssetImage('assets/images/propic.jpg'),
                                                 radius: 35,
                                               )
                                             : CircleAvatar(
@@ -418,7 +417,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                                                       leading: postController.likesList[index].picture == ""
                                                                                           ? const CircleAvatar(
                                                                                               radius: 40,
-                                                                                              backgroundImage: AssetImage('assets/images/profile_icon.png'),
+                                                                                              backgroundImage:  AssetImage('assets/images/propic.jpg'),
                                                                                             )
                                                                                           : CircleAvatar(
                                                                                               radius: 40,
@@ -512,7 +511,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                                                       leading: postController.likesList[index].picture == ""
                                                                                           ? const CircleAvatar(
                                                                                               radius: 40,
-                                                                                              backgroundImage: AssetImage('assets/images/profile_icon.png'),
+                                                                                              backgroundImage:  AssetImage('assets/images/propic.jpg'),
                                                                                             )
                                                                                           : CircleAvatar(
                                                                                               radius: 40,
@@ -833,8 +832,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                             null
                                                         ? const CircleAvatar(
                                                             backgroundImage:
-                                                                AssetImage(
-                                                                    'assets/images/profile_icon.png'),
+                                                                 AssetImage('assets/images/propic.jpg'),
                                                           )
                                                         : CircleAvatar(
                                                             backgroundImage: NetworkImage(

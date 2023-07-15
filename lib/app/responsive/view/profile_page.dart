@@ -180,110 +180,110 @@ class _ProfilePageState extends State<ProfilePage> {
       // ),
       // drawer: MobileDrawer(),
       backgroundColor: kwhite,
-      appBar: AppBar(
-        backgroundColor: kblue,
-        title: Text(
-          'Profile',
-          style: TextStyle(color: kwhite),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: GestureDetector(
-              onTap: () {
-                showModalBottomSheet(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(16)),
-                    context: context,
-                    builder: (context) {
-                      return Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Container(
-                            decoration: const BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(50),
-                              topRight: Radius.circular(50),
-                            )),
-                            child: Row(
-                              children: const [
-                                Padding(
-                                  padding: EdgeInsets.only(left: 20, top: 6),
-                                  child: Text(
-                                    'Settings',
-                                    style: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          ListTile(
-                            leading: const Icon(Icons.person_outlined),
-                            title: const Text(
-                              'Profile',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            onTap: () {
-                              Get.to(const SettingProfilePage());
-                            },
-                          ),
-                          ListTile(
-                            leading: Icon(Icons.key),
-                            // leading: SvgPicture.asset(
-                            //   'assets/images/key.svg',
-                            // ),
-                            title: const Text(
-                              'Change Password',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            onTap: () {
-                              Get.to(const ChangePasswordPage());
-                            },
-                          ),
-                          ListTile(
-                            leading: const Icon(Icons.privacy_tip),
-                            title: const Text(
-                              'Privacy',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            onTap: () {
-                              Get.to(const SettingprivacyPage());
-                            },
-                          ),
-                          ListTile(
-                            leading: const Icon(Icons.document_scanner),
-                            title: const Text(
-                              'Terms & Conditions',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            onTap: () {
-                              Get.to(const SettingTermConditionPage());
-                            },
-                          ),
-                          ListTile(
-                            leading: const Icon(Icons.logout),
-                            title: const Text(
-                              'Logout',
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            onTap: () {
-                              Navigator.of(context).pop();
-                              _showModalSheet();
-                            },
-                          ),
-                        ],
-                      );
-                    });
-              },
-              child: const Icon(Icons.settings),
-              //  child: ksettingsicon
-            ),
-          ),
-        ],
-        elevation: 0,
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: kblue,
+      //   title: Text(
+      //     'Profile',
+      //     style: TextStyle(color: kwhite),
+      //   ),
+      //   actions: [
+      //     Padding(
+      //       padding: const EdgeInsets.all(8.0),
+      //       child: GestureDetector(
+      //         onTap: () {
+      //           showModalBottomSheet(
+      //               shape: RoundedRectangleBorder(
+      //                   borderRadius: BorderRadius.circular(16)),
+      //               context: context,
+      //               builder: (context) {
+      //                 return Column(
+      //                   mainAxisSize: MainAxisSize.min,
+      //                   children: <Widget>[
+      //                     Container(
+      //                       decoration: const BoxDecoration(
+      //                           borderRadius: BorderRadius.only(
+      //                         topLeft: Radius.circular(50),
+      //                         topRight: Radius.circular(50),
+      //                       )),
+      //                       child: Row(
+      //                         children: const [
+      //                           Padding(
+      //                             padding: EdgeInsets.only(left: 20, top: 6),
+      //                             child: Text(
+      //                               'Settings',
+      //                               style: TextStyle(
+      //                                   fontSize: 18,
+      //                                   fontWeight: FontWeight.bold),
+      //                             ),
+      //                           ),
+      //                         ],
+      //                       ),
+      //                     ),
+      //                     ListTile(
+      //                       leading: const Icon(Icons.person_outlined),
+      //                       title: const Text(
+      //                         'Profile',
+      //                         style: TextStyle(fontWeight: FontWeight.bold),
+      //                       ),
+      //                       onTap: () {
+      //                         Get.to(const SettingProfilePage());
+      //                       },
+      //                     ),
+      //                     ListTile(
+      //                       leading: Icon(Icons.key),
+      //                       // leading: SvgPicture.asset(
+      //                       //   'assets/images/key.svg',
+      //                       // ),
+      //                       title: const Text(
+      //                         'Change Password',
+      //                         style: TextStyle(fontWeight: FontWeight.bold),
+      //                       ),
+      //                       onTap: () {
+      //                         Get.to(const ChangePasswordPage());
+      //                       },
+      //                     ),
+      //                     ListTile(
+      //                       leading: const Icon(Icons.privacy_tip),
+      //                       title: const Text(
+      //                         'Privacy',
+      //                         style: TextStyle(fontWeight: FontWeight.bold),
+      //                       ),
+      //                       onTap: () {
+      //                         Get.to(const SettingprivacyPage());
+      //                       },
+      //                     ),
+      //                     ListTile(
+      //                       leading: const Icon(Icons.document_scanner),
+      //                       title: const Text(
+      //                         'Terms & Conditions',
+      //                         style: TextStyle(fontWeight: FontWeight.bold),
+      //                       ),
+      //                       onTap: () {
+      //                         Get.to(const SettingTermConditionPage());
+      //                       },
+      //                     ),
+      //                     ListTile(
+      //                       leading: const Icon(Icons.logout),
+      //                       title: const Text(
+      //                         'Logout',
+      //                         style: TextStyle(fontWeight: FontWeight.bold),
+      //                       ),
+      //                       onTap: () {
+      //                         Navigator.of(context).pop();
+      //                         _showModalSheet();
+      //                       },
+      //                     ),
+      //                   ],
+      //                 );
+      //               });
+      //         },
+      //         child: const Icon(Icons.settings),
+      //         //  child: ksettingsicon
+      //       ),
+      //     ),
+      //   ],
+      //   elevation: 0,
+      // ),
       body: SafeArea(child: GetBuilder<ProfileController>(builder: (_) {
         return SingleChildScrollView(
           child: Column(

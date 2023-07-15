@@ -51,15 +51,15 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
       child: Column(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 15, top: 15),
+            padding: const EdgeInsets.only(left: 15, top: 20),
             child: Row(
               children: [
                 Text(
-                  'Friends',
+                  'My Connections',
                 )
                     .text
-                    .bold
-                    .xl4
+                    .semiBold
+                    .xl2
                     .fontFamily(GoogleFonts.poppins().fontFamily!)
                     .make(),
               ],
@@ -78,7 +78,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
                   },
                   child: Container(
                     height: 40,
-                    width: 120,
+                    width: 140,
                     decoration: BoxDecoration(
                         color: _friendsindex == 0 ? kblue : kwhite,
                         boxShadow: <BoxShadow>[
@@ -90,10 +90,10 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
                         borderRadius: BorderRadius.circular(15)),
                     child: Center(
                         child: Text(
-                      'Your Friends',
+                      'Your Connections',
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 15,
+                          fontSize: 14,
                           color: _friendsindex == 0 ? kwhite : Colors.black),
                     )),
                   ),
@@ -122,7 +122,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
                       'Request',
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
-                          fontSize: 15,
+                          fontSize: 14,
                           color: _friendsindex == 1 ? kwhite : Colors.black),
                     )),
                   ),
@@ -397,7 +397,7 @@ class _friendContinerState extends State<friendContiner> {
                 ? const CircleAvatar(
                     foregroundColor: Colors.white,
                     backgroundImage:
-                        AssetImage('assets/images/profile_icon.png'),
+                         AssetImage('assets/images/propic.jpg'),
                   )
                 : CircleAvatar(
                     backgroundImage: NetworkImage(widget.friendList.profile),

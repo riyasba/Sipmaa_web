@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:google_fonts/google_fonts.dart';
 //import 'package:reg_login/app/modules/screens/Settings/controller/settings_controller.dart';
 
 import 'package:reg_login/app/modules/screens/Settings/views/widgets/mywidgets.dart';
-import 'package:reg_login/app/modules/screens/Settings/views/widgets/pofile_widgets.dart';
+
 //import 'package:reg_login/app/modules/screens/Settings/views/widgets/profile_widget.dart';
 
 
@@ -203,9 +203,9 @@ class _SettingsPageState extends State<SettingsPage> {
             //  height: 800,
             width: 750,
             // width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4),
-              border: Border.all(color: Colors.black),
+            decoration: BoxDecoration(color: kwhite,
+              borderRadius: BorderRadius.circular(8),
+           
             ),
           ),
         ),

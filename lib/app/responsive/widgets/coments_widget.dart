@@ -16,7 +16,7 @@ class coments_widget extends StatelessWidget {
             onTap: () {},
             child: ListTile(
                 leading: CircleAvatar(radius: 40,
-                  backgroundImage: AssetImage('assets/images/profile_icon.png'),
+                  backgroundImage:  AssetImage('assets/images/propic.jpg'),
                 ),
                 title: Text("Names   $index"),
                 subtitle: Text("Commanents  $index"),

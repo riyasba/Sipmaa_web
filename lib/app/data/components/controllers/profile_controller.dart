@@ -32,6 +32,7 @@ import '../../../modules/authentication/forgotPassword/views/conformpassword.dar
 
 import '../../../modules/authentication/forgotPassword/views/otp_forgot.dart';
 import '../../../modules/authentication/forgotPassword/views/verified_screen.dart';
+import '../../../respohome/resposetings/respo_settings.dart';
 import '../../../responsive/forgotrespo/create_new_password.dart';
 import '../../../responsive/forgotrespo/forgot_password_verifypage.dart';
 import '../../../responsive/forgotrespo/sucessfull.dart';
@@ -509,7 +510,7 @@ class ProfileController extends GetxController {
     isLoading(false);
     if (response.statusCode == 201) {
       getProfile();
-      Get.offAll(() => SettingProfilePage());
+      Get.offAll(() => RespSetings());
       Get.rawSnackbar(
         messageText: const Text(
           "Added new position",
@@ -537,7 +538,7 @@ class ProfileController extends GetxController {
     isLoading(false);
     if (response.statusCode == 201) {
       getProfile();
-      Get.offAll(() => SettingProfilePage());
+      Get.offAll(() => RespSetings());
       Get.rawSnackbar(
         messageText: const Text(
           "New Skill added",

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:reg_login/app/modules/respohome/resposetions.dart';
+import 'package:reg_login/app/respohome/respohome.dart';
 import 'package:reg_login/app/routes/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

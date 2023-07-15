@@ -97,7 +97,7 @@ Future<void> _selectDate(BuildContext context) async {
                       radius: 60,
                       foregroundColor: Colors.grey,
                         backgroundImage:
-                            AssetImage('assets/images/profile_icon.png'),
+                             AssetImage('assets/images/propic.jpg'),
                       )
                     : CircleAvatar(
                       radius: 60,

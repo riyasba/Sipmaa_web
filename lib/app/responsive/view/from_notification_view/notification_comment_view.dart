@@ -62,7 +62,7 @@ class _NotoficationCommentViewState extends State<NotoficationCommentView> {
             child: Row(children: [
               postController.profileData.first.profilePicture == null
                   ? const CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/profile_icon.png'),
+                      backgroundImage:  AssetImage('assets/images/propic.jpg'),
                     )
                   : CircleAvatar(
                       backgroundImage: NetworkImage(
@@ -122,7 +122,7 @@ class _NotoficationCommentViewState extends State<NotoficationCommentView> {
                               ? const CircleAvatar(
                                   radius: 40,
                                   backgroundImage:
-                                      AssetImage('assets/images/profile_icon.png'),
+                                       AssetImage('assets/images/propic.jpg'),
                                 )
                               : CircleAvatar(
                                   radius: 40,

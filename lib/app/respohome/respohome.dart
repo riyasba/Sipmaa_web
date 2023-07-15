@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/get_instance.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
+
 import 'package:reg_login/app/data/components/constands/constands.dart';
-import 'package:reg_login/app/modules/respohome/Responsive.dart';
-import 'package:reg_login/app/modules/respohome/pofile_respo.dart';
+import 'package:reg_login/app/respohome/Comonappbar/appbar.dart';
+import 'package:reg_login/app/respohome/Responsive.dart';
+import 'package:reg_login/app/respohome/pofile_respo.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets.dart';
 import 'package:reg_login/app/responsive/view/home_respo.dart';
 
-import '../../data/components/controllers/profile_controller.dart';
-import '../screens/home/views/widgets/friends_widget.dart';
+import '../data/components/controllers/profile_controller.dart';
+import '../modules/screens/home/views/widgets/friends_widget.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({
@@ -81,101 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class AppbarComn extends StatelessWidget {
-  const AppbarComn({
-    super.key,
-  });
 
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      elevation: 0,
-      backgroundColor: kwhite,
-      //const Color(0xffCAE1FF),
-      leadingWidth: 100,
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 20),
-        child: Image.asset(
-          'assets/images/logo.png',
-        ),
-      ),
-      actions: [
-        // InkWell(
-        //   onTap: (){
-        //     homeController.homeindex(1);
-        //                     homeController.update();
-        //    // Get.to(FriendsSearch());
-        //   },
-        //   child: SearchWidget(
-        //     textController: textController,
-        //   ),
-        // ),
-        IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.home,
-              color: Colors.black,
-            )),
-        kwidth10,
-        IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.search,
-              color: Colors.black,
-            )),
-
-        kwidth10,
-        IconButton(
-            onPressed: () {},
-            // onPressed: () {
-            //   homeController.homeindex(7);
-            //   homeController.update();
-            // },
-            icon: const Icon(
-              Icons.settings_outlined,
-              color: Colors.black,
-            )),
-
-        kwidth10,
-        IconButton(
-            onPressed: () {
-              // homeController.homeindex(3);
-            },
-            icon: const Icon(
-              Icons.notifications_outlined,
-              color: Colors.black,
-            )),
-
-        kwidth10,
-        InkWell(
-          onTap: () {
-            // homeController.homeindex(4);
-          },
-          child: GetBuilder<ProfileController>(
-            builder: (_) {
-              return profileController.profileData.isEmpty
-                  ? Container()
-                  : Padding(
-                      padding: const EdgeInsets.only(right: 10),
-                      child: profileController
-                                  .profileData.first.user.profilePicture ==
-                              null
-                          ? const CircleAvatar(
-                              backgroundImage:
-                                  AssetImage('assets/images/profile_icon.png'),
-                            )
-                          : CircleAvatar(
-                              backgroundImage: NetworkImage(profileController
-                                  .profileData.first.user.profilePicture),
-                            ),
-                    );
-            },
-          ),
-        ),
-      ],
-    );
-  }
-}
 
 class new1 extends StatelessWidget {
   const new1({super.key});
