@@ -207,7 +207,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   profileController.profileData.isEmpty
                       ? Container()
                       : Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(profileController.profileData.first.user.bio ??
                                 ""),

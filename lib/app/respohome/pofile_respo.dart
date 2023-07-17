@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:reg_login/app/data/components/constands/constands.dart';
+import 'package:reg_login/app/respohome/respoprofil.dart';
 
 import 'package:velocity_x/velocity_x.dart';
 
@@ -40,11 +41,13 @@ class _ProfileRespoState extends State<ProfileRespo> {
                                   backgroundImage:
                                        AssetImage('assets/images/propic.jpg'),
                                 )
-                              : CircleAvatar(
-                                
-                                  backgroundImage: NetworkImage(profileController
-                                      .profileData.first.user.profilePicture,),
-                                ),
+                              : InkWell(onTap: (){Get.to(RespoProfile());},
+                                child: CircleAvatar(
+                                  
+                                    backgroundImage: NetworkImage(profileController
+                                        .profileData.first.user.profilePicture,),
+                                  ),
+                              ),
                     ksizedbox10,
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,

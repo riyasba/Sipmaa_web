@@ -51,10 +51,10 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: kblue,
-        title: Text('Friends Profile'),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: kblue,
+      //   title: Text('Friends Profile'),
+      // ),
       body: Container(
         height: size.height,
         width: MediaQuery.of(context).size.width,
@@ -186,11 +186,10 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                         profileController.otherUserProfileData.isEmpty
                             ? Container()
                             : Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(profileController.otherUserProfileData
-                                          .first.user.bio ??
-                                      ""),
+                                          .first.user.bio ??""),
                                 ],
                               ),
                       ],

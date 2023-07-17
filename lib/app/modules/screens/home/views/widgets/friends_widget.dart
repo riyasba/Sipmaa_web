@@ -13,6 +13,7 @@ import 'package:reg_login/app/responsive/widgets/chat_view/view_message_screen.d
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../../data/components/controllers/profile_controller.dart';
+import '../../../../../respohome/friendsprofile/friendsrespoprofile.dart';
 
 class HomeFriendsWidget extends StatefulWidget {
   const HomeFriendsWidget({super.key});
@@ -150,7 +151,7 @@ class _HomeFriendsWidgetState extends State<HomeFriendsWidget> {
                                   "1")
                                 InkWell(
                                   onTap: () {
-                                     Get.to(() => FriendsProfileScreen(
+                                     Get.offAll(() => RespoFriendsProfile(
                                                                 userId:  profileController
                                             .myFriendList[i].friendId,
                                                               ));
