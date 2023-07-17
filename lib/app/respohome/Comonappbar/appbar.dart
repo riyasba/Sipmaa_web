@@ -9,6 +9,7 @@ import 'package:reg_login/app/respohome/respoprofil.dart';
 
 import '../../data/components/constands/constands.dart';
 import '../../data/components/controllers/profile_controller.dart';
+import '../../responsive/view/profile_page.dart';
 import '../resposetings/respo_settings.dart';
 import '../respohome.dart';
 import '../searchrespo/saerchrespo.dart';
@@ -30,12 +31,14 @@ class _AppbarComnState extends State<AppbarComn> {
       elevation: 0,
       backgroundColor: kwhite,
       //const Color(0xffCAE1FF),
-      leadingWidth: 100,
+     leadingWidth: 100,
       leading: Padding(
-        padding: const EdgeInsets.only(left: 20),
-        child: Image.asset(
-          'assets/images/logo.png',
-        ),
+        padding: const EdgeInsets.only(left: 5),
+        child: 
+            Image.asset(
+              'assets/images/logo.png',
+            ),
+          
       ),
       actions: [
         kwidth10,
@@ -90,6 +93,9 @@ class _AppbarComnState extends State<AppbarComn> {
         kwidth10,
         IconButton(
             onPressed: () {
+
+
+
               Get.to(RespoNotification());
             },
             icon: Icon(
@@ -115,22 +121,9 @@ class _AppbarComnState extends State<AppbarComn> {
                               backgroundImage:
                                   AssetImage('assets/images/propic.jpg'),
                             )
-                          : Stack(
-                              children: [
-                                CircleAvatar(
-                                  backgroundImage: NetworkImage(
-                                      profileController.profileData.first.user
-                                          .profilePicture),
-                                ),
-                                Container(
-                                    height: 40,
-                                    width: 40,
-                                    child: ClipRRect(
-                                        borderRadius:
-                                            BorderRadius.circular(45),
-                                        child: Image.asset(
-                                            "assets/icons/silver_badge.png")))
-                              ],
+                          : CircleAvatar(
+                              backgroundImage: NetworkImage(profileController
+                                  .profileData.first.user.profilePicture),
                             ),
                     );
             },

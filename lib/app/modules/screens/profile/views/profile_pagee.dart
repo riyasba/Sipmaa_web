@@ -49,7 +49,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           primary: true,
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
-          children: [
+          children: [ksizedbox10,
             Stack(
               children: [
                 Stack(

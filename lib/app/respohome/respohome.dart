@@ -24,6 +24,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 final profileController = Get.find<ProfileController>();
+ final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
@@ -39,6 +40,10 @@ class _MyHomePageState extends State<MyHomePage> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+       key: _scaffoldKey,
+        drawer: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: 250),
+        child: ProfileRespo(),),
         backgroundColor: Color(0xffCAE1FF),
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(60), child: AppbarComn()),

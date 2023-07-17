@@ -275,7 +275,7 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                                   .otherUserProfileData.first.user.name,
                               lastName: "",
                               photo: profileController.otherUserProfileData
-                                  .first.user.profilePicture,
+                                  .first.user.profilePicture ?? "",
                               pin: 0,
                               isArchived: false,
                               isBlocked: false,

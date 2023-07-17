@@ -5,12 +5,15 @@ import 'package:reg_login/app/data/components/constands/constands.dart';
 import 'package:reg_login/app/respohome/Comonappbar/appbar.dart';
 import 'package:reg_login/app/respohome/Responsive.dart';
 import 'package:reg_login/app/respohome/pofile_respo.dart';
-
 import '../data/components/controllers/profile_controller.dart';
 import '../modules/screens/home/views/create_widget.dart';
 import '../modules/screens/home/views/widgets/friends_widget.dart';
 import '../responsive/view/create.dart';
 
+
+
+
+ 
 
 class RespoCreate extends StatefulWidget {
   const RespoCreate({
