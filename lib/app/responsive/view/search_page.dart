@@ -1,14 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-//import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 import 'package:get/get.dart';
 
 
 
 import '../../data/components/constands/constands.dart';
 import '../../data/components/controllers/posts_controller.dart';
-import '../widgets/bottumnavigationbar.dart';
+
 import '../widgets/search_field.dart';
 
 class SearchPage extends StatefulWidget {

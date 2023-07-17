@@ -7,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:reg_login/app/responsive/forgotrespo/forgot_page.dart';
-import 'package:reg_login/app/responsive/view/forgot_page.dart';
 import 'package:reg_login/app/responsive/view/register_page1.dart';
 import '../data/components/constands/constands.dart';
 import '../data/components/controllers/auth_controllers.dart';
@@ -31,16 +30,21 @@ class _loginpagerespoState extends State<loginpagerespo> {
     });
   }
 
+
+  
+
   CarouselController curouselController = CarouselController();
 
   final authController = Get.find<AuthController>();
-
   var userNameController = TextEditingController();
   var passwordController = TextEditingController();
-
   int pageIndex = 0;
 
+
+
   final _formKey = GlobalKey<FormState>();
+
+
 
   @override
   void initState() {
@@ -48,9 +52,19 @@ class _loginpagerespoState extends State<loginpagerespo> {
     authController.getSlider();
   }
 
+
+
+
   @override
   Widget build(BuildContext context) {
+
+
+
+
     var size = MediaQuery.of(context).size;
+
+
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(

@@ -16,6 +16,7 @@ import '../../../../data/components/controllers/profile_controller.dart';
 
 import 'package:timeago/timeago.dart' as timeago;
 
+import '../../../../respohome/friendsprofile/friendsrespoprofile.dart';
 import '../../../../responsive/widgets/like.dart';
 
 class HomeContainer extends StatefulWidget {
@@ -101,7 +102,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                 children: [
                                   InkWell( onTap: () {
                                                           Get.to(() =>
-                                                              FriendsProfileScreen(
+                                                              RespoFriendsProfile(
                                                                 userId: postsController
                                                                     .allPostList[
                                                                         index]
@@ -333,7 +334,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                               .allPostList[index].body
                                               .toString(),
                                           fit: BoxFit.cover,
-                                          width: size.width * 0.5,
+                                          width: size.width * 0.4,
                                         ),
                                       ),
                               ],

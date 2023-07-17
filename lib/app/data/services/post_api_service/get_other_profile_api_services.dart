@@ -28,7 +28,7 @@ class GetOtherProfileApiServices extends BaseApiService {
           data: {
             "user_id": userId,
           });
-      print("::::::::<get profile Api>::::::::status code::::::::::");
+      print("::::::::<get profile Api>::::::::status code:::::::::$userId:");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

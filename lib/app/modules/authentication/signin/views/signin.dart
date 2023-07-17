@@ -256,17 +256,17 @@ class _SignInViewState extends State<SignInView> {
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
                                   ksizedbox10,
-                                  Row(
-                                    children: [
-                                      Text(
-                                        "WELCOME",
-                                        style:GoogleFonts.openSans(
-                                          fontSize: 24.5,
-                                          fontWeight: FontWeight.bold
-                                        )
-                                      ),
-                                    ],
-                                  ),
+                                  // Row(
+                                  //   children: [
+                                  //     Text(
+                                  //       "WELCOME",
+                                  //       style:GoogleFonts.openSans(
+                                  //         fontSize: 24.5,
+                                  //         fontWeight: FontWeight.bold
+                                  //       )
+                                  //     ),
+                                  //   ],
+                                  // ),
                             
                                   // Text(
                                   //   'Login',
@@ -278,7 +278,7 @@ class _SignInViewState extends State<SignInView> {
                                     child: Row(
                                       children: [
                                         Text(
-                                          'LOGIN BACK TO SIPMAA HR COMMUNITY',
+                                          'WELCOME TO SIPMAA HR COMMUNITY',
                                           style: GoogleFonts.openSans(
                                             fontSize: 18,fontWeight: FontWeight.w500
                                           ),

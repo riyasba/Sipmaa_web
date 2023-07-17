@@ -11,6 +11,7 @@ import '../../data/components/controllers/auth_controllers.dart';
 import '../../data/components/controllers/posts_controller.dart';
 import '../../data/components/controllers/profile_controller.dart';
 
+import '../../respohome/friendsprofile/friendsrespoprofile.dart';
 import '../widgets/comonmobappbar.dart';
 import '../widgets/drawer.dart';
 
@@ -93,7 +94,7 @@ class _HomepageRespoState extends State<HomepageRespo> {
                                     null
                                 ? InkWell(
                                     onTap: () {
-                                      Get.to(() => PublicProfilePageView(
+                                      Get.to(() => RespoFriendsProfile(
                                             userId: postsController
                                                 .allPostList[index].user.id,
                                           ));
@@ -106,7 +107,7 @@ class _HomepageRespoState extends State<HomepageRespo> {
                                   )
                                 : InkWell(
                                     onTap: () {
-                                      Get.to(() => PublicProfilePageView(
+                                      Get.to(() => RespoFriendsProfile(
                                             userId: postsController
                                                 .allPostList[index].user.id,
                                           ));
@@ -125,7 +126,7 @@ class _HomepageRespoState extends State<HomepageRespo> {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    Get.to(() => PublicProfilePageView(
+                                    Get.to(() => RespoFriendsProfile(
                                           userId: postsController
                                               .allPostList[index].user.id,
                                         ));

@@ -2,12 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:get/get.dart';
 import 'package:reg_login/app/data/models/industries_model.dart';
 
 import '../../data/components/constands/constands.dart';
-import '../../data/components/constands/formfield.dart';
+
 import '../../data/components/controllers/auth_controllers.dart';
 import '../../data/models/department_model.dart';
 import '../../data/models/profile_update_model.dart';

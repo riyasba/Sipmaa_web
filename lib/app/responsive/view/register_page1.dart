@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 
@@ -37,10 +37,10 @@ class _register1State extends State<register1> {
 
   var confirmPasswordController = TextEditingController();
 
-  // final firstNameKey = GlobalKey<FormState>();
+ 
   final _formKey = GlobalKey<FormState>();
 
-  // final createPassKey = GlobalKey<FormState>();
+
   final authController = Get.find<AuthController>();
 
   @override
@@ -54,7 +54,7 @@ class _register1State extends State<register1> {
   Future<void> _showMyDialog() async {
     return showDialog<void>(
       context: context,
-      barrierDismissible: false, // user must tap button!
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Verify your email'),
