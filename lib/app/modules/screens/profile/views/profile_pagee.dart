@@ -50,13 +50,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
           children: [
             Stack(
               children: [
-                Container(
-                    color: kwhite,
-                    width: MediaQuery.of(context).size.width * 0.874,
-                    child: Image.asset(
-                      'assets/images/Rectangle 800.png',
-                      fit: BoxFit.fill,
-                    )),
+                Stack(
+                  children: [
+                    Container(
+                       height: 320,
+                          width: MediaQuery.of(context).size.width * 0.874,
+                      child: Container(
+                          color: kwhite,
+                          height: 300,
+                          width: MediaQuery.of(context).size.width * 0.874,
+                          child: Image.asset(
+                            'assets/images/Rectangle 800.png',
+                            fit: BoxFit.fill,
+                          )),
+                    ),
+                    
+                  ],
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -141,9 +151,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: 15, left: size.width * 0.37),
+              padding: EdgeInsets.only(top: 15, ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   profileController.profileData.isEmpty
                       ? Container()

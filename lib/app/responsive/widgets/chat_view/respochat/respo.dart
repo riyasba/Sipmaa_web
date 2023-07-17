@@ -70,9 +70,11 @@ class _ViewChatsUserListRespoState extends State<ViewChatsUserListRespo> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Container(
-      height: size.height * 0.68,
-   
+    return Container(decoration: BoxDecoration(color: kwhite,
+      borderRadius: BorderRadius.circular(8)),
+     // height: size.height * 0.68,
+    height: MediaQuery.of(context).size.height * 0.88,
+      width: MediaQuery.of(context).size.width * 0.38,
       child: ListView(
         shrinkWrap: true,
         controller: scrollcontroller,
@@ -252,7 +254,8 @@ class _ViewChatsUserListRespoState extends State<ViewChatsUserListRespo> {
                               ),
                             ),
                           )
-                        ],
+                     // Text('No chats ') 
+                      ],
                       ),
                     );
                   }

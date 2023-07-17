@@ -12,15 +12,14 @@ import 'package:reg_login/app/data/components/constands/firestoreconsts.dart';
 import 'package:reg_login/app/modules/screens/home/views/chat.dart';
 import 'package:reg_login/app/responsive/widgets/chat_view/chat_widget/image_view_in_chat.dart';
 import 'package:reg_login/app/responsive/widgets/chat_view/chat_widget/other_chat_bubble.dart';
-import 'package:reg_login/app/responsive/widgets/chat_view/view_message_screen.dart';
 import 'package:reg_login/app/routes/app_pages.dart';
-
 import '../../../../data/components/constands/constands.dart';
 import '../../../../data/components/constands/message_types.dart';
 import '../../../../data/components/controllers/chat_controller.dart';
 import '../../../../data/components/controllers/profile_controller.dart';
 import '../../../../data/models/chat_messages_model.dart';
 import '../../../../data/models/chat_models.dart';
+import '../../../../respohome/respohome.dart';
 import '../chat_widget/my_chat_container.dart';
 import '../chat_widget/recived_image_view.dart';
 import '../chat_widget/send_image_container.dart';
@@ -153,8 +152,8 @@ class _ViewMessageScreenRespoState extends State<ViewMessageScreenRespo> {
             backgroundColor: kblue,
             elevation: 0,
             leading: InkWell(
-                onTap: () {
-                Get.offAllNamed(Routes.HOME_PAGE);
+                onTap: () { Get.to(MyHomePage());
+               // Get.offAllNamed(Routes.HOME_PAGE);
                   // Get.back();
                 },
                 child: Row(

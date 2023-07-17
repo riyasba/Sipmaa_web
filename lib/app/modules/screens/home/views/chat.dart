@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reg_login/app/data/components/constands/constands.dart';
 
-import '../../../../responsive/widgets/chat_view/chat_list_view.dart';
 import '../../../../responsive/widgets/chat_view/respochat/chatlistrespo.dart';
 
 class Chat extends StatelessWidget {

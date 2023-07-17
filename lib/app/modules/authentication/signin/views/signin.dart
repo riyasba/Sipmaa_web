@@ -554,7 +554,11 @@ class _SignInViewState extends State<SignInView> {
                           )
                         ]
                       ),
-                        child: Image.asset('assets/images/Group 1927.png')))
+                        child: Column(
+                          children: [Image.asset('assets/images/Group 2110.png',height: 100,),
+                            Image.asset('assets/images/Group 1927.png'),
+                          ],
+                        )))
               ],
             ),
           ),

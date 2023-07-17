@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 import 'package:reg_login/app/responsive/view/profile/public_profile_screen.dart';
 import 'package:reg_login/app/responsive/view/reactions_page.dart';
 import 'package:reg_login/app/responsive/widgets/like.dart';
-
 import 'package:timeago/timeago.dart' as timeago;
-import '../../modules/screens/home/views/widgets/likepost.dart';
 import '../../data/components/constands/constands.dart';
 import '../../data/components/controllers/auth_controllers.dart';
 import '../../data/components/controllers/posts_controller.dart';
-
-import '../widgets/drawer.dart';
 import 'coments.dart';
 
 class FilterPage extends StatefulWidget {

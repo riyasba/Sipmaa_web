@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:get/instance_manager.dart';
 import 'package:reg_login/app/respohome/notification/responotification.dart';
+import 'package:reg_login/app/respohome/respochat/respochat.dart';
 import 'package:reg_login/app/respohome/respocreate.dart';
 import 'package:reg_login/app/respohome/respoprofil.dart';
 
@@ -40,44 +41,40 @@ class _AppbarComnState extends State<AppbarComn> {
             onPressed: () {Get.to(MyHomePage());},
             icon: Icon(
               Icons.home,
-              color: Colors.black,
+              color: kblue,
             )),kwidth10,
         IconButton(
             onPressed: () {Get.to(RespoCreate());},
+          
+            icon:  Icon(
+              Icons.create,
+              color: kblue,
+            )),kwidth10, IconButton(
+            onPressed: () {Get.to(RespoChat());},
             // onPressed: () {
             //   homeController.homeindex(7);
             //   homeController.update();
             // },
-            icon: const Icon(
-              Icons.create,
-              color: Colors.black,
+            icon:  Icon(
+              Icons.chat,
+              color: kblue,
             )),
-        // InkWell(
-        //   onTap: (){
-        //     homeController.homeindex(1);
-        //                     homeController.update();
-        //    // Get.to(FriendsSearch());
-        //   },
-        //   child: SearchWidget(
-        //     textController: textController,
-        //   ),
-        // ),
        
         kwidth10,
         IconButton(
             onPressed: () {Get.to(RespoSrech());},
             icon: Icon(
               Icons.search,
-              color: Colors.black,
+              color: kblue,
             )),
 
         kwidth10,
         IconButton(
             onPressed: () {Get.to(RespSetings());},
           
-            icon: const Icon(
+            icon:  Icon(
               Icons.settings_outlined,
-              color: Colors.black,
+              color: kblue,
             )),
 
         kwidth10,
@@ -85,9 +82,9 @@ class _AppbarComnState extends State<AppbarComn> {
             onPressed: () {Get.to(RespoNotification());
       
             },
-            icon: const Icon(
+            icon:  Icon(
               Icons.notifications_outlined,
-              color: Colors.black,
+              color: kblue,
             )),
 
         kwidth10,
@@ -100,7 +97,7 @@ class _AppbarComnState extends State<AppbarComn> {
               return profileController.profileData.isEmpty
                   ? Container()
                   : Padding(
-                      padding: const EdgeInsets.only(right: 10),
+                      padding:  EdgeInsets.only(right: 10),
                       child: profileController
                                   .profileData.first.user.profilePicture ==
                               null
