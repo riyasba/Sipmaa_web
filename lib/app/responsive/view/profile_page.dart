@@ -294,7 +294,8 @@ class _ProfilePageState extends State<ProfilePage> {
               const SizedBox(
                 height: 15,
               ),
-              Stack(children: [
+              Stack(
+                children: [
                 Container(
                   height: 112,
                   width: MediaQuery.of(context).size.width,
@@ -381,7 +382,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                            profileController.profileData.first.user.bio ?? ""),
+                            profileController.profileData.first.user.designation ?? ""),
                       ],
                     ),
               // Padding(

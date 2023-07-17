@@ -31,6 +31,13 @@ class _RespoFriendsProfileState extends State<RespoFriendsProfile> {
   void initState() {
     super.initState();
     print("---------------here-------------------->>");
+    print("---------------here-------------------->>");
+    print("---------------here-------------------->>");
+    print("---------------here-------------------->>");
+    print("---------------here-------------------->>");
+    print("---------------here-------------------->>");
+    print("---------------here-------------------->>");
+    print("---------------here-------------------->>");
     profileController.getProfile();
   }
 
@@ -70,7 +77,7 @@ class _RespoFriendsProfileState extends State<RespoFriendsProfile> {
                 Expanded(
                     flex: size.width > 1340 ? 8 : 10,
                     child: FriendsProfileScreen(
-                      userId: postsController.allPostList[index].user.id,
+                      userId: widget.userId,
                     )),
                 kwidth10,
                 Expanded(
@@ -86,7 +93,7 @@ class _RespoFriendsProfileState extends State<RespoFriendsProfile> {
                 Expanded(
                     flex: size.width > 1340 ? 7 : 9,
                     child: FriendsProfileScreen(
-                      userId: postsController.allPostList[index].user.id,
+                      userId: widget.userId,
                     )),
                 kwidth10,
                 Expanded(

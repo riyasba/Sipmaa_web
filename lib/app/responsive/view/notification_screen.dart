@@ -75,9 +75,8 @@ class _Notificaton_screenState extends State<Notificaton_screen> {
                 itemBuilder: (BuildContext context, int index) {
                   return GestureDetector(
                     onTap: () {
-                      var data = jsonDecode(
-                          profileController.notificationList[index].data);
-
+                      var data = profileController.notificationList[index].data
+                          .toJson();
                       redirectToPages(response: data);
                     },
                     child: ListTile(

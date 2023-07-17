@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:readmore/readmore.dart';
 import 'package:reg_login/app/data/components/controllers/posts_controller.dart';
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets/continers/comentcontiner.dart';
@@ -50,7 +51,8 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(backgroundColor: kblue,
+      appBar: AppBar(
+        backgroundColor: kblue,
         title: Text('Friends Profile'),
       ),
       body: Container(
@@ -66,17 +68,27 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                 children: [
                   Container(
                       color: kwhite,
-                      width: MediaQuery.of(context).size.width,
-                      child: Image.asset(
-                        'assets/images/Rectangle 800.png',
-                        fit: BoxFit.fill,
-                      )),
+                      height: 200,
+                      width: MediaQuery.of(context).size.width * 0.874,
+                      child: profileController.otherUserProfileData.first.user
+                                  .backgroundImage ==
+                              null
+                          ? Image.asset(
+                              'assets/images/Rectangle 800.png',
+                              fit: BoxFit.fill,
+                            )
+                          : Image.network(
+                              profileController.otherUserProfileData.first.user
+                                  .backgroundImage,
+                              fit: BoxFit.fill,
+                            )),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding:
-                            EdgeInsets.only(top: 150,),
+                        padding: EdgeInsets.only(
+                          top: 150,
+                        ),
                         child: Stack(
                           children: [
                             Container(
@@ -96,7 +108,7 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                                         ? Container()
                                         : ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(50),
+                                                BorderRadius.circular(100),
                                             child: profileController
                                                         .otherUserProfileData
                                                         .first
@@ -119,32 +131,32 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                               ),
                             ),
 
-                            //
-                            Positioned(
-                                bottom: 5,
-                                right: 10,
-                                child: InkWell(
-                                  onTap: () async {
-                                    var imagePath;
-                                    PickedFile? pickedFile =
-                                        await ImagePicker().getImage(
-                                      source: ImageSource.gallery,
-                                    );
-                                    imagePath = await pickedFile!.readAsBytes();
+                            // //
+                            // Positioned(
+                            //     bottom: 5,
+                            //     right: 10,
+                            //     child: InkWell(
+                            //       onTap: () async {
+                            //         var imagePath;
+                            //         PickedFile? pickedFile =
+                            //             await ImagePicker().getImage(
+                            //           source: ImageSource.gallery,
+                            //         );
+                            //         imagePath = await pickedFile!.readAsBytes();
 
-                                    profileController.updateProfilePic(
-                                        media: imagePath);
-                                  },
-                                  child: Container(
-                                    height: 26.5,
-                                    child: const CircleAvatar(
-                                        radius: 30,
-                                        backgroundImage: AssetImage(
-                                            'assets/images/profileicon.png'),
-                                        backgroundColor: Colors.grey,
-                                        child: Icon(Icons.add)),
-                                  ),
-                                ))
+                            //         profileController.updateProfilePic(
+                            //             media: imagePath);
+                            //       },
+                            //       child: Container(
+                            //         height: 26.5,
+                            //         child: const CircleAvatar(
+                            //             radius: 30,
+                            //             backgroundImage: AssetImage(
+                            //                 'assets/images/profileicon.png'),
+                            //             backgroundColor: Colors.grey,
+                            //             child: Icon(Icons.add)),
+                            //       ),
+                            //     ))
                           ],
                         ),
                       ),
@@ -176,8 +188,8 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                             : Row(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Text(profileController
-                                          .otherUserProfileData.first.user.bio ??
+                                  Text(profileController.otherUserProfileData
+                                          .first.user.bio ??
                                       ""),
                                 ],
                               ),
@@ -185,115 +197,108 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                     ),
                   ),
                 ],
-              ),  if (profileController.otherUserProfileData.first.isFriend ==
-                        0)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18)),
-                                  backgroundColor: kblue,
-                                  minimumSize: Size(50, 40)),
-                              onPressed: () async {
-                                bool isRequested = await profileController
-                                    .sendRequestFromProfile(
-                                        userId: widget.userId.toString());
+              ),
+              if (profileController.otherUserProfileData.first.isFriend == 0)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18)),
+                            backgroundColor: kblue,
+                            minimumSize: Size(50, 40)),
+                        onPressed: () async {
+                          bool isRequested =
+                              await profileController.sendRequestFromProfile(
+                                  userId: widget.userId.toString());
 
-                                if (isRequested) {
-                                  
-                                }
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset('assets/images/iconimage.png'),
-                                  const SizedBox(
-                                    width: 5,
-                                  ),
-                                  const Text(
-                                    'Request',
-                                    style: TextStyle(color: Colors.white),
-                                  )
-                                ],
-                              )),
-                        ],
-                      ),ksizedbox20,
-                    if (profileController.otherUserProfileData.first.isFriend ==
-                        1)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18)),
-                                  backgroundColor: kblue,
-                                  minimumSize: Size(50, 40)),
-                              onPressed: () {
-                                final myprofileController =
-                                    Get.find<ProfileController>();
-                                String tchatId = "";
+                          if (isRequested) {}
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Image.asset('assets/images/iconimage.png'),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            const Text(
+                              'Request',
+                              style: TextStyle(color: Colors.white),
+                            )
+                          ],
+                        )),
+                  ],
+                ),
+              ksizedbox20,
+              if (profileController.otherUserProfileData.first.isFriend == 1)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18)),
+                            backgroundColor: kblue,
+                            minimumSize: Size(50, 40)),
+                        onPressed: () {
+                          final myprofileController =
+                              Get.find<ProfileController>();
+                          String tchatId = "";
 
-                                if (profileController
-                                        .otherUserProfileData.first.user.id >
-                                    myprofileController
-                                        .profileData.first.user.id) {
-                                  tchatId =
-                                      "chatId${profileController.otherUserProfileData.first.user.id}0${myprofileController.profileData.first.user.id}";
-                                } else {
-                                  tchatId =
-                                      "chatId${myprofileController.profileData.first.user.id}0${profileController.otherUserProfileData.first.user.id}";
-                                }
-                                ChatListModel chatListModel = ChatListModel(
-                                    userId: profileController
-                                        .otherUserProfileData.first.user.id,
-                                    firstName: profileController
-                                        .otherUserProfileData.first.user.name,
-                                    lastName: "",
-                                    photo: profileController
-                                        .otherUserProfileData
-                                        .first
-                                        .user
-                                        .profilePicture,
-                                    pin: 0,
-                                    isArchived: false,
-                                    isBlocked: false,
-                                    isMuted: false,
-                                    userName: "",
-                                    chatId: tchatId,
-                                    message: "",
-                                    messageType: MessageType().text,
-                                    unreadCount: 1,
-                                    readStatus: false,
-                                    createdAt: DateTime.now()
-                                        .millisecondsSinceEpoch
-                                        .toString(),
-                                    updatedAt: DateTime.now()
-                                        .millisecondsSinceEpoch
-                                        .toString(),
-                                    users: [
-                                      myprofileController
-                                          .profileData.first.user.id
-                                    ]);
+                          if (profileController
+                                  .otherUserProfileData.first.user.id >
+                              myprofileController.profileData.first.user.id) {
+                            tchatId =
+                                "chatId${profileController.otherUserProfileData.first.user.id}0${myprofileController.profileData.first.user.id}";
+                          } else {
+                            tchatId =
+                                "chatId${myprofileController.profileData.first.user.id}0${profileController.otherUserProfileData.first.user.id}";
+                          }
+                          ChatListModel chatListModel = ChatListModel(
+                              userId: profileController
+                                  .otherUserProfileData.first.user.id,
+                              firstName: profileController
+                                  .otherUserProfileData.first.user.name,
+                              lastName: "",
+                              photo: profileController.otherUserProfileData
+                                  .first.user.profilePicture,
+                              pin: 0,
+                              isArchived: false,
+                              isBlocked: false,
+                              isMuted: false,
+                              userName: "",
+                              chatId: tchatId,
+                              message: "",
+                              messageType: MessageType().text,
+                              unreadCount: 1,
+                              readStatus: false,
+                              createdAt: DateTime.now()
+                                  .millisecondsSinceEpoch
+                                  .toString(),
+                              updatedAt: DateTime.now()
+                                  .millisecondsSinceEpoch
+                                  .toString(),
+                              users: [
+                                myprofileController.profileData.first.user.id
+                              ]);
 
-                                Get.to(() => ViewMessageScreenRespo(
-                                      chatModel: chatListModel,
-                                      peerId: widget.userId,
-                                    ));
-                              },
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Text(
-                                    'Chat Now',
-                                    style: TextStyle(color: Colors.white),
-                                  )
-                                ],
-                              )),
-                        ],
-                      ),
+                          Get.to(() => ViewMessageScreenRespo(
+                                chatModel: chatListModel,
+                                peerId: widget.userId,
+                              ));
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text(
+                              'Chat Now',
+                              style: TextStyle(color: Colors.white),
+                            )
+                          ],
+                        )),
+                  ],
+                ),
               ksizedbox40,
               Container(
                 width: MediaQuery.of(context).size.width * 0.874,
@@ -400,6 +405,206 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                 ),
               ),
               ksizedbox30,
+              const SizedBox(
+                height: 10,
+              ),
+              const Divider(
+                thickness: 1,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, bottom: 5),
+                    child: Text(
+                      "About",
+                      style: primaryfont.copyWith(
+                          color: Color.fromARGB(214, 19, 18, 18),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Container(
+                    width: size.width,
+                    alignment: Alignment.centerLeft,
+                    child: ReadMoreText(
+                      profileController.otherUserProfileData.first.user.bio ??
+                          "",
+                      trimLines: 2,
+                      colorClickableText: Colors.black,
+                      trimMode: TrimMode.Line,
+                      trimCollapsedText: 'show more',
+                      trimExpandedText: ' show less',
+                      lessStyle: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.bold),
+                      moreStyle: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
+              const Divider(
+                thickness: 1,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, bottom: 5),
+                    child: Text(
+                      "Designation",
+                      style: primaryfont.copyWith(
+                          color: Color.fromARGB(214, 19, 18, 18),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+
+              Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(profileController
+                              .otherUserProfileData.first.user.designation ??
+                          ""),
+                    ],
+                  )),
+
+              const SizedBox(
+                height: 10,
+              ),
+              const Divider(
+                thickness: 1,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, bottom: 5),
+                    child: Text(
+                      "Current Company",
+                      style: primaryfont.copyWith(
+                          color: const Color.fromARGB(214, 19, 18, 18),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(profileController
+                              .otherUserProfileData.first.user.currentCompany ??
+                          ""),
+                    ],
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
+              const Divider(
+                thickness: 1,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, bottom: 5),
+                    child: Text(
+                      "Previous Company",
+                      style: primaryfont.copyWith(
+                          color: const Color.fromARGB(214, 19, 18, 18),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 10),
+                  child: Container(
+                    width: size.width,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (int i = 0;
+                            i <
+                                profileController.otherUserProfileData.first
+                                    .positions.length;
+                            i++)
+                          Text(
+                              "${profileController.otherUserProfileData.first.positions[i].companyName},"),
+                      ],
+                    ),
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
+              const Divider(
+                thickness: 1,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, bottom: 5),
+                    child: Text(
+                      "Skills",
+                      style: primaryfont.copyWith(
+                          color: const Color.fromARGB(214, 19, 18, 18),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 10),
+                  child: Container(
+                    width: size.width,
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (int i = 0;
+                            i <
+                                profileController
+                                    .otherUserProfileData.first.skills.length;
+                            i++)
+                          Text(
+                              "${profileController.otherUserProfileData.first.skills[i].name},"),
+                      ],
+                    ),
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
+              const Divider(
+                thickness: 1,
+              ),
+              ksizedbox30,
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
@@ -482,21 +687,43 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                                                                 .only(left: 15),
                                                         child: Row(
                                                           children: [
-                                                            Image.network(
-                                                              profileController
-                                                                  .otherUserProfileData
-                                                                  .first
-                                                                  .posts[index]
-                                                                  .body,
-                                                              fit: BoxFit
-                                                                  .contain,
-                                                              width:
-                                                                  size.width *
-                                                                      0.3,
-                                                              height:
-                                                                  size.height *
-                                                                      0.4,
-                                                            ),
+                                                            profileController
+                                                                        .otherUserProfileData
+                                                                        .first
+                                                                        .posts[
+                                                                            index]
+                                                                        .body ==
+                                                                    ""
+                                                                ? Container(
+                                                                    child: Text(profileController
+                                                                        .otherUserProfileData
+                                                                        .first
+                                                                        .posts[
+                                                                            index]
+                                                                        .title),
+                                                                    width:
+                                                                        size.width *
+                                                                            0.3,
+                                                                    height:
+                                                                        size.height *
+                                                                            0.4,
+                                                                  )
+                                                                : Image.network(
+                                                                    profileController
+                                                                        .otherUserProfileData
+                                                                        .first
+                                                                        .posts[
+                                                                            index]
+                                                                        .body,
+                                                                    fit: BoxFit
+                                                                        .contain,
+                                                                    width:
+                                                                        size.width *
+                                                                            0.3,
+                                                                    height:
+                                                                        size.height *
+                                                                            0.4,
+                                                                  ),
                                                           ],
                                                         ),
                                                       ),
@@ -563,26 +790,26 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                                                     ),
                                                   ),
                                                 ),
-                                                Positioned(
-                                                  top: 10,
-                                                  right: 10,
-                                                  child: InkWell(
-                                                    onTap: () {
-                                                      _deletePromt(
-                                                          context,
-                                                          profileController
-                                                              .otherUserProfileData
-                                                              .first
-                                                              .posts[index]
-                                                              .id
-                                                              .toString());
-                                                    },
-                                                    child: const Icon(
-                                                      Icons.delete,
-                                                      color: Colors.red,
-                                                    ),
-                                                  ),
-                                                ),
+                                                // Positioned(
+                                                //   top: 10,
+                                                //   right: 10,
+                                                //   child: InkWell(
+                                                //     onTap: () {
+                                                //       _deletePromt(
+                                                //           context,
+                                                //           profileController
+                                                //               .otherUserProfileData
+                                                //               .first
+                                                //               .posts[index]
+                                                //               .id
+                                                //               .toString());
+                                                //     },
+                                                //     child: const Icon(
+                                                //       Icons.delete,
+                                                //       color: Colors.red,
+                                                //     ),
+                                                //   ),
+                                                // ),
                                               ],
                                             ),
                                           ],
@@ -594,11 +821,19 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                                 padding: const EdgeInsets.all(8.0),
                                 child: Container(
                                   color: Colors.white,
-                                  child: Image.network(
-                                    profileController.otherUserProfileData.first
-                                        .posts[index].body,
-                                    fit: BoxFit.cover,
-                                  ),
+                                  child: profileController.otherUserProfileData
+                                              .first.posts[index].body ==
+                                          ""
+                                      ? Text(profileController
+                                          .otherUserProfileData
+                                          .first
+                                          .posts[index]
+                                          .title)
+                                      : Image.network(
+                                          profileController.otherUserProfileData
+                                              .first.posts[index].body,
+                                          fit: BoxFit.cover,
+                                        ),
                                 ),
                               ),
                             );

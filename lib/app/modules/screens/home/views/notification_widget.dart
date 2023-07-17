@@ -49,12 +49,16 @@ class _NotificationWidgetState extends State<NotificationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(crossAxisAlignment: CrossAxisAlignment.center,
-      children: [ksizedbox20,
-        Container(decoration: BoxDecoration( color: kwhite,borderRadius: BorderRadius.circular(8)),
-           height: MediaQuery.of(context).size.height * 0.88,
-      width: MediaQuery.of(context).size.width * 0.38,
-         
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        ksizedbox20,
+        Container(
+          decoration: BoxDecoration(
+              color: kwhite, borderRadius: BorderRadius.circular(8)),
+          height: MediaQuery.of(context).size.height * 0.88,
+          width: MediaQuery.of(context).size.width * 0.38,
+
           child: GetBuilder<ProfileController>(builder: (_) {
             return profileController.notificationList.isEmpty
                 ? const Center(
@@ -66,17 +70,27 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                     itemBuilder: (BuildContext context, int index) {
                       return GestureDetector(
                         onTap: () {
-                          var data = jsonDecode(
-                              profileController.notificationList[index].data);
+                          var data = profileController
+                              .notificationList[index].data
+                              .toJson();
 
                           redirectToPages(response: data);
                         },
                         child: ListTile(
-                          leading: const CircleAvatar(
-                            radius: 40,
-                            backgroundImage:
-                                AssetImage('assets/icons/profile_icon.png'),
-                          ),
+                          leading: profileController.notificationList[index]
+                                      .data.profilePicture ==
+                                  ""
+                              ? CircleAvatar(
+                                  radius: 40,
+                                  backgroundImage: AssetImage(
+                                      'assets/icons/profile_icon.png'),
+                                )
+                              : CircleAvatar(
+                                  radius: 40,
+                                  backgroundImage: NetworkImage(
+                                      profileController.notificationList[index]
+                                          .data.profilePicture),
+                                ),
                           title: Row(
                             children: [
                               Text(

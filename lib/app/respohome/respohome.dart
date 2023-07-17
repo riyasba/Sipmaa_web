@@ -104,7 +104,7 @@ class HomeContiners extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Container(
       decoration: BoxDecoration(
-          color: Color(0xffCAE1FF), borderRadius: BorderRadius.circular(9)),
+          color: const Color(0xffCAE1FF), borderRadius: BorderRadius.circular(9)),
       child: Padding(
         padding: const EdgeInsets.only(
           left: 8,

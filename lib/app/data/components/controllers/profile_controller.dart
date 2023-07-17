@@ -6,6 +6,7 @@ import 'package:reg_login/app/data/services/profile_api_service/respond_request_
 import 'package:reg_login/app/data/services/post_api_service/get_profile_api_services.dart';
 import 'package:reg_login/app/data/services/profile_api_service/change_password_api_services.dart';
 import 'package:reg_login/app/data/services/profile_api_service/search_user_api_services.dart';
+import 'package:reg_login/app/data/services/profile_api_service/update_background_image_api_services.dart';
 import 'package:reg_login/app/data/services/profile_api_service/update_userdetails_api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:simpa/models/friend_list_model.dart';
@@ -165,7 +166,8 @@ class ProfileController extends GetxController {
 
   sendRequest({required String userId, required int index}) async {
     dio.Response<dynamic> response =
-        await sendFriendRequestAPIServices.sendFriendRequest(userId: userId, friendId: profileData.first.user.id.toString());
+        await sendFriendRequestAPIServices.sendFriendRequest(
+            userId: userId, friendId: profileData.first.user.id.toString());
 
     print("--------------------------");
     print(response.data);
@@ -297,16 +299,19 @@ class ProfileController extends GetxController {
   updateUserDetails({
     required String name,
     required String bio,
+    required String lastName,
     required String hisOrHer,
     required String designation,
     required String email,
     required String mobile,
   }) async {
     isLoading(true);
+    print("------------------->> working ------>>");
     update();
     dio.Response<dynamic> response =
         await updateUserDetailsApi.updateUserDetails(
             name: name,
+            lastName: lastName,
             bio: bio,
             designation: designation,
             email: email,
@@ -315,6 +320,7 @@ class ProfileController extends GetxController {
     update();
     if (response.statusCode == 200) {
       // Get.to(ProfileSuccessfullPage());
+      getProfile();
       Get.rawSnackbar(
         messageText: const Text(
           "Updated successfully",
@@ -349,6 +355,23 @@ class ProfileController extends GetxController {
     dio.Response<dynamic> response =
         await updateProfilePicApi.updateProfilePic(media: media);
     isLoading(false);
+    update();
+    if (response.statusCode == 200) {
+      getProfile();
+    }
+  }
+
+  RxBool isBackgroundLoading = false.obs;
+
+  UpdateProfileBackgroundPicApi updateProfileBackgroundPicApi =
+      UpdateProfileBackgroundPicApi();
+
+  updateProfileBackgoundPic({required dynamic media}) async {
+    isBackgroundLoading(true);
+    update();
+    dio.Response<dynamic> response = await updateProfileBackgroundPicApi
+        .updateProfileBackgroundPic(media: media);
+    isBackgroundLoading(false);
     update();
     if (response.statusCode == 200) {
       getProfile();
@@ -416,13 +439,17 @@ class ProfileController extends GetxController {
 
     if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
-   
+
       await prefs.setString("data", response.data["data"].toString());
 
       if (isFromMobile) {
-        Get.to( Forgotpasswordverifiypage(mobile: mobileoremail,));
+        Get.to(Forgotpasswordverifiypage(
+          mobile: mobileoremail,
+        ));
       } else {
-        Get.to(OtpForgot(mobile: mobileoremail,));
+        Get.to(OtpForgot(
+          mobile: mobileoremail,
+        ));
       }
     } else {
       Get.rawSnackbar(
@@ -483,15 +510,14 @@ class ProfileController extends GetxController {
   ResendOtpApiServices resendOtpApiServices = ResendOtpApiServices();
 
   resendOtp({required String mobile}) async {
+    dio.Response<dynamic> response =
+        await resendOtpApiServices.resendOtpApiServices(mobile: mobile);
 
-    dio.Response<dynamic> response = await resendOtpApiServices.
-    resendOtpApiServices(mobile: mobile);
-
-    if(response.statusCode == 200){
-
+    if (response.statusCode == 200) {
     } else {
       Get.rawSnackbar(
-        messageText: const Text("Something went wrong",
+        messageText: const Text(
+          "Something went wrong",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.red,
@@ -499,9 +525,7 @@ class ProfileController extends GetxController {
     }
   }
 
-
-
-    addPositions(
+  addPositions(
       {required AddPositonsModel addPostionsModel,
       required String useId}) async {
     isLoading(true);
@@ -529,9 +553,7 @@ class ProfileController extends GetxController {
     }
   }
 
-
-
-    addSkills({required String skills, required String useId}) async {
+  addSkills({required String skills, required String useId}) async {
     isLoading(true);
     dio.Response<dynamic> response =
         await addSkillssApiServices.addSkills(skills: skills, useId: useId);
@@ -557,10 +579,7 @@ class ProfileController extends GetxController {
     }
   }
 
-
-
-
-    sendRequestFromProfile({required String userId}) async {
+  sendRequestFromProfile({required String userId}) async {
     bool isRequested = false;
     dio.Response<dynamic> response =
         await sendFriendRequestAPIServices.sendFriendRequest(
@@ -588,5 +607,4 @@ class ProfileController extends GetxController {
 
     return isRequested;
   }
-
 }

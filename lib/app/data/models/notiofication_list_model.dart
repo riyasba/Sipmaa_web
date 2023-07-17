@@ -13,10 +13,12 @@ String notificationListModelToJson(NotificationListModel data) =>
 class NotificationListModel {
   String message;
   List<ListElement> list;
+  int count;
 
   NotificationListModel({
     required this.message,
     required this.list,
+    required this.count,
   });
 
   factory NotificationListModel.fromJson(Map<String, dynamic> json) =>
@@ -24,28 +26,30 @@ class NotificationListModel {
         message: json["message"],
         list: List<ListElement>.from(
             json["list"].map((x) => ListElement.fromJson(x))),
+        count: json["count"],
       );
 
   Map<String, dynamic> toJson() => {
         "message": message,
         "list": List<dynamic>.from(list.map((x) => x.toJson())),
+        "count": count,
       };
 }
 
 class ListElement {
-  dynamic id;
+  int id;
   String title;
   String message;
-  dynamic recipientId;
-  dynamic notifiableType;
-  dynamic notifyId;
-  dynamic data;
+  String recipientId;
+  String notifiableType;
+  String notifyId;
+  Data data;
   dynamic readAt;
   DateTime createdAt;
   DateTime updatedAt;
 
   ListElement({
-    this.id,
+    required this.id,
     required this.title,
     required this.message,
     required this.recipientId,
@@ -64,7 +68,7 @@ class ListElement {
         recipientId: json["recipient_id"],
         notifiableType: json["notifiable_type"],
         notifyId: json["notify_id"],
-        data: json["data"],
+        data: Data.fromJson(json["data"]),
         readAt: json["read_at"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
@@ -77,9 +81,41 @@ class ListElement {
         "recipient_id": recipientId,
         "notifiable_type": notifiableType,
         "notify_id": notifyId,
-        "data": data,
+        "data": data.toJson(),
         "read_at": readAt,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
+      };
+}
+
+class Data {
+  String type;
+  int id;
+  int userId;
+  String profilePicture;
+  String designation;
+
+  Data({
+    required this.type,
+    required this.id,
+    required this.userId,
+    required this.profilePicture,
+    required this.designation,
+  });
+
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
+        type: json["type"] ?? "",
+        id: int.parse(json["id"].toString()),
+        userId: int.parse(json["user_id"].toString()),
+        profilePicture: json["profile_picture"] ?? "",
+        designation: json["designation"] ?? "",
+      );
+
+  Map<String, dynamic> toJson() => {
+        "type": type,
+        "id": id,
+        "user_id": userId,
+        "profile_picture": profilePicture,
+        "designation": designation,
       };
 }

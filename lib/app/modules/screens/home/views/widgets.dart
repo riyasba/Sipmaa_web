@@ -100,16 +100,13 @@ class _HomeContainerState extends State<HomeContainer> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
-                                  InkWell( onTap: () {
-                                                          Get.to(() =>
-                                                              RespoFriendsProfile(
-                                                                userId: postsController
-                                                                    .allPostList[
-                                                                        index]
-                                                                    .user
-                                                                    .id,
-                                                              ));
-                                                        },
+                                  InkWell(
+                                    onTap: () {
+                                      Get.to(() => RespoFriendsProfile(
+                                            userId: postsController
+                                                .allPostList[index].user.id,
+                                          ));
+                                    },
                                     child: Row(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -118,7 +115,8 @@ class _HomeContainerState extends State<HomeContainer> {
                                                     .profilePicture ==
                                                 null
                                             ? const CircleAvatar(
-                                                backgroundImage:  AssetImage('assets/images/propic.jpg'),
+                                                backgroundImage: AssetImage(
+                                                    'assets/images/propic.jpg'),
                                                 radius: 35,
                                               )
                                             : CircleAvatar(
@@ -143,8 +141,9 @@ class _HomeContainerState extends State<HomeContainer> {
                                                 .text
                                                 .bold
                                                 .xl2
-                                                .fontFamily(GoogleFonts.poppins()
-                                                    .fontFamily!)
+                                                .fontFamily(
+                                                    GoogleFonts.poppins()
+                                                        .fontFamily!)
                                                 .make(),
                                             Text(postsController
                                                         .allPostList[index]
@@ -157,8 +156,9 @@ class _HomeContainerState extends State<HomeContainer> {
                                                 .text
                                                 .semiBold
                                                 .sm
-                                                .fontFamily(GoogleFonts.poppins()
-                                                    .fontFamily!)
+                                                .fontFamily(
+                                                    GoogleFonts.poppins()
+                                                        .fontFamily!)
                                                 .make(),
                                           ],
                                         ),
@@ -180,116 +180,117 @@ class _HomeContainerState extends State<HomeContainer> {
                                                 .fontFamily!)
                                             .make(),
                                       ),
-                                      InkWell(
-                                          onTap: () {
-                                            showModalBottomSheet(
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            16)),
-                                                context: context,
-                                                builder: (context) {
-                                                  return Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    children: <Widget>[
-                                                      Container(
-                                                        decoration:
-                                                            const BoxDecoration(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .only(
-                                                          topLeft:
-                                                              Radius.circular(
-                                                                  50),
-                                                          topRight:
-                                                              Radius.circular(
-                                                                  50),
-                                                        )),
-                                                        child: const Row(
-                                                          children: [
-                                                            Padding(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      left: 20,
-                                                                      top: 6),
-                                                              child: Text(
-                                                                'Post Settings',
-                                                                style: TextStyle(
-                                                                    fontSize:
-                                                                        25,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w500),
+                                      if (postsController
+                                              .allPostList[index].user.id !=
+                                          profileController
+                                              .profileData.first.user.id)
+                                        InkWell(
+                                            onTap: () {
+                                              showModalBottomSheet(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              16)),
+                                                  context: context,
+                                                  builder: (context) {
+                                                    return Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      children: <Widget>[
+                                                        Container(
+                                                          decoration:
+                                                              const BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .only(
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    50),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    50),
+                                                          )),
+                                                          child: const Row(
+                                                            children: [
+                                                              Padding(
+                                                                padding: EdgeInsets
+                                                                    .only(
+                                                                        left:
+                                                                            20,
+                                                                        top: 6),
+                                                                child: Text(
+                                                                  'Post Settings',
+                                                                  style: TextStyle(
+                                                                      fontSize:
+                                                                          25,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w500),
+                                                                ),
                                                               ),
-                                                            ),
-                                                          ],
+                                                            ],
+                                                          ),
                                                         ),
-                                                      ),
-                                                      ksizedbox20,
-                                                      ListTile(
-                                                        leading: const Icon(
-                                                            Icons.report),
-                                                        title: const Text(
-                                                          'Report',
-                                                          style: TextStyle(
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
+                                                        ksizedbox20,
+                                                        ListTile(
+                                                          leading: const Icon(
+                                                              Icons.report),
+                                                          title: const Text(
+                                                            'Report',
+                                                            style: TextStyle(
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                          onTap: () {
+                                                            Get.back();
+                                                            reporingTextController
+                                                                .clear();
+                                                            showDialog(
+                                                                context:
+                                                                    context,
+                                                                builder:
+                                                                    (context) {
+                                                                  return AlertDialog(
+                                                                    title: const Text(
+                                                                        "Why are you reporting this post?"),
+                                                                    content:
+                                                                        TextField(
+                                                                      controller:
+                                                                          reporingTextController,
+                                                                      onChanged:
+                                                                          (value) {},
+                                                                      // controller: _textFieldController,
+                                                                      decoration:
+                                                                          const InputDecoration(
+                                                                              hintText: "Irrelevant or annoying"),
+                                                                    ),
+                                                                    actions: [
+                                                                      TextButton(
+                                                                          onPressed:
+                                                                              () {
+                                                                            if (reporingTextController.text.isNotEmpty) {
+                                                                              Get.back();
+                                                                              postsController.reportAPost(userId: postsController.profileData.first.id.toString(), postId: postsController.allPostList[index].id.toString(), comment: reporingTextController.text);
+                                                                            }
+                                                                          },
+                                                                          child:
+                                                                              Text(
+                                                                            "Submit",
+                                                                            style:
+                                                                                primaryfont.copyWith(color: Colors.blue),
+                                                                          ))
+                                                                    ],
+                                                                  );
+                                                                });
+                                                          },
                                                         ),
-                                                        onTap: () {
-                                                          Get.back();
-                                                          reporingTextController
-                                                              .clear();
-                                                          showDialog(
-                                                              context: context,
-                                                              builder:
-                                                                  (context) {
-                                                                return AlertDialog(
-                                                                  title: const Text(
-                                                                      "Why are you reporting this post?"),
-                                                                  content:
-                                                                      TextField(
-                                                                    controller:
-                                                                        reporingTextController,
-                                                                    onChanged:
-                                                                        (value) {},
-                                                                    // controller: _textFieldController,
-                                                                    decoration: const InputDecoration(
-                                                                        hintText:
-                                                                            "Irrelevant or annoying"),
-                                                                  ),
-                                                                  actions: [
-                                                                    TextButton(
-                                                                        onPressed:
-                                                                            () {
-                                                                          if (reporingTextController
-                                                                              .text
-                                                                              .isNotEmpty) {
-                                                                            Get.back();
-                                                                            postsController.reportAPost(
-                                                                                userId: postsController.profileData.first.id.toString(),
-                                                                                postId: postsController.allPostList[index].id.toString(),
-                                                                                comment: reporingTextController.text);
-                                                                          }
-                                                                        },
-                                                                        child:
-                                                                            Text(
-                                                                          "Submit",
-                                                                          style:
-                                                                              primaryfont.copyWith(color: Colors.blue),
-                                                                        ))
-                                                                  ],
-                                                                );
-                                                              });
-                                                        },
-                                                      ),
-                                                    ],
-                                                  );
-                                                });
-                                          },
-                                          child: const Icon(
-                                              Icons.more_vert_rounded)),
+                                                      ],
+                                                    );
+                                                  });
+                                            },
+                                            child: const Icon(
+                                                Icons.more_vert_rounded)),
                                     ],
                                   )
                                 ],
@@ -357,7 +358,8 @@ class _HomeContainerState extends State<HomeContainer> {
                                           : postsController.allPostList[index]
                                                       .likeCount ==
                                                   1
-                                              ? InkWell(onTap: () {
+                                              ? InkWell(
+                                                  onTap: () {
                                                     postController.getLikesList(
                                                         postId: postsController
                                                             .allPostList[index]
@@ -418,7 +420,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                                                       leading: postController.likesList[index].picture == ""
                                                                                           ? const CircleAvatar(
                                                                                               radius: 40,
-                                                                                              backgroundImage:  AssetImage('assets/images/propic.jpg'),
+                                                                                              backgroundImage: AssetImage('assets/images/propic.jpg'),
                                                                                             )
                                                                                           : CircleAvatar(
                                                                                               radius: 40,
@@ -447,9 +449,15 @@ class _HomeContainerState extends State<HomeContainer> {
                                                           });
                                                     });
                                                   },
-                                                child: Text(
-                                                    "${postsController.allPostList[index].likeCount} Likes").text.semiBold.fontFamily(GoogleFonts.poppins().fontFamily!).make(),
-                                              )
+                                                  child: Text(
+                                                          "${postsController.allPostList[index].likeCount} Likes")
+                                                      .text
+                                                      .semiBold
+                                                      .fontFamily(
+                                                          GoogleFonts.poppins()
+                                                              .fontFamily!)
+                                                      .make(),
+                                                )
                                               : InkWell(
                                                   onTap: () {
                                                     postController.getLikesList(
@@ -512,7 +520,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                                                       leading: postController.likesList[index].picture == ""
                                                                                           ? const CircleAvatar(
                                                                                               radius: 40,
-                                                                                              backgroundImage:  AssetImage('assets/images/propic.jpg'),
+                                                                                              backgroundImage: AssetImage('assets/images/propic.jpg'),
                                                                                             )
                                                                                           : CircleAvatar(
                                                                                               radius: 40,
@@ -616,16 +624,16 @@ class _HomeContainerState extends State<HomeContainer> {
                             Padding(
                               padding: const EdgeInsets.only(left: 20),
                               child: Row(
-                                children: [  LikeButtonWidget(
-                                              isliked: postsController
-                                                  .allPostList[index]
-                                                  .likedByUser,
-                                              postId: postsController
-                                                  .allPostList[index].id,
-                                              indexOfPost: index,
-                                              likeCount: postsController
-                                                  .allPostList[index].likeCount,
-                                            ),
+                                children: [
+                                  LikeButtonWidget(
+                                    isliked: postsController
+                                        .allPostList[index].likedByUser,
+                                    postId:
+                                        postsController.allPostList[index].id,
+                                    indexOfPost: index,
+                                    likeCount: postsController
+                                        .allPostList[index].likeCount,
+                                  ),
                                   // LikeButton(
                                   //   isliked: postsController
                                   //       .allPostList[index].likedByUser,
@@ -833,7 +841,8 @@ class _HomeContainerState extends State<HomeContainer> {
                                                             null
                                                         ? const CircleAvatar(
                                                             backgroundImage:
-                                                                 AssetImage('assets/images/propic.jpg'),
+                                                                AssetImage(
+                                                                    'assets/images/propic.jpg'),
                                                           )
                                                         : CircleAvatar(
                                                             backgroundImage: NetworkImage(

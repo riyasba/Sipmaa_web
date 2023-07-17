@@ -22,6 +22,7 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
   bool _value = false;
   var nameController = TextEditingController();
   var lastNameController = TextEditingController();
+  var bioController = TextEditingController();
   var positionController = TextEditingController();
   var emailController = TextEditingController();
   var numberController = TextEditingController();
@@ -43,6 +44,8 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
 
       lastNameController.text =
           profileController.profileData.first.user.lastName ?? "";
+
+      bioController.text = profileController.profileData.first.user.bio ?? "";
       // selectedCategory =
       //     profileController.profileData.first.user. ?? "";
       positionController.text =
@@ -131,7 +134,9 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                                     null
                                 ? const CircleAvatar(
                                     radius: 60,
-                                    backgroundImage: AssetImage('assets/images/propic.jpg'),)
+                                    backgroundImage:
+                                        AssetImage('assets/images/propic.jpg'),
+                                  )
                                 : CircleAvatar(
                                     radius: 60,
                                     backgroundImage: NetworkImage(
@@ -165,8 +170,8 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
               height: 20,
             ),
             Container(
-            //  height: MediaQuery.of(context).size.height * 0.7,
-              child: Column( children: [
+              //  height: MediaQuery.of(context).size.height * 0.7,
+              child: Column(children: [
                 Column(
                   children: [
                     Padding(
@@ -194,6 +199,20 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                                 borderSide:
                                     const BorderSide(color: Colors.black))),
                         controller: lastNameController,
+                      ),
+                    ),
+
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                            hintText: 'About',
+                            labelText: 'About',
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10),
+                                borderSide:
+                                    const BorderSide(color: Colors.black))),
+                        controller: bioController,
                       ),
                     ),
 
@@ -257,52 +276,56 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 16,
                                 ),
-                              ),ksizedbox10,
+                              ),
+                              ksizedbox10,
                               Row(
                                 children: [
                                   Text(
                                     profileController.profileData.first
                                         .positions[i].companyName,
                                     style: primaryfont.copyWith(
-                                      fontSize: 14,fontWeight: FontWeight.w500
-                                    ),
-                                  ),ksizedbox10,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  ksizedbox10,
                                   Text(" . "),
                                   Text(
                                     profileController.profileData.first
                                         .positions[i].employmentType,
                                     style: primaryfont.copyWith(
-                                      fontSize: 14,fontWeight: FontWeight.w500
-                                    ),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500),
                                   ),
                                 ],
-                              ),ksizedbox10,
+                              ),
+                              ksizedbox10,
                               Row(
                                 children: [
                                   Text(
                                     profileController.profileData.first
                                         .positions[i].startDate,
                                     style: primaryfont.copyWith(
-                                      fontSize: 15,fontWeight: FontWeight.w500
-                                    ),
-                                  ),ksizedbox10,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  ksizedbox10,
                                   Text(" - "),
                                   Text(
                                     profileController.profileData.first
                                             .positions[i].endDate ??
                                         "on going",
                                     style: primaryfont.copyWith(
-                                      fontSize: 14,fontWeight: FontWeight.w500
-                                    ),
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w500),
                                   ),
                                 ],
-                              ),ksizedbox10,
+                              ),
+                              ksizedbox10,
                               Text(
                                 profileController
                                     .profileData.first.positions[i].location,
                                 style: primaryfont.copyWith(
-                                  fontSize: 15,fontWeight: FontWeight.w500
-                                ),
+                                    fontSize: 15, fontWeight: FontWeight.w500),
                               ),
                             ],
                           ),
@@ -321,8 +344,7 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                               },
                               child: Text(
                                 "+ Add new position",
-                                style:
-                                    primaryfont.copyWith(color: Colors.blue),
+                                style: primaryfont.copyWith(color: Colors.blue),
                               )),
                         ),
                       ],
@@ -349,8 +371,8 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                           const EdgeInsets.only(left: 15, right: 15, top: 10),
                       child: GridView.builder(
                           shrinkWrap: true,
-                          itemCount: profileController
-                              .profileData.first.skills.length,
+                          itemCount:
+                              profileController.profileData.first.skills.length,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                                   childAspectRatio: 4, crossAxisCount: 4),
@@ -386,14 +408,13 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(left: 10),
-                          child: TextButton (
+                          child: TextButton(
                               onPressed: () {
                                 Get.to(RespAddSkills());
                               },
                               child: Text(
                                 "+ Add new Skills",
-                                style:
-                                    primaryfont.copyWith(color: Colors.blue),
+                                style: primaryfont.copyWith(color: Colors.blue),
                               )),
                         ),
                       ],
@@ -436,9 +457,11 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                         child: Container(
                           height: 25,
                           width: 25,
-                          child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text('Submit').text.semiBold.white.make(),kwidth10,
+                              Text('Submit').text.semiBold.white.make(),
+                              kwidth10,
                               const CircularProgressIndicator(
                                 strokeWidth: 3,
                                 color: Colors.white,
@@ -450,21 +473,25 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                     )
                   : Padding(
                       padding: const EdgeInsets.only(right: 7),
-                      child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text('Submit').text.semiBold.white.make(),kwidth10,
+                          Text('Submit').text.semiBold.white.make(),
+                          kwidth10,
                           IconButton(
                               onPressed: () {
                                 if (nameController.text.isNotEmpty &&
                                     lastNameController.text.isNotEmpty &&
-                                    positionController.text.isNotEmpty &&
                                     emailController.text.isNotEmpty &&
                                     numberController.text.isNotEmpty) {
+                                  print(nameController.text);
+                                  print(selectedCategory);
                                   profileController.updateUserDetails(
                                       name: nameController.text,
-                                      bio: lastNameController.text,
+                                      bio: bioController.text,
+                                      lastName: lastNameController.text,
                                       designation: positionController.text,
-                                      hisOrHer: selectedCategory,
+                                      hisOrHer: selectedCategory ?? "",
                                       email: emailController.text,
                                       mobile: numberController.text);
                                 } else {

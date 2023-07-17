@@ -3,20 +3,19 @@ import 'package:dio/dio.dart';
 import 'package:reg_login/app/data/services/base_url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class UpdateUserDetailsApi extends BaseApiService {
-  Future updateUserDetails(
-      {required String name,
-      required String bio,
-      required String lastName,
-      required String designation,
-      required String email,
-      required String mobile}) async {
+class UpdateProfileBackgroundPicApi extends BaseApiService {
+  Future updateProfileBackgroundPic({
+    required dynamic media,
+  }) async {
     dynamic responseJson;
     try {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
-
+      FormData formData = FormData.fromMap({
+        "backround_image":
+            MultipartFile.fromBytes(media, filename: "background_image"),
+      });
       var response = await dio.post(updateProfileURL,
           options: Options(
               headers: {
@@ -27,16 +26,9 @@ class UpdateUserDetailsApi extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {
-            "name": name,
-            "bio": bio,
-            "last_name": lastName,
-            "designation": designation,
-            "official_email": email,
-            "mobile": mobile,
-          });
+          data: formData);
       print(
-          "::::::::<Update user-detail-Profile>::::::::status code::::::::::");
+          "::::::::<Update Profile  Background pic>::::::::status code::::::::::");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

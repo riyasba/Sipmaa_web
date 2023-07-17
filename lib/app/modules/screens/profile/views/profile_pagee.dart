@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:readmore/readmore.dart';
 import 'package:reg_login/app/data/components/controllers/posts_controller.dart';
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/modules/screens/home/controler/controler.dart';
@@ -39,7 +40,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Container(
-      decoration: BoxDecoration(color: kwhite,borderRadius: BorderRadius.circular(8)),
+      decoration:
+          BoxDecoration(color: kwhite, borderRadius: BorderRadius.circular(8)),
       height: MediaQuery.of(context).size.height * 0.88,
       width: MediaQuery.of(context).size.width * 0.38,
       child: GetBuilder<ProfileController>(builder: (_) {
@@ -53,18 +55,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 Stack(
                   children: [
                     Container(
-                       height: 320,
-                          width: MediaQuery.of(context).size.width * 0.874,
+                      height: 220,
+                      width: MediaQuery.of(context).size.width * 0.874,
                       child: Container(
                           color: kwhite,
-                          height: 300,
+                          height: 200,
                           width: MediaQuery.of(context).size.width * 0.874,
-                          child: Image.asset(
-                            'assets/images/Rectangle 800.png',
-                            fit: BoxFit.fill,
-                          )),
+                          child: profileController
+                                      .profileData.first.user.backgroundImage ==
+                                  null
+                              ? Image.asset(
+                                  'assets/images/Rectangle 800.png',
+                                  fit: BoxFit.fill,
+                                )
+                              : Image.network(
+                                  profileController
+                                      .profileData.first.user.backgroundImage,
+                                  fit: BoxFit.fill,
+                                )),
                     ),
-                    
+                    Positioned(
+                      bottom: 5,
+                      right: 5,
+                      child: InkWell(
+                        onTap: () async {
+                          final ImagePicker _picker = ImagePicker();
+                          // Pick an image
+                          final XFile? timage = await _picker.pickImage(
+                              source: ImageSource.gallery);
+
+                          var imagePath = await timage!.readAsBytes();
+
+                          profileController.updateProfileBackgoundPic(
+                              media: imagePath);
+                        },
+                        child: Container(
+                          height: 30,
+                          width: 30,
+                          decoration: BoxDecoration(
+                              color: kblue,
+                              borderRadius: BorderRadius.circular(30)),
+                          alignment: Alignment.center,
+                          child: const Icon(
+                            Icons.camera_alt_outlined,
+                            size: 14,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    )
                   ],
                 ),
                 Row(
@@ -91,7 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       ? Container()
                                       : ClipRRect(
                                           borderRadius:
-                                              BorderRadius.circular(50),
+                                              BorderRadius.circular(100),
                                           child: profileController
                                                       .profileData
                                                       .first
@@ -117,7 +156,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           //
                           Positioned(
                               bottom: 5,
-                              right: 10,
+                              right: -50,
                               child: InkWell(
                                 onTap: () async {
                                   var imagePath;
@@ -133,7 +172,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 child: Container(
                                   height: 26.5,
                                   child: const CircleAvatar(
-                                      radius: 30,
+                                      radius: 100,
                                       backgroundImage: AssetImage(
                                           'assets/images/profileicon.png'),
                                       backgroundColor: Colors.grey,
@@ -151,7 +190,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: 15, ),
+              padding: EdgeInsets.only(
+                top: 15,
+              ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -282,6 +323,203 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             ksizedbox30,
+
+            const SizedBox(
+              height: 10,
+            ),
+            const Divider(
+              thickness: 1,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, bottom: 5),
+                  child: Text(
+                    "About",
+                    style: primaryfont.copyWith(
+                        color: Color.fromARGB(214, 19, 18, 18),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Container(
+                  width: size.width,
+                  alignment: Alignment.centerLeft,
+                  child: ReadMoreText(
+                    profileController.profileData.first.user.bio ?? "",
+                    trimLines: 2,
+                    colorClickableText: Colors.black,
+                    trimMode: TrimMode.Line,
+                    trimCollapsedText: 'show more',
+                    trimExpandedText: ' show less',
+                    lessStyle: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.bold),
+                    moreStyle: const TextStyle(
+                        fontSize: 14, fontWeight: FontWeight.bold),
+                  ),
+                )),
+            const SizedBox(
+              height: 10,
+            ),
+            const Divider(
+              thickness: 1,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, bottom: 5),
+                  child: Text(
+                    "Designation",
+                    style: primaryfont.copyWith(
+                        color: Color.fromARGB(214, 19, 18, 18),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
+            ),
+
+            Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(profileController.profileData.first.user.designation ??
+                        ""),
+                  ],
+                )),
+
+            const SizedBox(
+              height: 10,
+            ),
+            const Divider(
+              thickness: 1,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, bottom: 5),
+                  child: Text(
+                    "Current Company",
+                    style: primaryfont.copyWith(
+                        color: const Color.fromARGB(214, 19, 18, 18),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(profileController
+                            .profileData.first.user.currentCompany ??
+                        ""),
+                  ],
+                )),
+            const SizedBox(
+              height: 10,
+            ),
+            const Divider(
+              thickness: 1,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, bottom: 5),
+                  child: Text(
+                    "Previous Company",
+                    style: primaryfont.copyWith(
+                        color: const Color.fromARGB(214, 19, 18, 18),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+                padding: const EdgeInsets.only(left: 20, right: 10),
+                child: Container(
+                  width: size.width,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (int i = 0;
+                          i <
+                              profileController
+                                  .profileData.first.positions.length;
+                          i++)
+                        Text(
+                            "${profileController.profileData.first.positions[i].companyName},"),
+                    ],
+                  ),
+                )),
+            const SizedBox(
+              height: 10,
+            ),
+            const Divider(
+              thickness: 1,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, bottom: 5),
+                  child: Text(
+                    "Skills",
+                    style: primaryfont.copyWith(
+                        color: const Color.fromARGB(214, 19, 18, 18),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+                padding: const EdgeInsets.only(left: 20, right: 10),
+                child: Container(
+                  width: size.width,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (int i = 0;
+                          i < profileController.profileData.first.skills.length;
+                          i++)
+                        Text(
+                            "${profileController.profileData.first.skills[i].name},"),
+                    ],
+                  ),
+                )),
+            const SizedBox(
+              height: 10,
+            ),
+            const Divider(
+              thickness: 1,
+            ),
+            ksizedbox30,
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: Row(
@@ -361,19 +599,41 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                               left: 15),
                                                       child: Row(
                                                         children: [
-                                                          Image.network(
-                                                            profileController
-                                                                .profileData
-                                                                .first
-                                                                .posts[index]
-                                                                .body,
-                                                            fit: BoxFit.contain,
-                                                            width: size.width *
-                                                                0.3,
-                                                            height:
-                                                                size.height *
-                                                                    0.4,
-                                                          ),
+                                                          profileController
+                                                                      .profileData
+                                                                      .first
+                                                                      .posts[
+                                                                          index]
+                                                                      .body ==
+                                                                  ""
+                                                              ? Container(
+                                                                  width:
+                                                                      size.width *
+                                                                          0.3,
+                                                                  height:
+                                                                      size.height *
+                                                                          0.4,
+                                                                  decoration: BoxDecoration(
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              30)),
+                                                                )
+                                                              : Image.network(
+                                                                  profileController
+                                                                      .profileData
+                                                                      .first
+                                                                      .posts[
+                                                                          index]
+                                                                      .body,
+                                                                  fit: BoxFit
+                                                                      .contain,
+                                                                  width:
+                                                                      size.width *
+                                                                          0.3,
+                                                                  height:
+                                                                      size.height *
+                                                                          0.4,
+                                                                ),
                                                         ],
                                                       ),
                                                     ),
@@ -469,11 +729,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               padding: const EdgeInsets.all(8.0),
                               child: Container(
                                 color: Colors.white,
-                                child: Image.network(
-                                  profileController
-                                      .profileData.first.posts[index].body,
-                                  fit: BoxFit.cover,
-                                ),
+                                child: profileController.profileData.first
+                                            .posts[index].body ==
+                                        ""
+                                    ? Text(profileController
+                                        .profileData.first.posts[index].title)
+                                    : Image.network(
+                                        profileController.profileData.first
+                                            .posts[index].body,
+                                        fit: BoxFit.cover,
+                                      ),
                               ),
                             ),
                           );

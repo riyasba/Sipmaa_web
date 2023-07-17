@@ -153,13 +153,13 @@ class _SettingProfilePageState extends State<SettingProfilePage> {
                                         positionController.text.isNotEmpty &&
                                         emailController.text.isNotEmpty &&
                                         numberController.text.isNotEmpty) {
-                                      profileController.updateUserDetails(
-                                          name: nameController.text,
-                                          bio: lastNameController.text,
-                                          designation: positionController.text,
-                                          hisOrHer: selectedCategory,
-                                          email: emailController.text,
-                                          mobile: numberController.text);
+                                      // profileController.updateUserDetails(
+                                      //     name: nameController.text,
+                                      //     bio: lastNameController.text,
+                                      //     designation: positionController.text,
+                                      //     hisOrHer: selectedCategory,
+                                      //     email: emailController.text,
+                                      //     mobile: numberController.text);
                                     } else {
                                       Get.rawSnackbar(
                                         messageText: const Text(

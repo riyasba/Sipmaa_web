@@ -271,13 +271,14 @@ Future<void> _selectDate(BuildContext context) async {
                         positionController.text.isNotEmpty &&
                         emailController.text.isNotEmpty &&
                         numberController.text.isNotEmpty) {
-                      profileController.updateUserDetails(
-                        hisOrHer: selectedCategory,
-                          name: nameController.text,
-                          bio: hisherController.text,
-                          designation: positionController.text,
-                          email: emailController.text,
-                          mobile: numberController.text, );
+                      // profileController.updateUserDetails(
+                      //   hisOrHer: selectedCategory,
+                      //     name: nameController.text,
+                      //     bio: hisherController.text,
+                      //     lastName: ,
+                      //     designation: positionController.text,
+                      //     email: emailController.text,
+                      //     mobile: numberController.text, );
                     } else {
                       Get.rawSnackbar(
                         messageText: const Text(

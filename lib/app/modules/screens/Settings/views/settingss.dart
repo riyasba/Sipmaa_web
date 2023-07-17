@@ -10,7 +10,6 @@ import 'package:reg_login/app/modules/screens/Settings/views/widgets/mywidgets.d
 
 //import 'package:reg_login/app/modules/screens/Settings/views/widgets/profile_widget.dart';
 
-
 import '../../../../data/components/constands/constands.dart';
 
 import '../../profile/views/profileupdate_settings.dart';
@@ -36,7 +35,7 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Obx(
           () => Container(
             child: Column(
-                children: [
+              children: [
                 ksizedbox30,
                 Container(
                   child: Row(
@@ -51,7 +50,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             child: Text(
                               'Profile',
                               style: GoogleFonts.openSans(
-                                //letterSpacing: 0.5,
+                                  //letterSpacing: 0.5,
                                   color:
                                       settingsController.settingIndex.value == 0
                                           ? kblue
@@ -69,10 +68,9 @@ class _SettingsPageState extends State<SettingsPage> {
                               borderRadius: BorderRadius.circular(4),
                               boxShadow: <BoxShadow>[
                                 BoxShadow(
-                                  offset: Offset(0.0, 0.75),
-                                  blurRadius: 7,
-                                  color: kblue
-                                )
+                                    offset: Offset(0.0, 0.75),
+                                    blurRadius: 7,
+                                    color: kblue)
                               ]),
                         ),
                       ),
@@ -109,7 +107,6 @@ class _SettingsPageState extends State<SettingsPage> {
                                   offset: Offset(0.0, 0.75),
                                   blurRadius: 7,
                                   color: kblue,
-
                                 )
                               ]),
                         ),
@@ -143,7 +140,6 @@ class _SettingsPageState extends State<SettingsPage> {
                                   offset: Offset(0.0, 0.75),
                                   blurRadius: 7,
                                   color: kblue,
-                                  
                                 )
                               ]),
                         ),
@@ -174,11 +170,12 @@ class _SettingsPageState extends State<SettingsPage> {
                               borderRadius: BorderRadius.circular(4),
                               boxShadow: <BoxShadow>[
                                 BoxShadow(
-                                  offset: Offset(0.0, 0.75,
+                                  offset: Offset(
+                                    0.0,
+                                    0.75,
                                   ),
                                   blurRadius: 7,
                                   color: kblue,
-
                                 )
                               ]),
                         ),
@@ -191,8 +188,8 @@ class _SettingsPageState extends State<SettingsPage> {
                       color: kblue, borderRadius: BorderRadius.circular(8)),
                 ),
                 ksizedbox30,
-                if (settingsController.settingIndex.value == 0)SettingProfilePageweb()
-                 ,
+                if (settingsController.settingIndex.value == 0)
+                  SettingProfilePageweb(),
                 if (settingsController.settingIndex.value == 1)
                   Changepassword(),
                 if (settingsController.settingIndex.value == 2) Privacy(),
@@ -203,9 +200,9 @@ class _SettingsPageState extends State<SettingsPage> {
             //  height: 800,
             width: 750,
             // width: double.infinity,
-            decoration: BoxDecoration(color: kwhite,
+            decoration: BoxDecoration(
+              color: kwhite,
               borderRadius: BorderRadius.circular(8),
-           
             ),
           ),
         ),
