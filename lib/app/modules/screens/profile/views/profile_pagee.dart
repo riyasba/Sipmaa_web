@@ -117,39 +117,50 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           Container(
                             height: 170,
                             width: 170,
-                            child: Container(
-                              height: 160,
-                              width: 160,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100)),
-                              child: profileController.isLoading.isTrue
-                                  ? const Center(
-                                      child: CircularProgressIndicator(),
-                                    )
-                                  : profileController.profileData.isEmpty
-                                      ? Container()
-                                      : ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(100),
-                                          child: profileController
-                                                      .profileData
-                                                      .first
-                                                      .user
-                                                      .profilePicture ==
-                                                  null
-                                              ? Image.asset(
-                                                  'assets/images/propic.jpg',
-                                                  fit: BoxFit.fill,
-                                                )
-                                              : Image.network(
-                                                  profileController
-                                                      .profileData
-                                                      .first
-                                                      .user
-                                                      .profilePicture,
-                                                  fit: BoxFit.fill,
-                                                ),
-                                        ),
+                            child: Stack(
+                              children: [
+                                Container(
+                                  height: 160,
+                                  width: 160,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(100)),
+                                  child: profileController.isLoading.isTrue
+                                      ? const Center(
+                                          child: CircularProgressIndicator(),
+                                        )
+                                      : profileController.profileData.isEmpty
+                                          ? Container()
+                                          : ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              child: profileController
+                                                          .profileData
+                                                          .first
+                                                          .user
+                                                          .profilePicture ==
+                                                      null
+                                                  ? Image.asset(
+                                                      'assets/images/propic.jpg',
+                                                      fit: BoxFit.fill,
+                                                    )
+                                                  : Image.network(
+                                                      profileController
+                                                          .profileData
+                                                          .first
+                                                          .user
+                                                          .profilePicture,
+                                                      fit: BoxFit.fill,
+                                                    ),
+                                            ),
+                                ),
+                                 Container(
+                                    height: 160,
+                                    width: 160,
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(100),
+                                        child: Image.asset(
+                                            "assets/icons/silver_badge.png")))
+                              ],
                             ),
                           ),
 

@@ -37,59 +37,69 @@ class _AppbarComnState extends State<AppbarComn> {
           'assets/images/logo.png',
         ),
       ),
-      actions: [kwidth10, IconButton(
-            onPressed: () {Get.to(MyHomePage());},
+      actions: [
+        kwidth10,
+        IconButton(
+            onPressed: () {
+              Get.to(MyHomePage());
+            },
             icon: Icon(
               Icons.home,
               color: kblue,
-            )),kwidth10,
+            )),
+        kwidth10,
         IconButton(
-            onPressed: () {Get.to(RespoCreate());},
-          
-            icon:  Icon(
+            onPressed: () {
+              Get.to(RespoCreate());
+            },
+            icon: Icon(
               Icons.add_a_photo_outlined,
               color: kblue,
-            )),kwidth10, IconButton(
-            onPressed: () {Get.to(RespoChat());},
+            )),
+        kwidth10,
+        IconButton(
+            onPressed: () {
+              Get.to(RespoChat());
+            },
             // onPressed: () {
             //   homeController.homeindex(7);
             //   homeController.update();
             // },
-            icon:  Icon(
+            icon: Icon(
               Icons.chat,
               color: kblue,
             )),
-       
         kwidth10,
         IconButton(
-            onPressed: () {Get.to(RespoSrech());},
+            onPressed: () {
+              Get.to(RespoSrech());
+            },
             icon: Icon(
               Icons.search,
               color: kblue,
             )),
-
         kwidth10,
         IconButton(
-            onPressed: () {Get.to(RespSetings());},
-          
-            icon:  Icon(
+            onPressed: () {
+              Get.to(RespSetings());
+            },
+            icon: Icon(
               Icons.settings_outlined,
               color: kblue,
             )),
-
         kwidth10,
         IconButton(
-            onPressed: () {Get.to(RespoNotification());
-      
+            onPressed: () {
+              Get.to(RespoNotification());
             },
-            icon:  Icon(
+            icon: Icon(
               Icons.notifications_outlined,
               color: kblue,
             )),
-
         kwidth10,
         InkWell(
-          onTap: () {Get.to(RespoProfile());
+          onTap: () {
+            Get.to(RespoProfile());
             // homeController.homeindex(4);
           },
           child: GetBuilder<ProfileController>(
@@ -97,17 +107,30 @@ class _AppbarComnState extends State<AppbarComn> {
               return profileController.profileData.isEmpty
                   ? Container()
                   : Padding(
-                      padding:  EdgeInsets.only(right: 10),
+                      padding: EdgeInsets.only(right: 10),
                       child: profileController
                                   .profileData.first.user.profilePicture ==
                               null
                           ? const CircleAvatar(
                               backgroundImage:
-                                   AssetImage('assets/images/propic.jpg'),
+                                  AssetImage('assets/images/propic.jpg'),
                             )
-                          : CircleAvatar(
-                              backgroundImage: NetworkImage(profileController
-                                  .profileData.first.user.profilePicture),
+                          : Stack(
+                              children: [
+                                CircleAvatar(
+                                  backgroundImage: NetworkImage(
+                                      profileController.profileData.first.user
+                                          .profilePicture),
+                                ),
+                                Container(
+                                    height: 40,
+                                    width: 40,
+                                    child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(45),
+                                        child: Image.asset(
+                                            "assets/icons/silver_badge.png")))
+                              ],
                             ),
                     );
             },

@@ -86,7 +86,7 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(
+                        padding: const EdgeInsets.only(
                           top: 150,
                         ),
                         child: Stack(
@@ -94,40 +94,53 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                             Container(
                               height: 170,
                               width: 170,
-                              child: Container(
-                                height: 160,
-                                width: 160,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100)),
-                                child: profileController.isLoading.isTrue
-                                    ? const Center(
-                                        child: CircularProgressIndicator(),
-                                      )
-                                    : profileController
-                                            .otherUserProfileData.isEmpty
-                                        ? Container()
-                                        : ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(100),
-                                            child: profileController
-                                                        .otherUserProfileData
-                                                        .first
-                                                        .user
-                                                        .profilePicture ==
-                                                    null
-                                                ? Image.asset(
-                                                    "assets/images/profile_icon.png",
-                                                    fit: BoxFit.fill,
-                                                  )
-                                                : Image.network(
-                                                    profileController
-                                                        .otherUserProfileData
-                                                        .first
-                                                        .user
-                                                        .profilePicture,
-                                                    fit: BoxFit.fill,
-                                                  ),
-                                          ),
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    height: 160,
+                                    width: 160,
+                                    decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100)),
+                                    child: profileController.isLoading.isTrue
+                                        ? const Center(
+                                            child: CircularProgressIndicator(),
+                                          )
+                                        : profileController
+                                                .otherUserProfileData.isEmpty
+                                            ? Container()
+                                            : ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(100),
+                                                child: profileController
+                                                            .otherUserProfileData
+                                                            .first
+                                                            .user
+                                                            .profilePicture ==
+                                                        null
+                                                    ? Image.asset(
+                                                        "assets/images/profile_icon.png",
+                                                        fit: BoxFit.fill,
+                                                      )
+                                                    : Image.network(
+                                                        profileController
+                                                            .otherUserProfileData
+                                                            .first
+                                                            .user
+                                                            .profilePicture,
+                                                        fit: BoxFit.fill,
+                                                      ),
+                                              ),
+                                  ),
+                                  Container(
+                                      height: 160,
+                                      width: 160,
+                                      child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(100),
+                                          child: Image.asset(
+                                              "assets/icons/silver_badge.png")))
+                                ],
                               ),
                             ),
 
@@ -189,7 +202,8 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(profileController.otherUserProfileData
-                                          .first.user.bio ??""),
+                                          .first.user.bio ??
+                                      ""),
                                 ],
                               ),
                       ],
