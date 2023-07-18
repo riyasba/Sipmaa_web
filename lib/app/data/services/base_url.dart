@@ -131,6 +131,16 @@ abstract class BaseApiService {
 
       //store skills
   final String addSkillsURL = "https://sipmaaindia.com/api/auth/store_skill";
+
+
+
+
+    String getStateList = "https://sipmaaindia.com/api/getStateList";
+  String getCityList = "https://sipmaaindia.com/api/getCityList";
+
+  String requirementsURL = "https://sipmaaindia.com/api/requirments";
+
+    String getSkillsURL = "https://sipmaaindia.com/api/getUserSkills";
 }
 //  final String updateProfileURL =
 //       "https://sipmaaindia.com/api/auth/profile_update";

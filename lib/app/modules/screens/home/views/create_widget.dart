@@ -55,16 +55,8 @@ class _CreateWidgetState extends State<CreateWidget> {
               child: Row(
                 children: [
                   postsController.profileData.first.profilePicture == null
-                      ? Image.asset(
-                          'assets/images/propic.jpg',
-                          height: 60,
-                          fit: BoxFit.fitHeight,
-                        )
-                      : Image.network(
-                          postsController.profileData.first.profilePicture,
-                          height: 60,
-                          fit: BoxFit.fitHeight,
-                        ),
+                      ?CircleAvatar(backgroundImage: AssetImage( 'assets/images/propic.jpg',),radius: 35,)
+                      :CircleAvatar(backgroundImage: NetworkImage( postsController.profileData.first.profilePicture,),radius: 35,) ,
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Column(

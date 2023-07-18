@@ -8,6 +8,8 @@ import 'package:reg_login/app/data/components/constands/constands.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets/continers/comentcontiner.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets/likepost.dart';
 import 'package:reg_login/app/modules/screens/profile/friends_profile.dart';
+import 'package:reg_login/app/respohome/pofile_respo.dart';
+import 'package:reg_login/app/respohome/respoprofil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../data/components/controllers/auth_controllers.dart';
@@ -18,6 +20,7 @@ import 'package:timeago/timeago.dart' as timeago;
 
 import '../../../../respohome/friendsprofile/friendsrespoprofile.dart';
 import '../../../../responsive/widgets/like.dart';
+import 'create_widget.dart';
 
 class HomeContainer extends StatefulWidget {
   HomeContainer({super.key});
@@ -68,6 +71,8 @@ class _HomeContainerState extends State<HomeContainer> {
             : postsController.allPostList.isEmpty
                 ? Center(
                     child: Image.asset("assets/icons/no_post.png"),
+                    //   ],
+                    // ),
                   )
                 : ListView(
                     shrinkWrap: true,
@@ -75,11 +80,168 @@ class _HomeContainerState extends State<HomeContainer> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(bottom: 15, top: 5),
-                        child: Container(
-                          height: 150,
-                          decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(20)),
+                        child: Column(
+                          children: [
+                            Container(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Row(
+                                    children: [
+                                      kwidth10,
+                                      profileController.profileData.first.user
+                                                  .profilePicture ==
+                                              null
+                                          ? InkWell(
+                                              onTap: () {
+                                                Get.to(RespoProfile());
+                                              },
+                                              child: const CircleAvatar(
+                                                backgroundImage: AssetImage(
+                                                    'assets/images/propic.jpg'),
+                                                radius: 35,
+                                              ),
+                                            )
+                                          : InkWell(
+                                              onTap: () {
+                                                Get.to(RespoProfile());
+                                              },
+                                              child: CircleAvatar(
+                                                backgroundImage: NetworkImage(
+                                                    profileController
+                                                        .profileData
+                                                        .first
+                                                        .user
+                                                        .profilePicture),
+                                                radius: 35,
+                                              ),
+                                            ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding: const EdgeInsets.only(
+                                              left: 15, right: 15),
+                                          child: Container(
+                                            child: TextFormField(
+                                              onTap: () {
+                                                _dialogBuilder(context);
+                                              },
+                                              decoration: InputDecoration(
+                                                floatingLabelBehavior:
+                                                    FloatingLabelBehavior.never,
+                                                fillColor: Colors.grey[250],
+                                                labelText: 'Start a Post',
+                                                hintStyle: TextStyle(
+                                                  color: Colors.grey[700],
+                                                ),
+                                                border: OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                      color: Color.fromARGB(
+                                                          0, 158, 158, 158),
+                                                      width: 2.0),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          16.0),
+                                                ),
+                                                filled: true,
+                                                enabledBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                      color: Color.fromARGB(
+                                                          0, 158, 158, 158),
+                                                      width: 2.0),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          16.0),
+                                                ),
+                                                focusedBorder:
+                                                    OutlineInputBorder(
+                                                  borderSide: const BorderSide(
+                                                      color: Color.fromARGB(
+                                                          0, 158, 158, 158),
+                                                      width: 2.0),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          16.0),
+                                                ),
+                                                contentPadding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        17.0, 2.0, 17.0, 16.0),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      //    kwidth10,
+                                      InkWell(
+                                        onTap: () {
+                                          _dialogBuilder(context);
+                                        },
+                                        child: Row(
+                                          children: [
+                                            Image.asset(
+                                                'assets/images/Icon.png'),
+                                            kwidth10,
+                                            Text('Photo')
+                                                .text
+                                                .bold
+                                                .gray500
+                                                .make(),
+                                            kwidth10,
+                                          ],
+                                        ),
+                                      ),
+                                      kwidth10,
+                                      InkWell(
+                                        onTap: () {
+                                          _dialogBuilder(context);
+                                        },
+                                        child: Row(
+                                          children: [
+                                            kwidth10,
+                                            Image.asset(
+                                                'assets/images/Icon1.png'),
+                                            kwidth10,
+                                            Text('Add Article')
+                                                .text
+                                                .gray500
+                                                .bold
+                                                .make(),
+                                          ],
+                                        ),
+                                      ),
+                                      // Container(
+                                      //   child: Center(
+                                      //       child: Text('Submit')
+                                      //           .text
+                                      //           .semiBold
+                                      //           .white
+                                      //           .make()),
+                                      //   height: 30,
+                                      //   width: 70,
+                                      //   decoration: BoxDecoration(
+                                      //       color: kblue,
+                                      //       borderRadius:
+                                      //           BorderRadius.circular(15)),
+                                      // )
+                                      kwidth10,
+                                    ],
+                                  )
+                                ],
+                              ),
+                              height: 150,
+                              decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(20)),
+                            ),
+
+                            //
+                          ],
                         ),
                       ),
                       ListView.separated(
@@ -1090,6 +1252,17 @@ class _HomeContainerState extends State<HomeContainer> {
               ),
             ],
           ),
+        );
+      },
+    );
+  }
+
+  Future<void> _dialogBuilder(BuildContext context) {
+    return showDialog<void>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: CreateWidget(),
         );
       },
     );

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reg_login/app/data/components/constands/constands.dart';
+import 'package:reg_login/app/data/models/city_list_model.dart';
 import 'package:reg_login/app/data/models/department_model.dart';
 import 'package:reg_login/app/data/models/industries_model.dart';
 import 'package:reg_login/app/data/models/profile_update_model.dart';
+import 'package:reg_login/app/data/models/skills_model.dart';
+import 'package:reg_login/app/data/models/state_list_model.dart';
 import 'package:reg_login/app/data/services/auth_api_service/check_email_verify_api_services.dart';
 import 'package:reg_login/app/data/services/auth_api_service/get_department_api_services.dart';
 import 'package:reg_login/app/data/services/auth_api_service/get_industries_api_services.dart';
@@ -14,34 +17,24 @@ import 'package:reg_login/app/data/services/auth_api_service/update_profile_api_
 import 'package:reg_login/app/modules/authentication/OTP/views/otp.dart';
 import 'package:reg_login/app/modules/authentication/register/views/register.dart';
 import 'package:reg_login/app/modules/authentication/register/views/registersplash.dart';
-import 'package:reg_login/app/routes/app_pages.dart';
+
 import 'package:reg_login/app/services/network_api_services/auth_api_services/register_api_services.dart';
 import 'package:reg_login/app/services/network_api_services/user_name_check_api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-// import 'package:simpa/models/department_model.dart';
-// import 'package:simpa/models/profile_update_model.dart';
-// import 'package:simpa/models/register_model.dart';
-// import 'package:simpa/models/slider_model.dart';
-// import 'package:simpa/services/network_api_services/auth_api_services/get_departments_api_services.dart';
-// import 'package:simpa/services/network_api_services/auth_api_services/get_slider_api_services.dart';
-// import 'package:simpa/services/network_api_services/auth_api_services/login_api_services.dart';
-// import 'package:simpa/services/network_api_services/auth_api_services/register_api_services.dart';
-// import 'package:simpa/services/network_api_services/auth_api_services/update_profile_api_services.dart';
-// import 'package:simpa/services/network_api_services/auth_api_services/user_name_check_api_services.dart';
-// import 'package:simpa/view/otp_page.dart';
-// import 'package:simpa/view/register_details_page.dart';
-// import 'package:simpa/view/register_splash.dart';
-// import 'package:simpa/widgets/bottumnavigationbar.dart';
 
-// import '../services/network_api_services/auth_api_services/otp_verify_api_services.dart';
 import 'package:dio/dio.dart' as dio;
 import '../../../get_slider_api_services.dart';
 import '../../../respohome/respohome.dart';
-import '../../../modules/screens/home/views/home_screen.dart';
+
 import '../../../responsive/view/otp_page.dart';
 import '../../../responsive/view/mob_register_details_page.dart';
+import '../../models/requiremets_models.dart';
 import '../../models/slider_model.dart';
-import '../../services/auth_api_service/get_industries_api_services.dart';
+import '../../services/auth_api_service/get_city_api_services.dart';
+
+import '../../services/auth_api_service/get_requirements_list_api_services.dart';
+import '../../services/auth_api_service/get_skills_api_services.dart';
+import '../../services/auth_api_service/get_states_api_services.dart';
 import '../../services/auth_api_service/login_api_services.dart';
 import '../../models/register_model.dart';
 
@@ -53,10 +46,15 @@ class AuthController extends GetxController {
   RxBool isUserNameAvailable = false.obs;
   List<Department> departments = [];
   List<SliderList> sliderList = [];
+    List<Requirement> requirementList = [];
+
+  List<StateList> stateList = [];
+  List<CityList> cityList = [];
   GetDepartmentServicesApi getDepartmentServicesApi =
       GetDepartmentServicesApi();
   LoginServicesApi loginServicesApi = LoginServicesApi();
-
+  GetRequirementsApiServices getRequirementsApiServices =
+      GetRequirementsApiServices();
   /// OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
   OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
   RegisterServicesApi registerServicesApi = RegisterServicesApi();
@@ -389,6 +387,73 @@ class AuthController extends GetxController {
 
     return isverified;
   }
+
+
+
+
+
+
+    GetStateApiServices getStateApiServices = GetStateApiServices();
+
+  GetCityApiServices getCityApiServices = GetCityApiServices();
+
+  getStateList() async {
+    dio.Response<dynamic> response = await getStateApiServices.getStateApi();
+    if (response.statusCode == 200) {
+      StateListModel stateListModel = StateListModel.fromJson(response.data);
+      stateList = stateListModel.stateList;
+    }
+    update();
+  }
+
+  getCityList(int stateId) async {
+    dio.Response<dynamic> response =
+        await getCityApiServices.getCityApi(stateId);
+    if (response.statusCode == 200) {
+      CityListModel cityListModel = CityListModel.fromJson(response.data);
+      cityList = cityListModel.cityList;
+    }
+    update();
+  }
+
+  getRequiremetList() async {
+    dio.Response<dynamic> response =
+        await getRequirementsApiServices.getRequiremtsApi();
+    if (response.statusCode == 200) {
+      RequirementsModel requirementsModel =
+          RequirementsModel.fromJson(response.data);
+      requirementList = requirementsModel.requirement;
+    }
+    update();
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+    GetSkillsServicesApi getSkillsServicesApi = GetSkillsServicesApi();
+
+  getSkillsList() async {
+    dio.Response<dynamic> response = await getSkillsServicesApi.getSkillsApi();
+
+    if (response.statusCode == 200) {
+      SkillsModel skillsdataModel = SkillsModel.fromJson(response.data);
+      skillsDataList = skillsdataModel.data;
+      update();
+    }
+  }
+
+
+  List<SkillsData> skillsDataList = [];
+
+  
 }
 
 

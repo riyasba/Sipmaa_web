@@ -18,6 +18,7 @@ class ProfileModel {
   List<Post> posts;
   List<Position> positions;
   List<Skill> skills;
+  String departmentName;
   int totalFriends;
   int isFriend;
   int totalLikes;
@@ -28,6 +29,7 @@ class ProfileModel {
     required this.user,
     required this.posts,
     required this.totalFriends,
+    required this.departmentName,
     required this.isFriend,
     required this.totalLikes,
     required this.totalPosts,
@@ -42,6 +44,7 @@ class ProfileModel {
         totalFriends: json["total_friends"],
         isFriend: json["is_friend"],
         totalLikes: json["total_likes"],
+           departmentName: json["department_name"],
         totalPosts: json["total_posts"],
         positions: List<Position>.from(
             json["positions"].map((x) => Position.fromJson(x))),
@@ -221,14 +224,14 @@ class Position {
   factory Position.fromJson(Map<String, dynamic> json) => Position(
         id: json["id"],
         userId: json["user_id"],
-        title: json["title"],
-        employmentType: json["employment_type"],
-        companyName: json["company_name"],
-        location: json["location"],
-        startDate: json["start_date"],
-        endDate: json["end_date"],
-        industryName: json["industry_name"],
-        description: json["description"],
+        title: json["title"] ?? "",
+        employmentType: json["employment_type"] ?? "",
+        companyName: json["company_name"] ?? "",
+        location: json["location"] ?? "",
+        startDate: json["start_date"] ?? "",
+        endDate: json["end_date"] ?? "",
+        industryName: json["industry_name"] ?? "",
+        description: json["description"] ?? "",
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
       );

@@ -1,4 +1,5 @@
 import 'package:date_format/date_format.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reg_login/app/data/components/controllers/auth_controllers.dart';
@@ -6,7 +7,10 @@ import 'package:reg_login/app/data/components/controllers/profile_controller.dar
 
 import '../../../data/components/constands/constands.dart';
 import '../../../data/models/add_positions_model.dart';
+import '../../../data/models/city_list_model.dart';
+import '../../../data/models/department_model.dart';
 import '../../../data/models/industries_model.dart';
+import '../../../data/models/requiremets_models.dart';
 
 
 class ProfileAddNewPossitonView extends StatefulWidget {
@@ -24,17 +28,27 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
   var industries;
   var employement;
 
+  var selectedCity;
+  var designation;
+  var department;
+
   var startDateController = TextEditingController();
   var endDateController = TextEditingController();
   var titleController = TextEditingController();
   var locationController = TextEditingController();
   var companyNameController = TextEditingController();
   var descriptionController = TextEditingController();
+  var othersController = TextEditingController();
+  var designationControllers = TextEditingController();
+  var requiremtsSelected;
 
   @override
   void initState() {
     super.initState();
     authController.getIndustriesList();
+        authController.getCityList(1141);
+    authController.getDepartmentList();
+    authController.getRequiremetList();
   }
 
   List<String> employementType = [
@@ -127,70 +141,13 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
       ),
       body: ListView(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: TextField(
-              decoration: InputDecoration(
-                  hintText: 'Title',
-                  labelText: "Title",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Colors.black))),
-              controller: titleController,
-            ),
-          ),
-          GetBuilder<AuthController>(builder: (_) {
-            return Padding(
-              padding: const EdgeInsets.only(left: 10, right: 10),
-              child: Container(
-                height: 60,
-                width: 330,
-                // padding: EdgeInsets.all(2),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    border: Border.all(
-                        color: const Color.fromARGB(255, 12, 12, 12)
-                            .withOpacity(0.4))),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 10, right: 10, top: 16),
-                  child: DropdownButton<Industry>(
-                    value: industries,
-                    isExpanded: true,
-                    icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                    elevation: 0,
-                    itemHeight: 55,
-                    isDense: true,
-                    dropdownColor: Colors.grey[250],
-                    style: const TextStyle(color: Colors.black54),
-                    hint: const Text(
-                      "Industries",
-                      style: TextStyle(fontSize: 14),
-                    ),
-                    onChanged: (Industry? value) {
-                      // This is called when the user selects an item.
-                      setState(() {
-                        authController.isInduaturesSelected(false);
-                        industries = value!;
-                      });
-                    },
-                    items: authController.industriesList
-                        .map<DropdownMenuItem<Industry>>((Industry value) {
-                      return DropdownMenuItem<Industry>(
-                        value: value,
-                        child: Text(value.name),
-                      );
-                    }).toList(),
-                  ),
-                ),
-              ),
-            );
-          }),
+    
           const SizedBox(
             height: 5,
           ),
 
           //dropdown
-          Padding(
+            Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextField(
               decoration: InputDecoration(
@@ -202,52 +159,123 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
               controller: companyNameController,
             ),
           ),
-          const SizedBox(
-            height: 5,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 10, right: 10),
-            child: Container(
-              height: 60,
-              width: 330,
-              // padding: EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(
-                      color: const Color.fromARGB(255, 12, 12, 12)
-                          .withOpacity(0.4))),
-              child: Padding(
-                padding: const EdgeInsets.only(left: 10, right: 10, top: 16),
-                child: DropdownButton<String>(
-                  value: employement,
-                  isExpanded: true,
-                  icon: const Icon(Icons.keyboard_arrow_down_outlined),
-                  elevation: 0,
-                  itemHeight: 55,
-                  isDense: true,
-                  dropdownColor: Colors.grey[250],
-                  style: const TextStyle(color: Colors.black54),
-                  hint: const Text(
-                    "Employment Type",
-                    style: TextStyle(fontSize: 14),
+
+      
+          GetBuilder<AuthController>(builder: (_) {
+            return Padding(
+              padding: const EdgeInsets.fromLTRB(10.0, 5, 10, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+          
+                  Padding(
+                    padding: const EdgeInsets.only(left: 0, right: 0),
+                    child: Container(
+                      height: 56,
+                      child: DropdownSearch<Department>(
+                        itemAsString: (Department u) => u.title,
+                        popupProps: PopupProps.menu(
+                          showSelectedItems: false,
+                          showSearchBox: true,
+                          menuProps: MenuProps(
+                              borderRadius: BorderRadius.circular(10)),
+                          searchFieldProps: const TextFieldProps(),
+                        ),
+                        items: authController.departments,
+                        dropdownDecoratorProps: DropDownDecoratorProps(
+                          dropdownSearchDecoration: InputDecoration(
+                              // labelText: "Department *",
+                              hintText: "Department",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            authController.isDesignationSelected(false);
+                            department = value!;
+                          });
+                        },
+                        // selectedItem: selectedState,
+                      ),
+                    ),
                   ),
-                  onChanged: (String? value) {
-                    // This is called when the user selects an item.
-                    setState(() {
-                      employement = value!;
-                    });
-                  },
-                  items: employementType
-                      .map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                ),
+
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Obx(
+                    () => authController.isDesignationSelected.isTrue
+                        ? const Padding(
+                            padding: EdgeInsets.only(left: 15),
+                            child: Text(
+                              "Please select Department",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 230, 46, 33),
+                                  fontSize: 12),
+                            ),
+                          )
+                        : Container(),
+                  )
+                ],
+              ),
+            );
+          }),
+
+          if (department != null && department.title == "HR Department")
+            const SizedBox(
+              height: 10,
+            ),
+          if (department != null && department.title == "HR Department")
+            Column(
+              children: [
+              
+                GetBuilder<AuthController>(builder: (_) {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 10, right: 10),
+                    child: Container(
+                      height: 56,
+                      child: DropdownSearch<Requirement>(
+                        itemAsString: (Requirement u) => u.name,
+                        popupProps: PopupProps.menu(
+                          showSelectedItems: false,
+                          showSearchBox: true,
+                          menuProps: MenuProps(
+                              borderRadius: BorderRadius.circular(10)),
+                          searchFieldProps: const TextFieldProps(),
+                        ),
+                        items: authController.requirementList,
+                        dropdownDecoratorProps: DropDownDecoratorProps(
+                          dropdownSearchDecoration: InputDecoration(
+                              // labelText: "Recruitment",
+                              hintText: "Category",
+                              border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(15))),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            requiremtsSelected = value!;
+                          });
+                        },
+                        // selectedItem: selectedState,
+                      ),
+                    ),
+                  );
+                }),
+              ],
+            ),
+          if (requiremtsSelected != null && requiremtsSelected.name == "Others")
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: TextField(
+                decoration: InputDecoration(
+                    hintText: 'Enter Others',
+                    labelText: "Others",
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: Colors.black))),
+                controller: locationController,
               ),
             ),
-          ),
           const SizedBox(
             height: 5,
           ),
@@ -255,13 +283,87 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
             padding: const EdgeInsets.all(10.0),
             child: TextField(
               decoration: InputDecoration(
-                  hintText: 'Location',
-                  labelText: "Location",
+                  hintText: 'Enter Designation',
+                  labelText: "Designation",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: const BorderSide(color: Colors.black))),
-              controller: locationController,
+              controller: designationControllers,
             ),
+          ),
+
+          Padding(
+            padding:
+                const EdgeInsets.only(left: 10, right: 10, top: 5, bottom: 5),
+            child: Container(
+              height: 56,
+              child: DropdownSearch<String>(
+                popupProps: PopupProps.menu(
+                  showSelectedItems: false,
+                  showSearchBox: true,
+                  menuProps: MenuProps(borderRadius: BorderRadius.circular(10)),
+                  searchFieldProps: const TextFieldProps(),
+                ),
+                items: employementType,
+                dropdownDecoratorProps: DropDownDecoratorProps(
+                  dropdownSearchDecoration: InputDecoration(
+                      // labelText: "Department *",
+                      hintText: "Employment Type",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15))),
+                ),
+                onChanged: (value) {
+                  setState(() {
+                    employement = value!;
+                  });
+                },
+                // selectedItem: selectedState,
+              ),
+            ),
+          ),
+         
+          const SizedBox(
+            height: 10,
+          ),
+          Column(
+            children: [
+             
+              GetBuilder<AuthController>(builder: (_) {
+                return Padding(
+                  padding: const EdgeInsets.only(left: 10, right: 10),
+                  child: DropdownSearch<CityList>(
+                    itemAsString: (CityList u) => u.city,
+                    popupProps: PopupProps.menu(
+                      showSelectedItems: false,
+                      showSearchBox: true,
+                      menuProps:
+                          MenuProps(borderRadius: BorderRadius.circular(10)),
+                      searchFieldProps: const TextFieldProps(),
+                    ),
+                    items: authController.cityList,
+                    dropdownDecoratorProps: DropDownDecoratorProps(
+                      dropdownSearchDecoration: InputDecoration(
+                          // labelText: "City",
+                          hintText: "Location",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        selectedCity = value!;
+                        locationController.text = value.city;
+                        // citySelected = value.id;
+                        // cityController.text = value.city;
+                      });
+                    },
+                    // selectedItem: selectedCity,
+                  ),
+                );
+              }),
+            ],
+          ),
+          const SizedBox(
+            height: 5,
           ),
 
           Padding(
@@ -297,22 +399,6 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
               controller: endDateController,
             ),
           ),
-          //start date to end date
-
-          //industrty
-
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: TextField(
-              decoration: InputDecoration(
-                  hintText: 'Description',
-                  labelText: "Description",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Colors.black))),
-              controller: descriptionController,
-            ),
-          ),
         ],
       ),
       bottomNavigationBar: Obx(
@@ -329,9 +415,10 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
                   ))
               : InkWell(
                   onTap: () {
-                    if (titleController.text.isEmpty) {
+                  if (department == null) {
                       Get.rawSnackbar(
-                          message: "Enter title", backgroundColor: Colors.red);
+                          message: "Enter Department",
+                          backgroundColor: Colors.red);
                     } else if (companyNameController.text.isEmpty) {
                       Get.rawSnackbar(
                           message: "Enter company name",
@@ -344,39 +431,33 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
                       Get.rawSnackbar(
                           message: "Enter start date",
                           backgroundColor: Colors.red);
-                    } else if (industries == null) {
-                      Get.rawSnackbar(
-                          message: "Select Industries",
-                          backgroundColor: Colors.red);
                     } else if (employement == null) {
                       Get.rawSnackbar(
                           message: "Select employement type",
                           backgroundColor: Colors.red);
-                    } else if (descriptionController.text.isEmpty) {
+                    } else if (designationControllers.text.isEmpty) {
                       Get.rawSnackbar(
-                          message: "Enter description",
+                          message: "Enter Designation",
                           backgroundColor: Colors.red);
                     } else {
                       AddPositonsModel addPositonsModel = AddPositonsModel(
-                          title: titleController.text,
+                          department: department.id.toString(),
+                          designation: designationControllers.text,
+                          requireMents: requiremtsSelected.id.toString(),
+                          others: othersController.text,
                           company_name: companyNameController.text,
-                          description: descriptionController.text.isEmpty
-                              ? ""
-                              : descriptionController.text,
                           employment_type: employement,
                           end_date: endDateController.text.isEmpty
                               ? "null"
                               : endDateController.text,
-                          industry_name: industries.id.toString(),
+                          industry_name: "",
                           location: locationController.text,
-                          start_date: startDateController.text);
+                          start_date: startDateController.text, description: '', title: '');
 
                       profileController.addPositions(
                           addPostionsModel: addPositonsModel,
                           useId: profileController.profileData.first.user.id
                               .toString());
-
-                          
                     }
                   },
                   child: Container(

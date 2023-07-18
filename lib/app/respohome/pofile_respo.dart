@@ -40,34 +40,39 @@ class _ProfileRespoState extends State<ProfileRespo> {
                             ? const CircleAvatar(
                                 backgroundImage:
                                     AssetImage('assets/images/propic.jpg'),
-                              )
-                            : Stack(
-                                children: [
-                                  InkWell(
-                                    onTap: () {
-                                      Get.to(RespoProfile());
-                                    },
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(35),
-                                      child: Image.network(
-                                        profileController.profileData.first.user
-                                            .profilePicture,
-                                        height: 45,
-                                        width: 45,
-                                        fit: BoxFit.fill,
+                          radius: 36,    )
+                            : InkWell(  onTap: () {
+            Get.to(RespoProfile());
+            // homeController.homeindex(4);
+          },
+                              child: Stack(
+                                  children: [
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(RespoProfile());
+                                      },
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(35),
+                                        child: Image.network(
+                                          profileController.profileData.first.user
+                                              .profilePicture,
+                                          height: 65,
+                                          width: 65,
+                                          fit: BoxFit.fill,
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  Container(
-                                       height: 45,
-                                      width: 45,
-                                      child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(35),
-                                          child: Image.asset(
-                                              "assets/icons/silver_badge.png")))
-                                ],
-                              ),
+                                    Container(
+                                         height: 65,
+                                        width: 65,
+                                        child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(35),
+                                            child: Image.asset(
+                                                "assets/icons/silver_badge.png")))
+                                  ],
+                                ),
+                            ),
                         ksizedbox10,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -84,7 +89,7 @@ class _ProfileRespoState extends State<ProfileRespo> {
                             // )
                           ],
                         ),
-                        Text('${profileController.profileData.first.user.designation}')
+                        Text('${profileController.profileData.first.departmentName}')
                             .text
                             .bold
                             .make(),
@@ -100,7 +105,7 @@ class _ProfileRespoState extends State<ProfileRespo> {
                             Row(
                               children: [
                                 kwidth10,
-                                Text('Current Company :').text.sm.make(),
+                                Text('Current Company :').text.sm.bold.make(),
                               ],
                             ),
                             Row(
@@ -126,7 +131,33 @@ class _ProfileRespoState extends State<ProfileRespo> {
                             Row(
                               children: [
                                 kwidth10,
-                                Text('previously associated :').text.sm.make(),
+                                Text('Designation :').text.sm.bold.make(),
+                              ],
+                            ),
+                            Row(
+                              children: [
+                                kwidth10,
+                                Text('${profileController.profileData.first.user.designation} ')
+                                    .text
+                                    .sm
+                                    .make(),
+                              ],
+                            ),
+                            ksizedbox10,
+                          ],
+                        ),
+                        Divider(
+                          height: 0.5,
+                          color: kgrey,
+                        ),
+                        ksizedbox10,
+                        Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Row(
+                              children: [
+                                kwidth10,
+                                Text('previously associated :').text.sm.bold.make(),
                               ],
                             ),
                             Row(
@@ -150,7 +181,7 @@ class _ProfileRespoState extends State<ProfileRespo> {
                             ),
                           ],
                         ),
-                        ksizedbox20,
+                        ksizedbox10,
                         Row(
                           children: [
                             kwidth10,
@@ -197,7 +228,7 @@ class _ProfileRespoState extends State<ProfileRespo> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     kwidth10,
-                                    Text('Like').text.semiBold.make(),
+                                    Text('Earned Like').text.semiBold.make(),
                                     Spacer(),
                                     Text('${profileController.profileData.first.totalLikes}')
                                         .text
@@ -216,7 +247,7 @@ class _ProfileRespoState extends State<ProfileRespo> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     kwidth10,
-                                    Text('Friends').text.semiBold.make(),
+                                    Text('Connects').text.semiBold.make(),
                                     Spacer(),
                                     Text('${profileController.profileData.first.totalFriends}')
                                         .text

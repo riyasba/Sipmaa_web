@@ -16,6 +16,6 @@ class AddPositonsModel {
     required this.end_date,
     required this.industry_name,
     required this.location,
-    required this.start_date,
+    required this.start_date, required String department, required String designation, required String others, required String requireMents,
   });
 }

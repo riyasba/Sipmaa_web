@@ -49,118 +49,127 @@ class _NotificationWidgetState extends State<NotificationWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: [
-        ksizedbox20,
-        Container(
-          decoration: BoxDecoration(
-              color: kwhite, borderRadius: BorderRadius.circular(8)),
-          height: MediaQuery.of(context).size.height * 0.88,
-          width: MediaQuery.of(context).size.width * 0.38,
+    return Container(
+      decoration: BoxDecoration(
+          color: kwhite, borderRadius: BorderRadius.circular(8)),
+      height: MediaQuery.of(context).size.height * 0.88,
+      width: MediaQuery.of(context).size.width * 0.38,
 
-          child: GetBuilder<ProfileController>(builder: (_) {
-            return profileController.notificationList.isEmpty
-                ? const Center(
-                    child: Text("No Data"),
-                  )
-                : ListView.separated(
-                    physics: const BouncingScrollPhysics(),
-                    itemCount: profileController.notificationList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return GestureDetector(
-                        onTap: () {
-                          var data = profileController
-                              .notificationList[index].data
-                              .toJson();
+      child: GetBuilder<ProfileController>(builder: (_) {
+        return profileController.notificationList.isEmpty
+            ? const Center(
+                child: Text("No Data"),
+              )
+            : ListView.separated(
+                physics: const BouncingScrollPhysics(),
+                itemCount: profileController.notificationList.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return GestureDetector(
+                    onTap: () {
+                      var data = profileController
+                          .notificationList[index].data
+                          .toJson();
 
-                          redirectToPages(response: data);
-                        },
+                      redirectToPages(response: data);
+                    },
+                    child: Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
                         child: ListTile(
                           leading: profileController.notificationList[index]
                                       .data.profilePicture ==
                                   ""
-                              ? CircleAvatar(
-                                  radius: 40,
-                                  backgroundImage: AssetImage(
-                                      'assets/icons/profile_icon.png'),
+                              ? InkWell(
+                                  onTap: () {
+                                    // Get.to(() => PublicUserProfilePage(
+                                    //       userId: profileController
+                                    //           .notificationList[index].data.id,
+                                    //     ));
+                                  },
+                                  child: const CircleAvatar(
+                                      radius: 40,
+                                      backgroundImage: AssetImage(
+                                          'assets/icons/profile_icon.png')),
                                 )
                               : CircleAvatar(
                                   radius: 40,
                                   backgroundImage: NetworkImage(
                                       profileController.notificationList[index]
-                                          .data.profilePicture),
-                                ),
-                          title: Row(
-                            children: [
-                              Text(
-                                profileController.notificationList[index].title,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.w700),
-                              )
-                            ],
+                                          .data.profilePicture)),
+                          // title: Row(
+                          //   children: [
+                          //     Text(
+                          //       profileController.notificationList[index].title,
+                          //       style: const TextStyle(
+                          //           fontWeight: FontWeight.w700),
+                          //     ),
+                          //   ],
+                          // ),
+                          title: Text(
+                            profileController.notificationList[index].message,
+                            style: primaryfont.copyWith(
+                                fontSize: 14, color: Colors.black54),
                           ),
-                          subtitle: Text(profileController
-                              .notificationList[index].message),
                           trailing: const Text(
                             '',
                             style: TextStyle(fontSize: 10),
                           ),
                         ),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const Divider(
-                        height: 1,
-                      );
-                    },
+                      ),
+                    ),
                   );
-          }),
-          // child: Column(
-          //   children: [
-          //     ksizedbox20,
-          //     Padding(
-          //       padding: const EdgeInsets.only(left: 15),
-          //       child: Row(
-          //         children: [
-          //           Text('Notifications',style: TextStyle(fontSize: 16,
-          //           fontWeight: FontWeight.bold),)
-          //         ],
-          //       ),
-          //     ),
-          //     ksizedbox20,
-          //     Padding(
-          //       padding: const EdgeInsets.only(left: 20),
-          //       child: Row(
-          //         children: [
-          //          Image.asset('assets/images/profile.png',height: 50,fit: BoxFit.fitHeight,),
-          //          Padding(
-          //            padding: const EdgeInsets.only(left: 15),
-          //            child: Column(
-          //             crossAxisAlignment: CrossAxisAlignment.start,
-          //              children: [
-          //                Text('Prakash Raj commented on ',
-          //                style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),),
-          //                Text('Tamil new year post',style: TextStyle(fontSize: 12,
-          //                fontWeight: FontWeight.bold),)
-          //              ],
-          //            ),
-          //          ),
-          //          Padding(
-          //            padding: const EdgeInsets.only(left: 30),
-          //            child: Text('2 Hours ago',style: TextStyle(
-          //             fontSize: 12
-          //            ),),
-          //          )
-          //         ],
-          //       ),
-          //     ),
-          //     ksizedbox20,
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return Divider(
+              height: 0, // Set the height to 0 to remove the divider line
+              color: Colors.transparent, // Set the color to transparent
+            );
+                },
+              );
+      }),
+      // child: Column(
+      //   children: [
+      //     ksizedbox20,
+      //     Padding(
+      //       padding: const EdgeInsets.only(left: 15),
+      //       child: Row(
+      //         children: [
+      //           Text('Notifications',style: TextStyle(fontSize: 16,
+      //           fontWeight: FontWeight.bold),)
+      //         ],
+      //       ),
+      //     ),
+      //     ksizedbox20,
+      //     Padding(
+      //       padding: const EdgeInsets.only(left: 20),
+      //       child: Row(
+      //         children: [
+      //          Image.asset('assets/images/profile.png',height: 50,fit: BoxFit.fitHeight,),
+      //          Padding(
+      //            padding: const EdgeInsets.only(left: 15),
+      //            child: Column(
+      //             crossAxisAlignment: CrossAxisAlignment.start,
+      //              children: [
+      //                Text('Prakash Raj commented on ',
+      //                style: TextStyle(fontSize: 12,fontWeight: FontWeight.bold),),
+      //                Text('Tamil new year post',style: TextStyle(fontSize: 12,
+      //                fontWeight: FontWeight.bold),)
+      //              ],
+      //            ),
+      //          ),
+      //          Padding(
+      //            padding: const EdgeInsets.only(left: 30),
+      //            child: Text('2 Hours ago',style: TextStyle(
+      //             fontSize: 12
+      //            ),),
+      //          )
+      //         ],
+      //       ),
+      //     ),
+      //     ksizedbox20,
 
-          //   ],
-          // ),
-        ),
-      ],
+      //   ],
+      // ),
     );
   }
 }

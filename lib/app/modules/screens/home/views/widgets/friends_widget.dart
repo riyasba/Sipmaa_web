@@ -4,14 +4,8 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reg_login/app/data/components/constands/constands.dart';
-import 'package:reg_login/app/data/components/constands/message_types.dart';
-import 'package:reg_login/app/data/models/chat_models.dart';
 import 'package:reg_login/app/data/models/friend_list_model.dart';
-import 'package:reg_login/app/modules/screens/profile/friends_profile.dart';
-import 'package:reg_login/app/responsive/widgets/chat_view/respochat/viewmsgrespo.dart';
-import 'package:reg_login/app/responsive/widgets/chat_view/view_message_screen.dart';
 import 'package:velocity_x/velocity_x.dart';
-
 import '../../../../../data/components/controllers/profile_controller.dart';
 import '../../../../../respohome/friendsprofile/friendsrespoprofile.dart';
 

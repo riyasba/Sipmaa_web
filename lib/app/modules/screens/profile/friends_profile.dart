@@ -3,17 +3,15 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:readmore/readmore.dart';
 import 'package:reg_login/app/data/components/controllers/posts_controller.dart';
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets/continers/comentcontiner.dart';
-
 import '../../../data/components/constands/constands.dart';
 import '../../../data/components/constands/message_types.dart';
 import '../../../data/models/chat_models.dart';
 import '../../../responsive/widgets/chat_view/respochat/viewmsgrespo.dart';
-import '../../../responsive/widgets/chat_view/view_message_screen.dart';
+
 
 // ignore: must_be_immutable
 class FriendsProfileScreen extends StatefulWidget {
@@ -50,20 +48,18 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: kblue,
-      //   title: Text('Friends Profile'),
-      // ),
-      body: Container(
-        height: size.height,
-        width: MediaQuery.of(context).size.width,
+    return  Container(   decoration: BoxDecoration(color: kwhite,
+        borderRadius: BorderRadius.circular(8)),
+        height: MediaQuery.of(context).size.height * 0.88,
+      width: MediaQuery.of(context).size.width * 0.38,
+       // height: size.height,
+        //width: MediaQuery.of(context).size.width,
         child: GetBuilder<ProfileController>(builder: (_) {
           return ListView(
             primary: true,
             scrollDirection: Axis.vertical,
             shrinkWrap: true,
-            children: [
+            children: [ksizedbox10,
               Stack(
                 children: [
                   Container(
@@ -202,8 +198,7 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Text(profileController.otherUserProfileData
-                                          .first.user.bio ??
-                                      ""),
+                                          .first.departmentName),
                                 ],
                               ),
                       ],
@@ -329,7 +324,7 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Friends',
+                              'Connects',
                               style: TextStyle(
                                   color: kwhite,
                                   fontSize: 16,
@@ -475,6 +470,40 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                   Padding(
                     padding: const EdgeInsets.only(left: 20, bottom: 5),
                     child: Text(
+                      "Current Company",
+                      style: primaryfont.copyWith(
+                          color: const Color.fromARGB(214, 19, 18, 18),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(profileController
+                              .otherUserProfileData.first.user.currentCompany ??
+                          ""),
+                    ],
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
+              const Divider(
+                thickness: 1,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, bottom: 5),
+                    child: Text(
                       "Designation",
                       style: primaryfont.copyWith(
                           color: Color.fromARGB(214, 19, 18, 18),
@@ -496,39 +525,6 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                     ],
                   )),
 
-              const SizedBox(
-                height: 10,
-              ),
-              const Divider(
-                thickness: 1,
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20, bottom: 5),
-                    child: Text(
-                      "Current Company",
-                      style: primaryfont.copyWith(
-                          color: const Color.fromARGB(214, 19, 18, 18),
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                  padding: const EdgeInsets.only(left: 20),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(profileController
-                              .otherUserProfileData.first.user.currentCompany ??
-                          ""),
-                    ],
-                  )),
               const SizedBox(
                 height: 10,
               ),
@@ -854,8 +850,8 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
             ],
           );
         }),
-      ),
-    );
+      );
+    
   }
 
   _deletePromt(BuildContext context, String postId) {

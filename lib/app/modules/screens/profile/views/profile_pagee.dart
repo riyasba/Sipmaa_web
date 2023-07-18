@@ -49,7 +49,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           primary: true,
           scrollDirection: Axis.vertical,
           shrinkWrap: true,
-          children: [ksizedbox10,
+          children: [
+            ksizedbox10,
             Stack(
               children: [
                 Stack(
@@ -153,11 +154,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     ),
                                             ),
                                 ),
-                                 Container(
+                                Container(
                                     height: 160,
                                     width: 160,
                                     child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(100),
+                                        borderRadius:
+                                            BorderRadius.circular(100),
                                         child: Image.asset(
                                             "assets/icons/silver_badge.png")))
                               ],
@@ -220,8 +222,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       : Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(profileController.profileData.first.user.bio ??
-                                ""),
+                            Text(profileController.profileData.first.departmentName),
                           ],
                         ),
                 ],
@@ -248,7 +249,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              'Friends',
+                              'Connects',
                               style: TextStyle(
                                   color: kwhite,
                                   fontSize: 16,
@@ -386,40 +387,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               height: 10,
             ),
 
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 20, bottom: 5),
-                  child: Text(
-                    "Designation",
-                    style: primaryfont.copyWith(
-                        color: Color.fromARGB(214, 19, 18, 18),
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ),
-              ],
-            ),
-
-            Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(profileController.profileData.first.user.designation ??
-                        ""),
-                  ],
-                )),
-
-            const SizedBox(
-              height: 10,
-            ),
-            const Divider(
-              thickness: 1,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
+           
             Row(
               children: [
                 Padding(
@@ -444,6 +412,40 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         ""),
                   ],
                 )),
+            const SizedBox(
+              height: 10,
+            ),
+            const Divider(
+              thickness: 1,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+             Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(left: 20, bottom: 5),
+                  child: Text(
+                    "Designation",
+                    style: primaryfont.copyWith(
+                        color: Color.fromARGB(214, 19, 18, 18),
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600),
+                  ),
+                ),
+              ],
+            ),
+
+            Padding(
+                padding: const EdgeInsets.only(left: 20),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(profileController.profileData.first.user.designation ??
+                        ""),
+                  ],
+                )),
+
             const SizedBox(
               height: 10,
             ),

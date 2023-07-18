@@ -1,10 +1,12 @@
 import 'package:date_format/date_format.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../data/components/constands/constands.dart';
 import '../../../data/components/controllers/auth_controllers.dart';
 import '../../../data/components/controllers/profile_controller.dart';
+import '../../../data/models/skills_model.dart';
 
 
 class AddNewSkillsView extends StatefulWidget {
@@ -17,6 +19,7 @@ class AddNewSkillsView extends StatefulWidget {
 class _AddNewSkillsViewState extends State<AddNewSkillsView> {
   final authController = Get.find<AuthController>();
   final profileController = Get.find<ProfileController>();
+
 
   var industries;
   var employement;
@@ -31,6 +34,9 @@ class _AddNewSkillsViewState extends State<AddNewSkillsView> {
   @override
   void initState() {
     super.initState();
+    
+     authController.getSkillsList();
+    
     authController.getIndustriesList();
   }
 
@@ -126,14 +132,36 @@ class _AddNewSkillsViewState extends State<AddNewSkillsView> {
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),
-            child: TextField(
-              decoration: InputDecoration(
-                  hintText: 'Skills',
-                  labelText: "Skills",
-                  border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(10),
-                      borderSide: const BorderSide(color: Colors.black))),
-              controller: titleController,
+            child:GetBuilder<AuthController>(
+              builder: (_) {
+                return Container(
+                  height: 56,
+                  child: DropdownSearch<SkillsData>(
+                    itemAsString: (SkillsData u) => u.name,
+                    popupProps: PopupProps.menu(
+                      showSelectedItems: false,
+                      showSearchBox: true,
+                      menuProps: MenuProps(borderRadius: BorderRadius.circular(10)),
+                      searchFieldProps: const TextFieldProps(),
+                    ),
+                    items: authController.skillsDataList,
+                    dropdownDecoratorProps: DropDownDecoratorProps(
+                      dropdownSearchDecoration: InputDecoration(
+                          // labelText: "Department *",
+                          hintText: "Skills",
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(15))),
+                    ),
+                    onChanged: (value) {
+                      setState(() {
+                        // authController.isDesignationSelected(false);
+                        titleController.text = value!.name;
+                      });
+                    },
+                    // selectedItem: selectedState,
+                  ),
+                );
+              }
             ),
           ),
         ],
