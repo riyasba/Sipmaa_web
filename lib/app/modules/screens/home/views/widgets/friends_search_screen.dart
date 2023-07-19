@@ -4,6 +4,7 @@ import 'package:reg_login/app/data/components/constands/constands.dart';
 import 'package:reg_login/app/data/components/controllers/posts_controller.dart';
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/data/components/search_field.dart';
+import 'package:velocity_x/velocity_x.dart';
 
 //import 'package:staggered_grid_view_flutter/staggered_grid_view_flutter.dart';
 //import 'package:staggered_grid_view_flutter/widgets/staggered_grid_view.dart';
@@ -42,26 +43,26 @@ class _FriendsSearchState extends State<FriendsSearch> {
   Widget build(BuildContext context) {
     return GetBuilder<ProfileController>(builder: (_) {
       return Container(
-        height: 600, // MediaQuery.of(context).size.height * 0.88,
-        width: 500, //MediaQuery.of(context).size.width * 0.4,
+      height: MediaQuery.of(context).size.height * 0.88,
+      width: MediaQuery.of(context).size.width * 0.38,
         decoration: BoxDecoration(
             color: kwhite,
             boxShadow: <BoxShadow>[
               BoxShadow(offset: Offset(0.0, 0.7), blurRadius: 0.5, color: kgrey)
             ],
-            borderRadius: BorderRadius.circular(10)),
+            borderRadius: BorderRadius.circular(8)),
         child: Column(
           children: [
-            ksizedbox10,
-            Padding(
-              padding: const EdgeInsets.only(top: 20, left: 20),
-              child: Row(children: [
-                Text(
+            ksizedbox30,
+            Row(children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Text(
                   'Search',
                   style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                )
-              ]),
-            ),
+                ),
+              )
+            ]),
             ksizedbox30,
             SizedBox(
               width: 20,
@@ -70,7 +71,7 @@ class _FriendsSearchState extends State<FriendsSearch> {
               padding: const EdgeInsets.all(8.0),
               child: Container(
                   height: 40,
-                  width: MediaQuery.of(context).size.width * 0.36,
+                  width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       color: kwhite.withOpacity(0.9),
                       borderRadius: BorderRadius.circular(15),
@@ -94,14 +95,14 @@ class _FriendsSearchState extends State<FriendsSearch> {
                   )),
             ),
             ksizedbox30,
-            SizedBox(
-              height: 400,
-              width: 500,
+            Container(
+            //  height: 400,
+              width:    MediaQuery.of(context).size.width,
               child: Padding(
                 padding: const EdgeInsets.only(left: 23, right: 20),
                 child: profileController.searchFriendsList.isEmpty
                     ? Center(
-                        child: Text("No data"),
+                        child: Text("Search New Friends").text.xl.semiBold.make(),
                       )
                     : ListView.builder(
                         shrinkWrap: true,
@@ -123,7 +124,7 @@ class _FriendsSearchState extends State<FriendsSearch> {
                                         ? const CircleAvatar(
                                             radius: 40,
                                             backgroundImage: AssetImage(
-                                                'assets/icons/profile_icon.png'),
+                                                'assets/images/propic.jpg'),
                                           )
                                         : CircleAvatar(
                                             radius: 40,

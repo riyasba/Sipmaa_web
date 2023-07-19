@@ -157,7 +157,7 @@ class _ProfileRespoState extends State<ProfileRespo> {
                             Row(
                               children: [
                                 kwidth10,
-                                Text('previously associated :').text.sm.bold.make(),
+                                Text('Previously associated :').text.sm.bold.make(),
                               ],
                             ),
                             Row(
@@ -275,7 +275,7 @@ class _ProfileRespoState extends State<ProfileRespo> {
               decoration: BoxDecoration(
                   color: kwhite, borderRadius: BorderRadius.circular(8)),
               width: size.width,
-              height: size.height * 0.7,
+            //  height: size.height * 0.7,
             );
           }),
         ),
@@ -391,7 +391,7 @@ class _ProfileRespoState extends State<ProfileRespo> {
                       children: [
                         kwidth10,
                         Image.asset(
-                          'assets/images/Mask Group 32.png',
+                          'assets/images/propic.jpg',
                           height: 35,
                         ),
                         kwidth10,
@@ -436,7 +436,7 @@ class _ProfileRespoState extends State<ProfileRespo> {
                                     .profileData.first.user.profilePicture ==
                                 null
                             ? Image.asset(
-                                'assets/images/Mask Group 32.png',
+                                'assets/images/propic.jpg',
                                 height: 35,
                               )
                             : Stack(

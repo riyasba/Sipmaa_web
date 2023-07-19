@@ -152,15 +152,16 @@ class _CreateWidgetState extends State<CreateWidget> {
                     minimumSize:
                         Size(MediaQuery.of(context).size.width * 0.27, 45)),
                 onPressed: () async {
-                  if (textController.text.isNotEmpty) {
+                  if (textController.text.isNotEmpty || imagePath != null ) {
                     int response = await postsController.uplodPost(
                         title: textController.text,
                         description: "",
                         media: imagePath);
+                         Get.back();
                     if (response == 201) {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
+                     showDialog(
+                         context: context,
+                         builder: (context) {
                             return Dialog(
                               child: Container(
                                 height:
@@ -206,9 +207,7 @@ class _CreateWidgetState extends State<CreateWidget> {
                                                     45)),
                                             onPressed: () {
                                               postsController.getAllPost();
-                                              Get.find<HomeController>()
-                                                  .homeindex(0);
-                                              Get.back();
+                                            Get.back();
                                             },
                                             child: Text(
                                               'Done',
@@ -222,7 +221,8 @@ class _CreateWidgetState extends State<CreateWidget> {
                             );
                           });
                     }
-                  } else {
+                  } 
+                  else {
                     Get.rawSnackbar(
                       messageText: const Text(
                         "Complete before posting",
@@ -241,4 +241,7 @@ class _CreateWidgetState extends State<CreateWidget> {
       ),
     );
   }
+}
+
+class MyHomePage {
 }

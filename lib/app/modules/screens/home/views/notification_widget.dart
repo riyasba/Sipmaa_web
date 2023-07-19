@@ -7,6 +7,8 @@ import 'package:reg_login/app/data/models/notification_model.dart';
 import 'package:reg_login/app/modules/screens/home/controler/controler.dart';
 import '../../../../data/components/controllers/posts_controller.dart';
 import '../../../../data/components/controllers/profile_controller.dart';
+import '../../../../respohome/respohome.dart';
+import '../../../../respohome/respoprofil.dart';
 
 class NotificationWidget extends StatefulWidget {
   NotificationWidget({super.key});
@@ -35,15 +37,16 @@ class _NotificationWidgetState extends State<NotificationWidget> {
         NotificationDataModel.fromJson(response);
 
     if (notificationModel.type == "like_Post") {
-      homeController.homeindex(4);
+      
+       Get.to(RespoProfile());
     } else if (notificationModel.type == "comment_Post") {
-      homeController.homeindex(4);
+      Get.to(RespoProfile());
     } else if (notificationModel.type == "Friend_Request") {
-      homeController.homeindex(0);
+       Get.to(MyHomePage());
     } else if (notificationModel.type == "Friend_Request_accepted") {
-      homeController.homeindex(0);
+       Get.to(MyHomePage());
     } else {
-      homeController.homeindex(0);
+      Get.to(MyHomePage());
     }
   }
 
@@ -89,7 +92,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                                   child: const CircleAvatar(
                                       radius: 40,
                                       backgroundImage: AssetImage(
-                                          'assets/icons/profile_icon.png')),
+                                          'assets/images/propic.jpg')),
                                 )
                               : CircleAvatar(
                                   radius: 40,
@@ -108,7 +111,7 @@ class _NotificationWidgetState extends State<NotificationWidget> {
                           title: Text(
                             profileController.notificationList[index].message,
                             style: primaryfont.copyWith(
-                                fontSize: 14, color: Colors.black54),
+                                fontSize: 14, color: Colors.black54,fontWeight: FontWeight.w500),
                           ),
                           trailing: const Text(
                             '',

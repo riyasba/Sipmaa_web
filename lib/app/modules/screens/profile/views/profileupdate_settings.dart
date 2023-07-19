@@ -394,7 +394,7 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                                         .profileData.first.skills[index].name,
                                     style: primaryfont.copyWith(
                                         color: Colors.white,
-                                        fontWeight: FontWeight.w500),
+                                        ),
                                   ),
                                 ),
                               ),
@@ -511,8 +511,8 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                         ],
                       )),
             ),
-            ksizedbox20
-          ],
+            ksizedbox20,
+          ksizedbox40,],
         );
       }),
     );

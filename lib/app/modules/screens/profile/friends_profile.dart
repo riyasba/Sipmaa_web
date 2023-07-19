@@ -10,6 +10,7 @@ import 'package:reg_login/app/modules/screens/home/views/widgets/continers/comen
 import '../../../data/components/constands/constands.dart';
 import '../../../data/components/constands/message_types.dart';
 import '../../../data/models/chat_models.dart';
+import '../../../respohome/respochat/chatviewrespo.dart';
 import '../../../responsive/widgets/chat_view/respochat/viewmsgrespo.dart';
 
 
@@ -115,7 +116,7 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                                                             .profilePicture ==
                                                         null
                                                     ? Image.asset(
-                                                        "assets/images/profile_icon.png",
+                                                        'assets/images/propic.jpg',
                                                         fit: BoxFit.fill,
                                                       )
                                                     : Image.network(
@@ -589,24 +590,61 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                     ),
                   ),
                 ],
-              ),
-              Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 10),
-                  child: Container(
-                    width: size.width,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        for (int i = 0;
-                            i <
-                                profileController
-                                    .otherUserProfileData.first.skills.length;
-                            i++)
-                          Text(
-                              "${profileController.otherUserProfileData.first.skills[i].name},"),
-                      ],
+              ),ksizedbox20,
+
+   Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, right: 20, ),
+                      child: GridView.builder(
+                          shrinkWrap: true,
+                          itemCount:
+                              profileController.profileData.first.skills.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  childAspectRatio: 4, crossAxisCount: 4),
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 3, left: 3, bottom: 5),
+                              child: Container(
+                                height: 35,
+                                decoration: BoxDecoration(
+                                    color: kblue,
+                                    borderRadius: BorderRadius.circular(50)),
+                                alignment: Alignment.center,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  child: Text(
+                                    profileController
+                                        .profileData.first.skills[index].name,
+                                    style: primaryfont.copyWith(
+                                        color: Colors.white,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }),
                     ),
-                  )),
+
+              // Padding(
+              //     padding: const EdgeInsets.only(left: 20, right: 10),
+              //     child: Container(
+              //       width: size.width,
+              //       child: Row(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [
+              //           for (int i = 0;
+              //               i <
+              //                   profileController
+              //                       .otherUserProfileData.first.skills.length;
+              //               i++)
+              //             Text(
+              //                 "${profileController.otherUserProfileData.first.skills[i].name},"),
+              //         ],
+              //       ),
+              //     )),
               const SizedBox(
                 height: 10,
               ),

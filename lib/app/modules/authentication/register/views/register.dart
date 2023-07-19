@@ -136,51 +136,7 @@ class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
                                 ],
                               ),
                             ),
-                            // Container(
-                            //   height: 50,
-                            //   width: 330,
-                            //   decoration: BoxDecoration(
-                            //       borderRadius: BorderRadius.circular(10),
-                            //       border: Border.all(
-                            //           color: const Color.fromARGB(
-                            //                   255, 158, 158, 158)
-                            //               .withOpacity(0.2))),
-                            //   child: Padding(
-                            //     padding: const EdgeInsets.only(
-                            //         left: 10, right: 10, top: 10),
-                            //     child: DropdownButton<Department>(
-                            //       value: designation,
-                            //       isExpanded: true,
-                            //       icon: const Icon(
-                            //           Icons.keyboard_arrow_down_outlined),
-                            //       elevation: 0,
-                            //       itemHeight: 55,
-                            //       isDense: true,
-                            //       dropdownColor: Colors.grey[250],
-                            //       style: const TextStyle(color: Colors.black54),
-                            //       hint: const Text(
-                            //         "Department",
-                            //         style: TextStyle(fontSize: 14),
-                            //       ),
-                            //       onChanged: (Department? value) {
-                            //         // This is called when the user selects an item.
-                            //         setState(() {
-                            //           authController
-                            //               .isDesignationSelected(false);
-                            //           designation = value!;
-                            //         });
-                            //       },
-                            //       items: authController.departments
-                            //           .map<DropdownMenuItem<Department>>(
-                            //               (Department value) {
-                            //         return DropdownMenuItem<Department>(
-                            //           value: value,
-                            //           child: Text(value.title),
-                            //         );
-                            //       }).toList(),
-                            //     ),
-                            //   ),
-                            // ),
+                          
                             Padding(
                               padding: const EdgeInsets.only(left: 5, right: 5),
                               child: Container(
@@ -373,7 +329,7 @@ class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
                           child: Row(
                             children: [
                               const Text(
-                                "Recruitment",
+                                "Category",
                               ),
                               Text(
                                 "*",
@@ -400,7 +356,7 @@ class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
                                 dropdownDecoratorProps: DropDownDecoratorProps(
                                   dropdownSearchDecoration: InputDecoration(
                                       // labelText: "Recruitment",
-                                      hintText: "Recruitment",
+                                      hintText: "Category",
                                       border: OutlineInputBorder(
                                           borderRadius:
                                               BorderRadius.circular(15))),
@@ -425,34 +381,34 @@ class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
                           textt: 'Others'),
 
 
-  Padding(
-                              padding: const EdgeInsets.only(left: 0, right: 0),
-                              child: Container(
-                                height: 56,
-                                child: DropdownSearch<String>(
-                                  popupProps: PopupProps.menu(
-                                    showSelectedItems: false,
-                                    showSearchBox: true,
-                                    menuProps: MenuProps(
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    searchFieldProps: const TextFieldProps(),
-                                  ),
-                                  items: employementType,
-                                  dropdownDecoratorProps:
-                                      DropDownDecoratorProps(
-                                    dropdownSearchDecoration: InputDecoration(
-                                        // labelText: "Department *",
-                                        hintText: "Employment Type",
-                                        border: OutlineInputBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(15))),
-                                  ),
-                                  onChanged: (value) {},
-                                  // selectedItem: selectedState,
-                                ),
-                              ),
-                            ),
+  // Padding(
+  //                             padding: const EdgeInsets.only(left: 0, right: 0),
+  //                             child: Container(
+  //                               height: 56,
+  //                               child: DropdownSearch<String>(
+  //                                 popupProps: PopupProps.menu(
+  //                                   showSelectedItems: false,
+  //                                   showSearchBox: true,
+  //                                   menuProps: MenuProps(
+  //                                       borderRadius:
+  //                                           BorderRadius.circular(10)),
+  //                                   searchFieldProps: const TextFieldProps(),
+  //                                 ),
+  //                                 items: employementType,
+  //                                 dropdownDecoratorProps:
+  //                                     DropDownDecoratorProps(
+  //                                   dropdownSearchDecoration: InputDecoration(
+  //                                       // labelText: "Department *",
+  //                                       hintText: "Employment Type",
+  //                                       border: OutlineInputBorder(
+  //                                           borderRadius:
+  //                                               BorderRadius.circular(15))),
+  //                                 ),
+  //                                 onChanged: (value) {},
+  //                                 // selectedItem: selectedState,
+  //                               ),
+  //                             ),
+  //                           ),
 
 
 

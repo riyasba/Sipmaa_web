@@ -7,6 +7,7 @@ import 'package:reg_login/app/respohome/Responsive.dart';
 import 'package:reg_login/app/respohome/pofile_respo.dart';
 import '../../data/components/controllers/profile_controller.dart';
 import '../../modules/screens/home/views/searchcontainer.dart';
+import '../../modules/screens/home/views/widgets/friends_search_screen.dart';
 import '../../modules/screens/home/views/widgets/friends_widget.dart';
 
 
@@ -50,7 +51,7 @@ class _RespoSrechState extends State<RespoSrech> {
             mobile: Row(
               children: [
                 Expanded(
-                    flex: size.width > 1340 ? 8 : 10, child: SearchContainer()
+                    flex: size.width > 1340 ? 8 : 10, child: FriendsSearch()
                     //  HomeContainer()
                     ),
               ],
@@ -58,7 +59,7 @@ class _RespoSrechState extends State<RespoSrech> {
             tablet: Row(
               children: [
                 Expanded(
-                    flex: size.width > 1340 ? 8 : 10, child: SearchContainer()),
+                    flex: size.width > 1340 ? 8 : 10, child: FriendsSearch()),
                 kwidth10,
                 Expanded(
                     flex: size.width > 1340 ? 3 : 5,
@@ -71,7 +72,7 @@ class _RespoSrechState extends State<RespoSrech> {
                 Expanded(
                     flex: size.width > 1340 ? 3 : 5, child: ProfileRespo()),
                 Expanded(
-                    flex: size.width > 1340 ? 7 : 9, child: SearchContainer()),
+                    flex: size.width > 1340 ? 7 : 9, child: FriendsSearch()),
                 kwidth10,
                 Expanded(
                     flex: size.width > 1340 ? 3 : 5,

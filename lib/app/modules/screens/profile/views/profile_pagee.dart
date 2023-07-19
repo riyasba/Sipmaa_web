@@ -510,22 +510,57 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ],
-            ),
-            Padding(
-                padding: const EdgeInsets.only(left: 20, right: 10),
-                child: Container(
-                  width: size.width,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      for (int i = 0;
-                          i < profileController.profileData.first.skills.length;
-                          i++)
-                        Text(
-                            "${profileController.profileData.first.skills[i].name},"),
-                    ],
-                  ),
-                )),
+            ),ksizedbox20,
+               Padding(
+                      padding:
+                          const EdgeInsets.only(left: 20, right: 20, ),
+                      child: GridView.builder(
+                          shrinkWrap: true,
+                          itemCount:
+                              profileController.profileData.first.skills.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  childAspectRatio: 4, crossAxisCount: 4),
+                          itemBuilder: (context, index) {
+                            return Padding(
+                              padding: const EdgeInsets.only(
+                                  right: 3, left: 3, bottom: 5),
+                              child: Container(
+                                height: 35,
+                                decoration: BoxDecoration(
+                                    color: kblue,
+                                    borderRadius: BorderRadius.circular(50)),
+                                alignment: Alignment.center,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10),
+                                  child: Text(
+                                    profileController
+                                        .profileData.first.skills[index].name,
+                                    style: primaryfont.copyWith(
+                                        color: Colors.white,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }),
+                    ),
+            // Padding(
+            //     padding: const EdgeInsets.only(left: 20, right: 10),
+            //     child: Container(
+            //       width: size.width,
+            //       child: Row(
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           for (int i = 0;
+            //               i < profileController.profileData.first.skills.length;
+            //               i++)
+            //             Text(
+            //                 "${profileController.profileData.first.skills[i].name},"),
+            //         ],
+            //       ),
+            //     )),
             const SizedBox(
               height: 10,
             ),

@@ -184,7 +184,7 @@ class PostsController extends GetxController {
     required String description,
     required var media,
   }) async {
-    isLoading(true);
+    // isLoading(true);
     update();
     dio.Response<dynamic> response = await uploadPostApiServices.uploadPost(
         title: title, description: description, media: media);
