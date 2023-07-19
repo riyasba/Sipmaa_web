@@ -12,7 +12,6 @@ import '../../../data/models/department_model.dart';
 import '../../../data/models/industries_model.dart';
 import '../../../data/models/requiremets_models.dart';
 
-
 class ProfileAddNewPossitonView extends StatefulWidget {
   const ProfileAddNewPossitonView({super.key});
 
@@ -46,7 +45,7 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
   void initState() {
     super.initState();
     authController.getIndustriesList();
-        authController.getCityList(1141);
+    authController.getCityList(1141);
     authController.getDepartmentList();
     authController.getRequiremetList();
   }
@@ -133,21 +132,30 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       appBar: AppBar(leading: InkWell(onTap: (){Get.back();},
-        child: Icon(Icons.arrow_back,color: kblue,)),
+      appBar: AppBar(
+        leading: InkWell(
+            onTap: () {
+              Get.back();
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: kblue,
+            )),
         elevation: 0,
-        title:  Text('Add New Positions',style: TextStyle(color:kblue ),),
+        title: Text(
+          'Add New Positions',
+          style: TextStyle(color: kblue),
+        ),
         backgroundColor: kwhite,
       ),
       body: ListView(
         children: [
-    
           const SizedBox(
             height: 5,
           ),
 
           //dropdown
-            Padding(
+          Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextField(
               decoration: InputDecoration(
@@ -160,14 +168,12 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
             ),
           ),
 
-      
           GetBuilder<AuthController>(builder: (_) {
             return Padding(
               padding: const EdgeInsets.fromLTRB(10.0, 5, 10, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-          
                   Padding(
                     padding: const EdgeInsets.only(left: 0, right: 0),
                     child: Container(
@@ -199,7 +205,6 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
                       ),
                     ),
                   ),
-
                   const SizedBox(
                     height: 5,
                   ),
@@ -228,7 +233,6 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
           if (department != null && department.title == "HR Department")
             Column(
               children: [
-              
                 GetBuilder<AuthController>(builder: (_) {
                   return Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),
@@ -321,13 +325,12 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
               ),
             ),
           ),
-         
+
           const SizedBox(
             height: 10,
           ),
           Column(
             children: [
-             
               GetBuilder<AuthController>(builder: (_) {
                 return Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
@@ -415,7 +418,7 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
                   ))
               : InkWell(
                   onTap: () {
-                  if (department == null) {
+                    if (department == null) {
                       Get.rawSnackbar(
                           message: "Enter Department",
                           backgroundColor: Colors.red);
@@ -450,9 +453,11 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
                           end_date: endDateController.text.isEmpty
                               ? "null"
                               : endDateController.text,
-                          industry_name: "",
+                          industry_name: "0",
                           location: locationController.text,
-                          start_date: startDateController.text, description: '', title: '');
+                          start_date: startDateController.text,
+                          description: '',
+                          title: '');
 
                       profileController.addPositions(
                           addPostionsModel: addPositonsModel,

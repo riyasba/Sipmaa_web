@@ -393,8 +393,8 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                                     profileController
                                         .profileData.first.skills[index].name,
                                     style: primaryfont.copyWith(
-                                        color: Colors.white,
-                                        ),
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -473,46 +473,48 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                     )
                   : Padding(
                       padding: const EdgeInsets.only(right: 7),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text('Submit').text.semiBold.white.make(),
-                          kwidth10,
-                          IconButton(
-                              onPressed: () {
-                                if (nameController.text.isNotEmpty &&
-                                    lastNameController.text.isNotEmpty &&
-                                    emailController.text.isNotEmpty &&
-                                    numberController.text.isNotEmpty) {
-                                  print(nameController.text);
-                                  print(selectedCategory);
-                                  profileController.updateUserDetails(
-                                      name: nameController.text,
-                                      bio: bioController.text,
-                                      lastName: lastNameController.text,
-                                      designation: positionController.text,
-                                      hisOrHer: selectedCategory ?? "",
-                                      email: emailController.text,
-                                      mobile: numberController.text);
-                                } else {
-                                  Get.rawSnackbar(
-                                    messageText: const Text(
-                                      "Fill All the fields",
-                                      style: TextStyle(color: Colors.white),
-                                    ),
-                                    backgroundColor: Colors.red,
-                                  );
-                                }
-                              },
-                              icon: const Icon(
-                                Icons.check,
-                                color: Colors.white,
-                              )),
-                        ],
+                      child: InkWell(
+                        onTap: () {
+                          if (nameController.text.isNotEmpty &&
+                              lastNameController.text.isNotEmpty &&
+                              emailController.text.isNotEmpty &&
+                              numberController.text.isNotEmpty) {
+                            print(nameController.text);
+                            print(selectedCategory);
+                            profileController.updateUserDetails(
+                                name: nameController.text,
+                                bio: bioController.text,
+                                lastName: lastNameController.text,
+                                designation: positionController.text,
+                                hisOrHer: selectedCategory ?? "",
+                                email: emailController.text,
+                                mobile: numberController.text);
+                          } else {
+                            Get.rawSnackbar(
+                              messageText: const Text(
+                                "Fill All the fields",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              backgroundColor: Colors.red,
+                            );
+                          }
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Submit').text.semiBold.white.make(),
+                            kwidth10,
+                            Icon(
+                              Icons.check,
+                              color: Colors.white,
+                            ),
+                          ],
+                        ),
                       )),
             ),
             ksizedbox20,
-          ksizedbox40,],
+            ksizedbox40,
+          ],
         );
       }),
     );

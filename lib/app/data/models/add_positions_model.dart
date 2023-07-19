@@ -7,6 +7,10 @@ class AddPositonsModel {
   String end_date;
   String industry_name;
   String description;
+  String department;
+  String designation;
+  String others;
+  String requireMents;
 
   AddPositonsModel({
     required this.title,
@@ -16,6 +20,10 @@ class AddPositonsModel {
     required this.end_date,
     required this.industry_name,
     required this.location,
-    required this.start_date, required String department, required String designation, required String others, required String requireMents,
+    required this.start_date,
+    required this.department,
+    required this.designation,
+    required this.others,
+    required this.requireMents,
   });
 }

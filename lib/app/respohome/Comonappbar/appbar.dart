@@ -60,6 +60,15 @@ class _AppbarComnState extends State<AppbarComn> {
               color: kblue,
             )),
         kwidth10,
+        IconButton(
+            onPressed: () {
+              Get.to(RespoSrech());
+            },
+            icon: Icon(
+              Icons.search,
+              color: kblue,
+            )),
+        kwidth10,
         // IconButton(
         //     onPressed: () {
         //       Get.to(RespoChat());

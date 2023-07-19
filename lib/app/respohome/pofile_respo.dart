@@ -40,12 +40,14 @@ class _ProfileRespoState extends State<ProfileRespo> {
                             ? const CircleAvatar(
                                 backgroundImage:
                                     AssetImage('assets/images/propic.jpg'),
-                          radius: 36,    )
-                            : InkWell(  onTap: () {
-            Get.to(RespoProfile());
-            // homeController.homeindex(4);
-          },
-                              child: Stack(
+                                radius: 36,
+                              )
+                            : InkWell(
+                                onTap: () {
+                                  Get.to(RespoProfile());
+                                  // homeController.homeindex(4);
+                                },
+                                child: Stack(
                                   children: [
                                     InkWell(
                                       onTap: () {
@@ -54,8 +56,8 @@ class _ProfileRespoState extends State<ProfileRespo> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(35),
                                         child: Image.network(
-                                          profileController.profileData.first.user
-                                              .profilePicture,
+                                          profileController.profileData.first
+                                              .user.profilePicture,
                                           height: 65,
                                           width: 65,
                                           fit: BoxFit.fill,
@@ -63,7 +65,7 @@ class _ProfileRespoState extends State<ProfileRespo> {
                                       ),
                                     ),
                                     Container(
-                                         height: 65,
+                                        height: 65,
                                         width: 65,
                                         child: ClipRRect(
                                             borderRadius:
@@ -72,7 +74,7 @@ class _ProfileRespoState extends State<ProfileRespo> {
                                                 "assets/icons/silver_badge.png")))
                                   ],
                                 ),
-                            ),
+                              ),
                         ksizedbox10,
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -157,7 +159,11 @@ class _ProfileRespoState extends State<ProfileRespo> {
                             Row(
                               children: [
                                 kwidth10,
-                                Text('Previously associated :').text.sm.bold.make(),
+                                Text('Previously associated :')
+                                    .text
+                                    .sm
+                                    .bold
+                                    .make(),
                               ],
                             ),
                             Row(
@@ -275,7 +281,7 @@ class _ProfileRespoState extends State<ProfileRespo> {
               decoration: BoxDecoration(
                   color: kwhite, borderRadius: BorderRadius.circular(8)),
               width: size.width,
-            //  height: size.height * 0.7,
+              //  height: size.height * 0.7,
             );
           }),
         ),
@@ -390,9 +396,12 @@ class _ProfileRespoState extends State<ProfileRespo> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         kwidth10,
-                        Image.asset(
-                          'assets/images/propic.jpg',
-                          height: 35,
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(50),
+                          child: Image.asset(
+                            'assets/images/propic.jpg',
+                            height: 35,
+                          ),
                         ),
                         kwidth10,
                         Spacer(),
@@ -435,9 +444,12 @@ class _ProfileRespoState extends State<ProfileRespo> {
                         profileController
                                     .profileData.first.user.profilePicture ==
                                 null
-                            ? Image.asset(
-                                'assets/images/propic.jpg',
-                                height: 35,
+                            ? ClipRRect(
+                                borderRadius: BorderRadius.circular(50),
+                                child: Image.asset(
+                                  'assets/images/propic.jpg',
+                                  height: 35,
+                                ),
                               )
                             : Stack(
                                 children: [

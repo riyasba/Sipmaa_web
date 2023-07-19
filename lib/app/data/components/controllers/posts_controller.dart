@@ -62,7 +62,7 @@ class PostsController extends GetxController {
   PostLikesListApiServices postLikesListApiServices =
       PostLikesListApiServices();
   PostFilterApiServices postFilterApiServices = PostFilterApiServices();
- ReportAPostApiServices reportAPostApiServices = ReportAPostApiServices();
+  ReportAPostApiServices reportAPostApiServices = ReportAPostApiServices();
   PostDelteApiServices postDelteApiServices = PostDelteApiServices();
 
   List<Post> allPostList = [];
@@ -184,7 +184,7 @@ class PostsController extends GetxController {
     required String description,
     required var media,
   }) async {
-    // isLoading(true);
+    isLoading(true);
     update();
     dio.Response<dynamic> response = await uploadPostApiServices.uploadPost(
         title: title, description: description, media: media);
@@ -286,12 +286,7 @@ class PostsController extends GetxController {
     }
   }
 
-
-
-
-
-
-    reportAPost({
+  reportAPost({
     required String userId,
     required String postId,
     required String comment,
@@ -310,8 +305,7 @@ class PostsController extends GetxController {
     }
   }
 
-
-    Future<String> getLikedNames({required String postId}) async {
+  Future<String> getLikedNames({required String postId}) async {
     String name = "";
     dio.Response<dynamic> response =
         await postLikesListApiServices.postLikesLists(postId: postId);

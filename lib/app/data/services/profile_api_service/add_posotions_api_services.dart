@@ -3,7 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:reg_login/app/data/services/base_url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 import '../../models/add_positions_model.dart';
 
 class AddPositonsApiServices extends BaseApiService {
@@ -37,6 +36,8 @@ class AddPositonsApiServices extends BaseApiService {
               "end_date": addPostionsModel.end_date,
             "industry_name": addPostionsModel.industry_name,
             "description": addPostionsModel.description,
+            "department": addPostionsModel.department,
+            "recruitment": addPostionsModel.requireMents,
           });
 
       print(response.statusCode);

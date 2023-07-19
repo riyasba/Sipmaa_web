@@ -43,10 +43,8 @@ class _CreateWidgetState extends State<CreateWidget> {
     return Container(
       height: MediaQuery.of(context).size.height * 0.88,
       width: MediaQuery.of(context).size.width * 0.38,
-      decoration: BoxDecoration(
-          color: kwhite,
-         
-          borderRadius: BorderRadius.circular(10)),
+      decoration:
+          BoxDecoration(color: kwhite, borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: [
           if (postsController.profileData.isNotEmpty)
@@ -55,8 +53,18 @@ class _CreateWidgetState extends State<CreateWidget> {
               child: Row(
                 children: [
                   postsController.profileData.first.profilePicture == null
-                      ?CircleAvatar(backgroundImage: AssetImage( 'assets/images/propic.jpg',),radius: 35,)
-                      :CircleAvatar(backgroundImage: NetworkImage( postsController.profileData.first.profilePicture,),radius: 35,) ,
+                      ? CircleAvatar(
+                          backgroundImage: AssetImage(
+                            'assets/images/propic.jpg',
+                          ),
+                          radius: 35,
+                        )
+                      : CircleAvatar(
+                          backgroundImage: NetworkImage(
+                            postsController.profileData.first.profilePicture,
+                          ),
+                          radius: 35,
+                        ),
                   Padding(
                     padding: const EdgeInsets.only(left: 10),
                     child: Column(
@@ -144,98 +152,108 @@ class _CreateWidgetState extends State<CreateWidget> {
             ),
           ),
           ksizedbox20,
-          Padding(
-            padding: const EdgeInsets.only(right: 50),
-            child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: kblue,
-                    minimumSize:
-                        Size(MediaQuery.of(context).size.width * 0.27, 45)),
-                onPressed: () async {
-                  if (textController.text.isNotEmpty || imagePath != null ) {
-                    int response = await postsController.uplodPost(
-                        title: textController.text,
-                        description: "",
-                        media: imagePath);
-                         Get.back();
-                    if (response == 201) {
-                     showDialog(
-                         context: context,
-                         builder: (context) {
-                            return Dialog(
-                              child: Container(
-                                height:
-                                    MediaQuery.of(context).size.height * 0.5,
-                                width: MediaQuery.of(context).size.width * 0.2,
-                                decoration: BoxDecoration(
-                                  color: kwhite,
-                                ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(top: 10),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
+          Obx(
+            () => Padding(
+              padding: const EdgeInsets.only(right: 50),
+              child: postsController.isLoading.isTrue
+                  ? CircularProgressIndicator()
+                  : ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: kblue,
+                          minimumSize: Size(
+                              MediaQuery.of(context).size.width * 0.27, 45)),
+                      onPressed: () async {
+                        if (textController.text.isNotEmpty ||
+                            imagePath != null) {
+                          int response = await postsController.uplodPost(
+                              title: textController.text,
+                              description: "",
+                              media: imagePath);
+                          Get.back();
+                          if (response == 201) {
+                            showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return Dialog(
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.5,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.2,
+                                      decoration: BoxDecoration(
+                                        color: kwhite,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.only(top: 10),
+                                        child: Column(
                                           children: [
-                                            Image.asset(
-                                              'assets/images/Character.png',
-                                              fit: BoxFit.fitHeight,
-                                              height: 150,
+                                            Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Image.asset(
+                                                    'assets/images/Character.png',
+                                                    fit: BoxFit.fitHeight,
+                                                    height: 150,
+                                                  ),
+                                                ]),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  top: 20),
+                                              child: Text(
+                                                'Your Post has Successfully Posted',
+                                                style: TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.w900),
+                                              ),
                                             ),
-                                          ]),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 20),
-                                        child: Text(
-                                          'Your Post has Successfully Posted',
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.w900),
+                                            ksizedbox30,
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 40, right: 40),
+                                              child: ElevatedButton(
+                                                  style: ElevatedButton.styleFrom(
+                                                      backgroundColor: kblue,
+                                                      minimumSize: Size(
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.2,
+                                                          45)),
+                                                  onPressed: () {
+                                                    postsController
+                                                        .getAllPost();
+                                                    Get.back();
+                                                  },
+                                                  child: Text(
+                                                    'Done',
+                                                    style:
+                                                        TextStyle(fontSize: 17),
+                                                  )),
+                                            )
+                                          ],
                                         ),
                                       ),
-                                      ksizedbox30,
-                                      Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 40, right: 40),
-                                        child: ElevatedButton(
-                                            style: ElevatedButton.styleFrom(
-                                                backgroundColor: kblue,
-                                                minimumSize: Size(
-                                                    MediaQuery.of(context)
-                                                            .size
-                                                            .width *
-                                                        0.2,
-                                                    45)),
-                                            onPressed: () {
-                                              postsController.getAllPost();
-                                            Get.back();
-                                            },
-                                            child: Text(
-                                              'Done',
-                                              style: TextStyle(fontSize: 17),
-                                            )),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            );
-                          });
-                    }
-                  } 
-                  else {
-                    Get.rawSnackbar(
-                      messageText: const Text(
-                        "Complete before posting",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      backgroundColor: Colors.red,
-                    );
-                  }
-                },
-                child: Text(
-                  'Post',
-                  style: TextStyle(fontSize: 18),
-                )),
+                                    ),
+                                  );
+                                });
+                          }
+                        } else {
+                          Get.rawSnackbar(
+                            messageText: const Text(
+                              "Complete before posting",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            backgroundColor: Colors.red,
+                          );
+                        }
+                      },
+                      child: Text(
+                        'Post',
+                        style: TextStyle(fontSize: 18),
+                      )),
+            ),
           )
         ],
       ),
@@ -243,5 +261,4 @@ class _CreateWidgetState extends State<CreateWidget> {
   }
 }
 
-class MyHomePage {
-}
+class MyHomePage {}
