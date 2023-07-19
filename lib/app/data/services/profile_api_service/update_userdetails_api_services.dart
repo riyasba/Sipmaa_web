@@ -7,6 +7,7 @@ class UpdateUserDetailsApi extends BaseApiService {
   Future updateUserDetails(
       {required String name,
       required String bio,
+      dynamic hisOrHer,
       required String lastName,
       required String designation,
       required String email,
@@ -34,6 +35,7 @@ class UpdateUserDetailsApi extends BaseApiService {
             "designation": designation,
             "official_email": email,
             "mobile": mobile,
+            "his_her": hisOrHer
           });
       print(
           "::::::::<Update user-detail-Profile>::::::::status code::::::::::");

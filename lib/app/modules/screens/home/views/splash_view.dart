@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/respohome/respohome.dart';
 import 'package:reg_login/app/routes/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,7 +23,7 @@ class _SplashState extends State<Splash> {
   toHomePage() async {
     await Future.delayed(const Duration(milliseconds: 3900));
 
-    Get.offAll(MyHomePage());
+    Get.find<ProfileController>().checkWhetherHeGo();
   }
 
   toLoginPage() async {

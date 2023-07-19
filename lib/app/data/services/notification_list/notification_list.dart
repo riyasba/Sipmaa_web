@@ -3,9 +3,6 @@ import 'package:dio/dio.dart';
 import 'package:reg_login/app/data/services/base_url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
-
-
 class GetNotificationListApi extends BaseApiService {
   Future getNotifionListApi() async {
     dynamic responseJson;

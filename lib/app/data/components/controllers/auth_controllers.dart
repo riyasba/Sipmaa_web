@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reg_login/app/data/components/constands/constands.dart';
+import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/data/models/city_list_model.dart';
 import 'package:reg_login/app/data/models/department_model.dart';
 import 'package:reg_login/app/data/models/industries_model.dart';
@@ -46,7 +47,7 @@ class AuthController extends GetxController {
   RxBool isUserNameAvailable = false.obs;
   List<Department> departments = [];
   List<SliderList> sliderList = [];
-    List<Requirement> requirementList = [];
+  List<Requirement> requirementList = [];
 
   List<StateList> stateList = [];
   List<CityList> cityList = [];
@@ -55,6 +56,7 @@ class AuthController extends GetxController {
   LoginServicesApi loginServicesApi = LoginServicesApi();
   GetRequirementsApiServices getRequirementsApiServices =
       GetRequirementsApiServices();
+
   /// OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
   OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
   RegisterServicesApi registerServicesApi = RegisterServicesApi();
@@ -62,12 +64,12 @@ class AuthController extends GetxController {
       ProfileUpdateServicesApi();
   UserNameApiServices userNameApiServices = UserNameApiServices();
   GetSliderApiServices getSliderApiServices = GetSliderApiServices();
- SendVerificationApiService sendVerificationApiService =
+  SendVerificationApiService sendVerificationApiService =
       SendVerificationApiService();
 
   CheckVerificationApiService checkVerificationApiService =
       CheckVerificationApiService();
-   GetIndustriesApiServices getIndustriesApiServices =
+  GetIndustriesApiServices getIndustriesApiServices =
       GetIndustriesApiServices();
   // registerUser(RegisterModel registerModel) async {
   //   print("---------------------------------2-----------");
@@ -116,14 +118,10 @@ class AuthController extends GetxController {
         Get.to(OTPVIEWS(
           phoneNumber: registerModel.mobile,
           otp: response.data["user"]["otp"].toString(),
-      //    mobile: ,
+          //    mobile: ,
         ));
         //desk
       }
-
-
-
-      
 
       // Get.to(OTPVIEWS(
       //   phoneNumber: registerModel.mobile,
@@ -266,7 +264,7 @@ class AuthController extends GetxController {
     if (response.statusCode == 200) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", response.data["token"]);
-      Get.offAll(MyHomePage());
+      Get.find<ProfileController>().checkWhetherHeGo();
       // if (size < 600) {
       //   Get.offAllNamed('/home-screen');
       // } else {
@@ -288,7 +286,7 @@ class AuthController extends GetxController {
         ),
         backgroundColor: Colors.red,
       );
-    }else {
+    } else {
       Get.rawSnackbar(
         messageText: const Text(
           "Invalid User name / Password",
@@ -296,7 +294,8 @@ class AuthController extends GetxController {
         ),
         backgroundColor: Colors.red,
       );
-    }}
+    }
+  }
 
   checkUserName({required String userName}) async {
     dio.Response<dynamic> response =
@@ -321,7 +320,7 @@ class AuthController extends GetxController {
     }
     update();
   }
-  
+
   List<Industry> industriesList = [];
 
   getIndustriesList() async {
@@ -335,9 +334,7 @@ class AuthController extends GetxController {
     }
   }
 
-
-
-    sendEmailVerification({required String emailId}) async {
+  sendEmailVerification({required String emailId}) async {
     bool isEmailSent = false;
     dio.Response<dynamic> response =
         await sendVerificationApiService.sendVerification(emailId: emailId);
@@ -365,12 +362,9 @@ class AuthController extends GetxController {
     }
 
     return isEmailSent;
-
-
-
-    
   }
-    checkEmailVerification({required String emailId}) async {
+
+  checkEmailVerification({required String emailId}) async {
     bool isverified = false;
     dio.Response<dynamic> response =
         await checkVerificationApiService.checkVerification(emailId: emailId);
@@ -388,12 +382,7 @@ class AuthController extends GetxController {
     return isverified;
   }
 
-
-
-
-
-
-    GetStateApiServices getStateApiServices = GetStateApiServices();
+  GetStateApiServices getStateApiServices = GetStateApiServices();
 
   GetCityApiServices getCityApiServices = GetCityApiServices();
 
@@ -427,18 +416,7 @@ class AuthController extends GetxController {
     update();
   }
 
-
-
-
-
-
-
-
-
-
-
-
-    GetSkillsServicesApi getSkillsServicesApi = GetSkillsServicesApi();
+  GetSkillsServicesApi getSkillsServicesApi = GetSkillsServicesApi();
 
   getSkillsList() async {
     dio.Response<dynamic> response = await getSkillsServicesApi.getSkillsApi();
@@ -450,11 +428,5 @@ class AuthController extends GetxController {
     }
   }
 
-
   List<SkillsData> skillsDataList = [];
-
-  
 }
-
-
-

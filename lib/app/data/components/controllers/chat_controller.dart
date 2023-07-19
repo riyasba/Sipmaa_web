@@ -1,16 +1,13 @@
 import 'dart:convert';
 
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:get/get.dart';
-
 
 import 'package:http/http.dart' as http;
 import 'package:reg_login/app/data/components/constands/message_types.dart';
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/data/models/chat_messages_model.dart';
-
 
 import '../../models/chat_models.dart';
 import '../../models/get_fcm_token_model.dart';
@@ -302,6 +299,14 @@ class ChatController extends GetxController {
         .snapshots();
   }
 
+  Stream<QuerySnapshot> getUnreadCound(int currentUserId) {
+    return firebaseFirestore
+        .collection(FireStoreConstants().pathChatListcollection)
+        .where(ChatListConstants().users, arrayContains: currentUserId)
+        .where(ChatListConstants().readStatus, isEqualTo: true)
+        .snapshots();
+  }
+
   Stream<QuerySnapshot> getPinned(int currentUserId, int limit) {
     return firebaseFirestore
         .collection(FireStoreConstants().pathChatListcollection)
@@ -418,7 +423,6 @@ class ChatController extends GetxController {
         .collection(userId)
         .doc(chatId)
         .get();
-        
 
     if (docs.exists) {
       if (docs[FireStoreConstants().isUserActive] == false &&

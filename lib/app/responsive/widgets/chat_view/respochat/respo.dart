@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/respohome/searchrespo/saerchrespo.dart';
 import 'package:reg_login/app/responsive/widgets/chat_view/respochat/viewmsgrespo.dart';
 import 'package:reg_login/app/responsive/widgets/chat_view/user_chat_card.dart';
 import '../../../../data/components/constands/constands.dart';
@@ -10,8 +11,6 @@ import '../../../../data/components/controllers/profile_controller.dart';
 import '../../../../data/models/chat_models.dart';
 import '../../../../respohome/respochat/chatviewrespo.dart';
 import '../../../view/search_friends/search_friends_view.dart';
-
-
 
 class ViewChatsUserListRespo extends StatefulWidget {
   const ViewChatsUserListRespo({Key? key}) : super(key: key);
@@ -71,10 +70,11 @@ class _ViewChatsUserListRespoState extends State<ViewChatsUserListRespo> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Container(decoration: BoxDecoration(color: kwhite,
-      borderRadius: BorderRadius.circular(8)),
-     // height: size.height * 0.68,
-    height: MediaQuery.of(context).size.height * 0.88,
+    return Container(
+      decoration:
+          BoxDecoration(color: kwhite, borderRadius: BorderRadius.circular(8)),
+      // height: size.height * 0.68,
+      height: MediaQuery.of(context).size.height * 0.88,
       width: MediaQuery.of(context).size.width * 0.38,
       child: ListView(
         shrinkWrap: true,
@@ -206,7 +206,8 @@ class _ViewChatsUserListRespoState extends State<ViewChatsUserListRespo> {
                           return Container(
                             child: InkWell(
                                 onTap: () {
-                                  print("---------------------------------------");
+                                  print(
+                                      "---------------------------------------");
                                   chatController.makeAsRead(
                                       chatList.userId, chatList.users.first);
                                   Get.offAll(() => ViewMessageScreenRespo(
@@ -239,7 +240,7 @@ class _ViewChatsUserListRespoState extends State<ViewChatsUserListRespo> {
                           ),
                           InkWell(
                             onTap: () {
-                              Get.to(() => const SearchFriends());
+                              Get.to(() => const RespoSrech());
                             },
                             child: Container(
                               height: 50,
@@ -255,8 +256,8 @@ class _ViewChatsUserListRespoState extends State<ViewChatsUserListRespo> {
                               ),
                             ),
                           )
-                     // Text('No chats ') 
-                      ],
+                          // Text('No chats ')
+                        ],
                       ),
                     );
                   }

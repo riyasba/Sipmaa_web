@@ -36,7 +36,6 @@ class _UserChatCardState extends State<UserChatCard> {
         Row(
           children: [
             Container(
-              width: size.width * 0.38,
               child: Padding(
                 padding: const EdgeInsets.only(left: 15, right: 10),
                 child: Row(
@@ -85,7 +84,8 @@ class _UserChatCardState extends State<UserChatCard> {
                             const SizedBox(
                               height: 5,
                             ),
-                            if (widget.chatUser.messageType == MessageType().text)
+                            if (widget.chatUser.messageType ==
+                                MessageType().text)
                               SizedBox(
                                   width: size.width * 0.25,
                                   child: Text(
@@ -114,7 +114,7 @@ class _UserChatCardState extends State<UserChatCard> {
                             if (widget.chatUser.messageType ==
                                 MessageType().image)
                               SizedBox(
-                                   width: size.width * 0.25,
+                                  width: size.width * 0.25,
                                   child: Text(
                                     "Image",
                                     style: primaryfont.copyWith(
@@ -123,7 +123,7 @@ class _UserChatCardState extends State<UserChatCard> {
                             if (widget.chatUser.messageType ==
                                 MessageType().profile)
                               SizedBox(
-                                   width: size.width * 0.25,
+                                  width: size.width * 0.25,
                                   child: Text(
                                     "Shared a profile",
                                     style: primaryfont.copyWith(
@@ -152,7 +152,8 @@ class _UserChatCardState extends State<UserChatCard> {
                           StreamBuilder<QuerySnapshot>(
                               stream: chatController.getUnReadCountStatus(
                                   widget.chatUser.chatId,
-                                  myProfileController.profileData.first.user.id),
+                                  myProfileController
+                                      .profileData.first.user.id),
                               builder: (context, snapshot) {
                                 if (snapshot.hasData) {
                                   if (snapshot.data!.docs.isNotEmpty) {
@@ -160,13 +161,15 @@ class _UserChatCardState extends State<UserChatCard> {
                                       height: 22,
                                       width: 22,
                                       decoration: BoxDecoration(
-                                          borderRadius: BorderRadius.circular(20),
+                                          borderRadius:
+                                              BorderRadius.circular(20),
                                           color: kblue),
                                       alignment: Alignment.center,
                                       child: Text(
                                           snapshot.data!.docs.length.toString(),
                                           style: primaryfont.copyWith(
-                                              color: Colors.white, fontSize: 13)),
+                                              color: Colors.white,
+                                              fontSize: 13)),
                                     );
                                   } else {
                                     return Container(
@@ -183,7 +186,6 @@ class _UserChatCardState extends State<UserChatCard> {
                               })
                       ],
                     )
-                    
                   ],
                 ),
               ),

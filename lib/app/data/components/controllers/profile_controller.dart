@@ -8,6 +8,8 @@ import 'package:reg_login/app/data/services/profile_api_service/change_password_
 import 'package:reg_login/app/data/services/profile_api_service/search_user_api_services.dart';
 import 'package:reg_login/app/data/services/profile_api_service/update_background_image_api_services.dart';
 import 'package:reg_login/app/data/services/profile_api_service/update_userdetails_api_services.dart';
+import 'package:reg_login/app/respohome/respohome.dart';
+import 'package:reg_login/app/routes/app_pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 // import 'package:simpa/models/friend_list_model.dart';
 // import 'package:simpa/models/friend_request_model.dart';
@@ -107,9 +109,28 @@ class ProfileController extends GetxController {
     } else if (response.statusCode == 401) {
       final prefs = await SharedPreferences.getInstance();
       await prefs.setString("auth_token", "null");
-      //  Get.to(loginpage());
+      Get.offAllNamed(Routes.SIGN_IN);
     }
     update();
+  }
+
+  checkWhetherHeGo() async {
+    dio.Response<dynamic> response = await getProfileApiServices.getProfile();
+    profileData.clear();
+    if (response.statusCode == 200) {
+      ProfileModel profileModel = ProfileModel.fromJson(response.data);
+      profileData.add(profileModel);
+      update();
+      if (profileModel.positions.isEmpty || profileModel.skills.isEmpty) {
+        Get.offAll(() => const RespSetings());
+      } else {
+        Get.offAll(MyHomePage());
+      }
+    } else if (response.statusCode == 401) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("auth_token", "null");
+      Get.offAllNamed(Routes.SIGN_IN);
+    }
   }
 
   getOtherProfile({required String userid}) async {
@@ -300,7 +321,7 @@ class ProfileController extends GetxController {
     required String name,
     required String bio,
     required String lastName,
-    required String hisOrHer,
+    dynamic hisOrHer,
     required String designation,
     required String email,
     required String mobile,
@@ -312,6 +333,7 @@ class ProfileController extends GetxController {
         await updateUserDetailsApi.updateUserDetails(
             name: name,
             lastName: lastName,
+            hisOrHer: hisOrHer,
             bio: bio,
             designation: designation,
             email: email,
@@ -332,6 +354,7 @@ class ProfileController extends GetxController {
   }
 
   List<ListElement> notificationList = [];
+  RxInt notificationCount = 0.obs;
 
   getNotificationList() async {
     dio.Response<dynamic> response =
@@ -341,6 +364,7 @@ class ProfileController extends GetxController {
       NotificationListModel notificationListModel =
           NotificationListModel.fromJson(response.data);
       notificationList = notificationListModel.list;
+      notificationCount(notificationListModel.count);
     }
     update();
   }
