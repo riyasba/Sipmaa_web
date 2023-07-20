@@ -101,7 +101,7 @@ class _HomepageRespoState extends State<HomepageRespo> {
                                     },
                                     child: const CircleAvatar(
                                       backgroundImage: AssetImage(
-                                          'assets/icons/profile_icon.png'),
+                                          'assets/images/propic.jpg'),
                                       radius: 25,
                                     ),
                                   )

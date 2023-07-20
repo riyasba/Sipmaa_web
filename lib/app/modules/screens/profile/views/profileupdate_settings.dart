@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reg_login/app/responsive/view/public_profle_view/add_new_skills_page.dart';
 import 'package:reg_login/app/responsive/view/public_profle_view/profile_add_new_possition_view.dart';
@@ -156,7 +157,39 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                 final XFile? timage =
                     await _picker.pickImage(source: ImageSource.gallery);
 
-                var imageUnitData = await timage!.readAsBytes();
+                    
+                                     final croppedImage = await ImageCropper().cropImage(
+                      sourcePath: timage!.path,
+                        cropStyle: CropStyle.circle,
+                       aspectRatioPresets: [CropAspectRatioPreset.ratio5x4],
+                      uiSettings: [
+                        AndroidUiSettings(
+                            toolbarTitle: 'Cropper',
+                            toolbarColor: kblue,
+                            toolbarWidgetColor: Colors.white,
+                            initAspectRatio: CropAspectRatioPreset.original,
+                            lockAspectRatio: false),
+                        IOSUiSettings(
+                          title: 'Cropper',
+                        ),
+                          WebUiSettings(
+                          context: context,
+                         presentStyle: CropperPresentStyle.dialog,
+            boundary: const CroppieBoundary(
+              width: 520,
+              height: 450,
+            ),
+            viewPort:
+                const CroppieViewPort(width: 480, height: 480, type: 'circle'),
+            enableExif: true,
+            enableZoom: true,
+            showZoomer: true,
+                        ),
+                      ],
+                    );
+                                 
+
+                var imageUnitData = await croppedImage!.readAsBytes();
                 var tse = imageUnitData.toList();
 
                 profileController.updateProfilePic(media: tse);

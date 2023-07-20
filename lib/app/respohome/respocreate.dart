@@ -50,7 +50,8 @@ class _RespoCreateState extends State<RespoCreate> {
             mobile: Row(
               children: [
                 Expanded(
-                    flex: size.width > 1340 ? 8 : 10, child: CreateWidgetrespo()
+                    flex: size.width > 1340 ? 8 : 10, child:  CreateWidget(),
+                   // CreateWidgetrespo()
                     //  HomeContainer()
                     ),
               ],

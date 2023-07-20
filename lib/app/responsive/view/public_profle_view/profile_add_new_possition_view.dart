@@ -149,6 +149,8 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
         backgroundColor: kwhite,
       ),
       body: ListView(
+          primary: true,
+          scrollDirection: Axis.vertical,
         children: [
           const SizedBox(
             height: 5,

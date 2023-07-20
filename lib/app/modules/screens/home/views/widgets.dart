@@ -75,6 +75,9 @@ class _HomeContainerState extends State<HomeContainer> {
                     // ),
                   )
                 : ListView(
+                
+                    primary: true,
+          scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
                     children: [
@@ -475,7 +478,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                 ),
                                 ksizedbox10,
                                 Container(
-                                  width: size.width * 0.5,
+                                  width: size.width * 0.4,
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
@@ -520,7 +523,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                             ),
                                           ),
                                   ],
-                                ),
+                                ),ksizedbox10,
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20),

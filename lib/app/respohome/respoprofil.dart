@@ -55,7 +55,8 @@ class _RespoProfileState extends State<RespoProfile> {
             mobile: Row(
               children: [
                 Expanded(
-                    flex: size.width > 1340 ? 8 : 10, child:ProfilePage ()
+                    flex: size.width > 1340 ? 8 : 10, child:ProfileScreen()
+                    //ProfilePage ()
                     //  HomeContainer()
                     ),
               ],

@@ -129,6 +129,8 @@ class _AddNewSkillsViewState extends State<AddNewSkillsView> {
         backgroundColor: kwhite,
       ),
       body: ListView(
+          primary: true,
+          scrollDirection: Axis.vertical,
         children: [
           Padding(
             padding: const EdgeInsets.all(10.0),

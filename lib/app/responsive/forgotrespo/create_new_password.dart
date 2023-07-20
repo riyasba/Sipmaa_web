@@ -70,6 +70,8 @@ class _CreateNewPasswordState extends State<CreateNewPassword> {
       body: Padding(
         padding: const EdgeInsets.only(left: 45, right: 45, bottom: 20, top: 30),
         child: ListView(
+            primary: true,
+          scrollDirection: Axis.vertical,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,

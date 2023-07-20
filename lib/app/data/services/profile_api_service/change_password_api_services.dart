@@ -10,11 +10,11 @@ class ChangePasswordApiServices extends BaseApiService {
       required String condirmPassword}) async {
     dynamic responseJson;
     try {
-      var dio = Dio();
+    var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
       String? authtoken = prefs.getString("auth_token");
 
-      var response = await dio.get(changePasswordURL,
+      var response = await dio.get("$changePasswordURL?old_password=$oldPassword&password=$currentPassword&password_confirmation=$condirmPassword",
           options: Options(
               headers: {
                 'Accept': 'application/json',
@@ -24,12 +24,14 @@ class ChangePasswordApiServices extends BaseApiService {
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {
-            "old_password": oldPassword,
-            "password": currentPassword,
-            "password_confirmation": condirmPassword
-          });
-      print("::::::::<change password api>::::::::status code:::::${response.statusCode}");
+          // data: {
+          //   "old_password": oldPassword,
+          //   "password": currentPassword,
+          //   "password_confirmation": condirmPassword
+          // },
+          );
+      // print(
+      //     "::::::::<Respond Friend request>::::::::status code:::::$userId::$friendId::$status:");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

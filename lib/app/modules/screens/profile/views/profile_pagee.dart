@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:readmore/readmore.dart';
 import 'package:reg_login/app/data/components/controllers/posts_controller.dart';
@@ -57,11 +58,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     Container(
                       height: 220,
-                      width: MediaQuery.of(context).size.width * 0.874,
+                      width: MediaQuery.of(context).size.width ,
+                      //* 0.874,
                       child: Container(
                           color: kwhite,
                           height: 200,
-                          width: MediaQuery.of(context).size.width * 0.874,
+                          width: MediaQuery.of(context).size.width,
+                          // * 0.874,
                           child: profileController
                                       .profileData.first.user.backgroundImage ==
                                   null
@@ -85,7 +88,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           final XFile? timage = await _picker.pickImage(
                               source: ImageSource.gallery);
 
-                          var imagePath = await timage!.readAsBytes();
+
+                                   final croppedImage = await ImageCropper().cropImage(
+                      sourcePath: timage!.path,
+                       aspectRatioPresets: [CropAspectRatioPreset.ratio16x9],
+                      uiSettings: [
+                        AndroidUiSettings(
+                            toolbarTitle: 'Cropper',
+                            toolbarColor: kblue,
+                            toolbarWidgetColor: Colors.white,
+                            initAspectRatio: CropAspectRatioPreset.original,
+                            lockAspectRatio: false),
+                        IOSUiSettings(
+                          title: 'Cropper',
+                        ),
+                          WebUiSettings(
+                          context: context,
+                            boundary: const CroppieBoundary(
+              width: 520,
+              height: 450,
+            ),
+                          presentStyle: CropperPresentStyle.dialog,
+                            enableExif: true,
+            enableZoom: true,
+            showZoomer: true,
+                          viewPort: CroppieViewPort( width: 430, height: (400*0.4).round(), type: "square" )
+
+                        ),
+                      ],
+                    );
+
+                          var imagePath = await croppedImage!.readAsBytes();
 
                           profileController.updateProfileBackgoundPic(
                               media: imagePath);
@@ -177,7 +210,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                       await ImagePicker().getImage(
                                     source: ImageSource.gallery,
                                   );
-                                  imagePath = await pickedFile!.readAsBytes();
+
+                                     final croppedImage = await ImageCropper().cropImage(
+                      sourcePath: pickedFile!.path,
+                        cropStyle: CropStyle.circle,
+                       aspectRatioPresets: [CropAspectRatioPreset.original],
+                      uiSettings: [
+                        AndroidUiSettings(
+                            toolbarTitle: 'Cropper',
+                            toolbarColor: kblue,
+                            toolbarWidgetColor: Colors.white,
+                            initAspectRatio: CropAspectRatioPreset.original,
+                            lockAspectRatio: false),
+                        IOSUiSettings(
+                          title: 'Cropper',
+                        ),
+                          WebUiSettings(
+                          context: context,
+                         presentStyle: CropperPresentStyle.dialog,
+            boundary: const CroppieBoundary(
+              width: 520,
+              height: 450,
+            ),
+            viewPort:
+                const CroppieViewPort(width: 480, height: 480, type: 'circle'),
+            enableExif: true,
+            enableZoom: true,
+            showZoomer: true,
+                        ),
+                      ],
+                    );
+                                  imagePath = await croppedImage!.readAsBytes();
 
                                   profileController.updateProfilePic(
                                       media: imagePath);
@@ -665,6 +728,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                                       borderRadius:
                                                                           BorderRadius.circular(
                                                                               30)),
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsets.all(8.0),
+                                                                                child: Text(profileController
+                                                                                                                          .profileData
+                                                                                                                          .first
+                                                                                                                          .posts[index]
+                                                                                                                          .title),
+                                                                              ),
                                                                 )
                                                               : Image.network(
                                                                   profileController
@@ -741,7 +812,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                     Get.back();
                                                   },
                                                   child: const Icon(
-                                                    Icons.arrow_back,
+                                                    Icons.arrow_back_ios,
                                                     color: Colors.black,
                                                   ),
                                                 ),
@@ -773,22 +844,28 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                     );
                                   });
                             },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                color: Colors.white,
-                                child: profileController.profileData.first
-                                            .posts[index].body ==
-                                        ""
-                                    ? Text(profileController
-                                        .profileData.first.posts[index].title)
-                                    : Image.network(
-                                        profileController.profileData.first
-                                            .posts[index].body,
-                                        fit: BoxFit.cover,
-                                      ),
+                            child:Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  color: Colors.white,
+                                  child: profileController.profileData
+                                              .first.posts[index].body ==
+                                          ""
+                                      ? Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Text(profileController
+                                            .profileData
+                                            .first
+                                            .posts[index]
+                                            .title),
+                                      )
+                                      : Image.network(
+                                          profileController.profileData
+                                              .first.posts[index].body,
+                                          fit: BoxFit.cover,
+                                        ),
+                                ),
                               ),
-                            ),
                           );
                         })
           ],

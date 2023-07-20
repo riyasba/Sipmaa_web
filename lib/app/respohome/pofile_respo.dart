@@ -8,6 +8,7 @@ import 'package:reg_login/app/respohome/respoprofil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../data/components/controllers/profile_controller.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileRespo extends StatefulWidget {
   const ProfileRespo({super.key});
@@ -337,8 +338,11 @@ class _ProfileRespoState extends State<ProfileRespo> {
                                                   BorderRadius.circular(10.0),
                                             ),
                                           ),
-                                          onPressed: () {
-                                            Get.toNamed('/sign-in');
+                                          onPressed: () async{
+                                            final prefs = await SharedPreferences.getInstance();
+                          
+                          await prefs.setString("auth_token", "null");
+                                            Get.offAllNamed('/sign-in');
                                           },
                                           // Get.to(
 

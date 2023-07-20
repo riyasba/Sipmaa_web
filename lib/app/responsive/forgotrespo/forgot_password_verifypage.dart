@@ -73,12 +73,14 @@ class _ForgotpasswordverifiypageState extends State<Forgotpasswordverifiypage> {
       body: Padding(
         padding: const EdgeInsets.only(left: 45, right: 45, bottom: 20, top: 30),
         child: ListView(
+            primary: true,
+          scrollDirection: Axis.vertical,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [Image.asset('assets/images/WhatsApp Image 2023-07-05 at 19.03.11.jpg'),
                // kverifiyforgotimage,
-                Text(
+               const Text(
                   'Create New Password',
                   style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18),
                 ),

@@ -3,7 +3,9 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:get/get.dart';
 
@@ -141,6 +143,8 @@ class _RespoChatviewState extends State<RespoChatview> {
 
     Get.back();
   }
+  final FocusNode _focusNode = FocusNode();
+
 
   @override
   Widget build(BuildContext context) {
@@ -236,79 +240,99 @@ class _RespoChatviewState extends State<RespoChatview> {
              onWillPop: () {
                return getBack();
              },
-             child: GetBuilder<ChatController>(
-                 builder: (_) => Container(
-                       height: size.height - 50,
-                       child: StreamBuilder<QuerySnapshot>(
-                           stream: chatController.getChatMessage(
-                               widget.chatModel.chatId, 25),
-                           builder: (BuildContext context,
-                               AsyncSnapshot<QuerySnapshot> snapshot) {
-                             chatController.updateReadStatus(
-                                 widget.chatModel.chatId,
-                                 myProfileController
-                                     .profileData.first.user.id);
-                             chatController.makeActiveUser(
-                                 chatId: widget.chatModel.chatId,
-                                 userId: myProfileController
-                                     .profileData.first.user.id
-                                     .toString(),
-                                 status: true);
-                             if (snapshot.hasData) {
-                               if (isRealtime) {
-                                 chatController.listMessages =
-                                     snapshot.data!.docs;
-                               }
-                               if (chatController
-                                   .listMessages.isNotEmpty) {
-                                 return ListView.builder(
-                                     padding: const EdgeInsets.all(10),
-                                     itemCount: chatController
-                                         .listMessages.length,
-                                     reverse: true,
-                                     controller: scrollController,
-                                     itemBuilder: (context, index) =>
-                                         buildItem(
-                                             index,
-                                             chatController
-                                                 .listMessages[index]));
-                               } else {
-                                 return Center(
-                                   child: Padding(
-                                     padding: const EdgeInsets.only(
-                                         left: 30, right: 30),
-                                     child: Container(
-                                       height: 70,
-                                       width: size.width,
-                                       decoration: BoxDecoration(
-                                           color: Colors.blue[300],
-                                           borderRadius:
-                                               BorderRadius.circular(15)),
-                                       child: Column(
-                                         crossAxisAlignment:
-                                             CrossAxisAlignment.center,
-                                         children: [
-                                           const SizedBox(
-                                             height: 25,
-                                           ),
-                                           Text(
-                                             "Send a new message now",
-                                             style: primaryfont.copyWith(
-                                                 color: kwhite),
-                                           ),
-                                         ],
+             child: RawKeyboardListener(
+              autofocus: true,
+      focusNode: _focusNode,
+              onKey: (event) {
+                var offset = scrollController.offset;
+  if (event.logicalKey == LogicalKeyboardKey.arrowUp) {
+ 
+    setState(() {
+      scrollController.animateTo(offset + 200, duration: Duration(milliseconds: 30), curve: Curves.ease);
+     }); }else  if (event.logicalKey == LogicalKeyboardKey.arrowDown) {
+ 
+    setState(() {
+      scrollController.animateTo(offset - 200, duration: const Duration(milliseconds: 30), curve: Curves.ease);
+     }); }else  if (event.logicalKey == LogicalKeyboardKey.enter) {
+  print("------------------->>E nter");
+      onSendMessage(textEditingController.text,
+                                MessageType().text);}
+      },
+               child: GetBuilder<ChatController>(
+                   builder: (_) => Container(
+                         height: size.height - 50,
+                         child: StreamBuilder<QuerySnapshot>(
+                             stream: chatController.getChatMessage(
+                                 widget.chatModel.chatId, 25),
+                             builder: (BuildContext context,
+                                 AsyncSnapshot<QuerySnapshot> snapshot) {
+                               chatController.updateReadStatus(
+                                   widget.chatModel.chatId,
+                                   myProfileController
+                                       .profileData.first.user.id);
+                               chatController.makeActiveUser(
+                                   chatId: widget.chatModel.chatId,
+                                   userId: myProfileController
+                                       .profileData.first.user.id
+                                       .toString(),
+                                   status: true);
+                               if (snapshot.hasData) {
+                                 if (isRealtime) {
+                                   chatController.listMessages =
+                                       snapshot.data!.docs;
+                                 }
+                                 if (chatController
+                                     .listMessages.isNotEmpty) {
+                                   return ListView.builder(
+                                   
+                                       padding: const EdgeInsets.all(10),
+                                       itemCount: chatController
+                                           .listMessages.length,
+                                       reverse: true,
+                                       controller: scrollController,
+                                       itemBuilder: (context, index) =>
+                                           buildItem(
+                                               index,
+                                               chatController
+                                                   .listMessages[index]));
+                                 } else {
+                                   return Center(
+                                     child: Padding(
+                                       padding: const EdgeInsets.only(
+                                           left: 30, right: 30),
+                                       child: Container(
+                                         height: 70,
+                                         width: size.width,
+                                         decoration: BoxDecoration(
+                                             color: Colors.blue[300],
+                                             borderRadius:
+                                                 BorderRadius.circular(15)),
+                                         child: Column(
+                                           crossAxisAlignment:
+                                               CrossAxisAlignment.center,
+                                           children: [
+                                             const SizedBox(
+                                               height: 25,
+                                             ),
+                                             Text(
+                                               "Send a new message now",
+                                               style: primaryfont.copyWith(
+                                                   color: kwhite),
+                                             ),
+                                           ],
+                                         ),
                                        ),
                                      ),
-                                   ),
+                                   );
+                                 }
+                               } else {
+                                 return const Center(
+                                   child: CircularProgressIndicator(),
                                  );
                                }
-                             } else {
-                               return const Center(
-                                 child: CircularProgressIndicator(),
-                               );
-                             }
-                           }),
-                     )),
+                             }),
+                       )),
+             ),
            ),
           bottomNavigationBar: Container(
             height: 70,
@@ -328,6 +352,7 @@ class _RespoChatviewState extends State<RespoChatview> {
                           borderRadius: BorderRadius.circular(40)),
                       padding: const EdgeInsets.only(left: 15),
                       child: TextField(
+                        focusNode: _focusNode,
                         textAlignVertical: TextAlignVertical.center,
                         maxLines: 5,
                         minLines: 1,
@@ -349,7 +374,18 @@ class _RespoChatviewState extends State<RespoChatview> {
                             contentPadding: const EdgeInsets.all(15),
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(30))),
+                          
+                                onSubmitted: (val){
+                                                  
+    onSendMessage(textEditingController.text,
+                                MessageType().text);
+                                },
                         onChanged: (value) {},
+                        onEditingComplete: (){
+                                  
+    onSendMessage(textEditingController.text,
+                                MessageType().text);
+                        },
                       ),
                     ),
                     Padding(

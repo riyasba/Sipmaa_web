@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reg_login/app/data/components/controllers/posts_controller.dart';
 import 'package:reg_login/app/modules/screens/home/controler/controler.dart';
@@ -28,8 +29,40 @@ class _CreateWidgetState extends State<CreateWidget> {
     PickedFile? pickedFile = await ImagePicker().getImage(
       source: ImageSource.gallery,
     );
-    imagePath = await pickedFile!.readAsBytes();
+   
+    
+
+        final croppedImage = await ImageCropper().cropImage(
+                      sourcePath: pickedFile!.path,
+                       aspectRatioPresets: [CropAspectRatioPreset.ratio7x5],
+                      uiSettings: [
+                        AndroidUiSettings(
+                            toolbarTitle: 'Cropper',
+                            toolbarColor: kblue,
+                            toolbarWidgetColor: Colors.white,
+                            initAspectRatio: CropAspectRatioPreset.original,
+                            lockAspectRatio: false),
+                        IOSUiSettings(
+                          title: 'Cropper',
+                        ),
+                          WebUiSettings(
+                          context: context,
+                            boundary: const CroppieBoundary(
+              width: 520,
+              height: 400,
+            ),
+                          presentStyle: CropperPresentStyle.dialog,
+                            enableExif: true,
+            enableZoom: true,
+            showZoomer: true,
+                          viewPort: CroppieViewPort( width: 400, height: (400*0.5).round(), type: "square" )
+
+                        ),
+                      ],
+                    );
+                     imagePath = await croppedImage!.readAsBytes();
     setState(() {
+
       // imageName = pickedFile.path.split(".").last;
     });
     // Uint8List? bytesFromPicker = await ImagePickerWeb.getImageAsBytes();
@@ -40,6 +73,8 @@ class _CreateWidgetState extends State<CreateWidget> {
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+
     return Container(
       height: MediaQuery.of(context).size.height * 0.88,
       width: MediaQuery.of(context).size.width * 0.38,
@@ -126,7 +161,7 @@ class _CreateWidgetState extends State<CreateWidget> {
               height: MediaQuery.of(context).size.height * 0.42,
               width: MediaQuery.of(context).size.width * 0.26,
               decoration: BoxDecoration(
-                  color: kgrey.withOpacity(0.1),
+                  color: size.width > 600?  kgrey.withOpacity(0.1):kwhite,
                   borderRadius: BorderRadius.circular(10)),
               child: Center(
                 child: Row(
@@ -261,4 +296,4 @@ class _CreateWidgetState extends State<CreateWidget> {
   }
 }
 
-class MyHomePage {}
+

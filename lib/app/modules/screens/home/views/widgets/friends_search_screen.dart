@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:reg_login/app/data/components/constands/constands.dart';
-import 'package:reg_login/app/data/components/controllers/posts_controller.dart';
+
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
-import 'package:reg_login/app/data/components/search_field.dart';
+
 import 'package:velocity_x/velocity_x.dart';
 
 //import 'package:staggered_grid_view_flutter/staggered_grid_view_flutter.dart';

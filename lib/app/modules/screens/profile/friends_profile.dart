@@ -832,8 +832,8 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                                                       Get.back();
                                                     },
                                                     child: const Icon(
-                                                      Icons.arrow_back,
-                                                      color: Colors.black,
+                                                      Icons.arrow_back_ios,
+                                                      color: Color.fromARGB(255, 53, 41, 41),
                                                     ),
                                                   ),
                                                 ),
@@ -871,11 +871,14 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                                   child: profileController.otherUserProfileData
                                               .first.posts[index].body ==
                                           ""
-                                      ? Text(profileController
-                                          .otherUserProfileData
-                                          .first
-                                          .posts[index]
-                                          .title)
+                                      ? Padding(
+                                        padding: const EdgeInsets.all(12.0),
+                                        child: Text(profileController
+                                            .otherUserProfileData
+                                            .first
+                                            .posts[index]
+                                            .title),
+                                      )
                                       : Image.network(
                                           profileController.otherUserProfileData
                                               .first.posts[index].body,

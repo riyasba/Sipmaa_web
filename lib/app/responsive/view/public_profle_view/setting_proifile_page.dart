@@ -1,14 +1,10 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reg_login/app/responsive/view/public_profle_view/add_new_skills_page.dart';
 import 'package:reg_login/app/responsive/view/public_profle_view/profile_add_new_possition_view.dart';
-
 import '../../../data/components/constands/constands.dart';
 import '../../../data/components/controllers/profile_controller.dart';
-
 
 
 class SettingProfilePage extends StatefulWidget {

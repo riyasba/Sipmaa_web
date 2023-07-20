@@ -11,7 +11,7 @@ import 'package:reg_login/app/respohome/respoprofil.dart';
 
 import '../../data/components/constands/constands.dart';
 import '../../data/components/controllers/profile_controller.dart';
-import '../../responsive/view/profile_page.dart';
+
 import '../resposetings/respo_settings.dart';
 import '../respohome.dart';
 import '../searchrespo/saerchrespo.dart';
@@ -29,19 +29,115 @@ class _AppbarComnState extends State<AppbarComn> {
   final profileController = Get.find<ProfileController>();
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
     return AppBar(
       elevation: 0,
       backgroundColor: kwhite,
       //const Color(0xffCAE1FF),
-      leadingWidth: 100,
-      leading: Padding(
-        padding: const EdgeInsets.only(left: 5),
-        child: Image.asset(
-          'assets/images/logo.png',
-        ),
-      ),
-      actions: [
-        kwidth10,
+      
+     leadingWidth:size.width > 600 ? 100:0,
+      leading: size.width > 600 ?  Image.asset(
+        'assets/images/logo.png',width: 100,
+      ) : InkWell(onTap: (){   
+              {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return Dialog(
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.2,
+                        width: MediaQuery.of(context).size.width * 0.2,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(7),
+                          color: kwhite,
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 10),
+                          child: Column(
+                            children: [
+                              ksizedbox10,
+                              const Padding(
+                                padding: EdgeInsets.only(top: 15),
+                                child: Text(
+                                  'Do you want to Logout ?',
+                                  style:
+                                      TextStyle(fontWeight: FontWeight.w900),
+                                ),
+                              ),
+                              ksizedbox30,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  SizedBox(
+                                    height: 30,
+                                    width: 80,
+                                    child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor:
+                                              const Color(0xFF3C73B1),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Get.toNamed('/sign-in');
+                                        },
+                                        // Get.to(
+
+                                        // BottomNavigationBarExample(),
+                                        //);
+
+                                        child: const Text(
+                                          'Yes',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                  ),
+                                  SizedBox(
+                                    height: 30,
+                                    width: 80,
+                                    child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: const Color(
+                                            0xFF3C73B1,
+                                          ),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                        ),
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        // Get.to(
+
+                                        // BottomNavigationBarExample(),
+                                        //);
+
+                                        child: const Text(
+                                          'No',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        )),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                );
+              }
+          },
+        child: Icon(Icons.logout,color: kblue,)),
+      actions: [kwidth10,
+        
         IconButton(
             onPressed: () {
               Get.to(MyHomePage());
@@ -50,7 +146,7 @@ class _AppbarComnState extends State<AppbarComn> {
               Icons.home,
               color: kblue,
             )),
-        kwidth10,
+      size.width > 600 ?  kwidth10:SizedBox(),
         IconButton(
             onPressed: () {
               Get.to(RespoCreate());
@@ -59,7 +155,7 @@ class _AppbarComnState extends State<AppbarComn> {
               Icons.add_a_photo_outlined,
               color: kblue,
             )),
-        kwidth10,
+     size.width > 600 ?  kwidth10:SizedBox(),
         IconButton(
             onPressed: () {
               Get.to(RespoSrech());
@@ -68,7 +164,7 @@ class _AppbarComnState extends State<AppbarComn> {
               Icons.search,
               color: kblue,
             )),
-        kwidth10,
+       size.width > 600 ?  kwidth10:SizedBox(),
         // IconButton(
         //     onPressed: () {
         //       Get.to(RespoChat());
@@ -181,7 +277,7 @@ class _AppbarComnState extends State<AppbarComn> {
                     }
                   });
         }),
-        kwidth10,
+      size.width > 600 ?  kwidth10:SizedBox(),
         IconButton(
             onPressed: () {
               Get.to(RespSetings());
@@ -190,7 +286,7 @@ class _AppbarComnState extends State<AppbarComn> {
               Icons.settings_outlined,
               color: kblue,
             )),
-        kwidth10,
+     size.width > 600 ?  kwidth10:SizedBox(),
         GetBuilder<ProfileController>(builder: (_) {
           return profileController.profileData.isEmpty
               ? IconButton(
@@ -237,7 +333,7 @@ class _AppbarComnState extends State<AppbarComn> {
                   ),
                 );
         }),
-        kwidth10,
+      size.width > 600 ?  kwidth10:SizedBox(),
         InkWell(
           onTap: () {
             Get.to(RespoProfile());
