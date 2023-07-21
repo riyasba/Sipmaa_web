@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:readmore/readmore.dart';
 import 'package:reg_login/app/responsive/view/public_profle_view/add_new_skills_page.dart';
 import 'package:reg_login/app/responsive/view/public_profle_view/profile_add_new_possition_view.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -107,8 +108,9 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
 
   @override
   Widget build(BuildContext context) {
+    var size=MediaQuery.of(context).size;
     return Container(
-      height: 1100,
+    //  height: 1100,
       width: 700,
       child: GetBuilder<ProfileController>(builder: (_) {
         return Column(
@@ -157,37 +159,35 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                 final XFile? timage =
                     await _picker.pickImage(source: ImageSource.gallery);
 
-                    
-                                     final croppedImage = await ImageCropper().cropImage(
-                      sourcePath: timage!.path,
-                        cropStyle: CropStyle.circle,
-                       aspectRatioPresets: [CropAspectRatioPreset.ratio5x4],
-                      uiSettings: [
-                        AndroidUiSettings(
-                            toolbarTitle: 'Cropper',
-                            toolbarColor: kblue,
-                            toolbarWidgetColor: Colors.white,
-                            initAspectRatio: CropAspectRatioPreset.original,
-                            lockAspectRatio: false),
-                        IOSUiSettings(
-                          title: 'Cropper',
-                        ),
-                          WebUiSettings(
-                          context: context,
-                         presentStyle: CropperPresentStyle.dialog,
-            boundary: const CroppieBoundary(
-              width: 520,
-              height: 450,
-            ),
-            viewPort:
-                const CroppieViewPort(width: 480, height: 480, type: 'circle'),
-            enableExif: true,
-            enableZoom: true,
-            showZoomer: true,
-                        ),
-                      ],
-                    );
-                                 
+                final croppedImage = await ImageCropper().cropImage(
+                  sourcePath: timage!.path,
+                  cropStyle: CropStyle.circle,
+                  aspectRatioPresets: [CropAspectRatioPreset.ratio5x4],
+                  uiSettings: [
+                    AndroidUiSettings(
+                        toolbarTitle: 'Cropper',
+                        toolbarColor: kblue,
+                        toolbarWidgetColor: Colors.white,
+                        initAspectRatio: CropAspectRatioPreset.original,
+                        lockAspectRatio: false),
+                    IOSUiSettings(
+                      title: 'Cropper',
+                    ),
+                    WebUiSettings(
+                      context: context,
+                      presentStyle: CropperPresentStyle.dialog,
+                      boundary: const CroppieBoundary(
+                        width: 400,
+                        height: 300,
+                      ),
+                      viewPort: const CroppieViewPort(
+                          width: 200, height: 200, type: 'circle'),
+                      enableExif: true,
+                      enableZoom: true,
+                      showZoomer: true,
+                    ),
+                  ],
+                );
 
                 var imageUnitData = await croppedImage!.readAsBytes();
                 var tse = imageUnitData.toList();
@@ -278,95 +278,224 @@ class _SettingProfilePagewebState extends State<SettingProfilePageweb> {
                     const SizedBox(
                       height: 10,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Current Position",
-                            style: primaryfont.copyWith(
-                                fontWeight: FontWeight.w500, fontSize: 16),
-                          ),
-                        ],
-                      ),
+              ksizedbox30,
+
+              //   const SizedBox(
+              //   height: 10,
+              // ),
+              const Divider(
+                thickness: 1,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, bottom: 5),
+                    child: Text(
+                      "About me",
+                      style: primaryfont.copyWith(
+                          color: const Color.fromARGB(214, 19, 18, 18),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
                     ),
-                    for (int i = 0;
-                        i <
-                            profileController
-                                .profileData.first.positions.length;
-                        i++)
-                      Padding(
-                        padding: const EdgeInsets.only(left: 15, top: 10),
-                        child: Container(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
+                  ),
+                ],
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Container(
+                    width: size.width,
+                    alignment: Alignment.centerLeft,
+                    child: ReadMoreText(
+                      profileController.profileData.first.user.bio ?? "",
+                      trimLines: 2,
+                      colorClickableText: Colors.black,
+                      trimMode: TrimMode.Line,
+                      trimCollapsedText: 'show more',
+                      trimExpandedText: ' show less',
+                      lessStyle: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.bold),
+                      moreStyle: const TextStyle(
+                          fontSize: 14, fontWeight: FontWeight.bold),
+                    ),
+                  )),
+
+              const SizedBox(
+                height: 10,
+              ),
+              const Divider(
+                thickness: 1,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, bottom: 5),
+                    child: Text(
+                      "Current Company",
+                      style: primaryfont.copyWith(
+                          color: const Color.fromARGB(214, 19, 18, 18),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(profileController
+                              .profileData.first.user.currentCompany ??
+                          ""),
+                    ],
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
+              const Divider(
+                thickness: 1,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, bottom: 5),
+                    child: Text(
+                      "Designation",
+                      style: primaryfont.copyWith(
+                          color: const Color.fromARGB(214, 19, 18, 18),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+
+              Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(profileController
+                              .profileData.first.user.designation ??
+                          ""),
+                    ],
+                  )),
+
+              const SizedBox(
+                height: 10,
+              ),
+              const Divider(
+                thickness: 1,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, bottom: 5),
+                    child: Text(
+                      "Previous Company",
+                      style: primaryfont.copyWith(
+                          color: const Color.fromARGB(214, 19, 18, 18),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+              Padding(
+                  padding: const EdgeInsets.only(left: 20, right: 10),
+                  child: Container(
+                    width: size.width,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (int i = 0;
+                            i <
                                 profileController
-                                    .profileData.first.positions[i].title,
-                                style: primaryfont.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 16,
+                                    .profileData.first.positions.length;
+                            i++)
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  profileController.profileData.first
+                                      .positions[i].companyName
+                                      .toUpperCase(),
+                                  style: primaryfont.copyWith(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600),
                                 ),
-                              ),
-                              ksizedbox10,
-                              Row(
-                                children: [
-                                  Text(
-                                    profileController.profileData.first
-                                        .positions[i].companyName,
-                                    style: primaryfont.copyWith(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  ksizedbox10,
-                                  Text(" . "),
-                                  Text(
-                                    profileController.profileData.first
-                                        .positions[i].employmentType,
-                                    style: primaryfont.copyWith(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ],
-                              ),
-                              ksizedbox10,
-                              Row(
-                                children: [
-                                  Text(
-                                    profileController.profileData.first
-                                        .positions[i].startDate,
-                                    style: primaryfont.copyWith(
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                  ksizedbox10,
-                                  Text(" - "),
-                                  Text(
-                                    profileController.profileData.first
-                                            .positions[i].endDate ??
-                                        "on going",
-                                    style: primaryfont.copyWith(
-                                        fontSize: 14,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ],
-                              ),
-                              ksizedbox10,
-                              Text(
-                                profileController
-                                    .profileData.first.positions[i].location,
-                                style: primaryfont.copyWith(
-                                    fontSize: 15, fontWeight: FontWeight.w500),
-                              ),
-                            ],
+                                Text(
+                                  profileController.profileData.first
+                                              .positions[i].departmentName ==
+                                          "Others"
+                                      ? profileController.profileData.first
+                                          .positions[i].otherDepartmentName
+                                      : profileController.profileData.first
+                                          .positions[i].departmentName,
+                                  style: primaryfont.copyWith(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Text(
+                                  "${profileController.profileData.first.positions[i].location}.",
+                                  style: primaryfont.copyWith(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Text(
+                                  "${profileController.profileData.first.positions[i].startDate} - ${profileController.profileData.first.positions[i].endDate == "" ? "On going" : profileController.profileData.first.positions[i].endDate} ",
+                                  style: primaryfont.copyWith(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Text(
+                                  "${profileController.profileData.first.positions[i].employmentType}.",
+                                  style: primaryfont.copyWith(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                const SizedBox(
+                                  height: 9,
+                                ),
+                                const Divider(
+                                  thickness: 0.5,
+                                ),
+                                const SizedBox(
+                                  height: 3,
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                      ),
-                    const SizedBox(
-                      height: 5,
+                      ],
                     ),
+                  )),
+              const SizedBox(
+                height: 10,
+              ),
+              // const Divider(
+              //   thickness: 1,
+              // ),
+              const SizedBox(
+                height: 10,
+              ),
                     Row(
                       children: [
                         Padding(

@@ -301,8 +301,8 @@ class _ProfileRespoState extends State<ProfileRespo> {
                     context: context,
                     builder: (context) {
                       return Dialog(
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * 0.2,
+                        child: Container(height: 150,
+                       //   height: MediaQuery.of(context).size.height * 0.2,
                           width: MediaQuery.of(context).size.width * 0.2,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(7),

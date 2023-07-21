@@ -39,6 +39,7 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
   var descriptionController = TextEditingController();
   var othersController = TextEditingController();
   var designationControllers = TextEditingController();
+    var othersDepartmentController = TextEditingController();
   var requiremtsSelected;
 
   @override
@@ -157,7 +158,7 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
           ),
 
           //dropdown
-          Padding(
+                Padding(
             padding: const EdgeInsets.all(10.0),
             child: TextField(
               decoration: InputDecoration(
@@ -170,12 +171,189 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
             ),
           ),
 
+          // GetBuilder<AuthController>(builder: (_) {
+          //   return Padding(
+          //     padding: const EdgeInsets.fromLTRB(10.0, 15, 10, 0),
+          //     child: Column(
+          //       crossAxisAlignment: CrossAxisAlignment.start,
+          //       children: [
+          //         // Padding(
+          //         //   padding: const EdgeInsets.all(8.0),
+          //         //   child: Row(
+          //         //     children: [
+          //         //       const Text(
+          //         //         "Industries",
+          //         //       ),
+          //         //       Text(
+          //         //         "*",
+          //         //         style: primaryfont.copyWith(color: Colors.red),
+          //         //       ),
+          //         //     ],
+          //         //   ),
+          //         // ),
+          //         // Container(
+          //         //   height: 50,
+          //         //   width: 330,
+          //         //   decoration: BoxDecoration(
+          //         //       borderRadius: BorderRadius.circular(10),
+          //         //       border: Border.all(
+          //         //           color: const Color.fromARGB(
+          //         //                   255, 158, 158, 158)
+          //         //               .withOpacity(0.2))),
+          //         //   child: Padding(
+          //         //     padding: const EdgeInsets.only(
+          //         //         left: 10, right: 10, top: 10),
+          //         //     child: DropdownButton<Department>(
+          //         //       value: designation,
+          //         //       isExpanded: true,
+          //         //       icon: const Icon(
+          //         //           Icons.keyboard_arrow_down_outlined),
+          //         //       elevation: 0,
+          //         //       itemHeight: 55,
+          //         //       isDense: true,
+          //         //       dropdownColor: Colors.grey[250],
+          //         //       style: const TextStyle(color: Colors.black54),
+          //         //       hint: const Text(
+          //         //         "Department",
+          //         //         style: TextStyle(fontSize: 14),
+          //         //       ),
+          //         //       onChanged: (Department? value) {
+          //         //         // This is called when the user selects an item.
+          //         //         setState(() {
+          //         //           authController
+          //         //               .isDesignationSelected(false);
+          //         //           designation = value!;
+          //         //         });
+          //         //       },
+          //         //       items: authController.departments
+          //         //           .map<DropdownMenuItem<Department>>(
+          //         //               (Department value) {
+          //         //         return DropdownMenuItem<Department>(
+          //         //           value: value,
+          //         //           child: Text(value.title),
+          //         //         );
+          //         //       }).toList(),
+          //         //     ),
+          //         //   ),
+          //         // ),
+          //         Padding(
+          //           padding: const EdgeInsets.only(left: 0, right: 0),
+          //           child: Container(
+          //             height: 56,
+          //             child: DropdownSearch<Industry>(
+          //               itemAsString: (Industry u) => u.name,
+          //               popupProps: PopupProps.menu(
+          //                 showSelectedItems: false,
+          //                 showSearchBox: true,
+          //                 menuProps: MenuProps(
+          //                     borderRadius: BorderRadius.circular(10)),
+          //                 searchFieldProps: const TextFieldProps(),
+          //               ),
+          //               items: authController.industriesList,
+          //               dropdownDecoratorProps: DropDownDecoratorProps(
+          //                 dropdownSearchDecoration: InputDecoration(
+          //                     // labelText: "Department *",
+          //                     hintText: "Industries",
+          //                     border: OutlineInputBorder(
+          //                         borderRadius: BorderRadius.circular(15))),
+          //               ),
+          //               onChanged: (value) {
+          //                 setState(() {
+          //                   authController.isInduaturesSelected(false);
+          //                   industries = value!;
+          //                 });
+          //               },
+          //               // selectedItem: selectedState,
+          //             ),
+          //           ),
+          //         ),
+
+          //         const SizedBox(
+          //           height: 5,
+          //         ),
+          //         Obx(
+          //           () => authController.isInduaturesSelected.isTrue
+          //               ? const Padding(
+          //                   padding: EdgeInsets.only(left: 15),
+          //                   child: Text(
+          //                     "Please select Industries",
+          //                     style: TextStyle(
+          //                         color: Color.fromARGB(255, 230, 46, 33),
+          //                         fontSize: 12),
+          //                   ),
+          //                 )
+          //               : Container(),
+          //         )
+          //       ],
+          //     ),
+          //   );
+          // }),
+
           GetBuilder<AuthController>(builder: (_) {
             return Padding(
               padding: const EdgeInsets.fromLTRB(10.0, 5, 10, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Padding(
+                  //   padding: const EdgeInsets.all(8.0),
+                  //   child: Row(
+                  //     children: [
+                  //       const Text(
+                  //         "Department",
+                  //       ),
+                  //       Text(
+                  //         "*",
+                  //         style: primaryfont.copyWith(color: Colors.red),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
+                  // Container(
+                  //   height: 50,
+                  //   width: 330,
+                  //   decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(10),
+                  //       border: Border.all(
+                  //           color: const Color.fromARGB(
+                  //                   255, 158, 158, 158)
+                  //               .withOpacity(0.2))),
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.only(
+                  //         left: 10, right: 10, top: 10),
+                  //     child: DropdownButton<Department>(
+                  //       value: designation,
+                  //       isExpanded: true,
+                  //       icon: const Icon(
+                  //           Icons.keyboard_arrow_down_outlined),
+                  //       elevation: 0,
+                  //       itemHeight: 55,
+                  //       isDense: true,
+                  //       dropdownColor: Colors.grey[250],
+                  //       style: const TextStyle(color: Colors.black54),
+                  //       hint: const Text(
+                  //         "Department",
+                  //         style: TextStyle(fontSize: 14),
+                  //       ),
+                  //       onChanged: (Department? value) {
+                  //         // This is called when the user selects an item.
+                  //         setState(() {
+                  //           authController
+                  //               .isDesignationSelected(false);
+                  //           designation = value!;
+                  //         });
+                  //       },
+                  //       items: authController.departments
+                  //           .map<DropdownMenuItem<Department>>(
+                  //               (Department value) {
+                  //         return DropdownMenuItem<Department>(
+                  //           value: value,
+                  //           child: Text(value.title),
+                  //         );
+                  //       }).toList(),
+                  //     ),
+                  //   ),
+                  // ),
                   Padding(
                     padding: const EdgeInsets.only(left: 0, right: 0),
                     child: Container(
@@ -207,6 +385,7 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
                       ),
                     ),
                   ),
+
                   const SizedBox(
                     height: 5,
                   ),
@@ -227,7 +406,19 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
               ),
             );
           }),
-
+          if (department != null && department.title == "Others")
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: TextField(
+                decoration: InputDecoration(
+                    hintText: 'Enter Department',
+                    labelText: "Others",
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: const BorderSide(color: Colors.black))),
+                controller: othersDepartmentController,
+              ),
+            ),
           if (department != null && department.title == "HR Department")
             const SizedBox(
               height: 10,
@@ -235,6 +426,21 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
           if (department != null && department.title == "HR Department")
             Column(
               children: [
+                // Padding(
+                //   padding: const EdgeInsets.only(left: 15, bottom: 8, top: 3),
+                //   child: Row(
+                //     children: [
+                //       const Text(
+                //         "Recruitment",
+                //       ),
+                //       Text(
+                //         "*",
+                //         style: primaryfont.copyWith(color: Colors.red),
+                //       ),
+                //     ],
+                //   ),
+                // ),
+
                 GetBuilder<AuthController>(builder: (_) {
                   return Padding(
                     padding: const EdgeInsets.only(left: 10, right: 10),
@@ -327,12 +533,68 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
               ),
             ),
           ),
-
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 10, right: 10),
+          //   child: Container(
+          //     height: 60,
+          //     width: 330,
+          //     // padding: EdgeInsets.all(2),
+          //     decoration: BoxDecoration(
+          //         borderRadius: BorderRadius.circular(10),
+          //         border: Border.all(
+          //             color: const Color.fromARGB(255, 12, 12, 12)
+          //                 .withOpacity(0.4))),
+          //     child: Padding(
+          //       padding: const EdgeInsets.only(left: 10, right: 10, top: 16),
+          //       child: DropdownButton<String>(
+          //         value: employement,
+          //         isExpanded: true,
+          //         icon: const Icon(Icons.keyboard_arrow_down_outlined),
+          //         elevation: 0,
+          //         itemHeight: 55,
+          //         isDense: true,
+          //         dropdownColor: Colors.grey[250],
+          //         style: const TextStyle(color: Colors.black54),
+          //         hint: const Text(
+          //           "Employment Type",
+          //           style: TextStyle(fontSize: 14),
+          //         ),
+          //         onChanged: (String? value) {
+          //           // This is called when the user selects an item.
+          //           setState(() {
+          //             employement = value!;
+          //           });
+          //         },
+          //         items: employementType
+          //             .map<DropdownMenuItem<String>>((String value) {
+          //           return DropdownMenuItem<String>(
+          //             value: value,
+          //             child: Text(value),
+          //           );
+          //         }).toList(),
+          //       ),
+          //     ),
+          //   ),
+          // ),
           const SizedBox(
             height: 10,
           ),
           Column(
             children: [
+              // Padding(
+              //   padding: const EdgeInsets.only(left: 15, bottom: 8, top: 3),
+              //   child: Row(
+              //     children: [
+              //       const Text(
+              //         "Location",
+              //       ),
+              //       Text(
+              //         "*",
+              //         style: primaryfont.copyWith(color: Colors.red),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               GetBuilder<AuthController>(builder: (_) {
                 return Padding(
                   padding: const EdgeInsets.only(left: 10, right: 10),
@@ -397,7 +659,7 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
               readOnly: true,
               decoration: InputDecoration(
                   hintText: 'End Date',
-                  labelText: "End Date (optional)",
+                  labelText: "End Date",
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: const BorderSide(color: Colors.black))),
@@ -436,7 +698,11 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
                       Get.rawSnackbar(
                           message: "Enter start date",
                           backgroundColor: Colors.red);
-                    } else if (employement == null) {
+                    } else if (endDateController.text.isEmpty) {
+                      Get.rawSnackbar(
+                          message: "Enter End date",
+                          backgroundColor: Colors.red);
+                    }  else if (employement == null) {
                       Get.rawSnackbar(
                           message: "Select employement type",
                           backgroundColor: Colors.red);
@@ -445,21 +711,24 @@ class _ProfileAddNewPossitonViewState extends State<ProfileAddNewPossitonView> {
                           message: "Enter Designation",
                           backgroundColor: Colors.red);
                     } else {
-                      AddPositonsModel addPositonsModel = AddPositonsModel(
-                          department: department.id.toString(),
+                         AddPositonsModel addPositonsModel = AddPositonsModel(
+                          department: department == null
+                              ? null
+                              : department.id.toString(),
                           designation: designationControllers.text,
-                          requireMents: requiremtsSelected.id.toString(),
+                          requireMents: requiremtsSelected == null
+                              ? null
+                              : requiremtsSelected.id.toString(),
                           others: othersController.text,
                           company_name: companyNameController.text,
                           employment_type: employement,
                           end_date: endDateController.text.isEmpty
                               ? "null"
                               : endDateController.text,
-                          industry_name: "0",
+                          industry_name: "",
                           location: locationController.text,
-                          start_date: startDateController.text,
-                          description: '',
-                          title: '');
+                          othersdepartment: othersDepartmentController.text,
+                          start_date: startDateController.text);
 
                       profileController.addPositions(
                           addPostionsModel: addPositonsModel,

@@ -21,6 +21,7 @@ class _RegistersplashState extends State<Registersplash> {
 
   toHomePage() async {
     await Future.delayed(const Duration(seconds: 3));
+    
 
     Get.offAllNamed(Routes.SIGN_IN);
   }

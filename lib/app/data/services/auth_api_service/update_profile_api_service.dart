@@ -23,15 +23,17 @@ class ProfileUpdateServicesApi extends BaseApiService {
                 return status! <= 500;
               }),
           data: {
-            "current_company": profileUpdateModel.currentCompany,
+             "current_company": profileUpdateModel.currentCompany,
             "designation": profileUpdateModel.department,
             "department": profileUpdateModel.designation,
+            "recruitment": profileUpdateModel.requirement,
             "industry_name": profileUpdateModel.industries,
             "official_email": profileUpdateModel.officialEmail,
             "address": profileUpdateModel.address,
             "pincode": profileUpdateModel.pincode,
             "city": profileUpdateModel.city,
-            "state": profileUpdateModel.state
+            "state": profileUpdateModel.state,
+            "other_department": profileUpdateModel.othersdepartment
           });
       print("::::::::<Update Profile>::::::::status code::::::::::");
       print(response.statusCode);

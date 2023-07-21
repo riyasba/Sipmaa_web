@@ -47,6 +47,8 @@ class _RegisterViewsState extends State<RegisterViews> {
   // final createPassKey = GlobalKey<FormState>();
   final authController = Get.find<AuthController>();
 
+   final GlobalKey<State> _dialogKey = GlobalKey<State>();
+
   @override
   void initState() {
     super.initState();
@@ -61,6 +63,7 @@ class _RegisterViewsState extends State<RegisterViews> {
       barrierDismissible: false, // user must tap button!
       builder: (BuildContext context) {
         return AlertDialog(
+          key: _dialogKey,
           title: const Text('Verify your email'),
           content: SingleChildScrollView(
             child: ListBody(
@@ -107,7 +110,7 @@ class _RegisterViewsState extends State<RegisterViews> {
           isEmailVerified = true;
         });
         timer.cancel();
-        Get.back();
+        Navigator.of(_dialogKey.currentContext!).pop();
       }
     });
 
@@ -613,27 +616,7 @@ class _RegisterViewsState extends State<RegisterViews> {
                                         ),
                                       ),
                                       onPressed: () {
-                                        RegisterModel registerModel =
-                                            RegisterModel(
-                                                email: emailIdController.text,
-                                                lastname:
-                                                    lastNameController.text,
-                                                mobile:
-                                                    phoneNumberController.text,
-                                                name: firstNameController.text,
-                                                username:
-                                                    userNameController.text,
-                                                passwordConfirmation:
-                                                    confirmPasswordController
-                                                        .text,
-                                                password:
-                                                    createPassWordController
-                                                        .text);
-
-                                        authController.registerUser(
-                                            registerModel, false);
-
-                                        //Get.toNamed('/otp-views');
+                                    
                                       },
                                       // Get.off(otp_page());
 

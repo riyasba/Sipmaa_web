@@ -29,12 +29,13 @@ class ProfileModel {
     required this.user,
     required this.posts,
     required this.totalFriends,
-    required this.departmentName,
     required this.isFriend,
     required this.totalLikes,
     required this.totalPosts,
     required this.positions,
+    required this.departmentName,
     required this.skills,
+   
   });
 
   factory ProfileModel.fromJson(Map<String, dynamic> json) => ProfileModel(
@@ -44,8 +45,9 @@ class ProfileModel {
         totalFriends: json["total_friends"],
         isFriend: json["is_friend"],
         totalLikes: json["total_likes"],
-           departmentName: json["department_name"],
         totalPosts: json["total_posts"],
+       
+        departmentName: json["department_name"],
         positions: List<Position>.from(
             json["positions"].map((x) => Position.fromJson(x))),
         skills: List<Skill>.from(json["skills"].map((x) => Skill.fromJson(x))),
@@ -93,6 +95,7 @@ class User {
   String status;
   DateTime createdAt;
   DateTime updatedAt;
+  dynamic otherDepartment;
 
   User({
     required this.id,
@@ -125,6 +128,7 @@ class User {
     required this.status,
     required this.createdAt,
     required this.updatedAt,
+    this.otherDepartment,
   });
 
   factory User.fromJson(Map<String, dynamic> json) => User(
@@ -134,6 +138,7 @@ class User {
         hisHer: json["his_her"],
         email: json["email"],
         mobile: json["mobile"],
+       otherDepartment: json['other_department'],
         backgroundImage: json["backround_image"],
         isVerrifiedMobile: json["is_verrified_mobile"],
         lastName: json["last_name"] ?? "",
@@ -198,6 +203,8 @@ class Position {
   String title;
   String employmentType;
   String companyName;
+  String departmentName;
+  String otherDepartmentName;
   String location;
   String startDate;
   String? endDate;
@@ -211,6 +218,8 @@ class Position {
     required this.userId,
     required this.title,
     required this.employmentType,
+    required this.departmentName,
+    required this.otherDepartmentName,
     required this.companyName,
     required this.location,
     required this.startDate,
@@ -226,7 +235,9 @@ class Position {
         userId: json["user_id"],
         title: json["title"] ?? "",
         employmentType: json["employment_type"] ?? "",
+        otherDepartmentName: json["other_department"] ?? "",
         companyName: json["company_name"] ?? "",
+        departmentName: json["name_depart"] ?? "",
         location: json["location"] ?? "",
         startDate: json["start_date"] ?? "",
         endDate: json["end_date"] ?? "",

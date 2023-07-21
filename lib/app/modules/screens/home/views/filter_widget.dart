@@ -56,8 +56,8 @@ class _FillterWidgetState extends State<FillterWidget> {
               children: [
                 Column(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.all(18.0),
+                    const Padding(
+                      padding: EdgeInsets.all(18.0),
                       child: Row(
                         children: [
                           Text(

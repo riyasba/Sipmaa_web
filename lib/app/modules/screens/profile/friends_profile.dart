@@ -423,14 +423,15 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
               const SizedBox(
                 height: 10,
               ),
-              Row(
+
+            Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(left: 20, bottom: 5),
                     child: Text(
-                      "About",
+                      "About me",
                       style: primaryfont.copyWith(
-                          color: Color.fromARGB(214, 19, 18, 18),
+                          color: const Color.fromARGB(214, 19, 18, 18),
                           fontSize: 16,
                           fontWeight: FontWeight.w600),
                     ),
@@ -443,8 +444,7 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                     width: size.width,
                     alignment: Alignment.centerLeft,
                     child: ReadMoreText(
-                      profileController.otherUserProfileData.first.user.bio ??
-                          "",
+                      profileController.otherUserProfileData.first.user.bio ?? "",
                       trimLines: 2,
                       colorClickableText: Colors.black,
                       trimMode: TrimMode.Line,
@@ -456,6 +456,7 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                           fontSize: 14, fontWeight: FontWeight.bold),
                     ),
                   )),
+
               const SizedBox(
                 height: 10,
               ),
@@ -465,7 +466,6 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
               const SizedBox(
                 height: 10,
               ),
-
               Row(
                 children: [
                   Padding(
@@ -499,7 +499,6 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
               const SizedBox(
                 height: 10,
               ),
-              
               Row(
                 children: [
                   Padding(
@@ -507,7 +506,7 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                     child: Text(
                       "Designation",
                       style: primaryfont.copyWith(
-                          color: Color.fromARGB(214, 19, 18, 18),
+                          color: const Color.fromARGB(214, 19, 18, 18),
                           fontSize: 16,
                           fontWeight: FontWeight.w600),
                     ),
@@ -554,19 +553,221 @@ class _FriendsProfileScreenState extends State<FriendsProfileScreen> {
                   padding: const EdgeInsets.only(left: 20, right: 10),
                   child: Container(
                     width: size.width,
-                    child: Row(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         for (int i = 0;
                             i <
-                                profileController.otherUserProfileData.first
-                                    .positions.length;
+                                profileController
+                                    .otherUserProfileData.first.positions.length;
                             i++)
-                          Text(
-                              "${profileController.otherUserProfileData.first.positions[i].companyName},"),
+                          Padding(
+                            padding: const EdgeInsets.only(bottom: 5),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  profileController.otherUserProfileData.first
+                                      .positions[i].companyName
+                                      .toUpperCase(),
+                                  style: primaryfont.copyWith(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                                Text(
+                                  profileController.otherUserProfileData.first
+                                              .positions[i].departmentName ==
+                                          "Others"
+                                      ? profileController.otherUserProfileData.first
+                                          .positions[i].otherDepartmentName
+                                      : profileController.otherUserProfileData.first
+                                          .positions[i].departmentName,
+                                  style: primaryfont.copyWith(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Text(
+                                  "${profileController.otherUserProfileData.first.positions[i].location}.",
+                                  style: primaryfont.copyWith(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Text(
+                                  "${profileController.otherUserProfileData.first.positions[i].startDate} - ${profileController.otherUserProfileData.first.positions[i].endDate == "" ? "On going" : profileController.otherUserProfileData.first.positions[i].endDate} ",
+                                  style: primaryfont.copyWith(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                Text(
+                                  "${profileController.otherUserProfileData.first.positions[i].employmentType}.",
+                                  style: primaryfont.copyWith(
+                                      color: Colors.black,
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                                const SizedBox(
+                                  height: 9,
+                                ),
+                                // const Divider(
+                                //   thickness: 0.5,
+                                // ),
+                                const SizedBox(
+                                  height: 3,
+                                ),
+                              ],
+                            ),
+                          ),
                       ],
                     ),
                   )),
+
+
+              // Row(
+              //   children: [
+              //     Padding(
+              //       padding: const EdgeInsets.only(left: 20, bottom: 5),
+              //       child: Text(
+              //         "About",
+              //         style: primaryfont.copyWith(
+              //             color: Color.fromARGB(214, 19, 18, 18),
+              //             fontSize: 16,
+              //             fontWeight: FontWeight.w600),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Padding(
+              //     padding: const EdgeInsets.only(left: 20),
+              //     child: Container(
+              //       width: size.width,
+              //       alignment: Alignment.centerLeft,
+              //       child: ReadMoreText(
+              //         profileController.otherUserotherUserProfileData.first.user.bio ??
+              //             "",
+              //         trimLines: 2,
+              //         colorClickableText: Colors.black,
+              //         trimMode: TrimMode.Line,
+              //         trimCollapsedText: 'show more',
+              //         trimExpandedText: ' show less',
+              //         lessStyle: const TextStyle(
+              //             fontSize: 14, fontWeight: FontWeight.bold),
+              //         moreStyle: const TextStyle(
+              //             fontSize: 14, fontWeight: FontWeight.bold),
+              //       ),
+              //     )),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // const Divider(
+              //   thickness: 1,
+              // ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+
+              // Row(
+              //   children: [
+              //     Padding(
+              //       padding: const EdgeInsets.only(left: 20, bottom: 5),
+              //       child: Text(
+              //         "Current Company",
+              //         style: primaryfont.copyWith(
+              //             color: const Color.fromARGB(214, 19, 18, 18),
+              //             fontSize: 16,
+              //             fontWeight: FontWeight.w600),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Padding(
+              //     padding: const EdgeInsets.only(left: 20),
+              //     child: Row(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: [
+              //         Text(profileController
+              //                 .otherUserProfileData.first.user.currentCompany ??
+              //             ""),
+              //       ],
+              //     )),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // const Divider(
+              //   thickness: 1,
+              // ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              
+              // Row(
+              //   children: [
+              //     Padding(
+              //       padding: const EdgeInsets.only(left: 20, bottom: 5),
+              //       child: Text(
+              //         "Designation",
+              //         style: primaryfont.copyWith(
+              //             color: Color.fromARGB(214, 19, 18, 18),
+              //             fontSize: 16,
+              //             fontWeight: FontWeight.w600),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+
+              // Padding(
+              //     padding: const EdgeInsets.only(left: 20),
+              //     child: Row(
+              //       crossAxisAlignment: CrossAxisAlignment.start,
+              //       children: [
+              //         Text(profileController
+              //                 .otherUserProfileData.first.user.designation ??
+              //             ""),
+              //       ],
+              //     )),
+
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // const Divider(
+              //   thickness: 1,
+              // ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+
+              // Row(
+              //   children: [
+              //     Padding(
+              //       padding: const EdgeInsets.only(left: 20, bottom: 5),
+              //       child: Text(
+              //         "Previous Company",
+              //         style: primaryfont.copyWith(
+              //             color: const Color.fromARGB(214, 19, 18, 18),
+              //             fontSize: 16,
+              //             fontWeight: FontWeight.w600),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+              // Padding(
+              //     padding: const EdgeInsets.only(left: 20, right: 10),
+              //     child: Container(
+              //       width: size.width,
+              //       child: Row(
+              //         crossAxisAlignment: CrossAxisAlignment.start,
+              //         children: [
+              //           for (int i = 0;
+              //               i <
+              //                   profileController.otherUserProfileData.first
+              //                       .positions.length;
+              //               i++)
+              //             Text(
+              //                 "${profileController.otherUserProfileData.first.positions[i].companyName},"),
+              //         ],
+              //       ),
+              //     )),
               const SizedBox(
                 height: 10,
               ),

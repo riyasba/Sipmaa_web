@@ -1,16 +1,16 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:reg_login/app/data/components/controllers/posts_controller.dart';
-import 'package:reg_login/app/modules/screens/home/controler/controler.dart';
-
 import '../../../../data/components/constands/constands.dart';
 
+
+
+
 class CreateWidget extends StatefulWidget {
-  const CreateWidget({super.key});
+  const  CreateWidget({super.key});
 
   @override
   State<CreateWidget> createState() => _CreateWidgetState();
@@ -48,8 +48,8 @@ class _CreateWidgetState extends State<CreateWidget> {
                           WebUiSettings(
                           context: context,
                             boundary: const CroppieBoundary(
-              width: 520,
-              height: 400,
+              width: 400,
+              height: 300,
             ),
                           presentStyle: CropperPresentStyle.dialog,
                             enableExif: true,
@@ -155,140 +155,134 @@ class _CreateWidgetState extends State<CreateWidget> {
           //     ],
           //   ),
           // ),
-          Padding(
-            padding: const EdgeInsets.only(right: 55, top: 10),
-            child: Container(
-              height: MediaQuery.of(context).size.height * 0.42,
-              width: MediaQuery.of(context).size.width * 0.26,
-              decoration: BoxDecoration(
-                  color: size.width > 600?  kgrey.withOpacity(0.1):kwhite,
-                  borderRadius: BorderRadius.circular(10)),
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    InkWell(
-                      onTap: () {
-                        chooseImage();
-                      },
-                      child: imagePath == null
-                          ? Image.asset('assets/images/createupload.png')
-                          : Container(
-                              height: 200,
-                              width: 350,
-                              child: Image.memory(
-                                imagePath,
-                                fit: BoxFit.contain,
-                              )),
-                    ),
-                  ],
-                ),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.34,
+            width: MediaQuery.of(context).size.width * 0.26,
+            decoration: BoxDecoration(
+                color: kgrey.withOpacity(0.1),
+                borderRadius: BorderRadius.circular(10)),
+            child: Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      chooseImage();
+                    },
+                    child: imagePath == null
+                        ? Image.asset('assets/images/createupload.png')
+                        : Container(
+                            height: 150,
+                            width: 350,
+                            child: Image.memory(
+                              imagePath,
+                              fit: BoxFit.contain,
+                            )),
+                  ),
+                ],
               ),
             ),
-          ),
+          ),//ksizedbox10,
           ksizedbox20,
           Obx(
-            () => Padding(
-              padding: const EdgeInsets.only(right: 50),
-              child: postsController.isLoading.isTrue
-                  ? CircularProgressIndicator()
-                  : ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: kblue,
-                          minimumSize: Size(
-                              MediaQuery.of(context).size.width * 0.27, 45)),
-                      onPressed: () async {
-                        if (textController.text.isNotEmpty ||
-                            imagePath != null) {
-                          int response = await postsController.uplodPost(
-                              title: textController.text,
-                              description: "",
-                              media: imagePath);
-                          Get.back();
-                          if (response == 201) {
-                            showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return Dialog(
-                                    child: Container(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.5,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.2,
-                                      decoration: BoxDecoration(
-                                        color: kwhite,
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(top: 10),
-                                        child: Column(
-                                          children: [
-                                            Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Image.asset(
-                                                    'assets/images/Character.png',
-                                                    fit: BoxFit.fitHeight,
-                                                    height: 150,
-                                                  ),
-                                                ]),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 20),
-                                              child: Text(
-                                                'Your Post has Successfully Posted',
-                                                style: TextStyle(
-                                                    fontWeight:
-                                                        FontWeight.w900),
-                                              ),
+            () => postsController.isLoading.isTrue
+                ? CircularProgressIndicator()
+                : ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: kblue,
+                        minimumSize: Size(
+                            MediaQuery.of(context).size.width * 0.27, 45)),
+                    onPressed: () async {
+                      if (textController.text.isNotEmpty ||
+                          imagePath != null) {
+                        int response = await postsController.uplodPost(
+                            title: textController.text,
+                            description: "",
+                            media: imagePath);
+                        Get.back();
+                        if (response == 201) {
+                          showDialog(
+                              context: context,
+                              builder: (context) {
+                                return Dialog(
+                                  child: Container(
+                                    height:
+                                        MediaQuery.of(context).size.height *
+                                            0.5,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.2,
+                                    decoration: BoxDecoration(
+                                      color: kwhite,
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(top: 10),
+                                      child: Column(
+                                        children: [
+                                          Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Image.asset(
+                                                  'assets/images/Character.png',
+                                                  fit: BoxFit.fitHeight,
+                                                  height: 150,
+                                                ),
+                                              ]),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                top: 20),
+                                            child: Text(
+                                              'Your Post has Successfully Posted',
+                                              style: TextStyle(
+                                                  fontWeight:
+                                                      FontWeight.w900),
                                             ),
-                                            ksizedbox30,
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 40, right: 40),
-                                              child: ElevatedButton(
-                                                  style: ElevatedButton.styleFrom(
-                                                      backgroundColor: kblue,
-                                                      minimumSize: Size(
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .width *
-                                                              0.2,
-                                                          45)),
-                                                  onPressed: () {
-                                                    postsController
-                                                        .getAllPost();
-                                                    Get.back();
-                                                  },
-                                                  child: Text(
-                                                    'Done',
-                                                    style:
-                                                        TextStyle(fontSize: 17),
-                                                  )),
-                                            )
-                                          ],
-                                        ),
+                                          ),
+                                          ksizedbox30,
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 40, right: 40),
+                                            child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    backgroundColor: kblue,
+                                                    minimumSize: Size(
+                                                        MediaQuery.of(context)
+                                                                .size
+                                                                .width *
+                                                            0.2,
+                                                        45)),
+                                                onPressed: () {
+                                                  postsController
+                                                      .getAllPost();
+                                                  Get.back();
+                                                },
+                                                child: Text(
+                                                  'Done',
+                                                  style:
+                                                      TextStyle(fontSize: 17),
+                                                )),
+                                          )
+                                        ],
                                       ),
                                     ),
-                                  );
-                                });
-                          }
-                        } else {
-                          Get.rawSnackbar(
-                            messageText: const Text(
-                              "Complete before posting",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                            backgroundColor: Colors.red,
-                          );
+                                  ),
+                                );
+                              });
                         }
-                      },
-                      child: Text(
-                        'Post',
-                        style: TextStyle(fontSize: 18),
-                      )),
-            ),
+                      } else {
+                        Get.rawSnackbar(
+                          messageText: const Text(
+                            "Complete before posting",
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          backgroundColor: Colors.red,
+                        );
+                      }
+                    },
+                    child: Text(
+                      'Post',
+                      style: TextStyle(fontSize: 18),
+                    )),
           )
         ],
       ),

@@ -182,7 +182,8 @@ class Privacy extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [Text(
-  'Privacy',
+  '''Privacy policy:
+''',
   style: TextStyle(fontSize: 19,fontWeight: FontWeight.w700,
     decoration: TextDecoration.underline,
   ),
@@ -190,7 +191,47 @@ class Privacy extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(19.0),
           child: Text(
-              "Since the launch of Flutter in May 2017Since the launch of Flutter in May 2017, it has resolved many of the existing problems in the app development industry. Flutter is a powerful language packed with a powerful mobile framework that can be used in both iOS and Android applications. Flutter is often used with DART, which is an object-oriented programming language by Google. The flutter development tools come with graphics library and material design allowing faster operations of the app and also giving the app a stunning look, irrespective of its operating platform! The biggest advantage of flutter is that it can be used to create cross-platform apps. Using flutter one can create iOS and Android apps in just one go, there is no need to develop app individually for both the platform.Since the launch of Flutter in May 2017, it has resolved many of the existing problems in the app development industry. Flutter is a powerful language packed with a powerful mobile framework that can be used in both iOS and Android applications. Flutter is often used with DART, which is an object-oriented programming language by Google. The flutter development tools come with graphics library and material design allowing faster operations of the app and also giving the app a stunning look, irrespective of its operating platform! The biggest advantage of flutter is that it can be used to create cross-platform apps. Using flutter one can create iOS and Android apps in just one go, there is no need to develop app individually for both the platform. it has resolved many of the existing problems in the app development industry. Flutter is a powerful language packed with a powerful mobile framework that can be used in both iOS and Android applications. Flutter is often used with DART, which is an object-oriented programming language by Google. The flutter development tools come with graphics library and material design allowing faster operations of the app and also giving the app a stunning look, irrespective of its operating platform! The biggest advantage of flutter is that it can be used to create cross-platform apps. Using flutter one can create iOS and Android apps in just one go, there is no need to develop app individually for both the platform.",style: TextStyle(fontWeight: FontWeight.w500),),
+             '''Our Privacy Policy has been updated.
+
+Your Privacy Matters:
+
+Sipmaa mission is to connect the world’s professionals to allow them to be more productive and successful. Central to this mission is our commitment to be transparent about the data we collect about you, how it is used and with whom it is shared.
+
+This Privacy Policy applies when you use our Services. We offer our users choices about the data we collect, use and share as described in this Privacy Policy, Cookie Policy, Settings and our Help Center.
+
+
+Introduction:
+We are a social network and online platform for professionals. People use our Services to find and be found for business opportunities, to connect with others and find information. Our Privacy Policy applies to any Member or
+
+Services:
+This Privacy Policy, including our Cookie Policy applies to your use of our Services.
+
+This Privacy Policy applies to Sipmaa, Sipmaa -branded apps,Sipmaa Learning and other Sipmaa-related sites, apps, communications and services (“Services”), including off-site Services, such as our ad services and the “Apply with Sipmaa” and “Share with Sipmaa” plugins, but excluding services that state that they are offered under a different privacy policy.
+Sipmaa Corporation will be the controller of your personal data provided to, or collected by or for, or processed in connection with, our Services.
+As a Visitor or Member of our Services, the collection, use and sharing of your personal data is subject to this Privacy Policy and other documents referenced in this Privacy Policy, as well as updates.
+Information We Collect: 
+We collect information you provide during registration, such as your name, email address, and professional details. We also collect data generated through your use of our platform, including profile information, connections, messages, and engagement with content.
+Use of Information: 
+We use the collected information to provide and personalize our services, connect professionals, enable communication, and improve user experience. This includes suggesting relevant content, job opportunities, and connections, as well as enhancing our advertising targeting capabilities.
+Data Sharing: 
+We may share your information with trusted third parties, including service providers and partners, to assist us in delivering our services and enhancing your Sipmaa experience. We do not sell your personal information to advertisers or other third parties.
+Control over Your Information:
+ You have control over the information you provide on Sipmaa. You can manage your profile settings, choose what information to share publicly, and control the visibility of your connections and activities.
+Communication: 
+We may send you emails, notifications, and other messages related to your account and activity onSipmaa. You can manage your communication preferences and opt-out of certain types of messages.
+Data Security: 
+We employ industry-standard security measures to protect your information from unauthorized access, disclosure, alteration, and destruction. We continuously monitor and update our systems to ensure the highest level of data protection.
+
+Data Transfers:
+Sipmaa operates globally, and your information may be transferred to and stored on servers located in different countries. We ensure that such transfers comply with applicable data protection laws.
+Compliance: 
+We comply with applicable privacy laws and regulations, including the European Union's General Data Protection Regulation (GDPR) and the California Consumer Privacy Act (CCPA).
+Updates and Contact: 
+We may update our Privacy Policy from time to time and will notify you of any significant changes. If you have questions, concerns, or requests regarding your privacy or data, you can contact us through the provided channels.
+Sipmaa Privacy Policy aims to provide a general understanding of how we handle your data. For more detailed information, we encourage you to read our complete Privacy Policy available on our website. 
+Contact Information:
+If you have questions or complaints regarding this Policy, please first contact Sipmaa. You can also reach us by physical mail. If this does not resolve your complaint, Residents in the Designated Countries and other regions may have more options under their laws.
+''',style: TextStyle(fontWeight: FontWeight.w500),),
         )
       ],
     );
@@ -204,7 +245,8 @@ class Termsandconditions extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [Text(
-  'Terms & Conditions',
+  '''Terms and conditions:
+''',
   style: TextStyle(fontSize: 19,fontWeight: FontWeight.w700,
     decoration: TextDecoration.underline,
   ),
@@ -212,7 +254,22 @@ class Termsandconditions extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(19.0),
           child: Text(
-              "Since the launch of Flutter in May 2017Since the launch of Flutter in May 2017, it has resolved many of the existing problems in the app development industry. Flutter is a powerful language packed with a powerful mobile framework that can be used in both iOS and Android applications. Flutter is often used with DART, which is an object-oriented programming language by Google. The flutter development tools come with graphics library and material design allowing faster operations of the app and also giving the app a stunning look, irrespective of its operating platform! The biggest advantage of flutter is that it can be used to create cross-platform apps. Using flutter one can create iOS and Android apps in just one go, there is no need to develop app individually for both the platform.Since the launch of Flutter in May 2017, it has resolved many of the existing problems in the app development industry. Flutter is a powerful language packed with a powerful mobile framework that can be used in both iOS and Android applications. Flutter is often used with DART, which is an object-oriented programming language by Google. The flutter development tools come with graphics library and material design allowing faster operations of the app and also giving the app a stunning look, irrespective of its operating platform! The biggest advantage of flutter is that it can be used to create cross-platform apps. Using flutter one can create iOS and Android apps in just one go, there is no need to develop app individually for both the platform. it has resolved many of the existing problems in the app development industry. Flutter is a powerful language packed with a powerful mobile framework that can be used in both iOS and Android applications. Flutter is often used with DART, which is an object-oriented programming language by Google. The flutter development tools come with graphics library and material design allowing faster operations of the app and also giving the app a stunning look, irrespective of its operating platform! The biggest advantage of flutter is that it can be used to create cross-platform apps. Using flutter one can create iOS and Android apps in just one go, there is no need to develop app individually for both the platform.",style: TextStyle(fontWeight: FontWeight.w500),),
+           '''The legal agreement between Sipmaa and its users regarding the use of their platform in Sipmaa terms and conditions. 
+
+User obligations and responsibilities: The terms outline the user's obligations when using the platform, including adherence to legal requirements, the accuracy of information provided, and appropriate behaviour.
+
+Account creation and usage: section describes how to set up an account, what qualifications are necessary, and what obligations the user has to protect the privacy of their account information.
+
+Intellectual property rights: Sipmaa terms address the ownership of content shared on the platform, including copyrights, trademarks, and licences.
+
+Privacy and data protection: This section details how Sipmaa collects, uses, stores, and protects user data. It may include information about cookies, tracking technologies, and the choices users have regarding their privacy settings.
+
+Prohibited actions include: Sipmaa terms typically outline activities that are not allowed on the platform, such as spamming, impersonation, and violations of intellectual property rights.
+
+Resolution and termination of disputes: This section may include information about resolving disputes, limitations of liability, and the circumstances under which Sipmaa can terminate or suspend a user's account.
+
+To access the specific terms of service for a related platform to Sipmaa, I recommend visiting the official website of that platform and locating the "Terms of Service," "Terms and Conditions," or a similar link usually found in the footer section of their webpages. By reviewing the terms directly from the official source, you can obtain the most accurate and up-to-date information regarding their specific terms of service.
+''',style: TextStyle(fontWeight: FontWeight.w500),),
         )
       ],
     );

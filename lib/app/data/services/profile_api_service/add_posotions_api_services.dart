@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:dio/dio.dart';
+import 'package:reg_login/app/data/models/add_positions_model.dart';
 import 'package:reg_login/app/data/services/base_url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../models/add_positions_model.dart';
 
 class AddPositonsApiServices extends BaseApiService {
   Future addPositions(
@@ -27,21 +27,23 @@ class AddPositonsApiServices extends BaseApiService {
               }),
           data: {
             "user_id": useId,
-            "title": addPostionsModel.title,
+            // "title": addPostionsModel.title,
+            "department": addPostionsModel.department,
+            "recruitment": addPostionsModel.requireMents,
             "employment_type": addPostionsModel.employment_type,
             "company_name": addPostionsModel.company_name,
             "location": addPostionsModel.location,
             "start_date": addPostionsModel.start_date,
             if (addPostionsModel.end_date != "null")
               "end_date": addPostionsModel.end_date,
-            "industry_name": addPostionsModel.industry_name,
-            "description": addPostionsModel.description,
-            "department": addPostionsModel.department,
-            "recruitment": addPostionsModel.requireMents,
+            "industry_name": "oo",
+            "description": "tt",
+            "other_department": addPostionsModel.othersdepartment
           });
 
       print(response.statusCode);
       print(response.data);
+      print(addPostionsModel.othersdepartment);
       responseJson = response;
     } on SocketException {
       print("no internet");

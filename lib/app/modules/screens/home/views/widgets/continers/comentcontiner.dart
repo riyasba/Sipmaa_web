@@ -48,7 +48,7 @@ class _comentsContainerState extends State<comentsContainer> {
             width: 40,
             height: 40,
             child: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
+              borderRadius: BorderRadius.circular(30),
               child: Image.network(
                 widget.commentsList.picture,
                 fit: BoxFit.cover,
@@ -81,12 +81,21 @@ class _comentsContainerState extends State<comentsContainer> {
               ),
               Padding(
                 padding: const EdgeInsets.only(top: 2),
-                child: Text(
-                  widget.commentsList.comment,
-                  style: const TextStyle(fontSize: 11.3, fontWeight: FontWeight.w600),
+                child: Container(width: size.width*0.1,
+                  child: Column(mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        widget.commentsList.comment,
+                        style: const TextStyle(
+                            fontSize: 11.3, fontWeight: FontWeight.w600),
+                      ),
+                    ],
+                  ),
                 ),
               ),
-        ksizedbox10 ],
+              ksizedbox10
+            ],
           ),
         ),
       ],

@@ -3,12 +3,10 @@ import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:readmore/readmore.dart';
 import 'package:reg_login/app/data/components/constands/constands.dart';
 
 import 'package:reg_login/app/modules/screens/home/views/widgets/continers/comentcontiner.dart';
-import 'package:reg_login/app/modules/screens/home/views/widgets/likepost.dart';
-import 'package:reg_login/app/modules/screens/profile/friends_profile.dart';
-import 'package:reg_login/app/respohome/pofile_respo.dart';
 import 'package:reg_login/app/respohome/respoprofil.dart';
 import 'package:velocity_x/velocity_x.dart';
 
@@ -75,9 +73,8 @@ class _HomeContainerState extends State<HomeContainer> {
                     // ),
                   )
                 : ListView(
-                
                     primary: true,
-          scrollDirection: Axis.vertical,
+                    scrollDirection: Axis.vertical,
                     shrinkWrap: true,
                     physics: const BouncingScrollPhysics(),
                     children: [
@@ -469,8 +466,10 @@ class _HomeContainerState extends State<HomeContainer> {
                                                         );
                                                       });
                                                 },
-                                                child: const Icon(
-                                                    Icons.more_vert_rounded)),
+                                                child: Icon(
+                                                  Icons.more_vert_rounded,
+                                                  color: kblue,
+                                                )),
                                         ],
                                       )
                                     ],
@@ -483,16 +482,30 @@ class _HomeContainerState extends State<HomeContainer> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text(
+                                      ReadMoreText(
                                         postsController
                                             .allPostList[index].title,
+                                        trimLines: 2,
+                                        colorClickableText: Colors.black,
+                                        trimMode: TrimMode.Line,
+                                        trimCollapsedText: 'show more',
+                                        trimExpandedText: ' show less',
+                                        lessStyle: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold),
+                                        moreStyle: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 15),
                                       )
-                                          .text
-                                          .semiBold
-                                          .start
-                                          .fontFamily(
-                                              GoogleFonts.poppins().fontFamily!)
-                                          .make(),
+                                      // .text
+                                      // .semiBold
+                                      // .start
+                                      // .fontFamily(
+                                      //     GoogleFonts.poppins().fontFamily!)
+                                      // .make(),
                                     ],
                                   ),
                                 ),
@@ -523,7 +536,8 @@ class _HomeContainerState extends State<HomeContainer> {
                                             ),
                                           ),
                                   ],
-                                ),ksizedbox10,
+                                ),
+                                ksizedbox10,
                                 Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20),
@@ -573,7 +587,10 @@ class _HomeContainerState extends State<HomeContainer> {
                                                                                 onPressed: () {
                                                                                   Get.back();
                                                                                 },
-                                                                                icon: const Icon(Icons.arrow_back)),
+                                                                                icon: Icon(
+                                                                                  Icons.arrow_back,
+                                                                                  color: kblue,
+                                                                                )),
                                                                             const Text(
                                                                               'Reactions',
                                                                             ).text.bold.fontFamily(GoogleFonts.poppins().fontFamily!).make(),
@@ -820,7 +837,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                       //   indexOfPost: index,
                                       // ),
 
-                                      kwidth10,
+                                      kwidth10, kwidth10,
                                       InkWell(
                                         onTap: () {
                                           postController.getComments(
@@ -832,7 +849,10 @@ class _HomeContainerState extends State<HomeContainer> {
                                         child: Padding(
                                           padding:
                                               const EdgeInsets.only(top: 5),
-                                          child: Icon(Icons.comment_rounded),
+                                          child: Icon(
+                                            Icons.comment,
+                                            color: kblue,
+                                          ),
                                         ),
                                       )
                                     ],
@@ -999,7 +1019,7 @@ class _HomeContainerState extends State<HomeContainer> {
                                                         .textEditingController
                                                         .text
                                                         .isNotEmpty
-                                                    ? Icon(Icons.send)
+                                                    ? Icon(Icons.send,color: kblue,)
                                                     : Container(
                                                         width: 5,
                                                       )),
@@ -1196,7 +1216,10 @@ class _HomeContainerState extends State<HomeContainer> {
                                             );
                                           }
                                         },
-                                        child: const Icon(Icons.send)),
+                                        child: Icon(
+                                          Icons.send_outlined,
+                                          color: kblue,
+                                        )),
                                     hintText: 'Write Comment',
                                     hintStyle: const TextStyle(
                                       fontSize: 14,
