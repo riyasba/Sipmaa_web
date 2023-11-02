@@ -1,32 +1,28 @@
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
-
 import 'package:reg_login/app/data/components/controllers/auth_controllers.dart';
 import 'package:reg_login/app/data/models/city_list_model.dart';
 import 'package:reg_login/app/data/models/department_model.dart';
 import 'package:reg_login/app/data/models/industries_model.dart';
 import 'package:reg_login/app/data/models/profile_update_model.dart';
-
 import '../../../../data/components/constands/constands.dart';
-
 import '../../../../data/models/requiremets_models.dart';
 import '../../../../data/models/state_list_model.dart';
 import '../../../../data/models/widgets/email_text_field.dart';
 import '../../../../data/models/widgets/postal_code_text.dart';
 import '../../../../data/models/widgets/textfield.dart';
 
-class ResgisterDetailsWeb extends StatefulWidget {
-  const ResgisterDetailsWeb({super.key});
+class StudentResgisterDetailsWeb extends StatefulWidget {
+  const StudentResgisterDetailsWeb({super.key});
 
   @override
-  State<ResgisterDetailsWeb> createState() => _ResgisterDetailsWebState();
+  State<StudentResgisterDetailsWeb> createState() => _StudentResgisterDetailsWebState();
 }
 
-class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
+class _StudentResgisterDetailsWebState extends State<StudentResgisterDetailsWeb> {
  final authController = Get.find<AuthController>();
 
   final _formKey = GlobalKey<FormState>();
@@ -114,14 +110,49 @@ class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
                           style: ktextstyle22,
                         ),
             
-                        ksizedbox10,
-            
-            
-                            TextformfieldWidget(
-                          controller: currentCompanyController,
-                          isMandatory: true,
-                          text: 'Current Company',
-                          textt: 'Current Company'),
+                         ksizedbox10,
+                        const Padding(
+                      padding: EdgeInsets.only(left: 20,bottom: 10,top: 10),
+                      child: Row(
+                        children: [
+                           Text('Current Company'),
+                        ],
+                      ),
+                    ), 
+                    Padding(
+            padding: const EdgeInsets.only(left: 10, right: 10),
+            child: TextFormField(
+              textCapitalization: TextCapitalization.words,
+              autovalidateMode: AutovalidateMode.onUserInteraction,
+              controller: currentCompanyController,
+              decoration: InputDecoration(
+                floatingLabelBehavior: FloatingLabelBehavior.never,
+                fillColor: Colors.grey[250],
+                labelText: 'Current Company (Optional)',
+                hintStyle: TextStyle(fontSize: 12,
+                  color: Colors.grey[500],
+                ),
+                border: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                      color: Color.fromARGB(0, 158, 158, 158), width: 2.0),
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                filled: true,
+                enabledBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                      color: Color.fromARGB(0, 158, 158, 158), width: 1.0),
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(
+                      color: Color.fromARGB(0, 158, 158, 158), width: 1.0),
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                contentPadding:
+                    const EdgeInsets.fromLTRB(17.0, 2.0, 17.0, 16.0),
+              ),
+            ),
+          ),    
             
                       GetBuilder<AuthController>(builder: (_) {
                         return Padding(
@@ -129,66 +160,21 @@ class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
+                               const Padding(
+                                padding: EdgeInsets.all(8.0),
                                 child: Row(
                                   children: [
-                                    const Text(
+                                     Text(
                                       "Industries",
                                     ),
-                                    Text(
-                                      "*",
-                                      style:
-                                          primaryfont.copyWith(color: Colors.red),
-                                    ),
+                                    // Text(
+                                    //   "*",
+                                    //   style:
+                                    //       primaryfont.copyWith(color: Colors.red),
+                                    // ),
                                   ],
                                 ),
                               ),
-                              // Container(
-                              //   height: 50,
-                              //   width: 330,
-                              //   decoration: BoxDecoration(
-                              //       borderRadius: BorderRadius.circular(10),
-                              //       border: Border.all(
-                              //           color: const Color.fromARGB(
-                              //                   255, 158, 158, 158)
-                              //               .withOpacity(0.2))),
-                              //   child: Padding(
-                              //     padding: const EdgeInsets.only(
-                              //         left: 10, right: 10, top: 10),
-                              //     child: DropdownButton<Department>(
-                              //       value: designation,
-                              //       isExpanded: true,
-                              //       icon: const Icon(
-                              //           Icons.keyboard_arrow_down_outlined),
-                              //       elevation: 0,
-                              //       itemHeight: 55,
-                              //       isDense: true,
-                              //       dropdownColor: Colors.grey[250],
-                              //       style: const TextStyle(color: Colors.black54),
-                              //       hint: const Text(
-                              //         "Department",
-                              //         style: TextStyle(fontSize: 14),
-                              //       ),
-                              //       onChanged: (Department? value) {
-                              //         // This is called when the user selects an item.
-                              //         setState(() {
-                              //           authController
-                              //               .isDesignationSelected(false);
-                              //           designation = value!;
-                              //         });
-                              //       },
-                              //       items: authController.departments
-                              //           .map<DropdownMenuItem<Department>>(
-                              //               (Department value) {
-                              //         return DropdownMenuItem<Department>(
-                              //           value: value,
-                              //           child: Text(value.title),
-                              //         );
-                              //       }).toList(),
-                              //     ),
-                              //   ),
-                              // ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 0, right: 0),
                                 child: Container(
@@ -224,23 +210,23 @@ class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Obx(
-                                () => authController.isInduaturesSelected.isTrue
-                                    ? const Padding(
-                                        padding: EdgeInsets.only(left: 15),
-                                        child: Text(
-                                          "Please select Industries",
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 230, 46, 33),
-                                              fontSize: 12),
-                                        ),
-                                      )
-                                    : Container(),
-                              )
+                              // const SizedBox(
+                              //   height: 5,
+                              // ),
+                              // Obx(
+                              //   () => authController.isInduaturesSelected.isTrue
+                              //       ? const Padding(
+                              //           padding: EdgeInsets.only(left: 15),
+                              //           child: Text(
+                              //             "Please select Industries",
+                              //             style: TextStyle(
+                              //                 color: Color.fromARGB(
+                              //                     255, 230, 46, 33),
+                              //                 fontSize: 12),
+                              //           ),
+                              //         )
+                              //       : Container(),
+                              // )
                             ],
                           ),
                         );
@@ -252,66 +238,21 @@ class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
+                               const Padding(
+                                padding: EdgeInsets.all(8.0),
                                 child: Row(
                                   children: [
-                                    const Text(
+                                    Text(
                                       "Department",
                                     ),
-                                    Text(
-                                      "*",
-                                      style:
-                                          primaryfont.copyWith(color: Colors.red),
-                                    ),
+                                    // Text(
+                                    //   "*",
+                                    //   style:
+                                    //       primaryfont.copyWith(color: Colors.red),
+                                    // ),
                                   ],
                                 ),
                               ),
-                              // Container(
-                              //   height: 50,
-                              //   width: 330,
-                              //   decoration: BoxDecoration(
-                              //       borderRadius: BorderRadius.circular(10),
-                              //       border: Border.all(
-                              //           color: const Color.fromARGB(
-                              //                   255, 158, 158, 158)
-                              //               .withOpacity(0.2))),
-                              //   child: Padding(
-                              //     padding: const EdgeInsets.only(
-                              //         left: 10, right: 10, top: 10),
-                              //     child: DropdownButton<Department>(
-                              //       value: designation,
-                              //       isExpanded: true,
-                              //       icon: const Icon(
-                              //           Icons.keyboard_arrow_down_outlined),
-                              //       elevation: 0,
-                              //       itemHeight: 55,
-                              //       isDense: true,
-                              //       dropdownColor: Colors.grey[250],
-                              //       style: const TextStyle(color: Colors.black54),
-                              //       hint: const Text(
-                              //         "Department",
-                              //         style: TextStyle(fontSize: 14),
-                              //       ),
-                              //       onChanged: (Department? value) {
-                              //         // This is called when the user selects an item.
-                              //         setState(() {
-                              //           authController
-                              //               .isDesignationSelected(false);
-                              //           designation = value!;
-                              //         });
-                              //       },
-                              //       items: authController.departments
-                              //           .map<DropdownMenuItem<Department>>(
-                              //               (Department value) {
-                              //         return DropdownMenuItem<Department>(
-                              //           value: value,
-                              //           child: Text(value.title),
-                              //         );
-                              //       }).toList(),
-                              //     ),
-                              //   ),
-                              // ),
                               Padding(
                                 padding: const EdgeInsets.only(left: 0, right: 0),
                                 child: Container(
@@ -356,23 +297,23 @@ class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
                                 ),
                               ),
             
-                              const SizedBox(
-                                height: 5,
-                              ),
-                              Obx(
-                                () => authController.isDesignationSelected.isTrue
-                                    ? const Padding(
-                                        padding: EdgeInsets.only(left: 15),
-                                        child: Text(
-                                          "Please select Department",
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 230, 46, 33),
-                                              fontSize: 12),
-                                        ),
-                                      )
-                                    : Container(),
-                              )
+                              // const SizedBox(
+                              //   height: 5,
+                              // ),
+                              // Obx(
+                              //   () => authController.isDesignationSelected.isTrue
+                              //       ? const Padding(
+                              //           padding: EdgeInsets.only(left: 15),
+                              //           child: Text(
+                              //             "Please select Department",
+                              //             style: TextStyle(
+                              //                 color: Color.fromARGB(
+                              //                     255, 230, 46, 33),
+                              //                 fontSize: 12),
+                              //           ),
+                              //         )
+                              //       : Container(),
+                              // )
                             ],
                           ),
                         );
@@ -392,19 +333,19 @@ class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
                           designation.title == "HR Department")
                         Column(
                           children: [
-                            Padding(
-                              padding: const EdgeInsets.only(
+                            const Padding(
+                              padding: EdgeInsets.only(
                                   left: 15, bottom: 8, top: 3),
                               child: Row(
                                 children: [
-                                  const Text(
+                                  Text(
                                     "Category",
                                   ),
-                                  Text(
-                                    "*",
-                                    style:
-                                        primaryfont.copyWith(color: Colors.red),
-                                  ),
+                                  // Text(
+                                  //   "*",
+                                  //   style:
+                                  //       primaryfont.copyWith(color: Colors.red),
+                                  // ),
                                 ],
                               ),
                             ),
@@ -458,123 +399,6 @@ class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
                             isMandatory: true,
                             text: 'Enter Others',
                             textt: 'Others'),
-            
-                      // GetBuilder<AuthController>(builder: (_) {
-                      //   return Padding(
-                      //     padding: const EdgeInsets.fromLTRB(10.0, 10, 10, 0),
-                      //     child: Column(
-                      //       crossAxisAlignment: CrossAxisAlignment.start,
-                      //       children: [
-                      //         Padding(
-                      //           padding: EdgeInsets.all(8.0),
-                      //           child: Row(
-                      //             children: [
-                      //               const Text(
-                      //                 "Employment Type",
-                      //               ),
-                      //               Text(
-                      //                 "*",
-                      //                 style:
-                      //                     primaryfont.copyWith(color: Colors.red),
-                      //               ),
-                      //             ],
-                      //           ),
-                      //         ),
-                      //         // Container(
-                      //         //   height: 50,
-                      //         //   width: 330,
-                      //         //   decoration: BoxDecoration(
-                      //         //       borderRadius: BorderRadius.circular(10),
-                      //         //       border: Border.all(
-                      //         //           color: const Color.fromARGB(
-                      //         //                   255, 158, 158, 158)
-                      //         //               .withOpacity(0.2))),
-                      //         //   child: Padding(
-                      //         //     padding: const EdgeInsets.only(
-                      //         //         left: 10, right: 10, top: 10),
-                      //         //     child: DropdownButton<Department>(
-                      //         //       value: designation,
-                      //         //       isExpanded: true,
-                      //         //       icon: const Icon(
-                      //         //           Icons.keyboard_arrow_down_outlined),
-                      //         //       elevation: 0,
-                      //         //       itemHeight: 55,
-                      //         //       isDense: true,
-                      //         //       dropdownColor: Colors.grey[250],
-                      //         //       style: const TextStyle(color: Colors.black54),
-                      //         //       hint: const Text(
-                      //         //         "Department",
-                      //         //         style: TextStyle(fontSize: 14),
-                      //         //       ),
-                      //         //       onChanged: (Department? value) {
-                      //         //         // This is called when the user selects an item.
-                      //         //         setState(() {
-                      //         //           authController
-                      //         //               .isDesignationSelected(false);
-                      //         //           designation = value!;
-                      //         //         });
-                      //         //       },
-                      //         //       items: authController.departments
-                      //         //           .map<DropdownMenuItem<Department>>(
-                      //         //               (Department value) {
-                      //         //         return DropdownMenuItem<Department>(
-                      //         //           value: value,
-                      //         //           child: Text(value.title),
-                      //         //         );
-                      //         //       }).toList(),
-                      //         //     ),
-                      //         //   ),
-                      //         // ),
-                      //         Padding(
-                      //           padding: const EdgeInsets.only(left: 0, right: 0),
-                      //           child: Container(
-                      //             height: 56,
-                      //             child: DropdownSearch<String>(
-                      //               popupProps: PopupProps.menu(
-                      //                 showSelectedItems: false,
-                      //                 showSearchBox: true,
-                      //                 menuProps: MenuProps(
-                      //                     borderRadius:
-                      //                         BorderRadius.circular(10)),
-                      //                 searchFieldProps: const TextFieldProps(),
-                      //               ),
-                      //               items: employementType,
-                      //               dropdownDecoratorProps:
-                      //                   DropDownDecoratorProps(
-                      //                 dropdownSearchDecoration: InputDecoration(
-                      //                     // labelText: "Department *",
-                      //                     hintText: "Employment Type",
-                      //                     border: OutlineInputBorder(
-                      //                         borderRadius:
-                      //                             BorderRadius.circular(15))),
-                      //               ),
-                      //               onChanged: (value) {},
-                      //               // selectedItem: selectedState,
-                      //             ),
-                      //           ),
-                      //         ),
-            
-                      //         // const SizedBox(
-                      //         //   height: 5,
-                      //         // ),
-                      //         // Obx(
-                      //         //   () => authController.isInduaturesSelected.isTrue
-                      //         //       ? const Padding(
-                      //         //           padding: EdgeInsets.only(left: 15),
-                      //         //           child: Text(
-                      //         //             "Please select Industries",
-                      //         //             style: TextStyle(
-                      //         //                 color: Color.fromARGB(
-                      //         //                     255, 230, 46, 33),
-                      //         //                 fontSize: 12),
-                      //         //           ),
-                      //         //         )
-                      //         //       : Container(),
-                      //         // )
-                      //       ],
-                      //     ),
-                      //   );
-                      // }),
                       TextformfieldWidget(
                           controller: designationController,
                           isMandatory: true,
@@ -585,20 +409,7 @@ class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
                           isMandatory: true,
                           text: 'Enter Official Email ID',
                           textt: 'Official Email ID'),
-                      // TextformfieldWidget(
-                      //     controller: cityController,
-                      //     isMandatory: true,
-                      //     text: 'Type City',
-                      //     textt: 'City'),
-                      // TextformfieldWidget(
-                      //     controller: stateController,
-                      //     isMandatory: true,
-                      //     text: 'Type State',
-                      //     textt: 'State'),
-                      // const SizedBox(
-                      //   height: 15,
-                      // ),
-            
+                      
                       Column(
                         children: [
                           Padding(
@@ -725,7 +536,7 @@ class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
                             padding: const EdgeInsets.only(left: 20, right: 20),
                             child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(
+                                  backgroundColor:const Color(
                                     0xFF3C73B1,
                                   ),
                                   shape: RoundedRectangleBorder(
@@ -733,22 +544,8 @@ class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
                                   ),
                                 ),
                                 onPressed: () {
-                                      if (designation == null) {
-                                        authController
-                                            .isDesignationSelected(true);
-                                      }
-            
-                                      if (industries == null) {
-                                        authController.isInduaturesSelected(true);
-                                      }
-                                      if (_formKey.currentState!.validate()) {
-                                        //redirect
-                                        if (authController
-                                                .isDesignationSelected.isFalse &&
-                                            authController
-                                                .isInduaturesSelected.isFalse) {
-                                                print("-------------->>______________>>_____________this 1");
-                                          ProfileUpdateModel profileUpdateModel =
+                                    
+                                    ProfileUpdateModel profileUpdateModel =
                                               ProfileUpdateModel(
                                                   currentCompany:
                                                       currentCompanyController
@@ -776,14 +573,12 @@ class _ResgisterDetailsWebState extends State<ResgisterDetailsWeb> {
                                                   industries:
                                                       industries.id.toString());
                                                        print("-------------->>______________>>_____________this 2");
-                                          authController
-                                              .updateProfile(profileUpdateModel);
-                                        }
-                                      }
+                                                  authController.studentUpdateProfile(profileUpdateModel);
+                                     
                                     },
                                 //=>Get.toNamed('/resgister-splash'),
             
-                                child: Text(
+                                child:const Text(
                                   'Register',
                                   style: TextStyle(
                                       color: Colors.white,

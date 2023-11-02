@@ -1,14 +1,10 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/get_core.dart';
-
 import 'package:reg_login/app/data/components/controllers/auth_controllers.dart';
-
 import '../../../../data/components/constands/constands.dart';
 import '../../../../data/components/controllers/profile_controller.dart';
 
@@ -68,24 +64,24 @@ final profileController = Get.find<ProfileController>();
         
                     child: Column(mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
                         Text(
                           'OTP Verification',
                           style: ktextstyle22,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 30,
                         ),
-                        Text(
+                        const Text(
                           'Enter the OTP sent to',
                           style:
                               TextStyle(fontSize: 17, fontWeight: FontWeight.w400),
                         ),
                         Text(
                           widget.phoneNumber,
-                          style: TextStyle(
+                          style:const TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.w400,
                               color: Colors.blue),
@@ -101,7 +97,7 @@ final profileController = Get.find<ProfileController>();
                         ksizedbox10,
                         OtpTextField(
                           numberOfFields: 4,
-                          borderColor: Color(0xFF512DA8),
+                          borderColor:const Color(0xFF512DA8),
                           //set to true to show as box or false to show as dash
                           showFieldAsBox: true,
                           //runs when a code is typed in
@@ -122,7 +118,7 @@ final profileController = Get.find<ProfileController>();
                             //     });
                           }, // end onSubmit
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 50,
                         ),
                         Row(
@@ -159,7 +155,7 @@ final profileController = Get.find<ProfileController>();
                               padding: const EdgeInsets.only(left: 20, right: 20),
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: Color(
+                                  backgroundColor:const Color(
                                     0xFF3C73B1,
                                   ),
                                   shape: RoundedRectangleBorder(
@@ -172,7 +168,7 @@ final profileController = Get.find<ProfileController>();
                                   //authController.otpVerify(otpValue,true);
                                 },
                                 //=> Get.toNamed('/register-2'),
-                                child: Text(
+                                child:const Text(
                                   'Submit',
                                   style: TextStyle(
                                       color: Colors.white,

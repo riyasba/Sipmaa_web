@@ -68,6 +68,7 @@ class User {
   int id;
   dynamic roleId;
   String name;
+  String userType;
   dynamic hisHer;
   String email;
   String mobile;
@@ -102,6 +103,7 @@ class User {
     required this.roleId,
     required this.name,
     required this.hisHer,
+    required this.userType,
     required this.email,
     required this.mobile,
     required this.backgroundImage,
@@ -136,6 +138,7 @@ class User {
         roleId: json["role_id"],
         name: json["name"],
         hisHer: json["his_her"],
+        userType: json["user_type"]?? "null",
         email: json["email"],
         mobile: json["mobile"],
        otherDepartment: json['other_department'],
@@ -171,6 +174,7 @@ class User {
         "name": name,
         "email": email,
         "mobile": mobile,
+        "user_type": userType,
         "is_verrified_mobile": isVerrifiedMobile,
         "last_name": lastName,
         "user_name": userName,

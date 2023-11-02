@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:reg_login/app/data/models/get_education_skills_model.dart';
 import 'package:reg_login/app/data/models/search_friends_model.dart';
 import 'package:reg_login/app/data/services/profile_api_service/friend_request_api_services.dart';
+import 'package:reg_login/app/data/services/profile_api_service/get_education_list_api_service.dart';
 import 'package:reg_login/app/data/services/profile_api_service/respond_request_api_services.dart';
 import 'package:reg_login/app/data/services/post_api_service/get_profile_api_services.dart';
 import 'package:reg_login/app/data/services/profile_api_service/change_password_api_services.dart';
@@ -99,7 +101,8 @@ class ProfileController extends GetxController {
   List<SearchFriendsList> searchFriendsList = [];
 
   RxBool isLoading = false.obs;
-
+  RxString educationlist = "".obs;
+  
   getProfile() async {
     dio.Response<dynamic> response = await getProfileApiServices.getProfile();
     profileData.clear();
@@ -631,4 +634,32 @@ class ProfileController extends GetxController {
 
     return isRequested;
   }
+
+  //get skill education list
+  GetEducationalSkillsServicesApi getEducationskillApiServices =
+      GetEducationalSkillsServicesApi();
+  List<educationskillsdata> educationskillsData = [];
+
+  getEducationalSkillsApi() async {
+    dio.Response<dynamic> response =
+        await getEducationskillApiServices.getEducationalSkillsApi();
+    if (response.statusCode == 200) {
+      
+      GetEducationalSkillsModel educationSkillsListModel = GetEducationalSkillsModel.fromJson(response.data); 
+            educationskillsData = educationSkillsListModel.departments;
+            update();
+    } else {
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Something went wrong",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+    update();
+  }
+
 }
+
+

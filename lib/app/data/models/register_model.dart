@@ -2,12 +2,12 @@
 //
 //     final registerModel = registerModelFromJson(jsonString);
 
-import 'dart:convert';
+// import 'dart:convert';
 
-RegisterModel registerModelFromJson(String str) =>
-    RegisterModel.fromJson(json.decode(str));
+// RegisterModel registerModelFromJson(String str) =>
+//     RegisterModel.fromJson(json.decode(str));
 
-String registerModelToJson(RegisterModel data) => json.encode(data.toJson());
+// String registerModelToJson(RegisterModel data) => json.encode(data.toJson());
 
 class RegisterModel {
   String name;
@@ -17,6 +17,7 @@ class RegisterModel {
   String mobile;
   String password;
   String passwordConfirmation;
+  String usertype;
 
   RegisterModel({
     required this.name,
@@ -26,25 +27,27 @@ class RegisterModel {
     required this.mobile,
     required this.password,
     required this.passwordConfirmation,
+    required this.usertype,
   });
-
-  factory RegisterModel.fromJson(Map<String, dynamic> json) => RegisterModel(
-        name: json["name"],
-        lastname: json["lastname"],
-        username: json["username"],
-        email: json["email"],
-        mobile: json["mobile"],
-        password: json["password"],
-        passwordConfirmation: json["password_confirmation"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "name": name,
-        "lastname": lastname,
-        "username": username,
-        "email": email,
-        "mobile": mobile,
-        "password": password,
-        "password_confirmation": passwordConfirmation,
-      };
 }
+
+//   factory RegisterModel.fromJson(Map<String, dynamic> json) => RegisterModel(
+//         name: json["name"],
+//         lastname: json["lastname"],
+//         username: json["username"],
+//         email: json["email"],
+//         mobile: json["mobile"],
+//         password: json["password"],
+//         passwordConfirmation: json["password_confirmation"],
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "name": name,
+//         "lastname": lastname,
+//         "username": username,
+//         "email": email,
+//         "mobile": mobile,
+//         "password": password,
+//         "password_confirmation": passwordConfirmation,
+//       };
+// }

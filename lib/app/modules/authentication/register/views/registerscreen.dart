@@ -653,25 +653,19 @@ class _RegisterViewsState extends State<RegisterViews> {
                                             print(emailIdController.text);
                                             RegisterModel registerModel =
                                                 RegisterModel(
-                                                    email:
-                                                        emailIdController.text,
-                                                    lastname:
-                                                        lastNameController.text,
-                                                    mobile:
-                                                        phoneNumberController
-                                                            .text,
-                                                    name: firstNameController
-                                                        .text,
-                                                    username:
-                                                        userNameController.text,
-                                                    passwordConfirmation:
-                                                        confirmPasswordController
-                                                            .text,
-                                                    password:
-                                                        createPassWordController
-                                                            .text);
+                                                    email: emailIdController.text,
+                                                    lastname: lastNameController.text,
+                                                    mobile:phoneNumberController.text,
+                                                    name: firstNameController.text,
+                                                    username: userNameController.text,
+                                                    passwordConfirmation: confirmPasswordController.text,
+                                                    password:createPassWordController.text,
+                                                    usertype: authController.wayIndex.value == 0
+                                                             ? "Student"
+                                                             : "Professional",
+                                                    );
                                             print(
-                                                "-----------------------on here----------------------");
+                                                "-----------------------on here-----${registerModel.usertype}---------------");
                                             authController.registerUser(
                                                 registerModel, false);
                                           } else {

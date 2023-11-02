@@ -4,8 +4,8 @@ import 'package:reg_login/app/data/models/profile_update_model.dart';
 import 'package:reg_login/app/data/services/base_url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileUpdateServicesApi extends BaseApiService {
-  Future profileUpdate(ProfileUpdateModel profileUpdateModel) async {
+class StudentProfileUpdateServicesApi extends BaseApiService {
+  Future studentProfileUpdate(ProfileUpdateModel profileUpdateModel) async {
     dynamic responseJson;
     try {
       var dio = Dio();
@@ -23,7 +23,8 @@ class ProfileUpdateServicesApi extends BaseApiService {
                 return status! <= 500;
               }),
           data: {
-             "current_company": profileUpdateModel.currentCompany,
+            "user_type": "Student",
+            "current_company": profileUpdateModel.currentCompany,
             "designation": profileUpdateModel.department,
             "department": profileUpdateModel.designation,
             "recruitment": profileUpdateModel.requirement,

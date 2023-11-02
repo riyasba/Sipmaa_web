@@ -8,31 +8,34 @@ import 'package:reg_login/app/data/models/industries_model.dart';
 import 'package:reg_login/app/data/models/profile_update_model.dart';
 import 'package:reg_login/app/data/models/skills_model.dart';
 import 'package:reg_login/app/data/models/state_list_model.dart';
+import 'package:reg_login/app/data/services/auth_api_service/add_education_skills_api_service.dart';
 import 'package:reg_login/app/data/services/auth_api_service/check_email_verify_api_services.dart';
 import 'package:reg_login/app/data/services/auth_api_service/get_department_api_services.dart';
 import 'package:reg_login/app/data/services/auth_api_service/get_industries_api_services.dart';
 import 'package:reg_login/app/data/services/auth_api_service/otp_verify_api_services.dart';
+import 'package:reg_login/app/data/services/auth_api_service/professional_profile_update_api_service.dart';
 import 'package:reg_login/app/data/services/auth_api_service/register_otp_verify_api_services.dart';
 import 'package:reg_login/app/data/services/auth_api_service/send_email_verify_api_services.dart';
-import 'package:reg_login/app/data/services/auth_api_service/update_profile_api_service.dart';
+import 'package:reg_login/app/data/services/auth_api_service/student_update_profile_api_service.dart';
+import 'package:reg_login/app/data/services/auth_api_service/student_update_profile_api_service.dart';
+import 'package:reg_login/app/data/services/auth_api_service/userType_update_api_service.dart';
+import 'package:reg_login/app/data/services/student_professional_type_api_service.dart';
 import 'package:reg_login/app/modules/authentication/OTP/views/otp.dart';
-import 'package:reg_login/app/modules/authentication/register/views/register.dart';
+import 'package:reg_login/app/modules/authentication/register/views/web_professional_register_details_screen.dart';
+import 'package:reg_login/app/modules/authentication/register/views/web_student_register_details_screen.dart';
 import 'package:reg_login/app/modules/authentication/register/views/registersplash.dart';
-
+import 'package:reg_login/app/responsive/view/onboarding_view/professional_onboarding_screen.dart';
+import 'package:reg_login/app/responsive/view/onboarding_view/student_onboarding_screen.dart';
 import 'package:reg_login/app/services/network_api_services/auth_api_services/register_api_services.dart';
 import 'package:reg_login/app/services/network_api_services/user_name_check_api_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'package:dio/dio.dart' as dio;
 import '../../../get_slider_api_services.dart';
-import '../../../respohome/respohome.dart';
-
 import '../../../responsive/view/otp_page.dart';
 import '../../../responsive/view/mob_register_details_page.dart';
 import '../../models/requiremets_models.dart';
 import '../../models/slider_model.dart';
 import '../../services/auth_api_service/get_city_api_services.dart';
-
 import '../../services/auth_api_service/get_requirements_list_api_services.dart';
 import '../../services/auth_api_service/get_skills_api_services.dart';
 import '../../services/auth_api_service/get_states_api_services.dart';
@@ -44,10 +47,15 @@ class AuthController extends GetxController {
   RxBool isInduaturesSelected = false.obs;
   RxBool isLoading = false.obs;
   RxInt selctedIndex = 100.obs;
+  RxInt wayIndex = 0.obs;
+  RxInt professinalindex = 0.obs;
   RxBool isUserNameAvailable = false.obs;
   List<Department> departments = [];
   List<SliderList> sliderList = [];
   List<Requirement> requirementList = [];
+
+  DateTime date1 = DateTime.now();
+  DateTime date = DateTime.now();
 
   List<StateList> stateList = [];
   List<CityList> cityList = [];
@@ -60,8 +68,8 @@ class AuthController extends GetxController {
   /// OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
   OtpVerifyServicesApi otpVerifyServicesApi = OtpVerifyServicesApi();
   RegisterServicesApi registerServicesApi = RegisterServicesApi();
-  ProfileUpdateServicesApi profileUpdateServicesApi =
-      ProfileUpdateServicesApi();
+  StudentProfileUpdateServicesApi profileUpdateServicesApi =
+      StudentProfileUpdateServicesApi();
   UserNameApiServices userNameApiServices = UserNameApiServices();
   GetSliderApiServices getSliderApiServices = GetSliderApiServices();
   SendVerificationApiService sendVerificationApiService =
@@ -98,6 +106,7 @@ class AuthController extends GetxController {
   //     );
   //   }
   // }
+  
   registerUser(RegisterModel registerModel, bool isMobile) async {
     isLoading(true);
     var response = await registerServicesApi.registerApi(registerModel);
@@ -154,7 +163,7 @@ class AuthController extends GetxController {
       String? tempAuthToken = prefs.getString("temp_auth_token");
       await prefs.setString("auth_token", tempAuthToken!);
       if (isMobile) {
-        Get.to(ResgisterDetailsWeb());
+        Get.to(StudentResgisterDetailsWeb());
       } else {
         Get.to(RegisterDetailsMobView());
       }
@@ -192,9 +201,13 @@ class AuthController extends GetxController {
       String? tempAuthToken = prefs.getString("temp_auth_token");
       await prefs.setString("auth_token", tempAuthToken!);
       if (isMobile) {
-        Get.to(ResgisterDetailsWeb());
+        if (wayIndex.value == 0) {
+        Get.to(const StudentResgisterDetailsWeb());
       } else {
-        Get.to(RegisterDetailsMobView());
+        Get.to(const ProfessionalResgisterDetailsWeb());
+      }
+      } else {
+        Get.to(const RegisterDetailsMobView());
       }
       //success
       Get.rawSnackbar(
@@ -226,22 +239,140 @@ class AuthController extends GetxController {
     }
   }
 
-  updateProfile(ProfileUpdateModel profileUpdateModel) async {
+  //student professional
+  StudentProfile studentProfile = StudentProfile();
+  studentProfessionaltype({required String type}) async {
+    dio.Response<dynamic> response =
+        await studentProfile.studentProfile(type: type);
+    if (response.statusCode == 200) {
+      Get.offAll(const Registersplash());
+    }
+  }
+
+    //existing user 
+  eStudentProfessionaltype({required String type}) async {
+    dio.Response<dynamic> response =
+        await studentProfile.studentProfile(type: type);
+    if (response.statusCode == 200) {
+    }
+  }
+
+   //existing user - update user type
+  UserTypeUpdateApiService userTypeUpdateApiService = UserTypeUpdateApiService();
+
+  updateUserType({required String userType}) async {
+    dio.Response<dynamic> response = await userTypeUpdateApiService.userTypeUpdateApiService(
+      userType: userType);
+      if(response.statusCode == 200){
+        Get.back();
+      }
+  }
+
+  AddEducationSkillssApiServices addeducationskillsapiservices =
+      AddEducationSkillssApiServices();
+
+  addEducationalSkills({
+    required String institutionname,
+    required String userId,
+    required String educationtitle,
+    required String city,
+    required String state,
+    required String frombatch,
+    required String tilldate,
+    required String educationdescription,
+    required String flag,
+  }) async {
     isLoading(true);
     dio.Response<dynamic> response =
-        await profileUpdateServicesApi.profileUpdate(profileUpdateModel);
+        await addeducationskillsapiservices.addEducationalSkills(
+            institutionname: institutionname,
+            educationtitle: educationtitle,
+            city: city,
+            state: state,
+            frombatch: frombatch,
+            educationdescription: educationdescription,
+            flag: flag,
+            tilldate: tilldate);
+
+    print("-------->>-----------<<-------->>>>>>>");
+    print(response.data);
     isLoading(false);
-    if (response.statusCode == 200) {
-      final prefs = await SharedPreferences.getInstance();
-      await prefs.setString("auth_token", "null");
-      Get.off(Registersplash());
+    if (response.statusCode == 201) {
+      Get.back();
+      Get.find<ProfileController>().getEducationalSkillsApi();
+      // getProfile();
+      // if (isFromLogin) {
+      //   Get.offAll(() => const SettingProfileMadatoryPage());
+      // } else {
+      //   Get.offAll(() => const SettingProfilePage());
+      // }
       Get.rawSnackbar(
         messageText: const Text(
-          "Registered Successfully",
+          "New Skill added",
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.green,
       );
+    } else {
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Unable to add skill",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
+
+  //professional profile update
+  ProfessionalProfileUpdateServicesApi professionalProfileUpdateServicesApi = ProfessionalProfileUpdateServicesApi();
+
+  professionalUpdateProfile(ProfileUpdateModel profileUpdateModel) async {
+    isLoading(true);
+    dio.Response<dynamic> response =
+        await professionalProfileUpdateServicesApi.professionalProfileUpdate(profileUpdateModel);
+    isLoading(false);
+    if (response.statusCode == 200) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("auth_token", "null");
+      Get.off(ObordingProfotional());
+      // Get.rawSnackbar(
+      //   messageText: const Text(
+      //     "Registered Successfully", 
+      //     style: TextStyle(color: Colors.white),
+      //   ),
+      //   backgroundColor: Colors.green,
+      // );
+    } else {
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Something went wrong",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      );
+    }
+  }
+
+  //student profile update
+  StudentProfileUpdateServicesApi studentProfileUpdateServicesApi = StudentProfileUpdateServicesApi();
+
+  studentUpdateProfile(ProfileUpdateModel profileUpdateModel) async {
+    isLoading(true);
+    dio.Response<dynamic> response =
+        await studentProfileUpdateServicesApi.studentProfileUpdate(profileUpdateModel);
+    isLoading(false);
+    if (response.statusCode == 200) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString("auth_token", "null");
+      Get.off(OnbordingStudent());
+      // Get.rawSnackbar(
+      //   messageText: const Text(
+      //     "Registered Successfully",
+      //     style: TextStyle(color: Colors.white),
+      //   ),
+      //   backgroundColor: Colors.green,
+      // );
     } else {
       Get.rawSnackbar(
         messageText: const Text(

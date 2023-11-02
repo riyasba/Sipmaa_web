@@ -1,14 +1,9 @@
-//import 'package:dropdownfield/dropdownfield.dart';
-
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-
 import 'package:get/get.dart';
 import 'package:reg_login/app/data/models/industries_model.dart';
-
 import '../../data/components/constands/constands.dart';
-
 import '../../data/components/controllers/auth_controllers.dart';
 import '../../data/models/city_list_model.dart';
 import '../../data/models/department_model.dart';
@@ -787,7 +782,7 @@ class _RegisterDetailsMobViewState extends State<RegisterDetailsMobView> {
                                                 industries:
                                                     industries.id.toString());
                                         authController
-                                            .updateProfile(profileUpdateModel);
+                                            .professionalUpdateProfile(profileUpdateModel);
                                       }
                                     }
                                   },

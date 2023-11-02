@@ -9,7 +9,7 @@ import 'package:reg_login/app/routes/app_pages.dart';
 
 import '../modules/authentication/OTP/views/otp.dart';
 import '../modules/authentication/forgotPassword/views/forgotpassword.dart';
-import '../modules/authentication/register/views/register.dart';
+import '../modules/authentication/register/views/web_student_register_details_screen.dart';
 import '../modules/authentication/register/views/registersplash.dart';
 import '../modules/authentication/signin/views/signin.dart';
 import '../modules/screens/Settings/views/settingss.dart';
@@ -36,7 +36,7 @@ class RouteGenerator {
 
    case Routes.Resgister_2:
         return _GeneratePageRoute(
-            widget: ResgisterDetailsWeb(), routeName: settings.name);
+            widget: StudentResgisterDetailsWeb(), routeName: settings.name);
 
 
   case Routes.Resgister_Splash:

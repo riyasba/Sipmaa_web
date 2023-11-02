@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:reg_login/app/modules/authentication/select_role/web_select_role_screen.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import '../../../../data/components/constands/constands.dart';
@@ -48,8 +49,7 @@ class _SignInViewState extends State<SignInView> {
     return Scaffold(
       backgroundColor: kblue,
       body: Padding(
-        padding:
-            const EdgeInsets.only(left: 45, right: 45, bottom: 20, top: 30),
+        padding: const EdgeInsets.only(left: 45, right: 45, bottom: 20, top: 30),
         child: Center(
           child: Container(
             decoration: BoxDecoration(
@@ -57,7 +57,7 @@ class _SignInViewState extends State<SignInView> {
                 boxShadow: <BoxShadow>[
                   BoxShadow(blurRadius: 5,
                   color: kgrey,
-                  offset: Offset(0.0, 0.75))
+                  offset:const Offset(0.0, 0.75))
                 ]),
             child: Row(
               children: [
@@ -521,9 +521,12 @@ class _SignInViewState extends State<SignInView> {
                                         style: ktextstyle15gry,
                                       ),
                                       TextButton(
-                                        onPressed: () =>
-                                            Get.toNamed('/register-page'),
-                                        child: Text(
+                                        onPressed: (){
+                                          Get.to(const WebSelectRoleScreen());
+                                        },
+                                        // onPressed: () =>
+                                        //     Get.toNamed('/register-page'),
+                                        child:const Text(
                                           'Register Now',
                                           style: TextStyle(
                                             fontSize: 15,
@@ -548,7 +551,7 @@ class _SignInViewState extends State<SignInView> {
                       decoration: BoxDecoration(
                         boxShadow: <BoxShadow>[
                           BoxShadow(
-                            offset: Offset(0.0, 0.75),
+                            offset:const Offset(0.0, 0.75),
                             blurRadius: 1,
                             color: kwhite
                           )

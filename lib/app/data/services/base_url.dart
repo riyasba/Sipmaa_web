@@ -140,7 +140,18 @@ abstract class BaseApiService {
 
   String requirementsURL = "http://admin.sipmaaindia.com/api/requirments";
 
-    String getSkillsURL = "http://admin.sipmaaindia.com/api/getUserSkills";
+  String getSkillsURL = "http://admin.sipmaaindia.com/api/getUserSkills";
+
+  //add education skill
+  final String addeducationskillUrl =
+      'http://admin.sipmaaindia.com/api/auth/store_education_skills';
+
+    //get education skill
+  final String geteducationskillUrl =
+      'http://admin.sipmaaindia.com/api/auth/get_education_skills';
+
+  //update education skills
+  final String updateEducationSkillsApiUrl = "http://admin.sipmaaindia.com/api/auth/update_education_skills";
 }
 //  final String updateProfileURL =
 //       "http://admin.sipmaaindia.com/api/auth/profile_update";

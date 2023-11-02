@@ -16,7 +16,7 @@ import '../modules/screens/home/views/home_screen.dart';
 import '../modules/authentication/OTP/views/otp.dart';
 import '../modules/authentication/forgotPassword/views/forgotpassword.dart';
 import '../modules/authentication/register/views/registerscreen.dart';
-import '../modules/authentication/register/views/register.dart';
+import '../modules/authentication/register/views/web_student_register_details_screen.dart';
 import '../modules/authentication/register/views/registersplash.dart';
 import '../responsive/view/home_respo.dart';
 
@@ -63,7 +63,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.Resgister_2,
-      page: () => const ResgisterDetailsWeb(),
+      page: () => const StudentResgisterDetailsWeb(),
       // binding: SignInBinding(),
     ),
     GetPage(

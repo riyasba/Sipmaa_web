@@ -475,22 +475,18 @@ class _register1State extends State<register1> {
                                       RegisterModel registerModel =
                                           RegisterModel(
                                               email: emailIdController.text,
-                                              lastname:
-                                                  lastNameController.text,
-                                              mobile:
-                                                  phoneNumberController.text,
+                                              lastname:lastNameController.text,
+                                              mobile: phoneNumberController.text,
                                               name: firstNameController.text,
-                                              username:
-                                                  userNameController.text,
-                                              passwordConfirmation:
-                                                  confirmPasswordController
-                                                      .text,
-                                              password:
-                                                  createPassWordController
-                                                      .text);
+                                              username: userNameController.text,
+                                              passwordConfirmation: confirmPasswordController.text,
+                                              password:createPassWordController.text,
+                                              usertype: authController.wayIndex.value == 0
+                                                             ? "Student"
+                                                             : "Professional",
+                                              );
       
-                                      authController
-                                          .registerUser(registerModel,true);
+                                      authController.registerUser(registerModel,true);
                                     } else {
                                       Get.rawSnackbar(
                                         messageText: const Text(

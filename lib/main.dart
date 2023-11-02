@@ -42,9 +42,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const GetMaterialApp(
       debugShowCheckedModeBanner: false,
-// home: HomePage(),
+      // home: HomePage(),
        onGenerateRoute: RouteGenerator.generateRoute,
-//   initialRoute: TRoutes.HOME_PAGE,
+      //   initialRoute: TRoutes.HOME_PAGE,
       initialRoute: Routes.SPLASH,
       // getPages: AppPages.routes,
     );

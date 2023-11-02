@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reg_login/app/modules/authentication/register/views/register.dart';
+import 'package:reg_login/app/modules/authentication/register/views/web_student_register_details_screen.dart';
 import 'package:reg_login/app/responsive/mobile_homescreenn.dart';
 import 'package:reg_login/app/responsive/view/mob_register_details_page.dart';
 
@@ -15,7 +15,7 @@ class _RegisterFormDetailsResponsiveState extends State<RegisterFormDetailsRespo
   Widget build(BuildContext context) {
     return const Scaffold(
         body: ResponsiveLayout(
-      desktopbody:ResgisterDetailsWeb(),
+      desktopbody:StudentResgisterDetailsWeb(),
       mobilebody: RegisterDetailsMobView(),
     ));
   }
