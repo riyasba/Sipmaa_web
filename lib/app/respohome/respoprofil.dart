@@ -11,12 +11,6 @@ import '../modules/screens/home/views/widgets/friends_widget.dart';
 import '../modules/screens/profile/views/profile_pagee.dart';
 import '../responsive/view/profile_page.dart';
 
-
-
-
-
-
-
 class RespoProfile extends StatefulWidget {
   const RespoProfile({
     super.key,
@@ -44,8 +38,8 @@ class _RespoProfileState extends State<RespoProfile> {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
-        backgroundColor: Color(0xffCAE1FF),
-        appBar: PreferredSize(
+        backgroundColor:const Color(0xffCAE1FF),
+        appBar:const PreferredSize(
             preferredSize: Size.fromHeight(60), child: AppbarComn()),
         // appBar: AppBar(
         //   backgroundColor: Theme.of(context).colorScheme.inversePrimary,

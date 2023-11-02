@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
@@ -535,6 +536,187 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(
                 height: 10,
               ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, bottom: 5),
+                    child: Text(
+                      "Education",
+                      style: primaryfont.copyWith(
+                          color: const Color.fromARGB(214, 19, 18, 18),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                  kwidth10,
+                  Padding(
+                    padding: const EdgeInsets.only(right: 10),
+                    child: Row(
+                      children: [
+                         InkWell(
+                          onTap: (){
+                           // _showDialog();
+                           //educationPopup();
+                          },
+                          child: const Icon(Icons.add,color: Colors.grey,)),
+                         const SizedBox(width: 20,),
+                         InkWell(
+                          onTap: (){
+                            //Get.to(const EducationSkillsUpdatePage());
+                          },
+                          child: const Icon(Icons.edit,size: 20,color: Colors.grey,)),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              Padding(
+                  padding: const EdgeInsets.only(left: 20),
+                  child: GetBuilder<ProfileController>(builder: (_) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ksizedbox10,
+                        profileController.educationskillsData.isEmpty
+                            ? const Text('No data')
+                            : ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: profileController
+                                    .educationskillsData.length,
+                                itemBuilder: (context, intex) {
+                                  return Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            if (profileController
+                                                    .educationskillsData[intex]
+                                                    .flag ==
+                                                "student")
+                                              Container(
+                                                height: 50,
+                                                width: 50,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          blurRadius: 2,
+                                                          color: Colors.grey
+                                                              .withOpacity(0.5))
+                                                    ]),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5.0),
+                                                  child: SvgPicture.asset(
+                                                      "assets/icons/open-book.svg"),
+                                                ),
+                                              ),
+                                            if (profileController
+                                                    .educationskillsData[intex]
+                                                    .flag ==
+                                                "college")
+                                              Container(
+                                                height: 50,
+                                                width: 50,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          blurRadius: 2,
+                                                          color: Colors.grey
+                                                              .withOpacity(0.5))
+                                                    ]),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5.0),
+                                                  child: SvgPicture.asset(
+                                                      "assets/icons/graduation-hat.svg"),
+                                                ),
+                                              ),
+                                            if (profileController
+                                                    .educationskillsData[intex]
+                                                    .flag ==
+                                                "institute")
+                                              Container(
+                                                height: 50,
+                                                width: 50,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          blurRadius: 2,
+                                                          color: Colors.grey
+                                                              .withOpacity(0.5))
+                                                    ]),
+                                                child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(5.0),
+                                                  child: SvgPicture.asset(
+                                                      "assets/icons/certificate.svg"),
+                                                ),
+                                              ),
+                                            if (profileController
+                                                    .educationskillsData[intex]
+                                                    .flag ==
+                                                null)
+                                              Container(
+                                                height: 50,
+                                                width: 50,
+                                                decoration: const BoxDecoration(
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            const SizedBox(
+                                              width: 10,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  profileController
+                                                      .educationskillsData[
+                                                          intex]
+                                                      .institutionName,
+                                                  style: const TextStyle(
+                                                      fontSize: 17,
+                                                      fontWeight:
+                                                          FontWeight.w600),
+                                                ),
+                                                Text(
+                                                  profileController
+                                                      .educationskillsData[
+                                                          intex]
+                                                      .educationTitle,
+                                                  style: const TextStyle(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w200),
+                                                ),
+                                                Text(profileController
+                                                    .educationskillsData[intex]
+                                                    .tillDate
+                                                    .toString()),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                }),
+                        // Text(profileController
+                        //         .profileData.first.user.education ??
+                        //     ""),
+                      ],
+                    );
+                  })),
 
               Row(
                 children: [
@@ -1012,4 +1194,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           );
         });
   }
+
+  
+
 }
