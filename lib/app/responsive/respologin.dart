@@ -4,10 +4,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/get_core.dart';
-import 'package:get/get_navigation/get_navigation.dart';
+import 'package:reg_login/app/modules/authentication/select_role/mob_select_role_scree.dart';
 import 'package:reg_login/app/responsive/forgotrespo/forgot_page.dart';
-import 'package:reg_login/app/responsive/view/register_page1.dart';
+import 'package:reg_login/app/responsive/view/mob_register_screen.dart';
 import '../data/components/constands/constands.dart';
 import '../data/components/controllers/auth_controllers.dart';
 
@@ -429,7 +428,7 @@ class _loginpagerespoState extends State<loginpagerespo> {
                               padding: const EdgeInsets.all(8.0),
                               child: TextButton(
                                 onPressed: () {
-                                  Get.to(ForgetPassword());
+                                  Get.to(const ForgetPassword());
                                   //  Get.to(forgot());
                                 },
                                 child: const Text(
@@ -501,12 +500,13 @@ class _loginpagerespoState extends State<loginpagerespo> {
                             ),
                             TextButton(
                               onPressed: () {
-                                Get.to(register1());
+                                print("..........check to");
+                                Get.off(const MobSelectRoleScreen());
                                 // Get.to(
                                 // register1(),
                                 // );
                               },
-                              child: Text(
+                              child:const Text(
                                 'Register Now',
                                 style: TextStyle(
                                   fontSize: 15,

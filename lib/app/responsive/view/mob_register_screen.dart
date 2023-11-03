@@ -1,12 +1,8 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
-
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-
-
 import '../../data/components/constands/constands.dart';
 import '../../data/components/controllers/auth_controllers.dart';
 import '../../data/models/register_model.dart';
@@ -15,14 +11,14 @@ import '../../data/models/widgets/phone_number_text_field.dart';
 import '../widgets/textfield.dart';
 
 
-class register1 extends StatefulWidget {
-  register1({super.key});
+class MobRegisterScreen extends StatefulWidget {
+  MobRegisterScreen({super.key});
 
   @override
-  State<register1> createState() => _register1State();
+  State<MobRegisterScreen> createState() => _MobRegisterScreenState();
 }
 
-class _register1State extends State<register1> {
+class _MobRegisterScreenState extends State<MobRegisterScreen> {
   var firstNameController = TextEditingController();
 
   var lastNameController = TextEditingController();
@@ -294,7 +290,7 @@ class _register1State extends State<register1> {
                                       ? isEmailVerified
                                           ? Container(
                                               width: 30,
-                                              child: Icon(
+                                              child:const Icon(
                                                 Icons.verified,
                                                 color: Colors.green,
                                               ),
@@ -432,8 +428,8 @@ class _register1State extends State<register1> {
                                   ),
                                 ),
                                 onPressed: () {},
-                                child: CircularProgressIndicator())
-                            : ElevatedButton(
+                                child:const CircularProgressIndicator())
+                               : ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(
                                     0xFF3C73B1,

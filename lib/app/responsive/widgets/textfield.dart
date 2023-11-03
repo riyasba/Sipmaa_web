@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:reg_login/app/data/components/constands/constands.dart';
 
 class TextformfieldWidget extends StatefulWidget {
   TextformfieldWidget({
@@ -32,8 +33,17 @@ class _TextformfieldWidgetState extends State<TextformfieldWidget> {
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              widget.textt!,
+            child: Row(
+              children: [
+                Text(
+                  widget.textt!,
+                ),
+                Text(
+                       "*",
+                      style:
+                       primaryfont.copyWith(color: Colors.red),
+                  ),
+              ],
             ),
           ),
           TextFormField(

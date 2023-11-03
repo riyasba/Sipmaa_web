@@ -105,9 +105,11 @@ class ProfileController extends GetxController {
   
   getProfile() async {
     dio.Response<dynamic> response = await getProfileApiServices.getProfile();
+     final prefs = await SharedPreferences.getInstance();
     profileData.clear();
     if (response.statusCode == 200) {
       ProfileModel profileModel = ProfileModel.fromJson(response.data);
+      await prefs.setString("user_id", profileModel.user.id.toString());
       profileData.add(profileModel);
     } else if (response.statusCode == 401) {
       final prefs = await SharedPreferences.getInstance();

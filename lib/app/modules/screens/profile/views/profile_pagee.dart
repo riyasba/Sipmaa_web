@@ -1,3 +1,5 @@
+import 'package:date_format/date_format.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/widgets.dart';
@@ -6,10 +8,13 @@ import 'package:get/get.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:readmore/readmore.dart';
+import 'package:reg_login/app/data/components/controllers/auth_controllers.dart';
 import 'package:reg_login/app/data/components/controllers/posts_controller.dart';
 import 'package:reg_login/app/data/components/controllers/profile_controller.dart';
 import 'package:reg_login/app/modules/screens/home/controler/controler.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets/continers/comentcontiner.dart';
+import 'package:reg_login/app/modules/screens/home/views/widgets/textfield.dart';
+import 'package:reg_login/app/modules/screens/profile/views/education_skills_update_page.dart';
 import '../../../../data/components/constands/constands.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -20,6 +25,16 @@ class ProfileScreen extends StatefulWidget {
 }
 
 int index = 0;
+
+List<String> educationList = [
+    "10th",
+    "12th",
+    "PUC",
+    "UG",
+    "PG",
+    "Certificates / Others"
+  ];
+
 List postimage = [
   'assets/images/Group 89.png',
   'assets/images/Group 89.png',
@@ -31,11 +46,116 @@ List postimage = [
 
 class _ProfileScreenState extends State<ProfileScreen> {
   final profileController = Get.find<ProfileController>();
+  final authController = Get.find<AuthController>();
 
   @override
   void initState() {
     super.initState();
+    profileController.getEducationalSkillsApi();
     profileController.getProfile();
+  }
+
+  final fromDateController = TextEditingController();
+  final toDateController = TextEditingController();
+
+  var institutenameController = TextEditingController();
+  var certificateController = TextEditingController();
+  var cCityController = TextEditingController();
+  var cStateController = TextEditingController();
+  var cDurationController = TextEditingController();
+  var cCourseController = TextEditingController();
+
+  String selectdt =
+      formatDate(DateTime.now().subtract(const Duration(days: 0)), [
+    yyyy,
+    "-",
+    mm,
+    "-",
+    dd,
+  ]);
+
+  String selectdt1 = formatDate(
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+      [yyyy, "-", mm, "-", dd]);
+
+  _showStartDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2030),
+        builder: ((context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: ColorScheme.light(
+                primary: kblue,
+                onPrimary: Colors.white,
+                onSurface: Colors.blue,
+              ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  primary: const Color.fromARGB(255, 42, 59, 158),
+                ),
+              ),
+            ),
+            child: child!,
+          );
+        }));
+
+    if (picked != null) {
+      setState(() {
+        authController.date1 = picked;
+        selectdt =
+            formatDate(authController.date1.subtract(const Duration(days: 0)), [
+          yyyy,
+          "-",
+          mm,
+          "-",
+          dd,
+        ]);
+      });
+      authController.update();
+    }
+  }
+
+  _showEndDate(BuildContext context) async {
+    DateTime? picked = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2000),
+        lastDate: DateTime(2030),
+        builder: ((context, child) {
+          return Theme(
+            data: Theme.of(context).copyWith(
+              colorScheme: ColorScheme.light(
+                primary: kblue,
+                onPrimary: Colors.white,
+                onSurface: Colors.blue,
+              ),
+              textButtonTheme: TextButtonThemeData(
+                style: TextButton.styleFrom(
+                  primary: const Color.fromARGB(255, 42, 59, 158),
+                ),
+              ),
+            ),
+            child: child!,
+          );
+        }));
+
+    if (picked != null) {
+      setState(() {
+        authController.date = picked;
+        selectdt1 =
+            formatDate(authController.date.add(const Duration(days: 0)), [
+          yyyy,
+          "-",
+          mm,
+          "-",
+          dd,
+        ]);
+      });
+    }
+    authController.update();
   }
 
   @override
@@ -557,13 +677,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                          InkWell(
                           onTap: (){
                            // _showDialog();
-                           //educationPopup();
+                           educationPopup();
                           },
                           child: const Icon(Icons.add,color: Colors.grey,)),
                          const SizedBox(width: 20,),
                          InkWell(
                           onTap: (){
-                            //Get.to(const EducationSkillsUpdatePage());
+                            Get.to(const EducationSkillsUpdatePage());
                           },
                           child: const Icon(Icons.edit,size: 20,color: Colors.grey,)),
                       ],
@@ -886,10 +1006,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               thickness: 1,
             ),
             ksizedbox30,
-            Padding(
-              padding: const EdgeInsets.all(16.0),
+           const Padding(
+              padding:  EdgeInsets.all(16.0),
               child: Row(
-                children: const [
+                children:  [
                   Text(
                     'All Post',
                     style: TextStyle(
@@ -1030,13 +1150,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                                       PostsController>()
                                                                   .commentsList
                                                                   .isEmpty
-                                                              ? Padding(
-                                                                  padding: const EdgeInsets
+                                                              ? const Padding(
+                                                                  padding:  EdgeInsets
                                                                           .only(
                                                                       bottom:
                                                                           20),
                                                                   child: Center(
-                                                                    child: const Text(
+                                                                    child:  Text(
                                                                         "No Comments yet!"),
                                                                   ),
                                                                 )
@@ -1142,15 +1262,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
             height: 162,
             child: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 28,
                 ),
-                Center(
+                const Center(
                     child: Text(
                   "Do you want to Delete this post?",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 )),
-                SizedBox(
+                const SizedBox(
                   height: 32,
                 ),
                 Row(
@@ -1158,7 +1278,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                            minimumSize: Size(100, 40),
+                            minimumSize:const Size(100, 40),
                             backgroundColor: kblue,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18))),
@@ -1195,6 +1315,272 @@ class _ProfileScreenState extends State<ProfileScreen> {
         });
   }
 
-  
+  var schoolController = TextEditingController();
+  var standardsController = TextEditingController();
+  var cityController = TextEditingController();
+  var stateController = TextEditingController();
+  var startdateController = TextEditingController();
+  var enddateController = TextEditingController();
+
+  var univercitynameController = TextEditingController();
+  var collageugController = TextEditingController();
+  var ugcityController = TextEditingController();
+  var stateugController = TextEditingController();
+  var specialiseddegreeController = TextEditingController();
+  var starttdateugController = TextEditingController();
+  var enddateugController = TextEditingController();
+
+  var univercitynamepgController = TextEditingController();
+  var collagepgController = TextEditingController();
+  var pgcityController = TextEditingController();
+  var statepgController = TextEditingController();
+  var pgspecialiseddegreeController = TextEditingController();
+  var starttdatepgController = TextEditingController();
+  var enddatepgController = TextEditingController();
+  var insitituteController = TextEditingController();
+  var durationController = TextEditingController();
+  var courseController = TextEditingController();
+
+  educationPopup(){
+    showDialog(
+              context: context,
+                            builder: (BuildContext context) {
+                              return Obx( () =>
+                                 AlertDialog(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(
+                                        18.0), // Adjust the radius as needed
+                                  ),
+                                  title: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Text('Fill Your Education Details'),
+                                      InkWell(
+                                          onTap: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Icon(
+                                            Icons.close,
+                                            color: Colors.red[500],
+                                          ))
+                                    ],
+                                  ),
+                                  content:const Text('Choose your education and update the required details.'),
+                                  actions: <Widget>[
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          bottom: 20, left: 10, right: 10),
+                                      child: Column(
+                                        children: [
+                                          //  ksizedbox10,
+                                          Container(
+                                  height: 56,
+                                  child: DropdownSearch<String>(
+                                    itemAsString: (String u) => u,
+                                    popupProps: PopupProps.menu(
+                                      showSelectedItems: false,
+                                      showSearchBox: true,
+                                      menuProps: MenuProps(
+                                          borderRadius:
+                                              BorderRadius.circular(10)),
+                                      searchFieldProps: const TextFieldProps(),
+                                    ),
+                                    items: educationList,
+                                    dropdownDecoratorProps:
+                                        DropDownDecoratorProps(
+                                      dropdownSearchDecoration: InputDecoration(
+                                          // labelText: "Department *",
+                                          hintText: "Select education",
+                                          border: OutlineInputBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(15))),
+                                    ),
+                                    onChanged: (value) {
+                                      setState(() {
+                                        profileController.educationlist(value);
+                                        standardsController.text = value.toString();
+                                      });
+                                    },
+                                    // selectedItem: selectedState,
+                                  ),
+                                ),          
+                                          if(profileController.educationlist.value == "10th" || profileController.educationlist.value == "12th")
+                                          ksizedbox10,
+                                          if(profileController.educationlist.value == "10th" || profileController.educationlist.value == "12th")
+                                          TextFormFieldWidget(
+                                            labeltext: 'School name',
+                                            controller: schoolController,
+                                          ),
+                                          if(profileController.educationlist.value == "UG" || profileController.educationlist.value == "PG" || profileController.educationlist.value == "PUC")
+                                          ksizedbox10,
+                                          if(profileController.educationlist.value == "UG" || profileController.educationlist.value == "PG" || profileController.educationlist.value == "PUC")
+                                          TextFormFieldWidget(
+                                            controller: schoolController,
+                                            labeltext: 'University name',
+                                          ),
+                                          if(profileController.educationlist.value == "UG" || profileController.educationlist.value == "PG" || profileController.educationlist.value == "PUC")
+                                          ksizedbox10,
+                                          if(profileController.educationlist.value == "UG" || profileController.educationlist.value == "PG" || profileController.educationlist.value == "PUC")
+                                          TextFormFieldWidget(
+                                            controller: collagepgController,
+                                            labeltext: 'College',
+                                          ),
+                                          if(profileController.educationlist.value == "Certificates / Others")
+                                          ksizedbox10,
+                                           if(profileController.educationlist.value == "Certificates / Others")
+                                          TextFormFieldWidget(
+                                          controller: schoolController,
+                                          labeltext: 'Institution Name',
+                                        ),
+                                         if(profileController.educationlist.value == "Certificates / Others")
+                                        ksizedbox10,
+                                         if(profileController.educationlist.value == "Certificates / Others")
+                                        TextFormFieldWidget(
+                                          controller: courseController,
+                                          labeltext: 'Course Name',
+                                        ),
+                                         if(profileController.educationlist.value == "Certificates / Others")
+                                        ksizedbox10,
+                                          if(profileController.educationlist.value == "Certificates / Others")
+                                           TextFormFieldWidget(
+                                            controller: durationController,
+                                            labeltext: 'Duration',
+                                          ),
+                                          if(profileController.educationlist.value == "Certificates / Others")
+                                          ksizedbox10,
+                                          if(profileController.educationlist.value == "Certificates / Others")
+                                          TextFormFieldWidget(
+                                            labeltext: 'Course / Certificate',
+                                            controller: certificateController,
+                                          ),
+                                          // TextFormFieldWidget(
+                                          //   labeltext: 'Standards',
+                                          //   controller: standardsController,
+                                          // ),
+                                          // ksizedbox10,
+                                          ksizedbox10,
+                                          TextFormFieldWidget(
+                                            labeltext: 'City',
+                                            controller: cityController,
+                                          ),
+                                          ksizedbox10,
+                                          TextFormFieldWidget(
+                                            labeltext: ' State',
+                                            controller: stateController,
+                                          ),
+                                          ksizedbox10,
+                                          GetBuilder<AuthController>(
+                                            builder: (_) {
+                                              return Row(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                children: [
+                                                  InkWell(
+                                                    onTap: (){
+                                                      _showStartDate(context);
+                                                    },
+                                                    child: Container(
+                                                      width: 120,
+                                                      height: 40,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.grey[100],
+                                                        borderRadius: BorderRadius.circular(10)
+                                                      ),
+                                                      child: Center(
+                                                        child: Text(
+                                                          selectdt
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    'To',
+                                                    style: TextStyle(
+                                                        fontSize: 18,
+                                                        fontWeight: FontWeight.w500,
+                                                        color: kgrey),
+                                                  ),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      _showEndDate(context);
+                                                    },
+                                                    child: Container(
+                                                      width: 120,
+                                                      height: 40,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.grey[100],
+                                                        borderRadius: BorderRadius.circular(10)
+                                                      ),
+                                                      child: Center(
+                                                        child: selectdt1 == formatDate(
+                                                        DateTime(DateTime.now().year, 
+                                                        DateTime.now().month, DateTime.now().day),
+                                                        [yyyy, "-", mm, "-", dd])
+                                                         ? const Text("Till Date") : Text(selectdt1),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              );
+                                            }
+                                          ),
+                                          ksizedbox10,
+                                          InkWell(
+                                            onTap: () {
+                                              var flag = "";
+                                              if(standardsController.text == "10th" || standardsController.text == "12th"){
+                                                flag = "student";
+                                              }else if(standardsController.text == "UG" || standardsController.text == "PG" || standardsController.text == "PUC"){
+                                                flag = "college";
+                                              }else{
+                                                flag = "institute";
+                                              }
+                                              
+                                              print(
+                                                  "-------->> chack values <<---------");
+                                              print(schoolController.text);
+                                              print(standardsController.text);
+                                              authController.addEducationalSkills(
+                                                  flag: flag,
+                                                  institutionname: schoolController.text,
+                                                  userId: "",
+                                                  educationtitle: standardsController.text,
+                                                  city: cityController.text,
+                                                  state: stateController.text,
+                                                  frombatch: selectdt,
+                                                  tilldate: selectdt1 == formatDate(
+                                                  DateTime(DateTime.now().year, 
+                                                  DateTime.now().month, DateTime.now().day),
+                                                  [yyyy, "-", mm, "-", dd]) ? "Till Date" : selectdt,
+                                                  educationdescription: certificateController.text);
+                                                 profileController.getEducationalSkillsApi(); 
+                                              //   Get.back();
+                                            },
+                                            child: Container(
+                                              width: double.infinity,
+                                              height: 48,
+                                              decoration: BoxDecoration(
+                                                  color: kblue,
+                                                  borderRadius:
+                                                      BorderRadius.circular(16)),
+                                              child: Center(
+                                                  child: Text(
+                                                'Submit',
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w700,
+                                                    fontSize: 16,
+                                                    color: kwhite),
+                                              )),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            },
+                          );
+   }
 
 }

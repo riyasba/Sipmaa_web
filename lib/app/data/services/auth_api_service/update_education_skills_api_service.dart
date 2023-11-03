@@ -3,29 +3,46 @@ import 'package:dio/dio.dart';
 import 'package:reg_login/app/data/services/base_url.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class StudentProfile extends BaseApiService {
-  Future studentProfile({required String type}) async {
+class UpdateEducationSkillssApiServices extends BaseApiService {
+  Future updateEducationalSkillsApi(
+      {required String institutionname,
+      required String educationtitle,
+      required String id,
+      required String city,
+      required String state,
+      required String frombatch,
+      required String educationdescription,
+      required String tilldate}) async {
     dynamic responseJson;
     try {
       var dio = Dio();
       final prefs = await SharedPreferences.getInstance();
-      String? tempAuthToken = prefs.getString("temp_auth_token");
+      String? authtoken = prefs.getString("auth_token");
+      String? userId = prefs.getString("user_id");
 
-      var response = await dio.post(updateProfileURL,
+      var response = await dio.post(updateEducationSkillsApiUrl,
           options: Options(
               headers: {
                 'Accept': 'application/json',
-                'Authorization': 'Bearer $tempAuthToken',
+                'Authorization': 'Bearer $authtoken',
               },
               followRedirects: false,
               validateStatus: (status) {
                 return status! <= 500;
               }),
-          data: {
-            "professional": type,
-          });
-      print("::::::::<Student professional>::::::::status code:::::$type:::::");
-      print(tempAuthToken);
+          data:{
+                "id": id,
+                "user_id": userId,
+                "institution_name": institutionname,
+                "education_title": educationtitle,
+                "education_description": educationdescription,
+                "city":  city,
+                "state":  state,
+                "from_batch": frombatch,
+                "till_date": tilldate,
+          }
+      );
+      print("...........update education skills api service.........>>>>>.");
       print(response.statusCode);
       print(response.data);
       responseJson = response;

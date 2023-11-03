@@ -88,7 +88,7 @@ class _RegisterDetailsMobViewState extends State<RegisterDetailsMobView> {
                   ),
                   ksizedbox10,
                   Text(
-                    'Enter the below Details',
+                    'Enter the below Details mob',
                     style: ktextstyle22,
                   ),
 

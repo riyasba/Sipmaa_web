@@ -18,12 +18,15 @@ import 'package:reg_login/app/data/services/auth_api_service/register_otp_verify
 import 'package:reg_login/app/data/services/auth_api_service/send_email_verify_api_services.dart';
 import 'package:reg_login/app/data/services/auth_api_service/student_update_profile_api_service.dart';
 import 'package:reg_login/app/data/services/auth_api_service/student_update_profile_api_service.dart';
+import 'package:reg_login/app/data/services/auth_api_service/update_education_skills_api_service.dart';
 import 'package:reg_login/app/data/services/auth_api_service/userType_update_api_service.dart';
 import 'package:reg_login/app/data/services/student_professional_type_api_service.dart';
-import 'package:reg_login/app/modules/authentication/OTP/views/otp.dart';
+import 'package:reg_login/app/modules/authentication/OTP/views/web_otp_screen.dart';
 import 'package:reg_login/app/modules/authentication/register/views/web_professional_register_details_screen.dart';
 import 'package:reg_login/app/modules/authentication/register/views/web_student_register_details_screen.dart';
 import 'package:reg_login/app/modules/authentication/register/views/registersplash.dart';
+import 'package:reg_login/app/responsive/loginrespo/mob_professional_register_details_screen.dart';
+import 'package:reg_login/app/responsive/loginrespo/mob_student_register_details_screen.dart';
 import 'package:reg_login/app/responsive/view/onboarding_view/professional_onboarding_screen.dart';
 import 'package:reg_login/app/responsive/view/onboarding_view/student_onboarding_screen.dart';
 import 'package:reg_login/app/services/network_api_services/auth_api_services/register_api_services.dart';
@@ -31,7 +34,7 @@ import 'package:reg_login/app/services/network_api_services/user_name_check_api_
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dio/dio.dart' as dio;
 import '../../../get_slider_api_services.dart';
-import '../../../responsive/view/otp_page.dart';
+import '../../../responsive/view/mob_otp_screen.dart';
 import '../../../responsive/view/mob_register_details_page.dart';
 import '../../models/requiremets_models.dart';
 import '../../models/slider_model.dart';
@@ -118,13 +121,13 @@ class AuthController extends GetxController {
       await prefs.setString("temp_auth_token", response.data["token"]);
       await prefs.setString("verify", "false");
       if (isMobile) {
-        Get.to(otp_page(
+        Get.to(MobOtpScreen(
           phoneNumber: registerModel.mobile,
           otp: response.data["user"]["otp"].toString(),
         ));
         //mobile
       } else {
-        Get.to(OTPVIEWS(
+        Get.to(WebOtpScreen(
           phoneNumber: registerModel.mobile,
           otp: response.data["user"]["otp"].toString(),
           //    mobile: ,
@@ -207,7 +210,12 @@ class AuthController extends GetxController {
         Get.to(const ProfessionalResgisterDetailsWeb());
       }
       } else {
-        Get.to(const RegisterDetailsMobView());
+        if(wayIndex.value == 0){
+          Get.to(const MobStudentResgisterDetails());
+        } else {
+          Get.to(const MobProfessionalResgisterDetails());
+        }
+        
       }
       //success
       Get.rawSnackbar(
@@ -560,4 +568,42 @@ class AuthController extends GetxController {
   }
 
   List<SkillsData> skillsDataList = [];
+
+  //update education skills
+  UpdateEducationSkillssApiServices updateEducationSkillssApiServices =
+      UpdateEducationSkillssApiServices();
+
+  updateEducationSkills(
+      {required String institutionname,
+      required String educationtitle,
+      required String id,
+      required String city,
+      required String state,
+      required String frombatch,
+      required String educationdescription,
+      required String tilldate}) async {
+    dio.Response<dynamic> response =
+        await updateEducationSkillssApiServices.updateEducationalSkillsApi(
+            institutionname: institutionname,
+            educationtitle: educationtitle,
+            id: id,
+            city: city,
+            state: state,
+            frombatch: frombatch,
+            educationdescription: educationdescription,
+            tilldate: tilldate);
+    if (response.statusCode == 200) {
+      Get.back();
+      Get.rawSnackbar(
+        messageText: const Text(
+          "Education updated successfully",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+      );
+    }
+    update();
+    Get.find<ProfileController>().getEducationalSkillsApi();
+  }
+  
 }

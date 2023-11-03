@@ -932,9 +932,9 @@ class _HomePageState extends State<HomePage> {
                                             controller: schoolController,
                                             labeltext: 'University name',
                                           ),
-                                          if(profileController.educationlist.value == "UG" || profileController.educationlist.value == "PG")
+                                          if(profileController.educationlist.value == "UG" || profileController.educationlist.value == "PG" || profileController.educationlist.value == "PUC")
                                           ksizedbox10,
-                                          if(profileController.educationlist.value == "UG" || profileController.educationlist.value == "PG")
+                                          if(profileController.educationlist.value == "UG" || profileController.educationlist.value == "PG" || profileController.educationlist.value == "PUC")
                                           TextFormFieldWidget(
                                             controller: collagepgController,
                                             labeltext: 'College',

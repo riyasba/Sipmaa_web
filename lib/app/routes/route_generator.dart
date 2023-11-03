@@ -7,7 +7,7 @@ import 'package:reg_login/app/responsive/view/home_responsive_view.dart';
 import 'package:reg_login/app/responsive/view/regiterform2_responsive.dart';
 import 'package:reg_login/app/routes/app_pages.dart';
 
-import '../modules/authentication/OTP/views/otp.dart';
+import '../modules/authentication/OTP/views/web_otp_screen.dart';
 import '../modules/authentication/forgotPassword/views/forgotpassword.dart';
 import '../modules/authentication/register/views/web_student_register_details_screen.dart';
 import '../modules/authentication/register/views/registersplash.dart';
@@ -62,7 +62,7 @@ case Routes.Change_password:
 
       case Routes.OTP_VIEWS:
         return _GeneratePageRoute(
-            widget: OTPVIEWS(
+            widget: WebOtpScreen(
               phoneNumber: "",
               otp: "",
             ),

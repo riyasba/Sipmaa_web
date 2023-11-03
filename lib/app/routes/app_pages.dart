@@ -13,7 +13,7 @@ import '../modules/screens/Settings/views/widgets/change_password.dart';
 //import '../modules/screens/Settings/views/settings.dart';
 //import '../modules/screens/profile/views/profile_page.dart';
 import '../modules/screens/home/views/home_screen.dart';
-import '../modules/authentication/OTP/views/otp.dart';
+import '../modules/authentication/OTP/views/web_otp_screen.dart';
 import '../modules/authentication/forgotPassword/views/forgotpassword.dart';
 import '../modules/authentication/register/views/registerscreen.dart';
 import '../modules/authentication/register/views/web_student_register_details_screen.dart';
@@ -55,7 +55,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.OTP_VIEWS,
-      page: () =>  OTPVIEWS(
+      page: () =>  WebOtpScreen(
         phoneNumber: "",
         otp: "",
       ),

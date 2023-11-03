@@ -13,16 +13,16 @@ import '../../data/components/controllers/auth_controllers.dart';
 import '../../data/components/controllers/profile_controller.dart';
 
 
-class otp_page extends StatefulWidget {
+class MobOtpScreen extends StatefulWidget {
   String phoneNumber;
   String otp;
-  otp_page({super.key, required this.phoneNumber, required this.otp});
+  MobOtpScreen({super.key, required this.phoneNumber, required this.otp});
 
   @override
-  State<otp_page> createState() => _otp_pageState();
+  State<MobOtpScreen> createState() => _MobOtpScreenState();
 }
 
-class _otp_pageState extends State<otp_page> {
+class _MobOtpScreenState extends State<MobOtpScreen> {
   final authController = Get.find<AuthController>();
 final profileController = Get.find<ProfileController>();
   @override
@@ -172,7 +172,7 @@ final profileController = Get.find<ProfileController>();
                                   onPressed: () {
                                     // authController.otpVerify(widget.otp);
                                   },
-                                  child: CircularProgressIndicator(),
+                                  child:const CircularProgressIndicator(),
                                 )
                               : ElevatedButton(
                                   style: ElevatedButton.styleFrom(

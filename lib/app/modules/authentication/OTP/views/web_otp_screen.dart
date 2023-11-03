@@ -8,16 +8,16 @@ import 'package:reg_login/app/data/components/controllers/auth_controllers.dart'
 import '../../../../data/components/constands/constands.dart';
 import '../../../../data/components/controllers/profile_controller.dart';
 
-class OTPVIEWS extends StatefulWidget {
+class WebOtpScreen extends StatefulWidget {
   String otp;
   String phoneNumber;
-  OTPVIEWS({super.key,required this.phoneNumber,required this.otp});
+  WebOtpScreen({super.key,required this.phoneNumber,required this.otp});
 
   @override
-  State<OTPVIEWS> createState() => _OTPVIEWSState();
+  State<WebOtpScreen> createState() => _WebOtpScreenState();
 }
 
-class _OTPVIEWSState extends State<OTPVIEWS> {
+class _WebOtpScreenState extends State<WebOtpScreen> {
 final profileController = Get.find<ProfileController>();
   final authController = Get.find<AuthController>();
 
@@ -68,7 +68,7 @@ final profileController = Get.find<ProfileController>();
                           height: 30,
                         ),
                         Text(
-                          'OTP Verification',
+                          'OTP Verification mob',
                           style: ktextstyle22,
                         ),
                         const SizedBox(

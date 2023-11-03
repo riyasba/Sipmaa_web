@@ -41,7 +41,8 @@ class AddEducationSkillssApiServices extends BaseApiService {
             "till_date": tilldate,
             "flag": flag
           });
-
+          print("........add education skill.....//");
+      print("..........$userId");
       print(response.statusCode);
       print(response.data);
       responseJson = response;
