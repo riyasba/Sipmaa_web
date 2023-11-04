@@ -17,11 +17,11 @@ import 'package:reg_login/app/modules/screens/home/views/widgets/textfield.dart'
 import 'package:reg_login/app/modules/screens/profile/views/education_skills_update_page.dart';
 import '../../../../data/components/constands/constands.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+class WebProfileScreen extends StatefulWidget {
+  const WebProfileScreen({super.key});
 
   @override
-  State<ProfileScreen> createState() => _ProfileScreenState();
+  State<WebProfileScreen> createState() => _WebProfileScreenState();
 }
 
 int index = 0;
@@ -44,7 +44,7 @@ List postimage = [
   'assets/images/Rectangle 807.png'
 ];
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _WebProfileScreenState extends State<WebProfileScreen> {
   final profileController = Get.find<ProfileController>();
   final authController = Get.find<AuthController>();
 

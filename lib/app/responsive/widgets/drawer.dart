@@ -7,7 +7,7 @@ import 'package:reg_login/app/responsive/widgets/chat_view/chat_list_view.dart';
 import '../view/friendsrespo.dart';
 import '../view/home_respo.dart';
 import '../view/notification_screen.dart';
-import '../view/profile_page.dart';
+import '../view/mob_profile_page.dart';
 
 
 class MobileDrawer extends StatefulWidget {
@@ -165,7 +165,7 @@ class _MobileDrawerState extends State<MobileDrawer> {
               children: [
                 TextButton(
                     onPressed: () {
-                      Get.to(ProfilePage());
+                      Get.to(MobProfilePage());
                       //  Get.to(RespoServices());
                     },
                     child: Text(

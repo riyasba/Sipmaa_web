@@ -8,8 +8,8 @@ import 'package:reg_login/app/respohome/pofile_respo.dart';
 
 import '../data/components/controllers/profile_controller.dart';
 import '../modules/screens/home/views/widgets/friends_widget.dart';
-import '../modules/screens/profile/views/profile_pagee.dart';
-import '../responsive/view/profile_page.dart';
+import '../modules/screens/profile/views/web_profile_pagee.dart';
+import '../responsive/view/mob_profile_page.dart';
 
 class RespoProfile extends StatefulWidget {
   const RespoProfile({
@@ -51,7 +51,7 @@ class _RespoProfileState extends State<RespoProfile> {
                 Expanded(
                     flex: size.width > 1340 ? 8 : 10, child:
                     //ProfileScreen()
-                    ProfilePage ()
+                    MobProfilePage ()
                     //  HomeContainer()
                     ),
               ],
@@ -61,7 +61,7 @@ class _RespoProfileState extends State<RespoProfile> {
                 Expanded(
                     flex: size.width > 1340 ? 8 : 10, child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ProfileScreen(),
+                      child: WebProfileScreen(),
                     )),
                 kwidth10,
                 Expanded(
@@ -77,7 +77,7 @@ class _RespoProfileState extends State<RespoProfile> {
                 Expanded(
                     flex: size.width > 1340 ? 7 : 9, child: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: ProfileScreen(),
+                      child: WebProfileScreen(),
                     )),
                 kwidth10,
                 Expanded(

@@ -10,7 +10,7 @@ import 'package:reg_login/app/modules/screens/home/views/notification_widget.dar
 import 'package:reg_login/app/modules/screens/Settings/views/settingss.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets/friends_search_screen.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets/textfield.dart';
-import 'package:reg_login/app/modules/screens/profile/views/profile_pagee.dart';
+import 'package:reg_login/app/modules/screens/profile/views/web_profile_pagee.dart';
 import 'package:reg_login/app/modules/screens/home/views/searchcontainer.dart';
 import 'package:reg_login/app/modules/screens/home/views/widgets.dart';
 import 'package:reg_login/app/data/components/constands/constands.dart';
@@ -796,7 +796,7 @@ class _HomePageState extends State<HomePage> {
                 if (homeController.homeindex.value == 1) SearchContainer(),
                 if (homeController.homeindex.value == 2) FillterWidget(),
                 if (homeController.homeindex.value == 3) NotificationWidget(),
-                if (homeController.homeindex.value == 4) ProfileScreen(),
+                if (homeController.homeindex.value == 4) WebProfileScreen(),
                 if (homeController.homeindex.value == 5) CreateWidget(),
                 if (homeController.homeindex.value == 6) FriendsSearch(),
                 if (homeController.homeindex.value == 7) SettingsPage(),
